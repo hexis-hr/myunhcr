@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Report an Incident | MyUNHCR</title>
+  <link rel='stylesheet' href='css/site.css'>
+  <script src='js/jquery.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/modernizr.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/foundation.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/foundation.tooltip.js' type='text/javascript' charset='utf-8'></script>
+</head>
+<body>
+  <header id='header' class='padding-t5 padding-b5'>
+    <div class='row'>
+      <div class='small-12 columns'>
+        <div class='row'>
+          <div class='small-3 columns header-logo text-center'>
+            <img src='images/logo/logo_2.png' alt='UNHCR Logo'>
+          </div>
+          <div class='small-6 columns header-title text-center padding-t5'>
+            <h3>MyUNHCR</h3>
+          </div>
+          <div class='small-3 columns text-right'>
+            <a href='menu-page.html' title=''><i class='fa fa-bars'></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header><!-- /header -->
+
+  <section class='page complaint'>
+    <div class='row margin-t20 margin-b20'>
+      <div class='small-10 columns'>
+        <h3>Report and Incident</h3>
+      </div>
+      <div class='small-2 columns'>
+        <span data-tooltip='' aria-haspopup='true' class='has-tip radius'
+          title='Info about this page'><i class='fa fa-question-circle'></i></span>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='small-12 columns'>
+        <p class='content-text'>Which type of protection incident are you reporting?</p>
+      </div>
+    </div>
+    <form action='#' method='post' accept-charset='utf-8'>
+      <div class='row padding-t20 padding-b20'>
+        <div class='small-12 columns text-center'>
+          <select name='' multiple>
+            <option value='0'>Domestic violence</option>
+          </select>
+        </div>
+      </div>
+      <div class='row margin-b20'>
+        <div class='small-12 columns'>
+          <h3>Where?</h3>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='small-12 columns'>
+          <!-- todo geo-location map -->
+          <div id='mos-map'>
+            <iframe src='https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804' width='600' height='450' frameborder='0' style='border:0'></iframe>
+          </div>
+        </div>
+      </div>
+      <div class='row margin-t20'>
+        <div class='small-6 small-offset-6 columns'>
+          <a class='button b-primary expand' href='report-an-incident3.html' title=''>Next</a>
+        </div>
+      </div>
+    </form>
+  </section><!-- /page -->
+
+  <footer class='text-center'>
+    <a class='button b-neutral left' href='report-an-incident.html' title=''
+      ><i class='fa fa-arrow-left'></i>Back</a>
+    <a class='button b-neutral right' href='yoursettings.html' title='Info Line'
+      ><i class='fa fa-phone'></i>Call Info Line</a>
+  </footer>
+
+<script> $(document).foundation(); </script>
+
+  <!-- GMap karta REPLACE-AT -->
+<script src='https://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js'></script> 
+<script> 
+    google.maps.event.addDomListener(window, 'load', init);
+    var map;
+      function init() {
+        var mapOptions = {
+            center: new google.maps.LatLng(45.265222,14.172477),
+            zoom: 11,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.SMALL,
+            },
+            disableDoubleClickZoom: true,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+            },
+            scaleControl: false,
+            scrollwheel: false,
+            panControl: false,
+            streetViewControl: true,
+            draggable : true,
+            overviewMapControl: false,
+            overviewMapControlOptions: {
+                opened: false,
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [
+        {
+          featureType: 'water',
+          stylers: [{color:'#46bcec'},{visibility:'on'}]
+        },{
+          featureType: 'landscape',
+          stylers: [{color:'#f2f2f2'}]
+        },{
+          featureType: 'road',
+          stylers: [{saturation: -100},{lightness: 45}]
+        },{
+          featureType: 'road.highway',
+          stylers: [{visibility: 'simplified'}]
+        },{
+          featureType: 'road.arterial',
+          elementType: 'labels.icon',
+          stylers: [{visibility: 'off'}]
+        },{
+          featureType: 'administrative',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#444444'}]
+        },{
+          featureType: 'transit',
+          stylers: [{visibility: 'off'}]
+        },{
+          featureType: 'poi',
+          stylers: [{visibility: 'off'}]
+        }
+      ],
+    }
+        var mapElement = document.getElementById('mos-map');
+        var map = new google.maps.Map(mapElement, mapOptions);
+        var locations = [
+          ['Opatija Riviera', 'undefined', 'undefined', 'undefined', 'undefined', 45.265222, 14.172477],['mos-map', 'undefined', 'undefined', 'undefined', 'undefined', 45.3376197, 14.305196]
+        ];
+        for (i = 0; i < locations.length; i++) {
+        if (locations[i][1] =='undefined'){ description ='';} else { description = locations[i][1];}
+        if (locations[i][2] =='undefined'){ telephone ='';} else { telephone = locations[i][2];}
+        if (locations[i][3] =='undefined'){ email ='';} else { email = locations[i][3];}
+        if (locations[i][4] =='undefined'){ web ='';} else { web = locations[i][4];}
+            marker = new google.maps.Marker({
+                icon: 'https://mapbuildr.com/assets/img/markers/solid-pin-blue.png',
+                position: new google.maps.LatLng(locations[i][5], locations[i][6]),
+                map: map,
+                title: locations[i][0],
+                desc: description,
+                tel: telephone,
+                email: email,
+                web: web
+            });
+        }
+      }
+</script>
+</body>
+</html>
+

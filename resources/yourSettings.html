@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Settings | MyUNHCR</title>
+  <link rel='stylesheet' href='css/site.css'>
+</head>
+<body>
+  <header id='header' class='padding-t5 padding-b5'>
+    <div class='row'>
+      <div class='small-12 columns'>
+        <div class='row'>
+          <div class='small-3 columns header-logo text-center'>
+            <img src='images/logo/logo_2.png' alt='UNHCR Logo'>
+          </div>
+          <div class='small-9 columns header-title padding-t5'>
+            <h3>Welcome to MyUNHCR</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header><!-- /header -->
+
+  <section class="page">
+    <div class='row'>
+      <div class='small-12 columns margin-t20'>
+        <h4>Select your settings:</h4>
+        <div class='row'>
+          <form class='margin-t10' action='yourSettings_submit' method='get' accept-charset='utf-8'>
+            <div class='small-6 columns'>
+              <p>Notifications:</p>
+            </div>
+            <div class='small-6 columns'>
+              <div class='onoffswitch right'>
+                <input type='checkbox' name='onoffswitch' class='onoffswitch-checkbox' id='onoffswitch' checked>
+                <label class='onoffswitch-label' for='onoffswitch'>
+                  <span class='onoffswitch-inner'></span>
+                  <span class='onoffswitch-switch'></span>
+                </label>
+              </div> 
+            </div>
+            <div class='small-12 columns margin-b30'>
+              <div class='selectlabel'>
+                  <select id='language'>
+                    <option value='0' selected='selected'>English</option>
+                    <option>Croatian</option>
+                    <option>Deutsch</option>
+                  </select>
+                  <label for='language'>Language</label>
+              </div>
+              <div class='selectlabel'>
+                  <select id='country'>
+                    <option value='0' selected='selected'>Jordan</option>
+                  </select>
+                  <label for='country'>Country</label>
+              </div>
+              <div class='selectlabel'>
+                  <select id='category'>
+                    <option value='0' selected='selected'>Refugees</option>
+                  </select>
+                  <label for='category'>Category</label>
+              </div>
+              <div class='selectlabel'>
+                <select id='location'>
+                  <option value='0' selected='selected'>Ammon</option>
+                </select>
+                <label for='location'>Location</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class='text-center'>
+    <a class='button expand' href='menu-page.html' title='Save'>Save</a>
+  </footer>
+</body>
+</html>
+

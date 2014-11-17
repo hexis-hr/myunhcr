@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>FAQ | MyUNHCR</title>
+  <link rel='stylesheet' href='css/site.css'>
+  <script src='js/jquery.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/modernizr.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/foundation.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/foundation.accordion.js' type='text/javascript' charset='utf-8'></script>
+  <script src='js/foundation.tooltip.js' type='text/javascript' charset='utf-8'></script>
+</head>
+<body>
+  <header id='header' class='padding-t5 padding-b5'>
+    <div class='row'>
+      <div class='small-12 columns'>
+        <div class='row'>
+          <div class='small-3 columns header-logo text-center'>
+            <img src='images/logo/logo_2.png' alt='UNHCR Logo'>
+          </div>
+          <div class='small-6 columns header-title text-center padding-t5'>
+            <h3>MyUNHCR</h3>
+          </div>
+          <div class='small-3 columns text-right'>
+            <a href='menu-page.html' title=''><i class='fa fa-bars'></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header><!-- /header -->
+
+  <section class='page'>
+    <div class='row margin-t20 margin-b20'>
+      <div class='small-10 columns'>
+        <h3>Frequently Asked Questions</h3>
+      </div>
+      <div class='small-2 columns'>
+        <span data-tooltip='' aria-haspopup='true' class='has-tip radius'
+          title='Info about this page'><i class='fa fa-question-circle'></i></span>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='small-12 columns'>
+      <ul class='small-block-grid-1 medium-block-grid-2'>
+      <li>
+        <dl class='accordion'  data-accordion='myAccordionGroup'>
+          <dd class='accordion-navigation'>
+            <a class='accordion-title' href='#panel1'>What can I do?</a>
+            <div id='panel1' class='content'>
+              <p class='content-text'>
+                Panel 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+          </dd>
+        </dl>
+      </li>
+      <li>
+        <dl class='accordion'  data-accordion='myAccordionGroup'>
+          <dd class='accordion-navigation'>
+            <a class='accordion-title' href='#panel2'>What is this?</a>
+            <div id='panel2' class='content'>
+              <p class='content-text'>
+                Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </p>
+            </div>
+          </dd>
+        </dl>
+      </li>
+      </ul>
+      </div>
+    </div>
+  </section><!-- /page -->
+
+  <footer class='text-center'>
+    <a class='button b-neutral left' href='myUNHCR-services-menu.html' title=''
+      ><i class='fa fa-arrow-left'></i>Back</a>
+    <a class='button b-neutral right' href='yoursettings.html' title='Info Line'
+      ><i class='fa fa-phone'></i>Call Info Line</a>
+  </footer>
+
+<script> $('#myAccordionGroup').on('toggled', function (event, accordion) { console.log(accordion); }); </script>
+<script> $(document).foundation({ accordion: { callback : function (accordion) { console.log(accordion); } } }); </script>
+</body>
+</html>
+

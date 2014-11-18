@@ -1,5 +1,5 @@
-set :deploy_config_path, 'application/configs/deploy.rb'
-set :stage_config_path, 'application/configs/deploy/'
+set :deploy_config_path, 'config/deploy.rb'
+set :stage_config_path, 'config/deploy/'
 
 # Load DSL and Setup Up Stages
 require 'capistrano/setup'

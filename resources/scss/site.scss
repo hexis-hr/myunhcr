@@ -113,13 +113,6 @@
     &.b-primary{ background:$primary-color; color:$white; }
   }
 
-// Settings for labels inside the select box
-  .selectlabel{
-    position:relative; 
-    label{ position:absolute; top:8px; left:10px; @extend .font-medium; }
-    select{ text-align:right; }
-  }
-
 // Main Menu List
   .mmenu-list{ margin:0; padding:0; @extend .padding-t25; }
 
@@ -148,8 +141,8 @@
 
 // Footer
   footer{ position:fixed; bottom:0; left:0; right:0px; width:100%; margin-bottom:0px; @extend .margin-t30;
-    .button{ margin:0;
-      &:first-child{ border-right:1px solid $border-color; }
+    .button{ margin:0; padding-left:0; padding-right:0;
+      &.left{ border-right:1px solid $border-color; }
     }
     a{ font-size: rem-calc(18);
       .fa{ font-size: rem-calc(20); margin-right:10px; }
@@ -161,7 +154,12 @@
 
 
 .important{ color:$warning-color; }
-.fa-question-circle{ font-size: rem-calc(24); vertical-align:bottom; }
+.fa-question-circle{ font-size: rem-calc(24); margin-top:3px; }
+
+.page-title{
+  padding-bottom:10px; border-bottom:1px solid $border-color;
+  h4{ margin-bottom:0; }
+}
 
 .content-title{ position:relative;
   h3{ width:80%; margin-bottom:0; }

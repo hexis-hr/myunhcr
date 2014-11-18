@@ -6372,7 +6372,7 @@ h4 {
 }
 
 h5 {
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 h6 {
@@ -6582,7 +6582,7 @@ blockquote p {
   }
 
   h5 {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
 
   h6 {
@@ -6723,7 +6723,7 @@ blockquote p {
   margin: 0;
 }
 .tab-bar h1, .tab-bar h2, .tab-bar h3, .tab-bar h4 {
-  font-size: 1.125rem;
+  font-size: 1rem;
 }
 
 .left-small {
@@ -9794,12 +9794,16 @@ th.hide-for-touch {
   text-transform: uppercase;
 }
 
+.bolded {
+  font-weight: bold;
+}
+
 /* Font Weight helpers */
 .font-regular {
   font-weight: 400;
 }
 
-.font-medium, .selectlabel label {
+.font-medium {
   font-weight: 500;
 }
 
@@ -10159,18 +10163,6 @@ th.hide-for-touch {
   color: white;
 }
 
-.selectlabel {
-  position: relative;
-}
-.selectlabel label {
-  position: absolute;
-  top: 8px;
-  left: 10px;
-}
-.selectlabel select {
-  text-align: right;
-}
-
 .mmenu-list {
   margin: 0;
   padding: 0;
@@ -10230,8 +10222,10 @@ footer {
 }
 footer .button {
   margin: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
-footer .button:first-child {
+footer .button.left {
   border-right: 1px solid #e1e1e1;
 }
 footer a {
@@ -10254,7 +10248,15 @@ footer .right {
 
 .fa-question-circle {
   font-size: 1.5rem;
-  vertical-align: bottom;
+  margin-top: 3px;
+}
+
+.page-title {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e1e1e1;
+}
+.page-title h4 {
+  margin-bottom: 0;
 }
 
 .content-title {

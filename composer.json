@@ -7,6 +7,8 @@
         "zendframework/zendframework": "2.3.3",
         "zendframework/zend-developer-tools": "dev-master",
         "doctrine/doctrine-orm-module": "0.8.*",
-        "doctrine/data-fixtures": "~1.0"
+        "doctrine/data-fixtures": "~1.0",
+        "rwoverdijk/assetmanager": "~1.4",
+        "zendframework/zftool": "dev-master"
     }
 }

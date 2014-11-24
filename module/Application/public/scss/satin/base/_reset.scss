@@ -1,0 +1,152 @@
+@mixin st-reset {
+
+
+  // Set border-box as default sizing
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+
+  // Set html height for SPA
+  html {
+    height: 100%;
+  }
+
+
+  // Reset body
+  body {
+    cursor: default;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  // Correct `block` display not defined in IE 8/9.
+  article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, summary, section, video {
+    display: block;
+  }
+
+
+  // 1. Correct `inline-block` display not defined in IE 8/9.
+  // 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+  audio, canvas, progress {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+
+
+  // Remove all list styles
+  ul, ol, dl, dt, dd {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+
+  // Remove paragraph and figure spacing by default
+  p, figure {
+    margin:0;
+    padding:0;
+  }
+
+
+  // Remove the gray background color from active links in IE 10.
+  a {
+    background: transparent;
+  }
+
+
+  // Improve readability when focused and also mouse hovered in all browsers.
+  a:hover, a:focus {
+    outline: 0;
+  }
+
+
+  // Address styling not present in IE 8/9, Safari 5, and Chrome.
+  abbr[title] {
+    border-bottom: 1px dotted;
+  }
+
+
+  // Address inconsistent and variable font size in all browsers.
+  small{
+    font-size: 80%;
+  }
+
+
+  // Prevent `sub` and `sup` affecting `line-height` in all browsers.
+  sub, sup {
+    position: relative;
+    vertical-align: baseline;
+    font-size:75%;
+    line-height:0;
+  }
+  sup {
+    top: -0.5em;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+
+
+  img {
+    display: inline-block; // Get rid of gap under images by making them display: inline-block; by default
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+    border: 0;
+
+    &.-half {
+      zoom: 0.5;
+    }
+  }
+
+
+  // Grid Defaults to get images and embeds to work properly
+  img, object, embed {
+    max-width: 100%;
+    height: auto;
+  }
+  object, embed {
+    height: 100%;
+  }
+
+
+  iframe { display:block; }
+
+
+  // Remove most spacing between table cells.
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  td, th {
+    padding: 0;
+  }
+
+
+  // Suposed to make tapping more responsive on IE browsers
+  a, input, button{
+    -ms-touch-action: none !important;
+  }
+
+
+  // For performance reasons, only on selected elements
+  #{$headers}, .preformat, .button, input {
+    text-rendering: optimizeLegibility;
+  }
+
+
+  // Make select elements 100% width by default
+  select{
+    width: 100%;
+  }
+
+
+  // Make sure textarea takes on height automatically
+  textarea {
+    height: auto;
+    min-height: 50px;
+  }
+
+
+}

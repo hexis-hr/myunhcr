@@ -1,0 +1,42 @@
+/*————————————————————————————————————————————————————————————————————————————————
+  Layout core
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin st-layout {
+    .floatLeft{ float: left }
+    .floatRight{ float: right }
+    .clearfix{ @include clearfix }
+
+    .hide { display: none }
+    .displayBlock{ display: block }
+    .displayInline{ display: inline }
+    .inlineBlock{ display: inline-block }
+
+    .fullWidth{ width: 100% }
+    .smallPadding{ @include rem(padding, 1rem); }
+    .padding{ @include rem(padding, 2rem); }
+    .noPadding{ padding: 0 !important }
+    .noMargin{ margin: 0 !important }
+
+    .posRelative{ position: relative }
+  }
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  GPU composite layer
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin compositeLayer() {
+    transform: translateZ(0);
+  }
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Absolute fill
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin absoluteFill($v:top, $h:left) {
+    position: absolute;
+    #{$v}: 0;
+    #{$h}: 0;
+    width: 100%;
+    height: 100%;
+  }
+

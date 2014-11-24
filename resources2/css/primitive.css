@@ -1,0 +1,886 @@
+@charset "UTF-8";
+/*————————————————————————————————————————————————————————————————————————————————
+  Remove unit values from integers
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Convert rem / em to px
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  EM Helper
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Tint & Shade
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Directional opposites
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Main REM mixin with pixel fallback
+
+  Syntax:
+  @include rem( <attribute>, <values...> );
+
+  Example: @include rem(font-size, 1.2rem);
+  Outputs: font-size: 19px; font-size:1.2rem;
+
+  Example: @include rem(margin, 2rem 20px);
+  Outputs: margin:32px 20px; margin:2rem 20px; (Initial pixel values are not converted to REM)
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Media queries
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Scalable / Responsive values
+
+  Syntax:
+  @include responsive(
+    <attribute> <value> <multiplier>?
+  );
+  
+  Sample usage:
+  @include responsive(
+    margin-top 20px 3,
+    margin-bottom 50px 2
+  );
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Desktop values for IE8
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  CSS Triangle
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  PNG scalable icon
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Icon scale
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Proportional image scaling
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Opacity
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Clearfix
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Automatic right-to-left support mixins
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  ESSENTIALS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  BRAND COLORS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  SITE COLORS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT: GRID
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: BLOCKS (Hint: Use fewer columns to optimise filesize)
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: GAPS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: HELPERS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: BASE
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: HEADERS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: GENERAL SIZING
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: LISTS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  CONTENT :: BUTTONS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  FORMS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  ESSENTIALS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  BRAND COLORS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  SITE COLORS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT: GRID
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: BLOCKS (Hint: Use fewer columns to optimise filesize)
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: GAPS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: HELPERS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: BASE
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: HEADERS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: GENERAL SIZING
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: LISTS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  CONTENT :: BUTTONS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  FORMS
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Layout core
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  GPU composite layer
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  Absolute fill
+————————————————————————————————————————————————————————————————————————————————*/
+.gap {
+  margin-bottom: 32px;
+}
+@media only screen and (min-width: 37.5em) {
+  .gap {
+    margin-bottom: 38px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .gap {
+    margin-bottom: 46px;
+  }
+}
+
+.gapSmall {
+  margin-bottom: 16px;
+}
+@media only screen and (min-width: 37.5em) {
+  .gapSmall {
+    margin-bottom: 18px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .gapSmall {
+    margin-bottom: 19px;
+  }
+}
+
+.gapLarge {
+  margin-bottom: 54px;
+}
+@media only screen and (min-width: 37.5em) {
+  .gapLarge {
+    margin-bottom: 70px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .gapLarge {
+    margin-bottom: 91px;
+  }
+}
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Typography core
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  LIST NESTING
+————————————————————————————————————————————————————————————————————————————————*/
+.preformat ul ul, .preformat ol ul, .preformat ul ol, .preformat ol ol {
+  margin-top: 15px;
+  margin-top: 0.91rem;
+  margin-bottom: 0;
+}
+.preformat ul ul, .preformat ol ul {
+  margin-left: 1.18em;
+  list-style-type: circle;
+}
+.preformat ul ul ul, .preformat ol ul ul {
+  list-style-type: disc;
+}
+.preformat ul ol, .preformat ol ol {
+  margin-left: 1.45em;
+}
+
+/*————————————————————————————————————————————————————————————————————————————————
+  UNORDERED LIST
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  ORDERED LIST
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  INLINE LIST
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  SEPARATOR LIST
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  SATIN CLASSES
+————————————————————————————————————————————————————————————————————————————————*/
+/*————————————————————————————————————————————————————————————————————————————————
+  DEBUGGER
+————————————————————————————————————————————————————————————————————————————————*/
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  cursor: default;
+  margin: 0;
+  padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, summary, section, video {
+  display: block;
+}
+
+audio, canvas, progress {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+ul, ol, dl, dt, dd {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+p, figure {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  background: transparent;
+}
+
+a:hover, a:focus {
+  outline: 0;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub, sup {
+  position: relative;
+  vertical-align: baseline;
+  font-size: 75%;
+  line-height: 0;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  display: inline-block;
+  vertical-align: middle;
+  -ms-interpolation-mode: bicubic;
+  border: 0;
+}
+img.-half {
+  zoom: 0.5;
+}
+
+img, object, embed {
+  max-width: 100%;
+  height: auto;
+}
+
+object, embed {
+  height: 100%;
+}
+
+iframe {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td, th {
+  padding: 0;
+}
+
+a, input, button {
+  -ms-touch-action: none !important;
+}
+
+h1, h2, h3, h4, h5, h6, .preformat, .button, input {
+  text-rendering: optimizeLegibility;
+}
+
+select {
+  width: 100%;
+}
+
+textarea {
+  height: auto;
+  min-height: 50px;
+}
+
+html {
+  font-size: 100%;
+}
+@media only screen and (min-width: 64.0625em) {
+  html {
+    font-size: 95%;
+  }
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1;
+  color: #424242;
+}
+
+[dir="rtl"] {
+  direction: rtl;
+}
+
+[lang="ar"] {
+  font-family: Greta, "arabic typesetting", Tahoma, Arial, sans-serif !important;
+  font-size: 17px;
+  font-size: 1.05rem;
+}
+[lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3, [lang="ar"] h4, [lang="ar"] h5, [lang="ar"] h6 {
+  font-family: Greta, "arabic typesetting", Tahoma, Arial, sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: bold;
+  line-height: 1.4;
+  color: #242424;
+}
+
+h1, .h1 {
+  font-size: 1.4375em;
+  line-height: 1.2;
+}
+
+h2, .h2 {
+  font-size: 1.28289em;
+  line-height: 1.24;
+}
+
+h3, .h3 {
+  font-size: 1.14815em;
+  line-height: 1.27;
+}
+
+h4, .h4 {
+  font-size: 1em;
+}
+
+h5, .h5 {
+  font-size: 1.04348em;
+}
+
+h6, .h6 {
+  font-size: 1.04545em;
+}
+
+@media only screen and (min-width: 20em) {
+  h1, .h1 {
+    font-size: 1.64286em;
+    line-height: 1.2;
+  }
+
+  h2, .h2 {
+    font-size: 1.5em;
+    line-height: 1.24;
+  }
+
+  h3, .h3 {
+    font-size: 1.29167em;
+    line-height: 1.27;
+  }
+}
+@media only screen and (min-width: 37.5em) {
+  h1, .h1 {
+    font-size: 2.3em;
+  }
+
+  h2, .h2 {
+    font-size: 1.95em;
+  }
+
+  h3, .h3 {
+    font-size: 1.55em;
+  }
+
+  h4, .h4 {
+    font-size: 1.25em;
+  }
+
+  h5, .h5 {
+    font-size: 1.2em;
+  }
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  cursor: pointer;
+}
+
+.link, .preformat a {
+  padding: 0 1px;
+  color: #E0212E;
+  text-decoration: underline;
+}
+.link:hover, .preformat a:hover {
+  text-decoration: none;
+  background: rgba(224, 33, 46, 0.1);
+}
+
+.showFromSmall, .showFromSmallPlus,
+.showFromMedium, .showFromMediumPlus,
+.showFromLarge, .showFromLargePlus,
+.showFromXlarge {
+  display: none !important;
+}
+
+@media only screen and (min-width: 20em) {
+  .hideFromSmall {
+    display: none !important;
+  }
+
+  .showFromSmall {
+    display: inherit !important;
+  }
+}
+@media only screen and (min-width: 26.75em) {
+  .hideFromSmallPlus {
+    display: none !important;
+  }
+
+  .showFromSmallPlus {
+    display: inherit !important;
+  }
+}
+@media only screen and (min-width: 37.5em) {
+  .hideFromMedium {
+    display: none !important;
+  }
+
+  .showFromMedium {
+    display: inherit !important;
+  }
+}
+@media only screen and (min-width: 50em) {
+  .hideFromMediumPlus {
+    display: none !important;
+  }
+
+  .showFromMediumPlus {
+    display: inherit !important;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .hideFromLarge {
+    display: none !important;
+  }
+
+  .showFromLarge {
+    display: inherit !important;
+  }
+}
+@media only screen and (min-width: 80em) {
+  .hideFromLargePlus {
+    display: none !important;
+  }
+
+  .showFromLargePlus {
+    display: inherit !important;
+  }
+}
+@media only screen and (min-width: 100em) {
+  .hideFromXlarge {
+    display: none !important;
+  }
+
+  .showFromXlarge {
+    display: inherit !important;
+  }
+}
+.showForTouch,
+.touch .hideForTouch {
+  display: none !important;
+}
+
+.hideForTouch,
+.touch .showForTouch {
+  display: inherit !important;
+}
+
+/* Default styles ————————————————————————————————————————————————————————————*/
+html {
+  height: 100%;
+  font-size: 110%;
+}
+
+body {
+  min-height: 100%;
+}
+
+.page {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.pageLink {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Default styles ————————————————————————————————————————————————————————————*/
+.mainHeader {
+  padding: 1em;
+  color: white;
+  background: #0083c9;
+}
+
+.mainHeader_wrapper {
+  text-align: center;
+}
+
+.mainHeader_call {
+  display: none;
+}
+
+.mainHeader_logo {
+  display: inline-block;
+  margin-bottom: 1em;
+}
+
+.mainHeader_nav {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.mainHeader_nav_trigger {
+  display: none;
+}
+
+.mainHeader_nav_item {
+  display: block;
+}
+
+.mainHeader_nav_link {
+  display: block;
+  margin-bottom: 2px;
+  padding: .75em;
+  font-size: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: #0097e8;
+}
+.mainHeader_nav_link:hover, .mainHeader_nav_link:focus {
+  background: #00a4fc;
+}
+
+/* Default styles ————————————————————————————————————————————————————————————*/
+.mainFooter {
+  padding: 0 1em;
+}
+
+/* Default styles ————————————————————————————————————————————————————————————*/
+/* Default styles ————————————————————————————————————————————————————————————*/
+/* Default styles ————————————————————————————————————————————————————————————*/
+/* Default styles ————————————————————————————————————————————————————————————*/
+/* Default styles ————————————————————————————————————————————————————————————*/
+/* Default styles ————————————————————————————————————————————————————————————*/
+/* Default  styles ————————————————————————————————————————————————————————————*/
+.button {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0.6em 1.2em 0.68571em;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: white;
+  text-align: center;
+  border: 0;
+  background: #6cab18;
+  display: block;
+  margin-bottom: .5em;
+  color: #242424;
+  background: #e6e6e6;
+  background: -webkit-linear-gradient(top, #f0f0f0, gainsboro);
+  background: linear-gradient(top, #f0f0f0, gainsboro);
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+}
+.button:hover, .button:active, .button:focus, .button:visited {
+  text-decoration: none;
+}
+.button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.button:hover {
+  background: #efefef;
+  background: -webkit-linear-gradient(top, #f9f9f9, #e5e5e5);
+  background: linear-gradient(top, #f9f9f9, #e5e5e5);
+}
+.button.-sharp {
+  border-radius: 0 !important;
+}
+
+.button.-primary {
+  color: white;
+  background: #6cab18;
+  background: -webkit-linear-gradient(top, #77bd1b, #619915);
+  background: linear-gradient(top, #77bd1b, #619915);
+  border: 1px solid #619915;
+}
+.button.-primary:hover {
+  background: #77bd1b;
+  background: -webkit-linear-gradient(top, #83cf1d, #6cab18);
+  background: linear-gradient(top, #83cf1d, #6cab18);
+}
+
+.button.-secondary {
+  color: white;
+  background: #0083c9;
+  background: -webkit-linear-gradient(top, #0090dd, #0076b5);
+  background: linear-gradient(top, #0090dd, #0076b5);
+  border: 1px solid #0076b5;
+}
+.button.-secondary:hover {
+  background: #0090dd;
+  background: -webkit-linear-gradient(top, #009ef2, #0083c9);
+  background: linear-gradient(top, #009ef2, #0083c9);
+}
+
+/* Default styles ————————————————————————————————————————————————————————————*/
+.preformat {
+  padding-top: 1px;
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+.preformat p.lead {
+  font-size: 1.1em;
+  font-weight: 300;
+}
+@media only screen and (min-width: 64.0625em) {
+  .preformat p.lead {
+    font-size: 1.2em;
+  }
+}
+.preformat small {
+  font-size: 0.85em;
+  color: #5e5e5e;
+}
+.preformat ul {
+  margin-left: 1.05em;
+  list-style-type: disc;
+}
+.preformat ul li {
+  margin-bottom: 15px;
+  margin-bottom: 0.91rem;
+  padding-left: 0.2em;
+}
+.preformat ul li:last-child {
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 37.5em) {
+  .preformat ul {
+    margin-left: 2em;
+  }
+}
+.preformat ol {
+  margin-left: 1.4em;
+  list-style-type: decimal;
+}
+.preformat ol li {
+  margin-bottom: 15px;
+  margin-bottom: 0.91rem;
+}
+.preformat ol li:last-child {
+  margin-bottom: 0;
+}
+@media only screen and (min-width: 37.5em) {
+  .preformat ol {
+    margin-left: 2em;
+  }
+}
+.preformat ol ul {
+  list-style-type: disc;
+}
+.preformat ol ul ul {
+  list-style-type: circle;
+}
+.preformat img {
+  margin-left: auto;
+  margin-right: auto;
+}
+.preformat p, .preformat ul, .preformat ol, .preformat pre, .preformat blockquote, .preformat iframe, .preformat > figure, .preformat > img {
+  margin-top: 0;
+  margin-bottom: 22px;
+  margin-bottom: 1.365rem;
+}
+.preformat h1, .preformat h2, .preformat h3, .preformat h4, .preformat h5, .preformat h6 {
+  margin-top: 33px;
+  margin-top: 2.0475rem;
+}
+.preformat h1 {
+  margin-bottom: 15px;
+  margin-bottom: 0.91rem;
+}
+.preformat h2 {
+  margin-bottom: 7px;
+  margin-bottom: 0.455rem;
+}
+.preformat h3, .preformat h4 {
+  margin-bottom: 5px;
+  margin-bottom: 0.34125rem;
+}
+.preformat h5, .preformat h6 {
+  margin-bottom: 4px;
+  margin-bottom: 0.2275rem;
+}
+.preformat hr {
+  display: block;
+  margin: 3.4125rem auto 3.003rem;
+  width: 20%;
+  height: 1px;
+  background: #cecece;
+  border: 0;
+}
+.preformat > h1:first-child, .preformat > h2:first-child, .preformat > h3:first-child, .preformat > h4:first-child, .preformat > h5:first-child, .preformat > h6:first-child {
+  margin-top: -0.2em;
+}
+.preformat > :last-child {
+  margin-bottom: 0;
+}
+.preformat.-compact {
+  line-height: 1.27273;
+}
+.preformat.-compact h1, .preformat.-compact h2, .preformat.-compact h3, .preformat.-compact h4, .preformat.-compact h5, .preformat.-compact h6 {
+  margin-top: 16px;
+  margin-top: 1.02375rem;
+  margin-bottom: 0;
+}
+.preformat.-compact p, .preformat.-compact ul, .preformat.-compact ol, .preformat.-compact pre, .preformat.-compact blockquote, .preformat.-compact iframe, .preformat.-compact > figure, .preformat.-compact > img {
+  margin-bottom: 11px;
+  margin-bottom: 0.6825rem;
+}
+.preformat.-compact > :first-child {
+  margin-top: -0.22em;
+}
+@media only screen and (min-width: 64.0625em) {
+  .preformat {
+    line-height: 1.4;
+  }
+}
+[lang="ar"] .preformat, .preformat[lang="ar"] {
+  line-height: 1.6;
+  letter-spacing: normal;
+}
+
+/* Default  styles ————————————————————————————————————————————————————————————*/
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: none;
+  background-size: cover;
+}
+
+.h16 {
+  height: 16px !important;
+}
+
+.h24 {
+  height: 24px !important;
+}
+
+.h32 {
+  height: 32px !important;
+}
+
+.h42 {
+  height: 42px !important;
+}
+
+.h64 {
+  height: 64px !important;
+}
+
+/* Default styles ————————————————————————————————————————————————————————————*/
+.welcomeTitle {
+  color: #0083c9;
+  text-align: center;
+}
+
+.welcomeLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 160px;
+  text-align: center;
+}
+
+.welcomeFooter {
+  margin-bottom: 1em;
+}
+
+.welcomeFooter_button.button {
+  display: block;
+  width: 100%;
+  padding-top: .9em;
+  padding-bottom: .9em;
+}
+
+.grid {
+  margin-top: -26px;
+}
+.grid_column {
+  margin-top: 26px;
+  padding-left: 12px;
+  padding-right: 12px;
+}

@@ -1,0 +1,58 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+.mainHeader { padding:1em; color:white; background:$blue; }
+  .mainHeader_wrapper { text-align:center; }
+    .mainHeader_call { display:none; }
+    .mainHeader_logo { display:inline-block; margin-bottom:1em; }
+    .mainHeader_nav { display:block; margin-bottom:1em; }
+      .mainHeader_nav_trigger { display:none; }
+      .mainHeader_nav_item { display:block; }
+        .mainHeader_nav_link { display:block; margin-bottom:2px; padding:.75em; @include rem(font-size, 0.9rem); font-weight:500; background:lighten($blue, 6);
+          &:hover, &:focus { background:lighten($blue, 10); }
+        }
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+  $height: 58px;
+  $active-background: darken($blue, 8);
+
+  // Javascript-disabled version of header
+  .mainHeader {}
+
+  // Javascript-enabled version of header
+  .js {
+    body { padding-top:$height; } // We need to offset the .page selement for the fixed header
+    .mainHeader { position:fixed; z-index:99; top:0; left:0; width:100%; min-height:$height; padding:0; transform:translateZ(0); }
+      .mainHeader_wrapper { position:relative; }
+        .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
+        .mainHeader_logo { margin:0; padding:8px 10px; height:$height; }
+        .mainHeader_menu { @extend %headerButton; display:block; position:absolute; top:0; right:0; }
+          .mainHeader_menu_icon { @include img("icons", "menu-white-h24@2x", 2, inline); }
+        .mainHeader_nav { display:none; margin:0; background:$active-background; }
+          .mainHeader_nav_link { padding:.7em; background:none; }
+          .mainHeader_nav_item {
+            &:first-child .mainHeader_nav_link { padding-top:1.2em; }
+            &:last-child .mainHeader_nav_link { padding-bottom:1.1em; }
+          }
+        .mainHeader_infoLine { display:none; }
+    
+    .mainHeader.-active {
+      .mainHeader_menu { background:darken($blue, 8); }
+        .mainHeader_menu_icon { @include img("icons", "close-white-h24@2x", 2, inline); }
+      .mainHeader_nav { display:block; }
+    }
+
+    @include large {
+      .mainHeader_logo { margin-left:-14px; }
+    }
+  } // End of .js
+
+  // Header button commons
+  %headerButton { height:$height; line-height:$height - 2; padding:0 14px; font-size:0.85em; font-weight:bold;
+    &_img { vertical-align:-7px; }
+    &:hover { background: $active-background; }
+  }
+
+}

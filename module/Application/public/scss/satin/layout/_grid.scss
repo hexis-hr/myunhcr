@@ -1,0 +1,223 @@
+@mixin st-grid {
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Grid basics
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .grid {
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    list-style: none !important;
+    font-size: 0;
+    letter-spacing: -0.31em;
+    text-align: center;
+    direction: ltr;
+
+    &.-reverse {
+      direction: rtl;
+    }
+  
+
+    // Grid column
+    &_column {
+      position: relative;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      vertical-align: top;
+      @include rem(font-size, 1rem);
+      letter-spacing: normal;
+      text-align: left;
+      direction: ltr;
+
+      // Negative margin fix
+      > div, > section, > header, > form {
+        // overflow: hidden;
+        padding-top: 0.1px; 
+      }
+    }
+
+
+    // Nested grid
+    // .grid {
+    //   @include rem(margin-right, -($grid-spacing / 2));
+    //   @include rem(margin-left, -($grid-spacing / 2));
+    // }
+
+  }
+
+
+  [dir="rtl"] .grid, .grid[dir="rtl"] {
+    direction: rtl;
+    // font-size: 0; // Possibly redundant
+
+    .grid_column {
+      @if $arabic-font-enabled == true { @include rem(font-size, $arabic-font-size); }
+      text-align: right;
+      direction: rtl;
+    }
+
+    &.-reverse {
+      direction: ltr;
+    }
+  }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Collapsed grid
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .grid.-collapse {
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    > .grid_column {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    @include small {
+      $spacing: $grid-spacing;
+      &.-smallExpand > .grid_column {
+        @include rem(padding-left, ($spacing / 2), !important);
+        @include rem(padding-right, ($spacing / 2), !important);
+      }
+    }
+
+    @include medium {
+      $spacing: ($grid-spacing * $baseRatio);
+      &.-mediumExpand > .grid_column {
+        @include rem(padding-left, ($spacing / 2), !important);
+        @include rem(padding-right, ($spacing / 2), !important);
+      }
+    }
+
+    @include large {
+      $spacing: ($grid-spacing * $baseRatio * $baseRatio);
+      &.-largeExpand > .grid_column {
+        @include rem(padding-left, ($spacing / 2), !important);
+        @include rem(padding-right, ($spacing / 2), !important);
+      }
+    }
+  }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Center a column
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .grid.-center {
+    > .grid_column {
+      display: block;
+    }
+  }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Clean grid
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .grid.-clean {
+    margin-top: 0 !important;
+
+    > .grid_column {
+      margin-top: 0 !important;
+    }
+  }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Query this shit
+  ————————————————————————————————————————————————————————————————————————————————*/
+  @include small {
+    .grid{ max-width: $grid-small-width; }
+    @include st-gridBreakpoint("small");
+  }
+
+  @include smallPlus {
+    .grid{ max-width: $grid-smallPlus-width; }
+    @include st-gridBreakpoint("smallPlus");
+  }
+
+  @include medium {
+    .grid{ max-width: $grid-medium-width; }
+    @include st-gridBreakpoint("medium");
+  }
+
+  @include mediumPlus {
+    .grid{ max-width: $grid-mediumPlus-width; }
+    @include st-gridBreakpoint("mediumPlus");
+  }
+
+  @include large {
+    .grid{ max-width: $grid-large-width; }
+    @include st-gridBreakpoint("large");
+  }
+
+  @include largePlus {
+    .grid{ max-width: $grid-largePlus-width; }
+    @include st-gridBreakpoint("largePlus");
+  }
+
+  @include xlarge {
+    .grid{ max-width: $grid-xlarge-width; }
+    @include st-gridBreakpoint("xlarge");
+  }
+
+}
+
+
+// ---------------------------------------------------------------------------------
+
+
+@mixin st-gridBreakpoint($breakpoint) {
+  @for $i from 1 through $grid-columns {
+    .-#{$breakpoint}#{$i} {
+      width: percentage($i / $grid-columns);
+    }
+  }
+}
+
+
+// ---------------------------------------------------------------------------------
+
+
+@mixin st-gridSpacing($spacing, $modifierClass:null, $multiplier:$baseRatio){
+  @at-root {
+
+    $classes: false;
+    @if $modifierClass {
+      $classes: ".grid.#{$modifierClass}, .lt-ie9 .grid.#{$modifierClass}";
+    } @else {
+      $classes: ".grid, .lt-ie9 .grid";
+    }
+      
+    // Output default spacing
+    @include st-gridSpacing-margin($classes, $spacing);
+
+    // Medium gets a slightly larger spacing
+    @include medium { @include st-gridSpacing-margin($classes, ($spacing * $multiplier)); }
+
+    // Large gets an even larger spacing
+    @include large { @include st-gridSpacing-margin($classes, ($spacing * $multiplier * $multiplier)); }
+
+  }
+}
+
+
+// Spacing helper
+@mixin st-gridSpacing-margin($classes, $spacing){
+  #{$classes} {
+    @include rem(margin-top, -($spacing));
+
+    > .grid_column {
+      @include rem(margin-top, $spacing);
+      @include rem(padding-left, ($spacing / 2));
+      @include rem(padding-right, ($spacing / 2));
+    }
+
+    .grid {
+      @include rem(margin-left, -($spacing / 2));
+      @include rem(margin-right, -($spacing / 2));
+    }
+  }
+}

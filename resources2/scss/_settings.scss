@@ -1,0 +1,178 @@
+/*————————————————————————————————————————————————————————————————————————————————
+  ESSENTIALS
+————————————————————————————————————————————————————————————————————————————————*/
+  $baseRem: 16px; // Used to calculate fallback pixel values for browsers which do not support REM units
+  $baseRatio: 1.25; // Used as default scale / multiplier
+  $pixelFallback: true; // Set to false if you can work with REM units
+  $ie8: true; // Enables IE8 compatile opacity
+  $align: left; // Default direction for text, floats, etc.
+  $direction: ltr; // Default direction for text, floats, etc.
+  $debug: false; // Shows some helpful info while styling
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  BRAND COLORS
+————————————————————————————————————————————————————————————————————————————————*/
+  $blue: #0083c9;
+  $darkBlue: #005a98;
+  $orange: #ff9933;
+  $green: #6cab18;
+  $gray: #a1a0a1;
+  $lightGray: #fdfdfd;
+  $white: #ffffff;
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  SITE COLORS
+————————————————————————————————————————————————————————————————————————————————*/
+  $primary: $green; // Primary interest (e.g., call-to-action button)
+  $secondary: $blue; // Headers, form labels... you decide
+  $neutral: #4E4E4E; // A simple neutral color
+  $neutral-dark: #242424; // Headers and such...
+  $neutral-light: #D9D9D9; // Very light & sexy backgrounds, borders, etc.
+
+  // $positive: #41a240; // Success messages and such...
+  // $negative: #f04821; // Error messages and such...
+  // $warning: null; // I promise I'll be more careful next time, officer.
+
+  // $text: #424242; // Default text color
+  // $text-strong: shade($text, 60%); // Emphasised text (<h1>, <strong>, ...)
+  // $text-light: tint($text, 15%); // De-emphasised text (<small>, <cite>, ...)
+  // $link: $primary; // Default link color
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT: GRID
+————————————————————————————————————————————————————————————————————————————————*/
+  // $grid-columns: 12; // Total number of columns in a grid
+  // $grid-spacing: 2.2rem; // Base spacing for small screens
+
+  // $grid-small-breakpoint: em(320px); // Media query condition. This one targets entry-level smartphones (usually)
+  // $grid-small-width: null; // Optional max-width for the container
+
+  // $grid-smallPlus-breakpoint: em(428px); // Larger smartphones (usually)
+  // $grid-smallPlus-width: null;
+
+  // $grid-medium-breakpoint: em(600px); // Tablets (usually)
+  // $grid-medium-width: null;
+  // $grid-medium-spacing: null;
+
+  // $grid-mediumPlus-breakpoint: em(800px); // Tablets (usually)
+  // $grid-mediumPlus-width: null;
+
+  // $grid-large-breakpoint: em(1024px); // Larger devices (usually). Also IE8 default
+  // $grid-large-width: 1120px; // Required for IE8
+
+  // $grid-largePlus-breakpoint: em(1280px);
+  // $grid-largePlus-width: null;
+
+  // $grid-xlarge-breakpoint: em(1600px);
+  // $grid-xlarge-width: null;
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: BLOCKS (Hint: Use fewer columns to optimise filesize)
+————————————————————————————————————————————————————————————————————————————————*/
+  // $blocks-spacing: $grid-spacing / 2; // Spacing between block columns
+  // $blocks-small:  4; // Total number of columns in a block grid for small screens
+  // $blocks-medium: 6; // Total number of columns in a block grid for medium screens
+  // $blocks-large:  8; // Total number of columns in a block grid for large screens
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: GAPS
+————————————————————————————————————————————————————————————————————————————————*/
+  // $gapSmall: 16px; // Smaller gap value
+  // $gap: 32px; // Gaps are your standard, responsive margins for separating page sections
+  // $gapLarge: 54px; // Larger gap value
+  // $gapMultiplier: 1.2; // Used to scale gaps responsively
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT :: HELPERS
+————————————————————————————————————————————————————————————————————————————————*/
+  // $global-radius: null; // Global border radius (optional)
+  // $ui-radius: 4px; // Radius for some UI elements (required)
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: BASE
+————————————————————————————————————————————————————————————————————————————————*/
+  $sans-font-family: "Helvetica Neue", Arial, sans-serif;
+  // $serif-font-family: Georgia, "Times New Roman", Times, serif;
+  // $monospace-font-family: Menlo, Monaco, Consolas, monospace;
+  
+  // Latin fonts
+  $body-font-family: $sans-font-family;
+  $header-font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+  $interface-font-family: $sans-font-family;
+
+  // Arabic fonts
+  $arabic-font-enabled: true;
+  $arabic-font-family: Greta, "arabic typesetting", Tahoma, Arial, sans-serif;
+  $arabic-font-size: 1.05rem;
+  $arabic-line-height: 1.6;
+
+  // $preformat-line-height: 1.4;
+  // $preformat-gap: 0.975rem * $preformat-line-height;
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: HEADERS
+————————————————————————————————————————————————————————————————————————————————*/
+  // $headers: "h1, h2, h3, h4, h5, h6";
+  // $header-font-weight: bold;
+  // $header-font-color: $neutral-dark;
+  // $header-line-height: 1.4;
+
+  // $h1: 2.30em;
+  // $h2: 1.95em;
+  // $h3: 1.55em;
+  // $h4: 1.25em;
+  // $h5: 1.20em;
+  // $h6: 1.15em;
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: GENERAL SIZING
+————————————————————————————————————————————————————————————————————————————————*/
+  // $text-small:   0.94em;
+  // $text-smaller: 0.85em;
+  // $text-large:   1.16em;
+  // $text-larger:  1.30em;
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  TYPE :: LISTS
+————————————————————————————————————————————————————————————————————————————————*/
+  // $list-decoration: disc;
+  // $list-decoration-alt: circle;
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  CONTENT :: BUTTONS
+————————————————————————————————————————————————————————————————————————————————*/
+  $button-size: 1.20em;
+  $button-font-size: 1rem;
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  FORMS
+————————————————————————————————————————————————————————————————————————————————*/
+  // Field wrapper
+  // $formField-gap: 20px;
+
+  // Global input styles
+  // $input-radius: 3px;
+  // $input-height: 2.45em;
+  // $input-touch-height: 2.8em;
+
+  // $label-font-size: 0.9rem;
+  // $label-font-color: $text-strong;
+  // $label-font-weight: bold;
+  // $input-font-size: 1rem;
+
+  // $input-background-color: white;
+  // $input-border-color: shade($neutral-light, 10%);
+  // $input-focus-color: $primary;

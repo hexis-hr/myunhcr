@@ -1,0 +1,94 @@
+@mixin st-debug{
+  $margin: 6px;
+  $minHeight: 24px;
+
+  #debug {
+    position: fixed;
+    z-index: 99;
+    display: block !important;
+    left: $margin;
+    bottom: $margin;
+    right: $margin;
+    padding-top: $minHeight;
+    min-height: $minHeight;
+    font-size: 14px;
+    line-height: 1.4;
+    background: #e5e5e5;
+    border-radius: 5px;
+  }
+
+  #debug_handle {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $minHeight;
+    background: #cdcdcd;
+    border-radius: 5px;
+  }
+
+  #debug_checkbox {
+    position: absolute;
+    z-index: 2;
+    top: 3px;
+    left: 0.5em;
+  }
+
+  .debug_wrapper {
+    display: none;
+    padding: 0.5em;
+  }
+
+  #debug_checkbox:checked ~ .debug_wrapper {
+    display: block;
+  }
+
+
+  
+
+
+  .debug_media{
+    &_basic {
+      display:block;
+      @include small{ display:none; }
+    }
+
+    &_small {
+      display:none;
+      @include smallOnly{ display:block; }
+    }
+
+    &_smallPlus {
+      display:none;
+      @include smallPlusOnly{ display:block; }
+    }
+
+    &_medium {
+      display:none;
+      @include mediumOnly{ display:block; }
+    }
+
+    &_mediumPlus {
+      display:none;
+      @include mediumPlusOnly{ display:block; }
+    }
+
+    &_large {
+      display:none;
+      @include largeOnly{ display:block; }
+    }
+
+    &_largePlus {
+      display:none;
+      @include largePlusOnly{ display:block; }
+    }
+
+    &_xlarge {
+      display:none;
+      @include xlarge{ display:block; }
+    }
+  }
+
+
+}

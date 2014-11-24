@@ -1,0 +1,30 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+.mainFooter {
+  padding: 0 1em;
+}
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+.mainFooter {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+
+  &.-compact {
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+  }
+
+  @include medium {
+    position: static;
+  }
+}
+
+
+}

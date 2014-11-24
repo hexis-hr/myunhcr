@@ -1,0 +1,17 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+
+.formTextarea {
+  @extend %inputBase;
+}
+
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+
+.formTextarea {}
+
+
+}

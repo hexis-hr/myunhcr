@@ -1,0 +1,35 @@
+@charset "UTF-8";
+@import "satin/_satin";
+
+
+// Toggle primitive mode
+$primitive: false;
+
+
+// Framework includes
+@include st-grid;
+
+
+// Import global modules
+@import "globals/_global";
+@import "globals/_header";
+@import "globals/_footer";
+
+
+// Import form modules
+@import "form/_input";
+@import "form/_select";
+@import "form/_textarea";
+@import "form/_checkbox";
+@import "form/_switch";
+@import "form/_datepicker";
+
+
+// Import content modules
+@import "content/_buttons";
+@import "content/_preformat";
+@import "content/_icons";
+
+
+// Import pages
+@import "pages/_welcome";

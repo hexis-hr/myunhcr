@@ -1,0 +1,31 @@
+@charset "UTF-8";
+@import "satin/_satin";
+
+// @import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+.arabicSans {
+  font-family: "Nassim Arabic Regular", $arabic-font-family !important;
+  // @include rem(font-size, 1.15rem, !important);
+}
+
+
+// Grid Demo
+#grid {
+  .demo {
+    padding-top: 15px;
+    // padding-bottom: 15px;
+    border: 4px;
+    font-size: 14px;
+    text-align: center !important;
+    background: rgba(black, 0.08);
+
+    span {
+      display: block;
+      padding-bottom: 15px;
+    }
+  }
+}
+
+
+.preformat { @include st-preformatExtras; }
+@include st-gridSpacing($grid-spacing);

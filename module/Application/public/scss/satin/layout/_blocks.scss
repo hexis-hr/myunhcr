@@ -1,0 +1,56 @@
+// BLOCKS
+// 19.04.2014
+
+
+@mixin st-blocks {
+  
+  // .blocks {
+  //   display: block;
+  //   margin-left: -($blocks-spacing / 2);
+  //   margin-right: -($blocks-spacing / 2);
+  //   width: auto;
+  //   list-style: none;
+  //   font-size: 0;
+
+  //   &_item {
+  //     display: inline-block;
+  //     padding-left: $blocks-spacing / 2;
+  //     padding-right: $blocks-spacing / 2;
+  //     margin-bottom: $blocks-spacing;
+  //     width: 100%;
+  //     font-size: rem(1);
+  //   }
+
+  // }
+
+  // @include small { @include blocks-breakpoint(small, $blocks-small); }
+  // @if $grid-postSmall-breakpoint{ @include postSmall { @include blocks-breakpoint(postSmall, ($blocks-small + 2)); }}
+
+  // @include medium { @include blocks-breakpoint(medium, $blocks-medium); }
+  // @if $grid-postMedium-breakpoint{ @include postMedium { @include blocks-breakpoint(postMedium, ($blocks-medium + 2)); }}
+
+  // @include large { @include blocks-breakpoint(large, $blocks-large); }
+  // @if $grid-postLarge-breakpoint{ @include postLarge { @include blocks-breakpoint(postLarge, ($blocks-large + 2)); }}
+
+}
+
+
+// ---------------------------------------------------------------------------------
+
+
+@mixin st-blocksBreakpoint($breakpoint, $columns) {
+  // @for $i from 1 through $columns {
+  //   @if $i != 1 {
+  //     .blocks.-#{$breakpoint}#{$i} > li {
+  //       width: 100% / $i;
+  //     }
+  //   }
+  // }
+  @for $i from 1 through $columns {
+    @if $i != 1 {
+      .blocks_item.-#{$breakpoint}#{$i} {
+        width: 100% / $i;
+      }
+    }
+  }
+}

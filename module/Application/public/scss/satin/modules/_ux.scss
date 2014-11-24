@@ -1,0 +1,28 @@
+@mixin st-ux {
+  
+  // Make an element unselectable
+  .unselectable {
+    user-select: none;
+  }
+
+  // Hidden elements for relaying messages to screen readers
+  #alertPolite, #alertAssertive, .reader{
+    position:absolute;
+    top:auto;
+    left:-9999px;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+
+  // Used to tell javascript which screen size is currently active.
+  // This makes sure there are no differences in JS and CSS sizes
+  #screenSize{ position:absolute; top:-9999px; left:-9999px; display:none;
+                      font-family:"basic";
+    @include small {  font-family:"small"; }
+    @include medium { font-family:"medium"; }
+    @include large {  font-family:"large"; }
+    @include xlarge { font-family:"xlarge"; }
+  }
+
+}

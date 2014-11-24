@@ -1,0 +1,10 @@
+%gap{ @include responsive(margin-bottom $gap $gapMultiplier); }
+%gapSmall{ @include responsive(margin-bottom $gapSmall ($gapMultiplier - 0.1)); }
+%gapLarge{ @include responsive(margin-bottom $gapLarge ($gapMultiplier + 0.1)); }
+
+
+@mixin st-gaps {
+  .gap{ @extend %gap; }
+  .gapSmall{ @extend %gapSmall; }
+  .gapLarge{ @extend %gapLarge; }
+}

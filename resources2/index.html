@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang='en' class='no-js'>
+<head>
+  <meta charset='utf-8'> <!-- Charset should be defined as early as possible to avoid rendering problems -->
+
+  <!-- ==== DNS Prefetch ==== -->
+  <link rel="dns-prefetch" href="//maps.googleapis.com">
+
+  <!-- ==== Critical Meta Tags ==== -->
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'> <!-- This line is best to remove and just send it as a http header -->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'> <!-- Required for Responsive Web Design -->
+  <title>MyUNHCR</title> <!-- Display the page title as early as possible -->
+
+  <!-- ======= Critical Inline Scripts ======= -->
+  <script>
+
+    var ua = navigator.userAgent.toLowerCase();
+    var doc = document.documentElement;
+    window.DOMContentLoaded = false;
+
+    var featureTest = function() {
+      // Show javascript support
+      doc.className = doc.className.replace(/\bno-js\b/,'js');
+    }
+
+    // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
+    var logDOMContent = function() {
+      document.addEventListener("DOMContentLoaded", function(){
+        window.DOMContentLoaded = true;
+      });
+    }
+
+    featureTest();
+    logDOMContent();
+
+  </script>
+
+  <!-- ==== Primitive CSS ==== -->
+  <link rel='stylesheet' href='css/primitive.css' type='text/css'>
+  <link rel='stylesheet' href='css/modern.css' type='text/css'>
+
+  <!-- ==== Secondary Meta Tags ==== -->
+  <meta name='description' content=''>
+</head>
+<body class='welcome'>
+
+  <section class='page'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <h1 class='welcomeTitle gap'>MyUNHCR</h1>
+        <a class='welcomeLogo gap'><img class='welcomeLogo_img' src='media/content/welcome-logo.png' alt=''></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class='mainFooter welcomeFooter'>
+    <div class='grid -collapse'>
+      <div class='grid_column -medium4 -large3'>
+        <a class='welcomeFooter_button button -primary' href='settings.html'>Start</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class='pageLink' href='settings.html'></a>
+
+  <!-- Various helpers -->
+  <div id='screenSize'></div>
+  <div id='alertPolite'></div>
+  <div id='alertAssertive'></div>
+
+  <!-- Secondary script files (async!) -->
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' defer async></script>
+  <script src='scripts/main.js' defer async></script>
+
+  <!-- ==== Prefetch the next page ==== -->
+  <link rel='prefetch' href='settings.html'>
+  <link rel='prerender' href='settings.html'>
+
+</body>
+</html>

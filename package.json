@@ -1,0 +1,12 @@
+{
+  "name": "GoldfishCMS",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Internet-Inovacije/goldfish/",
+  "private": true,
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-autoprefixer": "^1.0.1",
+    "gulp-plumber": "^0.6.6",
+    "gulp-ruby-sass": "^0.7.1"
+  }
+}

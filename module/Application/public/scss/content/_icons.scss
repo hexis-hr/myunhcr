@@ -1,0 +1,23 @@
+@if $primitive == true {
+/* Default  styles ————————————————————————————————————————————————————————————*/
+
+
+// Standard sizes
+.icon { @include st-icon; }
+.h16 { height:16px !important; }
+.h24 { height:24px !important; }
+.h32 { height:32px !important; }
+.h42 { height:42px !important; }
+.h64 { height:64px !important; }
+
+
+} @else {
+/* Modern phones only —————————————————————————————————————————————————————————*/
+
+
+// Global icons
+// .iconExample { @include img("icons", "example-white-h24", 1); }
+// .iconExampleRetina { @include img("icons", "example-white-h24@2x", 2); }
+
+
+}

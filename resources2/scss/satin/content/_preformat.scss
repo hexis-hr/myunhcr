@@ -1,0 +1,218 @@
+@mixin st-preformat {
+
+  padding-top: 1px; // Fix for negative margin on headers
+  line-height: $preformat-line-height + 0.1;
+  letter-spacing: .01em;
+
+  p {
+    &.lead {
+      font-size: 1.1em;
+      font-weight: 300;
+      @include large { font-size: 1.2em; }
+    }
+  }
+
+  small {
+    font-size: $text-smaller;
+    color: $text-light;
+  }
+
+  a{ @extend .link !optional; }
+
+  ul { @include st-ul; }
+  ol { @include st-ol; }
+
+  img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // Standardize margins for everything
+  p, ul, ol, pre, blockquote, iframe, > figure, > img {
+    margin-top: 0;
+    @include rem(margin-bottom, $preformat-gap);
+  }
+
+  #{$headers} {
+    @include rem(margin-top, ($preformat-gap * 1.5));
+  }
+
+  h1{ @include rem(margin-bottom, ($preformat-gap / 1.5)); }
+  h2{ @include rem(margin-bottom, ($preformat-gap / 3)); }
+  h3, h4{ @include rem(margin-bottom, ($preformat-gap / 4)); }
+  h5, h6{ @include rem(margin-bottom, ($preformat-gap / 6)); }
+
+  hr {
+    display: block;
+    margin: ($preformat-gap * 2.5) auto ($preformat-gap * 2.2);
+    width: 20%;
+    height: 1px;
+    background: shade($neutral-light, 5%);
+    border: 0;
+  }
+
+  // Remove margins for certain cases
+  > h1:first-child, > h2:first-child, > h3:first-child, > h4:first-child, > h5:first-child, > h6:first-child{ margin-top: -0.2em; }
+  > :last-child{ margin-bottom: 0; }
+
+  // Compact modifier for some design elements
+  &.-compact {
+    line-height: $preformat-line-height / 1.1;
+    #{$headers}{
+      @include rem(margin-top, (($preformat-gap * 1.5) / 2));
+      margin-bottom: 0;
+    }
+    p, ul, ol, pre, blockquote, iframe, > figure, > img { @include rem(margin-bottom, ($preformat-gap / 2)); }
+    > :first-child{ margin-top: -0.22em; }
+  }
+
+
+  @include large {
+    line-height: $preformat-line-height;
+  }
+
+}
+
+
+
+@mixin st-preformatExtras {
+
+  #{$headers} {
+    // Directly after headers, these elements have a bit of margin-top
+    + ul, + ol, + pre{
+      margin-top: $preformat-gap / 2.5;
+    }
+  }
+
+  figure {
+    // display: table;
+    // table-layout: fixed;
+    position: relative;
+    margin-left: -($grid-spacing / 2);
+    margin-right: -($grid-spacing / 2);
+    padding: 0;
+    text-align: center;
+
+    // div {
+    //   display: table-cell;
+    //   width: 100%;
+    // }
+
+      img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      figcaption {
+        // display: table-caption;
+        // caption-side: bottom;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: $grid-spacing / 2;
+        padding-right: $grid-spacing / 2;
+        @include rem(padding-top, ($preformat-gap / 1.5));
+        font-family: $serif-font-family;
+        font-size: 0.95em;
+        font-style: italic;
+        text-align: $align;
+      }
+  }
+
+  @include medium {
+    figure {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+
+      img {
+        width: auto;
+      }
+
+      figcaption {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding: 1em;
+      }
+    }
+  }
+
+  abbr {
+    cursor: help;
+    border-bottom: 1px dotted $text-light;
+  }
+
+  del, s {
+    text-decoration: line-through;
+  }
+
+  code {
+    // display: inline;
+    padding: .1em .2em;
+    // font-weight: bold;
+    font-family: $monospace-font-family;
+    font-size: 0.95em;
+    color: $secondary;
+    line-height: $preformat-line-height - 0.3;
+    background: tint($secondary, 90%);
+  }
+
+  kbd {
+    display: inline-block;
+    margin: 0 .1em;
+    border: 1px solid #CCC;
+    padding: .22em .4em;
+    font-size: $text-smaller;
+    font-weight: bold;
+    color: $text-light;
+    text-transform: uppercase;
+    line-height: 1;
+    vertical-align: 1px;
+    background-color: #f2f2f2;
+    box-shadow: 0 1px 0 rgba(black, 0.2);
+    border-radius: 3px;
+    text-shadow: 0 1px 0 #FFF;
+    white-space: nowrap;
+  }
+
+  blockquote{ margin:0; padding:.5em 1.1em .25em 1.05em; font-size:0.95em; border-left:1px solid #DDD; color:$text-light;
+    cite{ display:block; margin-top:0.25em; font-size:0.8em;
+      &:before{ margin-right:0.4em; content:'—'; }
+    }
+  }
+
+  pre {
+    padding: 1em;
+    background: #f7f7f7;
+    border: 1px solid #e8e8e8;
+    overflow: auto;
+    text-rendering: optimizeSpeed;
+  }
+    pre code {
+      display: block;
+      padding: 0 !important;
+      font-size: 0.9em;
+      font-family: $monospace-font-family;
+      font-weight: inherit;
+      color: inherit;
+      line-height: 1.45;
+      white-space: pre;
+      text-rendering: optimizeSpeed;
+      background: none;
+    }
+
+}
+
+
+
+@mixin st-preformat-arabic {
+  @at-root {
+    [lang="ar"] &, &[lang="ar"] {
+      line-height: $arabic-line-height;
+      letter-spacing: normal;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+
+.welcome {}
+  .welcomeTitle { color:$blue; text-align:center; }
+  .welcomeLogo { display:block; margin-left:auto; margin-right:auto; max-width:160px; text-align:center; }
+    .welcomeLogo_img{}
+  .welcomeFooter { margin-bottom:1em; }
+    .welcomeFooter_button.button { display:block; width:100%; padding-top:.9em; padding-bottom:.9em; }
+
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+
+  body.welcome { padding-top:0; }
+    .welcomeFooter { margin-bottom:0; }
+
+
+}

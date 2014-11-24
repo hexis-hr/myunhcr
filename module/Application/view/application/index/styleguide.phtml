@@ -1,0 +1,201 @@
+<?php $this->headLink()->appendStylesheet('/css/styleguide.css'); ?>
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<div class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Sample content</h1>
+    </div>
+  </div>
+  <div class='grid gap'>
+    <div class='grid_column -medium6'>
+      <div class='preformat gapSmall'>
+        <h2>Morning 1 2 3 Evening</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id rhoncus ante, vel luctus leo. Quisque et eros laoreet, pellentesque urna nec, tristique sem.</p>
+      </div>
+      <a class='button -primary'>Primary</a>
+      <a class='button -secondary'>Secondary</a>
+      <a class='button'>Neutral</a>
+    </div>
+    <div class='grid_column -medium6'>
+      <div class='preformat gapSmall'>
+        <h2>Morning 4 5 6 Evening</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id rhoncus ante, vel luctus leo. Quisque et eros laoreet, pellentesque urna nec, tristique sem.</p>
+      </div>
+      <a class='button'>Neutral 1</a>
+      <a class='button'>Neutral 2</a>
+      <a class='button'>Neutral 3</a>
+    </div>
+  </div>
+  <div class='grid gapLarge' lang='ar' dir='rtl'>
+    <div class='grid_column -medium6 arabicSans'>
+      <div class='preformat gapSmall'>
+        <h2>الصباح 1 2 3 مساء</h2>
+        <p>فقد ان واستسلم الفرنسي, وفي ألماني الفرنسية عل, في انه ٢٠٠٤ المشترك. بـ نفس طائرات الولايات, الأجل الدنمارك ستالينجراد تم يتم, فصل أم إنطلاق للألمان. لان اتفاق وتزويده الروسية ان, و وعلى إتفاقية بلا.</p>
+      </div>
+      <a class='button -primary'>ابتدائي</a>
+      <a class='button -secondary'>ثانوي</a>
+      <a class='button'>محايد</a>
+    </div>
+    <div class='grid_column -medium6'>
+      <div class='preformat gapSmall'>
+        <h2>الصباح 4 5 6 مساء</h2>
+        <p>فقد ان واستسلم الفرنسي, وفي ألماني الفرنسية عل, في انه ٢٠٠٤ المشترك. بـ نفس طائرات الولايات, الأجل الدنمارك ستالينجراد تم يتم, فصل أم إنطلاق للألمان. لان اتفاق وتزويده الروسية ان, و وعلى إتفاقية بلا.</p>
+      </div>
+      <a class='button'>محايد 1</a>
+      <a class='button'>محايد 2</a>
+      <a class='button'>محايد 3</a>
+    </div>
+  </div>
+
+  <div id='frontend' class='gapLarge'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <h1 class='sectionTitle'>Guidelines (draft)</h1>
+        <div class='preformat'>
+          <ul>
+            <li>Primary (green) buttons should be used only once per page, for the most important call-to-action</li>
+            <li>Always default to neutral button colors, use secondary (blue) theme only if you really have to</li>
+            <li>Icon sizes are based on <b>height</b> of the icon, and include the following: 16px, 24px, 32px, 48px, 64px</li>
+            <li>If you need just a plain simple horizontal margin or padding somewhere, consider using the <code>&amp;nbsp;</code> space character. It works with right-to-left languages with no additional adjustments.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id='grid'>
+    <div class='grid gapSmall'>
+      <div class='grid_column'>
+        <div class='demo'><span>grid_column</span></div>
+      </div>
+    </div>
+    <div class='grid gapSmall'>
+      <div class='grid_column -small6'>
+        <div class='demo'><span>-small6</span></div>
+      </div>
+      <div class='grid_column -small6'>
+        <div class='demo'><span>-small6</span></div>
+      </div>
+    </div>
+    <div class='grid gapSmall'>
+      <div class='grid_column -small3'>
+        <div class='demo'><span>-small3</span></div>
+      </div>
+      <div class='grid_column -small3'>
+        <div class='demo'><span>-small3</span></div>
+      </div>
+      <div class='grid_column -small3'>
+        <div class='demo'><span>-small3</span></div>
+      </div>
+      <div class='grid_column -small3'>
+        <div class='demo'><span>-small3</span></div>
+      </div>
+    </div>
+    <div class='grid gapSmall'>
+      <div class='grid_column -medium2'>
+        <div class='demo'><span>-medium2</span></div>
+      </div>
+      <div class='grid_column -medium2'>
+        <div class='demo'><span>-medium2</span></div>
+      </div>
+      <div class='grid_column -medium2'>
+        <div class='demo'><span>-medium2</span></div>
+      </div>
+      <div class='grid_column -medium2'>
+        <div class='demo'><span>-medium2</span></div>
+      </div>
+      <div class='grid_column -medium2'>
+        <div class='demo'><span>-medium2</span></div>
+      </div>
+      <div class='grid_column -medium2'>
+        <div class='demo'><span>-medium2</span></div>
+      </div>
+    </div>
+    <div class='grid gapSmall'>
+      <div class='grid_column'>
+        <div class='demo'>
+          <span>grid_column</span>
+          <div class='grid gapSmall'>
+            <div class='grid_column'>
+              <div class='demo'>
+                <span>grid_column</span>
+                <div class='grid gapSmall'>
+                  <div class='grid_column -small6'>
+                    <div class='demo'>
+                      <span>-small6</span>
+                      <div class='grid gapSmall'>
+                        <div class='grid_column -small6'>
+                          <div class='demo'>
+                            <span>-small6</span>
+                          </div>
+                        </div>
+                        <div class='grid_column -small6'>
+                          <div class='demo'>
+                            <span>-small6</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class='grid_column -small6'>
+                    <div class='demo'>
+                      <span>-small6</span>
+                      <div class='grid gapSmall'>
+                        <div class='grid_column -small6'>
+                          <div class='demo'>
+                            <span>-small6</span>
+                          </div>
+                        </div>
+                        <div class='grid_column -small6'>
+                          <div class='demo'>
+                            <span>-small6</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Forms</h1>
+      <form action='' class='settings form'>
+        <div class='form_item'>
+          <label class='form_label' for='demoField1'>Basic input</label>
+          <div class='form_field'>
+            <input class="formInput" id='demoField1' type='text' placeholder='Basic input'>
+          </div>
+        </div>
+        <div class='form_item'>
+          <label class='form_label' for='demoField2'>Select</label>
+          <div class='form_field customSelect'>
+            <select class='formSelect -custom' id='demoField2'>
+              <option>--</option>
+              <option>Lorem ipsum</option>
+              <option>Dolor sit amet</option>
+            </select>
+            <a unselectable='on' class='formSelect_overlay'>--</a>
+          </div>
+        </div>
+        <div class='form_item'>
+          <label class='form_label' for='demoField3'>Textarea</label>
+          <div class='form_field'>
+            <textarea class='formTextarea' id='demoField3' placeholder='Lorem ipsum...'></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+<?php echo $this->partial('application/index/footer.phtml');?>

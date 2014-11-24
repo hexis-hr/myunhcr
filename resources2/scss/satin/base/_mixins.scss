@@ -1,0 +1,274 @@
+/*————————————————————————————————————————————————————————————————————————————————
+  Main REM mixin with pixel fallback
+
+  Syntax:
+  @include rem( <attribute>, <values...> );
+
+  Example: @include rem(font-size, 1.2rem);
+  Outputs: font-size: 19px; font-size:1.2rem;
+
+  Example: @include rem(margin, 2rem 20px);
+  Outputs: margin:32px 20px; margin:2rem 20px; (Initial pixel values are not converted to REM)
+————————————————————————————————————————————————————————————————————————————————*/
+@mixin rem($property, $values, $important:null) {
+  @if $values {
+  
+    $fallback: ();
+    $rem: ();
+
+    @each $value in $values {
+      @if $value == 0 or $value == auto or unit($value) == "em" {
+        $fallback: append($fallback , $value);
+        $rem: append($rem, $value);
+      }
+      @else {
+        $unit: unit($value);
+        $val: strip-unit($value);
+
+        @if $unit == "px" {
+          $fallback: append($fallback,  $value);
+          // $rem: append($rem, ($val / strip-unit($baseRem) + rem)); // This line outputs REM values for initial PX values
+          $rem: append($rem,  $value); // This line outputs PX values for initial PX values
+        }
+
+        @if $unit == "rem" {
+          $fallback: append($fallback,  round($val * strip-unit($baseRem))+px);
+          $rem: append($rem, $value);
+        }
+      }
+    }
+
+    @if $pixelFallback {
+      #{$property}: $fallback $important; // Output px & em values always
+
+      // Output REM values only if some are present
+      $writeRem: false;
+      @for $i from 1 through length($rem) {
+        @if unit(nth($rem, $i)) == "rem" { $writeRem: true; }
+      }
+      @if $writeRem == true {
+        #{$property}: $rem $important;
+      }
+    }
+    @else{
+      #{$property}: $rem;
+    }
+
+  }
+}
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Media queries
+————————————————————————————————————————————————————————————————————————————————*/
+  $reduction: 0.02;
+  @mixin small { @media only screen and ( min-width: $grid-small-breakpoint ){ @content; }}
+  @mixin smallDown { @media only screen and ( max-width: $grid-smallPlus-breakpoint - $reduction ){ @content; }}
+  @mixin smallOnly { @media only screen and ( min-width: $grid-small-breakpoint ) and ( max-width: $grid-smallPlus-breakpoint - $reduction ){ @content; }}
+  @mixin smallPlus { @media only screen and ( min-width: $grid-smallPlus-breakpoint ){ @content; }}
+  @mixin smallPlusDown { @media only screen and ( max-width: $grid-medium-breakpoint - $reduction ){ @content; }}
+  @mixin smallPlusOnly { @media only screen and ( min-width: $grid-smallPlus-breakpoint ) and ( max-width: $grid-medium-breakpoint - $reduction ){ @content; }}
+  @mixin medium { @media only screen and ( min-width: $grid-medium-breakpoint ){ @content; }}
+  @mixin mediumDown { @media only screen and ( max-width: $grid-mediumPlus-breakpoint - $reduction ){ @content; }}
+  @mixin mediumOnly { @media only screen and ( min-width: $grid-medium-breakpoint ) and ( max-width: $grid-mediumPlus-breakpoint - $reduction ){ @content; }}
+  @mixin mediumPlus { @media only screen and ( min-width: $grid-mediumPlus-breakpoint ){ @content; }}
+  @mixin mediumPlusDown { @media only screen and ( max-width: $grid-large-breakpoint - $reduction ){ @content; }}
+  @mixin mediumPlusOnly { @media only screen and ( min-width: $grid-mediumPlus-breakpoint ) and ( max-width: $grid-large-breakpoint - $reduction ){ @content; }}
+  @mixin large { @media only screen and ( min-width: $grid-large-breakpoint ){ @content; }}
+  @mixin largeDown { @media only screen and ( max-width: $grid-large-breakpoint - $reduction ){ @content; }}
+  @mixin largeOnly { @media only screen and ( min-width: $grid-large-breakpoint ) and ( max-width: $grid-largePlus-breakpoint - $reduction ){ @content; }}
+  @mixin largePlus { @media only screen and ( min-width: $grid-largePlus-breakpoint ){ @content; }}
+  @mixin largePlusDown { @media only screen and ( max-width: $grid-largePlus-breakpoint - $reduction ){ @content; }}
+  @mixin largePlusOnly { @media only screen and ( min-width: $grid-largePlus-breakpoint ) and ( max-width: $grid-xlarge-breakpoint - $reduction ){ @content; }}
+  @mixin xlarge { @media only screen and ( min-width: $grid-xlarge-breakpoint ){ @content; }}
+  @mixin respond($query){ @media only screen and ( $query ){ @content; } } // Custom media query
+
+  @mixin landscape { @media only screen and ( orientation: landscape ){ @content; }}
+  @mixin short { @media only screen and ( max-height: 500px ){ @content; }}
+  @mixin retina { @media only screen and ( min-device-pixel-ratio: 1.5 ){ @content; }}
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Scalable / Responsive values
+
+  Syntax:
+  @include responsive(
+    <attribute> <value> <multiplier>?
+  );
+  
+  Sample usage:
+  @include responsive(
+    margin-top 20px 3,
+    margin-bottom 50px 2
+  );
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin responsive($items...){
+    @each $attribute, $value, $multiplier in $items {
+      @if $multiplier == null { $multiplier: $baseRatio; } // If no multiplier is defined, we use the base ratio
+      @if unit($value) == rem { @include rem($attribute, ($value)) }
+      @else { #{$attribute}: #{$value}; }
+    }
+    @include medium {
+      @each $attribute, $value, $multiplier in $items {
+        @if $multiplier == null { $multiplier: $baseRatio; } // If no multiplier is defined, we use the base ratio
+        $new_value: round( $value * $multiplier );
+        @if unit($value) == rem { @include rem($attribute, ($new_value)) }
+        @else { #{$attribute}: #{$new_value}; }
+      }
+    }
+    @include large {
+      @each $attribute, $value, $multiplier in $items {
+        @if $multiplier == null { $multiplier: $baseRatio; } // If no multiplier is defined, we use the base ratio
+        $new_value: round( $value * $multiplier * $multiplier );
+        @if unit($value) == rem { @include rem($attribute, ($new_value)) }
+        @else { #{$attribute}: #{$new_value}; }
+      }
+    }
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Desktop values for IE8
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin responsive-ie8($items...){
+    @each $attribute, $value, $multiplier in $items {
+      $new_value: round( $value * $multiplier * $multiplier );
+      @if unit($value) == rem { @include rem($attribute, ($new_value)) }
+      @else { #{$attribute}: #{$new_value}; }
+    }
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  CSS Triangle
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin triangle($size:18px, $color:#000, $direction:"down"){
+    width: 0;
+    height: 0;
+    border: $size solid transparent;
+    @include triangle-color($color, $direction);
+  }
+
+  @mixin triangle-color($color, $direction) {
+    @if $direction == "top" { border-bottom-color:$color; }
+    @else if $direction == "right" { border-left-color:$color; }
+    @else if $direction == "bottom" { border-top-color:$color; }
+    @else { border-right-color:$color; }
+  }
+
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  PNG scalable icon
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin img($src, $icon, $scale:1){
+    $path: "/resources2/media/#{$src}/#{$icon}.png";
+
+    @if file_exists($path) {
+      $width: image_width($path);
+      $height: image_height($path);
+
+      width: round($width / $scale);
+      height: round($height / $scale);
+      background-image: url('../media/#{$src}/#{$icon}.png');
+
+      // IE8 Support for scaling
+      @if $ie8{ @at-root {
+        .lt-ie9 & {
+          background-image: none;
+          filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/#{$src}/#{$icon}.png', sizingMethod='scale');
+        }
+      }}
+    } @else {
+      @debug $path;
+    }
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Icon scale
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin img-scale($src, $icon, $scale:1){
+    $path: "../build/images/#{$src}/#{$icon}.png";
+    @if file_exists($path) {
+      $width: image_width($path);
+      $height: image_height($path);
+      width: round($width * $scale);
+      height: round($height * $scale);
+    }
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Proportional image scaling
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin scale($original_width, $original_height, $target_height){
+
+    @if ($original_width > $original_height) {
+      width: ceil($target_height / ( $original_height / $original_width ))+px;
+      height: ($target_height)+px;
+    }
+
+    @else if ($original_width < $original_height) {
+      width: ceil($target_height / ( $original_height / $original_width ))+px;
+      height: ($target_height)+px;
+    }
+
+    @else {
+      width: ($target_height)+px;
+      height: ($target_height)+px;
+    }
+
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Opacity
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin opacity($opacity) {
+    @if $ie8 { filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($opacity * 100)})"); }
+    opacity: $opacity;
+  }
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Clearfix
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin clearfix {
+    &:after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+  }
+  %clearfix { @include clearfix; }
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Automatic right-to-left support mixins
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin float($direction) {
+    float: $direction;
+    @at-root {
+      .rtl & {
+        float: opposite($direction);
+      }
+    }
+  }
+  @mixin text-align($direction) {
+    text-align: $direction;
+    @at-root {
+      .rtl & {
+        text-align: opposite($direction);
+      }
+    }
+  }
+

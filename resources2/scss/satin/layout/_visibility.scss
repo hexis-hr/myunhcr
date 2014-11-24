@@ -1,0 +1,49 @@
+@mixin st-visibility{
+  
+  .showFromSmall, .showFromSmallPlus,
+  .showFromMedium, .showFromMediumPlus,
+  .showFromLarge, .showFromLargePlus,
+  .showFromXlarge { display: none !important; }
+
+  @include small {
+    .hideFromSmall { display: none !important; }
+    .showFromSmall { display: inherit !important; }
+  }
+
+  @include smallPlus {
+    .hideFromSmallPlus { display: none !important; }
+    .showFromSmallPlus { display: inherit !important; }
+  }
+
+  @include medium {
+    .hideFromMedium { display: none !important; }
+    .showFromMedium { display: inherit !important; }
+  }
+
+  @include mediumPlus {
+    .hideFromMediumPlus { display: none !important; }
+    .showFromMediumPlus { display: inherit !important; }
+  }
+
+  @include large {
+    .hideFromLarge { display: none !important; }
+    .showFromLarge { display: inherit !important; }
+  }
+
+  @include largePlus {
+    .hideFromLargePlus { display: none !important; }
+    .showFromLargePlus { display: inherit !important; }
+  }
+
+  @include xlarge {
+    .hideFromXlarge { display: none !important; }
+    .showFromXlarge { display: inherit !important; }
+  }
+
+  .showForTouch,
+  .touch .hideForTouch { display: none !important; }
+
+  .hideForTouch,
+  .touch .showForTouch { display: inherit !important; }
+
+}

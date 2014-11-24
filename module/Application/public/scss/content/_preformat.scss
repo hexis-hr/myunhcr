@@ -1,0 +1,16 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+.preformat {
+  @include st-preformat;
+  @include st-preformat-arabic;
+}
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+.preformat {
+
+}
+
+}

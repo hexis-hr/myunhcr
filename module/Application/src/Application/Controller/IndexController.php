@@ -10,6 +10,13 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
+        $this->layout()->setVariable('body_class', 'welcome');
+        return new ViewModel();
+    }
+
+    public function styleguideAction()
+    {
+        $this->layout()->setVariable('body_class', 'styleguide');
         return new ViewModel();
     }
 
@@ -73,8 +80,9 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
-    public function yourSettingsAction()
+    public function settingsAction()
     {
+        $this->layout()->setVariable('body_class', 'settings');
         return new ViewModel();
     }
 

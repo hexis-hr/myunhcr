@@ -1,0 +1,57 @@
+// Small HTML5 Shim
+article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{ display:block; }
+
+.lt-ie9{
+  
+  $width-1: 8.33333%;
+  $width-2: 16.66667%;
+  $width-3: 25%;
+  $width-4: 33.33333%;
+  $width-5: 41.66667%;
+  $width-6: 50%;
+  $width-7: 58.33333%;
+  $width-8: 66.66667%;
+  $width-9: 75%;
+  $width-10: 83.33333%;
+  $width-11: 91.66667%;
+  $width-12: 100%;
+
+  .grid {
+    margin-top: -($grid-large-spacing);
+    width: $grid-large-width;
+    max-width: $grid-large-width;
+
+    &_column {
+      margin-top: $grid-large-spacing;
+      // padding-left: $grid-large-spacing / 2;
+      // padding-right: $grid-large-spacing / 2;
+    }
+
+    .grid {
+      width: auto;
+    }
+  }
+  
+  // Breakpoint sizes are repeated without media queries since IE8 doesn't support them
+  @include st-gridBreakpoint("small");
+  @include st-gridBreakpoint("medium");
+  @include st-gridBreakpoint("large");
+
+  .gap{ @include responsive-ie8(margin-bottom $gap $gap-multiplier); }
+  .gapSmall{ @include responsive-ie8(margin-bottom $gap-small ($gap-multiplier - 0.1)); }
+  .gapLarge{ @include responsive-ie8(margin-bottom $gap-large ($gap-multiplier + 0.1)); }
+
+  .showFromSmall,
+  .showFromMedium,
+  .showFromLarge {
+    display: inherit !important;
+  }
+
+  .hideForIE8, 
+  .hideFromSmall,
+  .hideFromMedium,
+  .hideFromLarge {
+    display: none !important;
+  }
+
+}

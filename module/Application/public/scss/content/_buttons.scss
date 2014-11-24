@@ -1,0 +1,71 @@
+@if $primitive == true {
+/* Default  styles ————————————————————————————————————————————————————————————*/
+
+.button {
+  @include st-button;
+  display: block;
+  margin-bottom: .5em;
+  color: $neutral-dark;
+  background: #e6e6e6;
+  background: linear-gradient(top, lighten(#e6e6e6, 4), darken(#e6e6e6, 4));
+  border: 1px solid darken(#e6e6e6, 4);
+  border-radius: 3px;
+
+  &:hover {
+    background: #efefef;
+    background: linear-gradient(top, lighten(#efefef, 4), darken(#efefef, 4));
+  }
+
+  &.-sharp {
+    border-radius: 0 !important;
+  }
+}
+
+.button.-primary {
+  color: white;
+  background: $primary;
+  background: linear-gradient(top, lighten($primary, 4), darken($primary, 4));
+  border: 1px solid darken($primary, 4);
+
+  &:hover {
+    $color: lighten($primary, 4);
+    background: $color;
+    background: linear-gradient(top, lighten($color, 4), darken($color, 4));
+  }
+}
+
+.button.-secondary {
+  color: white;
+  background: $secondary;
+  background: linear-gradient(top, lighten($secondary, 4), darken($secondary, 4));
+  border: 1px solid darken($secondary, 4);
+
+  &:hover {
+    $color: lighten($secondary, 4);
+    background: $color;
+    background: linear-gradient(top, lighten($color, 4), darken($color, 4));
+  }
+}
+
+
+} @else {
+/* Modern phones only —————————————————————————————————————————————————————————*/
+
+.button {
+
+  @include small {
+    display: inline-block;
+    margin-bottom: 0;
+    padding: ($button-size / 1.7) $button-size;
+  }
+
+  &.-fullWidth {
+    display: block;
+    width: 100% !important;
+  }
+
+  
+
+}
+
+}

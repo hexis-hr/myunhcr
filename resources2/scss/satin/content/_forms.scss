@@ -1,0 +1,196 @@
+@mixin st-form {
+
+
+  .form {
+    // @include rem(margin-top, -($formField-gap));
+
+    &_fieldset {
+      @include rem(margin, ($formField-gap * 2) 0 0 0);
+      @include rem(padding, ($formField-gap * 2) 0 0 0);
+      border: 0;
+      border-top: 1px solid $neutral-light;
+
+      &:first-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      // &:last-child {
+      //   padding-bottom: 0;
+      // }
+    }
+
+
+    &_item {
+      position:relative;
+    }
+
+  }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Label
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .formLabel {
+    display: inline-block;
+    @include rem(padding-bottom, ($input-height/5));
+    @include rem(font-size, $label-font-size);
+    font-weight: $label-font-weight;
+    line-height: 1.1;
+    color: $label-font-color;
+
+    &.-error {
+      color: $negative;
+    }
+  }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Field wrapper
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .formField{
+    position: relative;
+  }
+
+
+    /*————————————————————————————————————————————————————————————————————————————————
+      Global input styling
+    ————————————————————————————————————————————————————————————————————————————————*/
+    .formField_input, .formField_select, .formField_textarea, .customSelect_overlay {
+      display: block;
+      margin: 0;
+      padding: 0 .65em;
+      width: 100%;
+      @include rem(height, $input-touch-height);
+      @include rem(font-size, $input-font-size);
+      font-family: $body-font-family;
+      background: $input-background-color;
+      border: 1px solid $input-border-color;
+      border-radius: $input-radius;
+
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      -webkit-tap-highlight-color: transparent;
+
+      &:focus {
+        @extend %input-focus;
+      }
+
+      &.-error {
+        border-color: $negative;
+        background: rgba($negative, 0.04);
+      }
+
+      &.-success {
+        border-color: $positive;
+      }
+
+      @include large {
+        @include rem(height, $input-height);
+        @at-root {
+          .touch & {
+            @include rem(height, $input-touch-height);
+          }
+        }
+      }
+    }
+
+    // Focus state for input fields
+    %input-focus {
+      outline: 0;
+      border-color: $input-focus-color !important;
+      box-shadow: 0 0 4px 0 tint($input-focus-color, 50%);
+    }
+
+
+    /*————————————————————————————————————————————————————————————————————————————————
+      Regular Input
+    ————————————————————————————————————————————————————————————————————————————————*/
+    .formField_input {
+      -webkit-appearance:none;
+    }
+
+
+    /*————————————————————————————————————————————————————————————————————————————————
+      Select box
+    ————————————————————————————————————————————————————————————————————————————————*/
+    .formField_select {}
+
+    .customSelect {
+      @include rem(min-height, $input-touch-height);
+
+      &_select {
+        position: relative;
+        z-index: 2;
+        @include opacity(0);
+
+        &:focus ~ .customSelect_overlay {
+          @extend %input-focus;
+        }
+      }
+
+      &_overlay {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background: red;
+        @include rem(line-height, ($input-touch-height / 1.05));
+        @include large {
+          @include rem(line-height, ($input-height / 1.05));
+        }
+      }
+
+      @at-root {
+        .no-js &_select {
+          @include opacity(1);
+        }
+        .no-js &_overlay {
+          display: none;
+        }
+      }
+
+      @include large {
+        @include rem(min-height, $input-height);
+      }
+    }
+
+
+    /*————————————————————————————————————————————————————————————————————————————————
+      Select box
+    ————————————————————————————————————————————————————————————————————————————————*/
+    .formField_textarea {
+      padding: .65em;
+      height: auto;
+      @include rem(min-height, ($input-height * 4));
+      resize: vertical;
+
+      @include medium {
+        @include rem(min-height, ($input-height * 2));
+      }
+    }
+
+
+  /*————————————————————————————————————————————————————————————————————————————————
+    Item States
+  ————————————————————————————————————————————————————————————————————————————————*/
+  .form_item.-error {
+    .formLabel {
+      @extend .formLabel.-error !optional;
+    }
+    .formField_input {
+      @extend .formField_input.-error !optional;
+    }
+  }
+
+  .form_item.-success {
+    .formLabel {
+      @extend .formLabel.-success !optional;
+    }
+    .formField_input {
+      @extend .formField_input.-success !optional;
+    }
+  }
+
+
+}

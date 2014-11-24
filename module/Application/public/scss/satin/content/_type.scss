@@ -1,0 +1,113 @@
+/*————————————————————————————————————————————————————————————————————————————————
+  Typography core
+————————————————————————————————————————————————————————————————————————————————*/
+@mixin st-type($type:"basic") {
+
+  html {
+    font-size: 100%;
+    @include large{ font-size: 95%; }
+  }
+
+  body {
+    font-family: $body-font-family;
+    line-height: 1;
+    color: $text;
+  }
+
+  [dir="rtl"] {
+    direction: rtl;
+  }
+
+  @if $arabic-font-enabled == true {
+    [lang="ar"] {
+      font-family: $arabic-font-family !important;
+      @include rem(font-size, $arabic-font-size);
+
+      #{$headers} {
+        font-family: $arabic-font-family !important;
+      }
+    }
+  }
+
+  //—————————————————————————————————
+
+  #{$headers} {
+    margin: 0;
+    font-family: $header-font-family;
+    font-weight: $header-font-weight;
+    line-height: $header-line-height;
+    color: $header-font-color;
+  }
+
+  h1, .h1 { font-size:$h1 / 1.60; line-height:$header-line-height - 0.20; }
+  h2, .h2 { font-size:$h2 / 1.52; line-height:$header-line-height - 0.16; }
+  h3, .h3 { font-size:$h3 / 1.35; line-height:$header-line-height - 0.13; }
+  h4, .h4 { font-size:$h4 / 1.25; }
+  h5, .h5 { font-size:$h5 / 1.15; }
+  h6, .h6 { font-size:$h6 / 1.10; }
+
+  @include small {
+    h1, .h1 { font-size:$h1 / 1.40; line-height:$header-line-height - 0.20; }
+    h2, .h2 { font-size:$h2 / 1.30; line-height:$header-line-height - 0.16; }
+    h3, .h3 { font-size:$h3 / 1.20; line-height:$header-line-height - 0.13; }
+  }
+
+  @include medium {
+    h1, .h1 { font-size:$h1; }
+    h2, .h2 { font-size:$h2; }
+    h3, .h3 { font-size:$h3; }
+    h4, .h4 { font-size:$h4; }
+    h5, .h5 { font-size:$h5; }
+  }
+
+  //—————————————————————————————————
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover, &:focus {
+      cursor: pointer;
+    }
+  }
+
+  .link {
+    padding: 0 1px;
+    color: $red;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+      background: rgba($red, 0.1);
+    }
+  }
+
+  //—————————————————————————————————
+
+  @if ($type=="extended"){
+    
+    hr {
+      @include responsive(
+        margin-top $gap $gap-multiplier,
+        margin-bottom $gap $gap-multiplier
+      );
+      border: 0;
+      height: 0;
+      border-bottom: 1px dashed shade($neutral-light, 15%);
+    }
+  
+    .textLeft{ text-align: left }
+    .textCenter{ text-align: center }
+    .textJustify{ text-align: justify }
+    .textRight{ text-align: right }
+    .textSmaller{ font-size: $text-smaller }
+    .textSmall{ font-size: $text-small }
+    .textNormal{ @include rem(font-size, 1rem); }
+    .textLarge{ font-size: $text-large }
+    .textLarger{ font-size: $text-larger }
+    .textLight{ font-weight: 300 }
+    .textBold{ font-weight: 600 }
+
+  }
+
+}

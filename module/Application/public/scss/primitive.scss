@@ -1,0 +1,51 @@
+@charset "UTF-8";
+@import "satin/_satin";
+
+
+// Toggle primitive mode
+$primitive: true;
+
+
+// Framework includes
+@include st-reset;
+@include st-type;
+@include st-gaps;
+@include st-visibility;
+
+
+// Import global modules
+@import "globals/_global";
+@import "globals/_header";
+@import "globals/_footer";
+
+
+// Import form modules
+@import "form/_base";
+@import "form/_input";
+@import "form/_select";
+@import "form/_textarea";
+@import "form/_checkbox";
+@import "form/_switch";
+@import "form/_datepicker";
+
+
+// Import content modules
+@import "content/_buttons";
+@import "content/_preformat";
+@import "content/_icons";
+
+
+// Import pages
+@import "pages/_welcome";
+
+
+// Custom grid rules for primitives
+.grid {
+  margin-top: -26px;
+  &_column {
+    margin-top: 26px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+

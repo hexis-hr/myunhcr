@@ -1,0 +1,109 @@
+/*————————————————————————————————————————————————————————————————————————————————
+  LIST NESTING
+————————————————————————————————————————————————————————————————————————————————*/
+%list-nesting {
+  ul, ol {
+    @include rem(margin-top, ($preformat-gap / 1.5));
+    margin-bottom: 0;
+  }
+  ul {
+    margin-left: 1.18em;
+    list-style-type: $list-decoration-alt;
+
+    ul {
+      list-style-type: $list-decoration;
+    }
+  }
+  ol {
+    margin-left: 1.45em;
+  }
+}
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  UNORDERED LIST
+————————————————————————————————————————————————————————————————————————————————*/
+@mixin st-ul {
+  @extend %list-nesting;
+  margin-left: 1.05em;
+  list-style-type: $list-decoration;
+
+  li {
+    @include rem(margin-bottom, ($preformat-gap / 1.5));
+    padding-left: 0.2em;
+    &:last-child { margin-bottom: 0; }
+  }
+
+  @include medium { margin-left: 2em; }
+}
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  ORDERED LIST
+————————————————————————————————————————————————————————————————————————————————*/
+@mixin st-ol {
+  @extend %list-nesting;
+  margin-left: 1.4em;
+  list-style-type: decimal;
+
+  li {
+    @include rem(margin-bottom, ($preformat-gap / 1.5));
+    &:last-child { margin-bottom: 0; }
+  }
+
+  @include medium { margin-left: 2em; }
+
+  ul{ list-style-type: $list-decoration; }
+  ul ul{ list-style-type: $list-decoration-alt; }
+}
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  INLINE LIST
+————————————————————————————————————————————————————————————————————————————————*/
+@mixin st-inlineList(
+  $margin: null
+){
+  &_item {
+    display: inline-block;
+    margin-left: $margin;
+    vertical-align: middle;
+
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+}
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  SEPARATOR LIST
+————————————————————————————————————————————————————————————————————————————————*/
+@mixin st-separatorList(
+  $margin: 0.2em,
+  $separator: "|",
+  $separatorColor: null
+){
+  &_item {
+    display: inline-block;
+    padding: .1em 0;
+
+    &:before {
+      display: inline-block;
+      margin: 0 $margin;
+      padding-right: 0.2em;
+      content: $separator;
+      color: $separatorColor;
+      opacity: 0.75;
+    }
+
+    &:first-child {
+      margin-left: 0;
+      &:before{ display:none; }
+    }
+  }
+}

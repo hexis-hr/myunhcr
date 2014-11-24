@@ -1,0 +1,66 @@
+/*————————————————————————————————————————————————————————————————————————————————
+  Remove unit values from integers
+————————————————————————————————————————————————————————————————————————————————*/
+  @function strip-unit($num){ @return $num / ($num * 0 + 1); }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Convert rem / em to px
+————————————————————————————————————————————————————————————————————————————————*/
+  @function px($value) {
+    @if unit($value) == "rem" {
+      @return round($rem-base * strip-unit($value)); // Convert rem values to px
+    }
+    @else {
+      @return $value; // Output pure em or px values
+    }
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  EM Helper
+————————————————————————————————————————————————————————————————————————————————*/
+  @function em($value) {
+    $value: strip-unit($value) / 16 * 1em;
+    @return $value;
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Tint & Shade
+————————————————————————————————————————————————————————————————————————————————*/
+  @function tint($color, $percent){
+    @return mix(white, $color, $percent);
+  }
+  @function shade($color, $percent){
+    @return mix(black, $color, $percent);
+  }
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Directional opposites
+————————————————————————————————————————————————————————————————————————————————*/
+  @function opposite($direction) {
+    $directions: (
+      top: bottom,
+      right: left,
+      bottom: top,
+      left: right,
+      up: down,
+      down: up,
+      ltr: rtl,
+      rtl: ltr
+    );
+
+    $opposite: map-get($directions, $direction);
+    @if $opposite != null {
+      @return $opposite;
+    }
+    @else {
+      @warn "No opposite direction can be found for '#{$direction}'.";
+    }
+  }

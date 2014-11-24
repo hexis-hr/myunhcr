@@ -1,0 +1,25 @@
+.lt-ie9{
+
+  body { font-size: 95%; }
+
+  h1, .h1 { font-size:$h1; }
+  h2, .h2 { font-size:$h2; }
+  h3, .h3 { font-size:$h3; }
+  h4, .h4 { font-size:$h4; }
+  h5, .h5 { font-size:$h5; }
+
+  .formField_input, .formField_select, .customSelect_overlay {
+    padding-top: $input-height / 4.1;
+    height: px($input-height);
+  }
+
+  .formField_textarea {
+    min-height: px($input-height * 2);
+  }
+
+  .customSelect_overlay {
+    padding-top: 0;
+    line-height: px($input-height / 1.1);
+  }
+
+}

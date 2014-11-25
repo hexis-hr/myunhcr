@@ -699,7 +699,7 @@
 .js .mainHeader_nav {
   display: none;
   margin: 0;
-  background: #0068a0;
+  background: #005e97;
 }
 .js .mainHeader_nav_link {
   padding: .7em;
@@ -715,7 +715,7 @@
   display: none;
 }
 .js .mainHeader.-active .mainHeader_menu {
-  background: #0068a0;
+  background: #005e97;
 }
 .js .mainHeader.-active .mainHeader_menu_icon {
   width: 26px;
@@ -739,7 +739,7 @@
   font-weight: bold;
 }
 .js .mainHeader_call:hover, .js .mainHeader_menu:hover {
-  background: #0068a0;
+  background: #005e97;
 }
 
 /* Modern phone styles ———————————————————————————————————————————————————————*/

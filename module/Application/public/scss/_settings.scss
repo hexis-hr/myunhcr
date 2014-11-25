@@ -15,12 +15,32 @@
 /*————————————————————————————————————————————————————————————————————————————————
   BRAND COLORS
 ————————————————————————————————————————————————————————————————————————————————*/
-  $blue: #0083c9;
-  $darkBlue: #005a98;
-  $orange: #ff9933;
-  $green: #6cab18;
-  $gray: #a1a0a1;
-  $lightGray: #fdfdfd;
+  $blue: #0077c0;
+  $darkBlue: #0f385a;
+  $lightBlue: #4ba6dd;
+
+  $orange: #f7941e;
+  $lightOrange: #fdc581;
+
+  $green: lighten(#00743e, 5);
+  $darkGreen: #0c331e;
+  $lightGreen: #5bbd72;
+
+  $red: #c61d23;
+  $darkRed: #5f1312;
+  $lightRed: #e6656a;
+
+  $purple: #9d3c72;
+  $darkPurple: #461a34;
+  $lightPurple: #c875a2;
+
+  $brown: #60503e;
+  $darkBrown: #3d3126;
+  $lightBrown: #9f7a5f;
+  
+  $black: #231f20;
+  $gray: #595959;
+  $lightGray: #e6e6e6;
   $white: #ffffff;
 
 
@@ -33,14 +53,14 @@
   $neutral-dark: #242424; // Headers and such...
   $neutral-light: #D9D9D9; // Very light & sexy backgrounds, borders, etc.
 
-  // $positive: #41a240; // Success messages and such...
-  // $negative: #f04821; // Error messages and such...
-  // $warning: null; // I promise I'll be more careful next time, officer.
+  $positive: $green; // Success messages and such...
+  $negative: $red; // Error messages and such...
+  $warning: $orange; // I promise I'll be more careful next time, officer.
 
-  // $text: #424242; // Default text color
-  // $text-strong: shade($text, 60%); // Emphasised text (<h1>, <strong>, ...)
+  $text: $gray; // Default text color
+  $text-strong: $black; // Emphasised text (<h1>, <strong>, ...)
   // $text-light: tint($text, 15%); // De-emphasised text (<small>, <cite>, ...)
-  // $link: $primary; // Default link color
+  $link: $blue; // Default link color
 
 
 /*————————————————————————————————————————————————————————————————————————————————

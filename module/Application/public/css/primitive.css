@@ -362,7 +362,7 @@ html {
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
   line-height: 1;
-  color: #424242;
+  color: #595959;
 }
 
 [dir="rtl"] {
@@ -460,12 +460,12 @@ a:hover, a:focus {
 
 .link, .preformat a {
   padding: 0 1px;
-  color: #E0212E;
+  color: #c61d23;
   text-decoration: underline;
 }
 .link:hover, .preformat a:hover {
   text-decoration: none;
-  background: rgba(224, 33, 46, 0.1);
+  background: rgba(198, 29, 35, 0.1);
 }
 
 .showFromSmall, .showFromSmallPlus,
@@ -576,7 +576,7 @@ body {
 .mainHeader {
   padding: 1em;
   color: white;
-  background: #0083c9;
+  background: #0077c0;
 }
 
 .mainHeader_wrapper {
@@ -612,10 +612,10 @@ body {
   font-size: 14px;
   font-size: 0.9rem;
   font-weight: 500;
-  background: #0097e8;
+  background: #008adf;
 }
 .mainHeader_nav_link:hover, .mainHeader_nav_link:focus {
-  background: #00a4fc;
+  background: #0097f3;
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/
@@ -649,7 +649,7 @@ body {
   color: white;
   text-align: center;
   border: 0;
-  background: #6cab18;
+  background: #008e4c;
   display: block;
   margin-bottom: .5em;
   color: #242424;
@@ -677,28 +677,28 @@ body {
 
 .button.-primary {
   color: white;
-  background: #6cab18;
-  background: -webkit-linear-gradient(top, #77bd1b, #619915);
-  background: linear-gradient(top, #77bd1b, #619915);
-  border: 1px solid #619915;
+  background: #008e4c;
+  background: -webkit-linear-gradient(top, #00a257, #007941);
+  background: linear-gradient(top, #00a257, #007941);
+  border: 1px solid #007941;
 }
 .button.-primary:hover {
-  background: #77bd1b;
-  background: -webkit-linear-gradient(top, #83cf1d, #6cab18);
-  background: linear-gradient(top, #83cf1d, #6cab18);
+  background: #00a257;
+  background: -webkit-linear-gradient(top, #00b661, #008e4c);
+  background: linear-gradient(top, #00b661, #008e4c);
 }
 
 .button.-secondary {
   color: white;
-  background: #0083c9;
-  background: -webkit-linear-gradient(top, #0090dd, #0076b5);
-  background: linear-gradient(top, #0090dd, #0076b5);
-  border: 1px solid #0076b5;
+  background: #0077c0;
+  background: -webkit-linear-gradient(top, #0084d4, #006aac);
+  background: linear-gradient(top, #0084d4, #006aac);
+  border: 1px solid #006aac;
 }
 .button.-secondary:hover {
-  background: #0090dd;
-  background: -webkit-linear-gradient(top, #009ef2, #0083c9);
-  background: linear-gradient(top, #009ef2, #0083c9);
+  background: #0084d4;
+  background: -webkit-linear-gradient(top, #0090e9, #0077c0);
+  background: linear-gradient(top, #0090e9, #0077c0);
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/
@@ -857,7 +857,7 @@ body {
 
 /* Default styles ————————————————————————————————————————————————————————————*/
 .welcomeTitle {
-  color: #0083c9;
+  color: #0077c0;
   text-align: center;
 }
 

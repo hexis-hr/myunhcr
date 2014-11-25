@@ -1,46 +1,26 @@
 @if $primitive == true {
 /* Default styles ————————————————————————————————————————————————————————————*/
 
-html {
-  height: 100%;
-  font-size: 110%;
-}
 
-body {
-  min-height: 100%;
-}
+html { height:100%; font-size:110%; }
+body { min-height:100%; }
 
-.page {
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
+.page { padding-top:1em; padding-bottom:1em; }
+  .pageLink { position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; }
 
-  .pageLink {
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-.clearfix{
-  @include clearfix;
-}
 
 } @else {
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 
+
 @include large {
-  html {
-    font-size: 100%;
-  }
+  html { font-size:105%; }
 }
 
 .page {
   @include responsive(
-    padding-top ($gapSmall * 1.4) ($gapMultiplier),
-    padding-bottom ($gapSmall * 1.4) ($gapMultiplier)
+    padding-top ($gapSmall) ($gapMultiplier),
+    padding-bottom ($gapSmall) ($gapMultiplier)
   );
 }
 
@@ -50,12 +30,5 @@ body {
     }
   }
 
-.floatLeft {
-  @include float(left);
-}
-
-.floatRight {
-  @include float(right);
-}
 
 }

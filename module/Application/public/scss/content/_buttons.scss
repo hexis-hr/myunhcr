@@ -24,26 +24,26 @@
 .button.-primary {
   color: white;
   background: $primary;
-  background: linear-gradient(top, lighten($primary, 4), darken($primary, 4));
+  background: linear-gradient(top, lighten($primary, 2), darken($primary, 2));
   border: 1px solid darken($primary, 4);
 
   &:hover {
     $color: lighten($primary, 4);
     background: $color;
-    background: linear-gradient(top, lighten($color, 4), darken($color, 4));
+    background: linear-gradient(top, lighten($color, 2), darken($color, 2));
   }
 }
 
 .button.-secondary {
   color: white;
   background: $secondary;
-  background: linear-gradient(top, lighten($secondary, 4), darken($secondary, 4));
+  background: linear-gradient(top, lighten($secondary, 2), darken($secondary, 2));
   border: 1px solid darken($secondary, 4);
 
   &:hover {
     $color: lighten($secondary, 4);
     background: $color;
-    background: linear-gradient(top, lighten($color, 4), darken($color, 4));
+    background: linear-gradient(top, lighten($color, 2), darken($color, 2));
   }
 }
 
@@ -55,7 +55,7 @@
 
     &:hover {
       color: white;
-      background: linear-gradient(top, lighten($secondary, 4), darken($secondary, 4));
+      background: linear-gradient(top, lighten($secondary, 2), darken($secondary, 2));
       border:none;
     }
   }
@@ -79,8 +79,11 @@
   &.-submit {
     display: block;
     width: 100% !important;
+    
     @include medium {
       width: auto !important;
+      padding-left: $button-size * 2.5;
+      padding-right: $button-size * 2.5;
     }
   }
 

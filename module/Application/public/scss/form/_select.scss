@@ -2,14 +2,59 @@
 /* Default styles ————————————————————————————————————————————————————————————*/
 
 
-.formSelect {}
+.formSelect {
+  @extend %inputBase;
+  height: $input-height;
+  -webkit-appearance:menulist-button; /* Fix for mac height */
+
+  &:focus {
+    @extend %inputBase_focus;
+  }
+}
+
+.customSelect {}
+  .customSelect_select {}
+  .customSelect_overlay { display:none; }
 
 
 } @else {
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 
 
-.formSelect {}
+.js {
+  .customSelect { position:relative; }
+    
+    .customSelect_select {
+      position: relative;
+      z-index: 2;
+      @include opacity(0);
+    }
+    
+    .customSelect_overlay {
+      @extend %inputBase;
+      position: absolute;
+      z-index: 1;
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $input-height;
+      line-height: $input-height;
+
+      &:after {
+        @include triangle(6px, lighten($gray, 30), down);
+        position: absolute;
+        top: 17px;
+        right: 13px;
+        content: '';
+      }
+    }
+
+    // Focused state
+    .customSelect_select:focus + .customSelect_overlay {
+      @extend %inputBase_focus;
+    }
+}
 
 
 }

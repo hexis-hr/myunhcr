@@ -146,7 +146,7 @@
 /*————————————————————————————————————————————————————————————————————————————————
   CSS Triangle
 ————————————————————————————————————————————————————————————————————————————————*/
-  @mixin triangle($size:18px, $color:#000, $direction:"down"){
+  @mixin triangle($size:6px, $color:#000, $direction:"down"){
     width: 0;
     height: 0;
     border: $size solid transparent;
@@ -154,9 +154,9 @@
   }
 
   @mixin triangle-color($color, $direction) {
-    @if $direction == "top" { border-bottom-color:$color; }
+    @if $direction == "up" { border-bottom-color:$color; }
     @else if $direction == "right" { border-left-color:$color; }
-    @else if $direction == "bottom" { border-top-color:$color; }
+    @else if $direction == "down" { border-top-color:$color; }
     @else { border-right-color:$color; }
   }
 
@@ -263,18 +263,27 @@
 /*————————————————————————————————————————————————————————————————————————————————
   Automatic right-to-left support mixins
 ————————————————————————————————————————————————————————————————————————————————*/
+  @mixin rtl{
+    @at-root {
+      [dir="rtl"] & {
+        @content;
+      }
+    }
+  }
+
   @mixin float($direction) {
     float: $direction;
     @at-root {
-      .rtl & {
+      [dir="rtl"] & {
         float: opposite($direction);
       }
     }
   }
+
   @mixin text-align($direction) {
     text-align: $direction;
     @at-root {
-      .rtl & {
+      [dir="rtl"] & {
         text-align: opposite($direction);
       }
     }

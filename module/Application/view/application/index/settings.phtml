@@ -6,95 +6,67 @@
       <h1 class='sectionTitle'>Settings</h1>
       <form action='menu-page.html' class='settings form'>
         
-        <div class='form_item formSwitch'>
-          <div class='grid -collapse'>
-            <div class='grid_column -small6'>
-              <label class='form_label' for='notifications'>Notifications</label>
-            </div>
-            <div class='grid_column -small6'>
-              <div class='form_field floatRight'>
-                <!-- <input type='checkbox' name='' value='' placeholder='' id='notifications'> -->
-                <div class='onoffswitch'>
-                  <input class='onoffswitch-checkbox' type='checkbox' name='onoffswitch' id='myonoffswitch' checked>
-                  <label class='onoffswitch-label' for='myonoffswitch'>
-                    <span class='onoffswitch-inner'></span>
-                    <span class='onoffswitch-switch'></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
 
-        <div class='form_item'>
-          <div class='grid -collapse -clean'>
-            <div class='grid_column -medium6'>
+            <div class='form_item formSwitch'>
+              <label class='form_label formSwitch_wrapper' for='notifications'>Notifications
+                <input class='formSwitch_checkbox' type='checkbox' id='notifications' checked>
+                <span class='formSwitch_custom'></span>
+              </label>
+            </div>
+
+            <div class='form_item'>
               <label class='form_label' for='language'>Language</label>
-            </div>
-            <div class='grid_column -medium6'>
               <div class='form_field customSelect'>
-                <select class='formSelect -custom' id='language'>
+                <select class='formSelect customSelect_select -custom' id='language'>
                   <option>English</option>
+                  <option>Deutsch</option>
+                  <option>Italiano</option>
+                  <option>العربية</option>
                 </select>
-                <a unselectable='on' class='formSelect_overlay'>English</a>
+                <a unselectable='on' class='customSelect_overlay'>English</a>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class='form_item'>
-          <div class='grid -collapse -clean'>
-            <div class='grid_column -medium6'>
-              <label class='form_label' for='country'>Country</label>
-            </div>
-            <div class='grid_column -medium6'>
-              <div class='form_field customSelect'>
-                <select class='formSelect -custom' id='country'>
-                  <option>Jordan</option>
-                </select>
-                <a unselectable='on' class='formSelect_overlay'>Jordan</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class='form_item'>
-          <div class='grid -collapse -clean'>
-            <div class='grid_column -medium6'>
+            <div class='form_item'>
               <label class='form_label' for='category'>Category</label>
-            </div>
-            <div class='grid_column -medium6'>
               <div class='form_field customSelect'>
-                <select class='formSelect -custom' id='category'>
+                <select class='formSelect customSelect_select -custom' id='category'>
                   <option>Refugees</option>
                 </select>
-                <a unselectable='on' class='formSelect_overlay'>Refugees</a>
+                <a unselectable='on' class='customSelect_overlay'>Refugees</a>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class='form_item'>
-          <div class='grid -collapse -clean'>
-            <div class='grid_column -medium6'>
-              <label class='form_label' for='location'>Location</label>
-            </div>
-            <div class='grid_column -medium6'>
+            <div class='form_item'>
+              <label class='form_label' for='country'>Country</label>
               <div class='form_field customSelect'>
-                <select class='formSelect -custom' id='location'>
+                <select class='formSelect customSelect_select -custom' id='country'>
+                  <option>Jordan</option>
+                </select>
+                <a unselectable='on' class='customSelect_overlay'>Jordan</a>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='location'>Location</label>
+              <div class='form_field customSelect'>
+                <select class='formSelect customSelect_select -custom' id='location'>
                   <option>Ammon</option>
                 </select>
-                <a unselectable='on' class='formSelect_overlay'>Ammon</a>
+                <a unselectable='on' class='customSelect_overlay'>Ammon</a>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class='form_item'>
-          <div class='form_field'>
-            <input class='button -primary -submit floatRight' type='submit' name='' value='Save'>
+            <div class='form_item'>
+              <div class='form_field'>
+                <input class='button -primary -submit' type='submit' name='' value='Save'>
+              </div>
+            </div>
+        
           </div>
-        </div>
+        </div><!-- /grid -->
 
       </form>
     </div>

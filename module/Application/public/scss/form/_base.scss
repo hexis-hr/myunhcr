@@ -1,3 +1,32 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+
+.form_item { margin-bottom:$form-item-gap; }
+  .form_item_column.-alignRight { @include text-align(right); }
+  .form_label { display:block; padding-bottom:.4em; font-size:0.9em; font-weight:500; color:$black; }
+
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+
+// .form_item { margin-bottom:1em; }
+
+
+}
+
+
 %inputBase {
   width: 100%;
+  padding: 0 .75em;
+  @include rem(font-size, 0.95rem);
+  border: 1px solid $input-border-color;
+  transition: 200ms;
+}
+
+
+%inputBase_focus {
+  box-shadow: 1px 2px 6px rgba(darken($input-focus-color, 20), 0.35), 0 0 0px 1px $input-focus-color !important;
+  outline: 4px $input-focus-color;
 }

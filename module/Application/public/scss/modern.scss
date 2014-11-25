@@ -8,12 +8,18 @@ $primitive: false;
 
 // Framework includes
 @include st-grid;
+@include st-gridSpacing($grid-spacing);
+@include st-ux;
 
 
 // Import global modules
 @import "globals/_global";
 @import "globals/_header";
 @import "globals/_footer";
+
+
+// Import layout modules
+@import "layout/_base";
 
 
 // Import form modules
@@ -27,6 +33,7 @@ $primitive: false;
 
 
 // Import content modules
+@import "content/_base";
 @import "content/_buttons";
 @import "content/_preformat";
 @import "content/_icons";

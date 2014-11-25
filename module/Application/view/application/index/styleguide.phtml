@@ -1,10 +1,11 @@
 <?php $this->headLink()->appendStylesheet('/css/styleguide.css'); ?>
 <?php echo $this->partial('application/index/header.phtml');?>
 
+
 <div class='page'>
   <div class='grid'>
     <div class='grid_column'>
-      <h1 class='sectionTitle'>Sample content</h1>
+      <h1 class='sectionTitle'>Page Title</h1>
     </div>
   </div>
   <div class='grid gap'>
@@ -168,29 +169,47 @@
     <div class='grid_column'>
       <h1 class='sectionTitle'>Forms</h1>
       <form action='' class='settings form'>
+            
+        <div class='form_item formSwitch'>
+          <label class='form_label formSwitch_wrapper' for='notifications'>Switch
+            <input class='formSwitch_checkbox' type='checkbox' id='notifications' checked>
+            <span class='formSwitch_custom'></span>
+          </label>
+        </div>
+
         <div class='form_item'>
-          <label class='form_label' for='demoField1'>Basic input</label>
+          <label class='form_label' for='demoField1'>Input</label>
           <div class='form_field'>
             <input class="formInput" id='demoField1' type='text' placeholder='Basic input'>
           </div>
         </div>
+
         <div class='form_item'>
-          <label class='form_label' for='demoField2'>Select</label>
+          <label class='form_label' for='category'>Select</label>
           <div class='form_field customSelect'>
-            <select class='formSelect -custom' id='demoField2'>
+            <select class='formSelect customSelect_select -custom' id='category'>
               <option>--</option>
-              <option>Lorem ipsum</option>
-              <option>Dolor sit amet</option>
+              <option>Item 1</option>
+              <option>Item 2</option>
+              <option>Item 3</option>
             </select>
-            <a unselectable='on' class='formSelect_overlay'>--</a>
+            <a unselectable='on' class='customSelect_overlay'>--</a>
           </div>
         </div>
+
         <div class='form_item'>
           <label class='form_label' for='demoField3'>Textarea</label>
           <div class='form_field'>
             <textarea class='formTextarea' id='demoField3' placeholder='Lorem ipsum...'></textarea>
           </div>
         </div>
+        
+        <div class='form_item'>
+          <div class='form_field'>
+            <input class='button -primary -submit' type='submit' name='' value='Submit button'>
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

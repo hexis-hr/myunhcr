@@ -27,7 +27,7 @@
     .mainHeader { position:fixed; z-index:99; top:0; left:0; width:100%; min-height:$height; padding:0; transform:translateZ(0); }
       .mainHeader_wrapper { position:relative; }
         .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
-        .mainHeader_logo { margin:0; padding:8px 10px; height:$height; }
+        .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$height; }
         .mainHeader_menu { @extend %headerButton; display:block; position:absolute; top:0; right:0; }
           .mainHeader_menu_icon { @include img("icons", "menu-white-h24@2x", 2, inline); }
         .mainHeader_nav { display:none; margin:0; background:$active-background; }

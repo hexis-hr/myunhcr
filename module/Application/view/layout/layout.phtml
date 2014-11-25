@@ -30,6 +30,41 @@
       });
     }
 
+    // Test for touch support (Modernizr)
+    if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
+      doc.className += " touch";
+    } else {
+      doc.className += " no-touch";
+    }
+
+    // Test for 2d transforms
+    if (detectCSSFeature('transform') === true) {
+      doc.className += " modern";
+    }
+
+    // Function for vendor feature testing
+    function detectCSSFeature(featurename){
+      var feature = false,
+      domPrefixes = ['Webkit', 'Moz', 'ms', 'O'],
+      elm = document.createElement('div'),
+      featurenameCapital = null;
+
+      featurename = featurename.toLowerCase();
+
+      if( elm.style[featurename] !== undefined ) { feature = true; } 
+
+      if( feature === false ) {
+        featurenameCapital = featurename.charAt(0).toUpperCase() + featurename.substr(1);
+        for( var i = 0; i < domPrefixes.length; i++ ) {
+          if( elm.style[domPrefixes[i] + featurenameCapital ] !== undefined ) {
+            feature = true;
+            break;
+          }
+        }
+      }
+      return feature; 
+    }
+
     featureTest();
     logDOMContent();
 

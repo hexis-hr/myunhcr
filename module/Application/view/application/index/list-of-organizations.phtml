@@ -1,3 +1,40 @@
-Module: Application
-Controller: index
-Action: list-of-organizations
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>List by Organizations</h1>
+      <span class='tooltip'></span>
+
+      <form action='' class='form'>
+
+        <div class='form_item'>
+          <div class='grid -collapse'>
+            <div class='grid_column'>
+              <div class='form_field'>
+                <input class='formInput' id='searchField' type='text' placeholder='Search..'>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='form_item'>
+          <div class='grid -collapse'>
+            <div class='grid_column'>
+              <div class='form_field customSelect'>
+                <select class='formSelect -custom' id='selectOrganizations'>
+                  <option>--</option>
+                </select>
+                <a unselectable='on' class='formSelect_overlay'>--</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<?php echo $this->partial('application/index/footer.phtml');?>
+

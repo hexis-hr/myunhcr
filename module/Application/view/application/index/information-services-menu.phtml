@@ -1,29 +1,26 @@
 <?php echo $this->partial('application/index/header.phtml');?>
- <section class="page">
-        <div class='row'>
-            <div class='small-12 columns text-center margin-t10 margin-b10'>
-                <h4>Information Services</h4>
-            </div>
-        </div>
-        <div class='row'>
-            <div class='small-12'>
-                <ul class="bblock-list">
-                    <li>
-                        <a href='map-of-service.html' title='Map of Services'>Map of Services</a><i class='fa fa-angle-right'></i>
-                    </li>
-                    <li>
-                        <a href='list-of-organizations.html' title='List by Organization'>By Organization</a
-                            ><i class='fa fa-angle-right'></i>
-                    </li>
-                    <li>
-                        <a href='list-by-sector.html' title='List by Sector'>By Sector</a><i class='fa fa-angle-right'></i>
-                    </li>
-                    <li>
-                        <a href='news-and-events.html' title='News and Events'>News and Events</a><i class='fa fa-angle-right'></i>
-                    </li>
-                    <li><a href='faq.html' title='Frequently Asked Questions'>FAQ</a><i class='fa fa-angle-right'></i></li>
-                </ul>
-            </div>
-        </div>
-    </section><!-- /page -->
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Information Services</h1>
+
+      <ul class='serviceList'>
+        <li><a href='map-of-service.html' title='Map of Services'>Map of Services</a
+          ><i class='fa fa-angle-right'></i></li>
+        <li><a href='list-of-organizations.html' title='List by Organization'>By Organization</a
+          ><i class='fa fa-angle-right'></i></li>
+        <li><a href='list-by-sector.html' title='List by Sector'>By Sector</a
+          ><i class='fa fa-angle-right'></i></li>
+        <li><a href='news-and-events.html' title='News and Events'>News and Events</a
+          ><i class='fa fa-angle-right'></i></li>
+        <li><a href='faq.html' title='Frequently Asked Questions'>FAQ</a
+          ><i class='fa fa-angle-right'></i></li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
 <?php echo $this->partial('application/index/footer.phtml');?>
+

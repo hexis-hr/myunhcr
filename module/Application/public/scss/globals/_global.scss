@@ -24,6 +24,10 @@ body {
     height: 100%;
   }
 
+.clearfix{
+  @include clearfix;
+}
+
 } @else {
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 
@@ -40,10 +44,18 @@ body {
   );
 }
 
-.pageLink {
-  @include medium {
-    display: none;
+  .pageLink {
+    @include medium {
+      display: none;
+    }
   }
+
+.floatLeft {
+  @include float(left);
+}
+
+.floatRight {
+  @include float(right);
 }
 
 }

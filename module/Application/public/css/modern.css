@@ -656,6 +656,20 @@
   }
 }
 
+.floatLeft {
+  float: left;
+}
+.rtl .floatLeft {
+  float: right;
+}
+
+.floatRight {
+  float: right;
+}
+.rtl .floatRight {
+  float: left;
+}
+
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 .js body {
   padding-top: 58px;
@@ -779,9 +793,19 @@
   display: block;
   width: 100% !important;
 }
+.button.-submit {
+  display: block;
+  width: 100% !important;
+}
+@media only screen and (min-width: 37.5em) {
+  .button.-submit {
+    width: auto !important;
+  }
+}
 
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 /* Modern phones only —————————————————————————————————————————————————————————*/
+/* Modern phone styles ———————————————————————————————————————————————————————*/
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 body.welcome {
   padding-top: 0;

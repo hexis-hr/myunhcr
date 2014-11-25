@@ -47,6 +47,19 @@
   }
 }
 
+  .button.-secondaryOutline {
+    color: $secondary;
+    background: $secondary;
+    background: white;
+    border: 1px solid $secondary;
+
+    &:hover {
+      color: white;
+      // background: $color;
+      background: linear-gradient(top, lighten($secondary, 4), darken($secondary, 4));
+      border:none;
+    }
+  }
 
 } @else {
 /* Modern phones only —————————————————————————————————————————————————————————*/
@@ -64,7 +77,13 @@
     width: 100% !important;
   }
 
-  
+  &.-submit {
+    display: block;
+    width: 100% !important;
+    @include medium {
+      width: auto !important;
+    }
+  }
 
 }
 

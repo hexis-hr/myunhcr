@@ -1,3 +1,15 @@
-Module: Application
-Controller: index
-Action: map-of-service
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Services Available</h1>
+      <span class='tooltip'></span>
+
+      <!-- Map with pinpointed service locations, fallback, list with address ? -->
+
+    </div>
+  </div>
+</section>
+
+<?php echo $this->partial('application/index/footer.phtml');?>

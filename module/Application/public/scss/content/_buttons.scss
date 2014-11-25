@@ -55,7 +55,6 @@
 
     &:hover {
       color: white;
-      // background: $color;
       background: linear-gradient(top, lighten($secondary, 4), darken($secondary, 4));
       border:none;
     }

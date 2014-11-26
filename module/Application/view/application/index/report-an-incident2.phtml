@@ -4,6 +4,8 @@
   <div class='grid'>
     <div class='grid_column'>
       <h1 class='sectionTitle'>Report an Incident</h1>
+      <span class='tooltip'></span>
+      
       <form action='report-an-incident3.html' class='incident form'>
         
         <div class='grid'>
@@ -20,22 +22,23 @@
           </div>
 
           <div class='form_item'>
-            <label class='form_label' for=''>Where</label>
+            <label class='form_label' for='location'>Where</label>
             <div class='form_field'>
             <!-- Map to pin point with fallback to input ?  - check map-of-service.phtml -->
+            <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='location'>
             </div>
           </div>
 
           <div class='grid'>
-            <div class='grid_column -small6'>
+            <div class='grid_column -small5'>
               <div class='form_item'>
-                <input class='button' type='submit' name='' value='Back'>
+                <a class='button -submit' href="report-an-incident.html">Back</a>
               </div>
             </div>
             
-            <div class='grid_column -small6'>
-              <div class='form_item floatRight'>
-                <input class='button -secondary' type='submit' name='' value='Next'>
+            <div class='grid_column -small7'>
+              <div class='form_item'>
+                <input class='button -secondary -submit' type='submit' name='' value='Next'>
               </div>
             </div>
           </div>

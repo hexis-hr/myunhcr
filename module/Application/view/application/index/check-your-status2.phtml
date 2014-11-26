@@ -1,3 +1,45 @@
-Module: Application
-Controller: index
-Action: check-your-status2
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Check Your Status</h1>
+      <span class='tooltip'></span>
+
+      <form action='check-your-status3.html' class='survey form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+            <div class='form_item'>
+              <label class='form_label' for='checkWhat'>What would you like to check</label>
+              <div class='form_field customSelect'>
+                <select class='formSelect customSelect_select -custom' id='checkWhat'>
+                  <option>Asylum Application</option>
+                </select>
+                <a unselectable='on' class='customSelect_overlay'>Asylum Application</a>
+              </div>
+            </div>
+
+            <div class='grid'>
+              <div class='grid_column -small5'>
+                <div class='form_item'>
+                  <a class='button -submit' href="check-your-status.html">Back</a>
+                </div>
+              </div>
+              
+              <div class='grid_column -small7'>
+                <div class='form_item'>
+                  <input class='button -secondary -submit' type='submit' name='' value='Next'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

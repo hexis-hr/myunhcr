@@ -1,3 +1,67 @@
-Module: Application
-Controller: index
-Action: report-an-incident
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Report an Incident</h1>
+      <form action='report-an-incident2.html' class='incident form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+          <div class='form_item'>
+            <label class='form_label' for=''>Is this report Anonymous</label>
+          </div>
+
+          <div class='grid'>
+            <div class='grid_column -small6'>
+              <div class='form_item'>
+                <label class='form_label' for='yes'>Yes</label>
+                <div class='form_field'>
+                  <input type='radio' name='' value='' placeholder='' id='yes'>
+                </div>
+              </div>
+            </div>
+
+            <div class='grid_column -small6'>
+              <div class='form_item'>
+                <label class='form_label' for='no'>No</label>
+                <div class='form_field'>
+                  <input type='radio' name='' value='' placeholder='' id='no'>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='form_item'>
+            <label class='form_label' for='incidentCategory'>The Category of the Incident</label>
+            <div class='form_field customSelect'>
+              <select class='formSelect customSelect_select -custom' id='incidentCategory'>
+                <option>Protection Incident</option>
+              </select>
+              <a unselectable='on' class='customSelect_overlay'>Protection Incident</a>
+            </div>
+          </div>
+
+          <div class='grid'>
+            <div class='grid_column -small6'>
+              <div class='form_item'>
+                <input class='button' type='submit' name='' value='Cancel'>
+              </div>
+            </div>
+            
+            <div class='grid_column -small6'>
+              <div class='form_item floatRight'>
+                <input class='button -secondary' type='submit' name='' value='Next'>
+              </div>
+            </div>
+          </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

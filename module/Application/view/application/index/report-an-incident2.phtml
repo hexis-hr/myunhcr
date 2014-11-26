@@ -1,3 +1,50 @@
-Module: Application
-Controller: index
-Action: report-an-incident2
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Report an Incident</h1>
+      <form action='report-an-incident3.html' class='incident form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+          <div class='form_item'>
+            <label class='form_label' for='protectionType'>Which type of protection incident are you reporting</label>
+            <div class='form_field customSelect'>
+              <select class='formSelect customSelect_select -custom' id='protectionType'>
+                <option>Domestic Violence</option>
+              </select>
+              <a unselectable='on' class='customSelect_overlay'>Domestic Violence</a>
+            </div>
+          </div>
+
+          <div class='form_item'>
+            <label class='form_label' for=''>Where</label>
+            <div class='form_field'>
+            <!-- Map to pin point with fallback to input ?  - check map-of-service.phtml -->
+            </div>
+          </div>
+
+          <div class='grid'>
+            <div class='grid_column -small6'>
+              <div class='form_item'>
+                <input class='button' type='submit' name='' value='Back'>
+              </div>
+            </div>
+            
+            <div class='grid_column -small6'>
+              <div class='form_item floatRight'>
+                <input class='button -secondary' type='submit' name='' value='Next'>
+              </div>
+            </div>
+          </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

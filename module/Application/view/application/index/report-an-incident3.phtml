@@ -1,3 +1,40 @@
-Module: Application
-Controller: index
-Action: report-an-incident3
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Report an Incident</h1>
+      <form action='report-an-incident4.html' class='incident form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+          <div class='form_item'>
+            <label class='form_label' for='feedbackMessage'>Please describe the incident</label>
+            <div class='form_field'>
+              <textarea class='formTextarea' id='feedbackMessage' placeholder='...'></textarea>
+            </div>
+          </div>
+
+          <div class='grid'>
+            <div class='grid_column -small6'>
+              <div class='form_item'>
+                <input class='button' type='submit' name='' value='Back'>
+              </div>
+            </div>
+            
+            <div class='grid_column -small6'>
+              <div class='form_item floatRight'>
+                <input class='button -secondary' type='submit' name='' value='Next'>
+              </div>
+            </div>
+          </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

@@ -1,3 +1,39 @@
-Module: Application
-Controller: index
-Action: report-an-incident4
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Report an Incident</h1>
+      <form action='refugee-feedback.html' class='incident form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+          <div class='form_item'>
+            <label class='form_label' for='feedbackMessage'
+              >Would you like to take/upload a picture of the incident ?</label>
+            <div class='form_field'>
+              <input type='file' accept='image/*;capture=camera'>
+            </div>
+          </div>
+
+          <div class='form_item'>
+            <label class='form_label' for='feedbackMessage'
+              >Would you like to record your testimony of the incident ?</label>
+            <div class='form_field'>
+              <input type='file' accept='audio/*;capture=microphone'>
+            </div>
+          </div>
+
+          <div class='form_item'>
+            <input class='button -primary -submit' type='submit' name='' value='Send'>
+          </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

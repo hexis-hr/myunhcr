@@ -1,3 +1,58 @@
-Module: Application
-Controller: index
-Action: book-an-appointment4
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Book an Appointemnt</h1>
+      <span class='tooltip'></span>
+
+      <form action='my-unhcr-services-menu.html' class='booking form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+            <div class='form_item'>
+              <label class='form_label'>Thank you! You have selected</label>
+            </div>
+
+            <div class='form_item'>
+              <div class='form_field'>
+                <input class='formInput' type='date' name='' value='' placeholder='' disabled id='date'>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <div class='form_field'>
+                <input class='formInput' type='time' name='' value='' placeholder='' disabled id='time'>
+              </div>
+            </div>
+
+            <!-- <div class='content'>
+              <p class='content_summary'>Please confirm your booking with the button bellow.</p>
+            </div> -->
+            <div class='form_item'>
+              <label class='form_label'>Please confirm your booking with the button bellow.</label>
+            </div>
+
+            <div class='grid'>
+              <div class='grid_column -small5'>
+                <div class='form_item'>
+                  <a class='button -submit' href="book-an-appointment3.html">Back</a>
+                </div>
+              </div>
+              
+              <div class='grid_column -small7'>
+                <div class='form_item'>
+                  <input class='button -primary -submit' type='submit' name='' value='Book'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

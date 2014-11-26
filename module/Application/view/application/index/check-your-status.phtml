@@ -1,3 +1,49 @@
-Module: Application
-Controller: index
-Action: check-your-status
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Check Your Status</h1>
+      <span class='tooltip'></span>
+
+      <form action='check-your-status2.html' class='status form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+            <div class='form_item'>
+              <label class='form_label' for='authentication'>Please enter your identification number</label>
+              <div class='form_field'>
+                <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='date'>Please enter your date of birth</label>
+              <div class='form_field'>
+                <input class='formInput' type='date' name='' value='' placeholder='' id='date'>
+              </div>
+            </div>
+
+            <div class='grid'>
+              <div class='grid_column -small5'>
+                <div class='form_item'>
+                  <a class='button -submit' href="my-unhcr-services-menu.html">Cancel</a>
+                </div>
+              </div>
+              
+              <div class='grid_column -small7'>
+                <div class='form_item'>
+                  <input class='button -secondary -submit' type='submit' name='' value='Next'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

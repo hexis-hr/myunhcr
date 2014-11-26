@@ -628,12 +628,12 @@
   }
 }
 .grid, .lt-ie9 .grid {
-  margin-top: -32px;
-  margin-top: -2rem;
+  margin-top: -25px;
+  margin-top: -1.53846rem;
 }
 .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-  margin-top: 32px;
-  margin-top: 2rem;
+  margin-top: 25px;
+  margin-top: 1.53846rem;
   padding-left: 16px;
   padding-left: 1rem;
   padding-right: 16px;
@@ -648,12 +648,12 @@
 
 @media only screen and (min-width: 37.5em) {
   .grid, .lt-ie9 .grid {
-    margin-top: -40px;
-    margin-top: -2.5rem;
+    margin-top: -31px;
+    margin-top: -1.92308rem;
   }
   .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-    margin-top: 40px;
-    margin-top: 2.5rem;
+    margin-top: 31px;
+    margin-top: 1.92308rem;
     padding-left: 20px;
     padding-left: 1.25rem;
     padding-right: 20px;
@@ -668,12 +668,12 @@
 }
 @media only screen and (min-width: 64.0625em) {
   .grid, .lt-ie9 .grid {
-    margin-top: -50px;
-    margin-top: -3.125rem;
+    margin-top: -38px;
+    margin-top: -2.40385rem;
   }
   .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-    margin-top: 50px;
-    margin-top: 3.125rem;
+    margin-top: 38px;
+    margin-top: 2.40385rem;
     padding-left: 25px;
     padding-left: 1.5625rem;
     padding-right: 25px;
@@ -999,23 +999,34 @@
 
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 /* Modern phone styles ———————————————————————————————————————————————————————*/
-.sectionTitle {
+.sectionHeader {
   padding-bottom: 16px;
   margin-bottom: 20.8px;
-  font-size: 22px;
 }
 @media only screen and (min-width: 37.5em) {
-  .sectionTitle {
+  .sectionHeader {
     padding-bottom: 19px;
     margin-bottom: 27px;
-    font-size: 24px;
   }
 }
 @media only screen and (min-width: 64.0625em) {
-  .sectionTitle {
+  .sectionHeader {
     padding-bottom: 23px;
     margin-bottom: 35px;
-    font-size: 27px;
+  }
+}
+
+.sectionHeader_title {
+  font-size: 20px;
+}
+@media only screen and (min-width: 37.5em) {
+  .sectionHeader_title {
+    font-size: 22px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .sectionHeader_title {
+    font-size: 24px;
   }
 }
 
@@ -1035,16 +1046,35 @@
   display: block;
   width: 100% !important;
 }
-@media only screen and (min-width: 37.5em) {
+@media only screen and (min-width: 50em) {
   .button.-submit {
     width: auto !important;
-    padding-left: 3em;
-    padding-right: 3em;
+    padding-left: 4.8em;
+    padding-right: 4.8em;
   }
 }
 
 /* Modern phone styles ———————————————————————————————————————————————————————*/
+.linkGroup_link:after {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: none;
+  background-size: cover;
+}
+
 /* Modern phones only —————————————————————————————————————————————————————————*/
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+.linkGroup_link:after {
+  width: 16px;
+  height: 24px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAwCAYAAABwrHhvAAAAAXNSR0IArs4c6QAAAXlJREFUWAntl7FOAzEMhv+kr8GCxMheVQgxIfEGDJV4FFp4ESYGVlaWSghVPFQvxC1pipo6ycUekOKlV5/P/xfn5JyBbr0CvQL/ogLLpcXz10yD1WaTkri9e4GZfOJpfZ+NrwwwbPxe3Dzs4twGg5tjMXtjn6u4yVfA3k5hMI/5zATWvEpWggd4vFpvVwy/8r3JQvBbEERp72nl/kUILhCUwHaUAZCqEkQ5gBJEHYACRD2AMMQ4AEGI8QBCEG0AAhDtAI0QMgAchNtcgzrqCeNb8YmHkm46oKgzOgzxvu+ew8d3/H98JQdwnNt3a5fy/vHJAYRWbRBz0klKJypjMZgJyt4K4qnDitl/ytv+EnLiBR8ubQCN4m0VEBAfDyAkPg5AULweQFi8DkBBvBxASbwMQFE8D0DzII1kqQ5X0GRIIGd8K6aTzMHPA8FkZoGQjX4PBo1D9+/1auVwc/YOc3Hum/alxCCSUClwKY7nBeo9pFegV6BXQLcCP+F05HQprLDIAAAAAElFTkSuQmCC');
+  position: absolute;
+  top: 12px;
+  right: 22px;
+  content: '';
+}
+
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 body.welcome {
@@ -1054,3 +1084,5 @@ body.welcome {
 .welcomeFooter {
   margin-bottom: 0;
 }
+
+/* Modern phone styles ———————————————————————————————————————————————————————*/

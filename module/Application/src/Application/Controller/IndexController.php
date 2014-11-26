@@ -108,6 +108,7 @@ class IndexController extends AbstractActionController
 
     public function menuPageAction()
     {
+        $this->layout()->setVariable('body_class', 'homepage');
         return new ViewModel();
     }
 

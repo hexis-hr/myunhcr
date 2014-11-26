@@ -1,0 +1,34 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+
+.linkGroup { border-top:1px solid $lightGray; }
+  .linkGroup_item {}
+    .linkGroup_link {
+      position: relative;
+      display: block;
+      padding: 14px 22px;
+      color: $link;
+      border-bottom: 1px solid $lightGray;
+    }
+
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+
+.linkGroup {}
+  .linkGroup_item {}
+    .linkGroup_link {}
+      .linkGroup_link:after {
+        @extend %icon;
+        @include img("icons", "arrowRight-blue-h24@2x", 2, inline);
+        position: absolute;
+        top: 12px;
+        right: 22px;
+        content: '';
+      }
+    
+
+
+}

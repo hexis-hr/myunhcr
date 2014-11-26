@@ -1,14 +1,22 @@
+%icon { @include st-icon; }
+
+
 @if $primitive == true {
 /* Default  styles ————————————————————————————————————————————————————————————*/
 
 
 // Standard sizes
-.icon { @include st-icon; }
+.icon { @extend %icon; }
 .h16 { height:16px !important; }
 .h24 { height:24px !important; }
 .h32 { height:32px !important; }
 .h42 { height:42px !important; }
 .h64 { height:64px !important; }
+
+
+// Global icons
+.icon.-infoBlack24 { @include img("icons", "info-black-h24@2x", 2, inline); }
+// .icon.-arrowRightBlue24 { @include img("icons", "arrowRight-blue-h24@2x", 2, inline); }
 
 
 } @else {

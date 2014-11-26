@@ -2,28 +2,74 @@
 /* Default styles ————————————————————————————————————————————————————————————*/
 
 
-.sectionTitle {
-  display: block;
+.sectionHeader {
+  position: relative;
   margin-bottom: .6em;
   padding-bottom: .6em;
-  font-size: $h4;
-  color: $blue;
-  text-align: center;
   border-bottom: 1px solid $lightGray;
 }
+
+  .sectionHeader_inner {
+    // position: relative;
+  }
+
+    .sectionHeader_title {
+      display: block;
+      font-size: $h4;
+      color: $black;
+      text-align: center;
+    }
+
+    .sectionHeader_info {
+      position: absolute;
+      top: -52%;
+      right: 0;
+      padding-top: 14px;
+      width: 50px;
+      height: 50px;
+      text-decoration: none;
+      text-align: center;
+      border: 0px !important;
+      opacity: 0.25;
+      transition: 300ms;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+
+.sectionHeader.-noMargin {
+  .sectionHeader_inner {
+    margin-bottom: 0 !important;
+  }
+}
+
+
+
+.verticalList {}
+  .verticalList_item { margin-bottom:1em; }
+
 
 
 } @else {
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 
 
-.sectionTitle {
+.sectionHeader {
   @include responsive(
     padding-bottom ($gapSmall) ($gapMultiplier),
-    margin-bottom ($gapSmall * 1.3) ($gapMultiplier + 0.1),
-    font-size 22px 1.1
+    margin-bottom ($gapSmall * 1.3) ($gapMultiplier + 0.1)
   );
 }
+
+  .sectionHeader_inner {}
+
+    .sectionHeader_title {
+      @include responsive(font-size 20px 1.1);
+    }
+    
+    .sectionHeader_info {}
 
 
 }

@@ -1,26 +1,52 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <h1 class='sectionTitle'>Information Services</h1>
-
-      <ul class='serviceList'>
-        <li><a href='map-of-service.html' title='Map of Services'>Map of Services</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='list-of-organizations.html' title='List by Organization'>List by Organization</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='list-by-sector.html' title='List by Sector'>List by Sector</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='news-and-events.html' title='News and Events'>News and Events</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='faq.html' title='Frequently Asked Questions'>FAQ</a
-          ><i class='fa fa-angle-right'></i></li>
-      </ul>
-
+  
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>Information Services</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class='grid'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <ul class='verticalList'>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='map-of-service.html'
+            title='Map of Services'>Map of Services</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='list-of-organizations.html'
+            title='List by Organization'>List by Organization</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='list-by-sector.html'
+            title='List by Sector'>List by Sector</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='news-and-events.html'
+            title='News and Events'>News and Events</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='faq.html'
+            title='Frequently Asked Questions'>FAQ</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </section>
 
 <?php echo $this->partial('application/index/footer.phtml');?>
-

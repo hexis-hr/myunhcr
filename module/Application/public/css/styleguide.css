@@ -308,12 +308,12 @@
 }
 
 .grid, .lt-ie9 .grid {
-  margin-top: -32px;
-  margin-top: -2rem;
+  margin-top: -25px;
+  margin-top: -1.53846rem;
 }
 .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-  margin-top: 32px;
-  margin-top: 2rem;
+  margin-top: 25px;
+  margin-top: 1.53846rem;
   padding-left: 16px;
   padding-left: 1rem;
   padding-right: 16px;
@@ -328,12 +328,12 @@
 
 @media only screen and (min-width: 37.5em) {
   .grid, .lt-ie9 .grid {
-    margin-top: -40px;
-    margin-top: -2.5rem;
+    margin-top: -31px;
+    margin-top: -1.92308rem;
   }
   .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-    margin-top: 40px;
-    margin-top: 2.5rem;
+    margin-top: 31px;
+    margin-top: 1.92308rem;
     padding-left: 20px;
     padding-left: 1.25rem;
     padding-right: 20px;
@@ -348,12 +348,12 @@
 }
 @media only screen and (min-width: 64.0625em) {
   .grid, .lt-ie9 .grid {
-    margin-top: -50px;
-    margin-top: -3.125rem;
+    margin-top: -38px;
+    margin-top: -2.40385rem;
   }
   .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-    margin-top: 50px;
-    margin-top: 3.125rem;
+    margin-top: 38px;
+    margin-top: 2.40385rem;
     padding-left: 25px;
     padding-left: 1.5625rem;
     padding-right: 25px;

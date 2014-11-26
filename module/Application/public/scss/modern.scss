@@ -38,7 +38,10 @@ $primitive: false;
 @import "content/_preformat";
 @import "content/_icons";
 @import "content/_list";
+@import "content/_links";
+@import "content/_sitemap";
 
 
 // Import pages
 @import "pages/_welcome";
+@import "pages/_homepage";

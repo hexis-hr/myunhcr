@@ -206,11 +206,12 @@
 
 // Spacing helper
 @mixin st-gridSpacing-margin($classes, $spacing){
+  $smallerSpacing: $spacing / 1.3;
   #{$classes} {
-    @include rem(margin-top, -($spacing));
+    @include rem(margin-top, -($smallerSpacing));
 
     > .grid_column {
-      @include rem(margin-top, $spacing);
+      @include rem(margin-top, $smallerSpacing);
       @include rem(padding-left, ($spacing / 2));
       @include rem(padding-right, ($spacing / 2));
     }

@@ -1,3 +1,43 @@
-Module: Application
-Controller: index
-Action: choose-your-survey
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Survey</h1>
+      <form action='what-is-your-gender.html' class='survey form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+            <div class='form_item'>
+              <label class='form_label' for='chooseSurvey'>Choose your survey</label>
+              <div class='form_field customSelect'>
+                <select class='formSelect customSelect_select -custom' id='chooseSurvey'>
+                  <option>Your needs assessment</option>
+                </select>
+                <a unselectable='on' class='customSelect_overlay'>Your needs assessment</a>
+              </div>
+            </div>
+
+            <div class='grid'>
+              <div class='grid_column -small6'>
+                <div class='form-item'>
+                  <input class='button' type='submit' name='' value='Back'>
+                </div>
+              </div>
+              
+              <div class='grid_column -small6'>
+                <div class='form-item floatRight'>
+                  <input class='button -secondary' type='submit' name='' value='Next'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

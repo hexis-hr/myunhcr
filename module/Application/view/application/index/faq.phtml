@@ -1,3 +1,23 @@
-Module: Application
-Controller: index
-Action: faq
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <h1 class='sectionTitle'>Frequently Asked Questions</h1>
+      <span class='tooltip'></span>
+
+      <div class='grid'>
+        <div class='grid_column'>
+          <div class='content'>
+            <h2 class='contentTitle'>What is MyUNHCR?</h2>
+            <p class='content_summary'>MyUNHCR is an App that not only refugees can use but everyone..</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<?php echo $this->partial('application/index/footer.phtml');?>
+

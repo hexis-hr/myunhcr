@@ -1,3 +1,47 @@
-Module: Application
-Controller: index
-Action: take-a-survey
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Survey</h1>
+      <form action='choose-your-survey.html' class='survey form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+            <div class='form_item'>
+              <label class='form_label' for='authentication'>Authentication</label>
+              <div class='form_field'>
+                <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='date'>Date of Birth</label>
+              <div class='form_field'>
+                <input class='formInput' type='date' name='' value='' placeholder='ID Number' id='date'>
+              </div>
+            </div>
+
+            <div class='grid'>
+              <div class='grid_column -small6'>
+                <div class='form-item'>
+                  <input class='button' type='submit' name='' value='Cancel'>
+                </div>
+              </div>
+              
+              <div class='grid_column -small6'>
+                <div class='form-item floatRight'>
+                  <input class='button -secondary' type='submit' name='' value='Next'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+    </div>
+  </div>
+</section>
+

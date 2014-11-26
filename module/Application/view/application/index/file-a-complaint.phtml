@@ -1,3 +1,38 @@
-Module: Application
-Controller: index
-Action: file-a-complaint
+<?php echo $this->partial('application/index/header.phtml');?>
+
+<section class='page'>
+  <div class='grid'>
+    <div class='grid_column'>
+      <h1 class='sectionTitle'>Your Feedback</h1>
+      
+      <div class='content'>
+        <p class='content_summary'>UNHCR encourages refugees to comment on the organization's performance in order to 
+          improve its services.<br><span class='warningText'>Important:</span> you can provide your feedback 
+          anonymously if you choose to do so.</p>
+      </div>
+
+      <form action='refugee-feedback.html' class='survey form'>
+        
+        <div class='grid'>
+          <div class='grid_column -medium9 -mediumPlus8'>
+
+            <div class='form-item'>
+              <label class='form_label' for='feedbackMessage'>Your Message</label>
+              <div class='form_field'>
+                <textarea class='formTextarea' id='feedbackMessage' placeholder='...'></textarea>
+              </div>
+            </div>
+
+            <div class='form-item'>
+              <input class='button -primary -submit' type='submit' name='' value='Send'>
+            </div>
+
+          </div>
+        </div><!-- /grid -->
+
+      </form>
+      
+    </div>
+  </div>
+</section>
+

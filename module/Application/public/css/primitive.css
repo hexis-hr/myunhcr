@@ -790,7 +790,7 @@ body {
   color: white;
   background: -webkit-linear-gradient(top, #007dca, #0071b6);
   background: linear-gradient(top, #007dca, #0071b6);
-  border: none;
+  border: 1px solid #006aac;
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/

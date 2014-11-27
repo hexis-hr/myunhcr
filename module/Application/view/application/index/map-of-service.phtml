@@ -1,19 +1,33 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <h1 class='sectionTitle'>Services Available</h1>
-      <span class='tooltip'></span>
 
-      <div class='form_item'>
-        <label class='form_label' for='location'>Where</label>
-        <div class='form_field'>
-          <!-- Map to pin point with fallback to input ?  - check map-of-service.phtml -->
-          <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='location'>
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>Services Available</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
         </div>
       </div>
+    </div>
+  </div>
 
+  <div class='grid'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <form action='' class='booking form'>
+        
+        <div class='form_item'>
+          <label class='form_label' for='location'>Where</label>
+          <div class='form_field'>
+            <!-- Map to pin point with fallback to input ?  - check map-of-service.phtml -->
+            <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='location'>
+          </div>
+        </div>
+
+      </form>
     </div>
   </div>
 </section>

@@ -1030,6 +1030,20 @@
   }
 }
 
+.sectionContent_title {
+  font-size: 18px;
+}
+@media only screen and (min-width: 37.5em) {
+  .sectionContent_title {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .sectionContent_title {
+    font-size: 22px;
+  }
+}
+
 /* Modern phones only —————————————————————————————————————————————————————————*/
 @media only screen and (min-width: 20em) {
   .button {

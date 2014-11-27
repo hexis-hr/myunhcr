@@ -1,11 +1,22 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
+
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>News and Events</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <h1 class='sectionTitle'>News and Events</h1>
-      <span class='tooltip'></span>
-
       <form action='' class='form'>
 
         <div class='form_item'>
@@ -16,11 +27,12 @@
 
       </form>
 
-      <div class='content'>
-        <h2 class='contentTitle'>Refugee Camp in Jordan Now Open</h2>
-        <p class='content_info'>Source:&nbsp;<a href='google.com'>Google News</a
-          ><span class='-date floatRight clearfix'>05/11/2014</span></p>
-        <p class='content_summary'>Lorem refugee Camp is now open for new arrivals into Jordan...</p>
+      <div class='sectionContent -newsArticle'>
+        <h2 class='sectionContent_title'>Refugee Camp in Jordan Now Open</h2>
+        <p class='sectionContent_info'>Source:&nbsp;<a class='sectionContent_info_link' 
+          href='google.com'>Google News</a><span class='sectionContent_info_date floatRight clearfix'
+          >05/11/2014</span></p>
+        <p class='sectionContent_inner'>Lorem refugee Camp is now open for new arrivals into Jordan...</p>
       </div>
 
     </div>

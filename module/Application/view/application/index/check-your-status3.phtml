@@ -1,37 +1,42 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
+
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>Check Your Status</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class='grid'>
-    <div class='grid_column'>
-      <h1 class='sectionTitle'>Check Your Status</h1>
-      <span class='tooltip'></span>
-
+    <div class='grid_column -medium9 -mediumPlus8'>
       <form action='my-unhcr-services-menu.html' class='survey form'>
-        
+
+        <div class='form_item'>
+          <label class='form_label' for='checkWhat'>Your Asylum-Application's status:</label>
+          <p class='content_summary warningText -checkStatus'>Decision is pending</p>
+        </div>
+
         <div class='grid'>
-          <div class='grid_column -medium9 -mediumPlus8'>
-
+          <div class='grid_column -small5'>
             <div class='form_item'>
-              <label class='form_label' for='checkWhat'>Your Asylum-Application's status:</label>
-              <p class='content_summary warningText'>Decision is pending</p>
+              <a class='button -submit' href='check-your-status2.html'>Back</a>
             </div>
-
-            <div class='grid'>
-              <div class='grid_column -small5'>
-                <div class='form_item'>
-                  <a class='button -submit' href='check-your-status2.html'>Back</a>
-                </div>
-              </div>
-              
-              <div class='grid_column -small7'>
-                <div class='form_item'>
-                  <input class='button -primary -submit' type='submit' name='' value='OK'>
-                </div>
-              </div>
-            </div>
-
           </div>
-        </div><!-- /grid -->
+          
+          <div class='grid_column -small7'>
+            <div class='form_item'>
+              <input class='button -primary -submit floatRight clearfix' type='submit' name='' value='OK'>
+            </div>
+          </div>
+        </div>
 
       </form>
     </div>

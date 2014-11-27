@@ -1,23 +1,47 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <h1 class='sectionTitle'>MyUNHCR Services</h1>
-
-      <ul class='serviceList'>
-        <li><a href='book-an-appointment.html' title='Book an Appointment'>Book an Appointment</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='check-your-status.html' title='Check Your Status'>Check Your Status</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='update-personal-data.html' title='Update Personal Data'>Update Personal Data</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='faq-myunhcr.html' title='Frequently Asked Questions'>FAQ</a
-          ><i class='fa fa-angle-right'></i></li>
-      </ul>
-
+  
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>MyUNHCR Services</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class='grid'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <ul class='verticalList'>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='book-an-appointment.html'
+            title='Book an Appointment'>Book an Appointment</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='check-your-status.html'
+            title='Check Your Status'>Check Your Status</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='update-personal-data.html'
+            title='Update Personal Data'>Update Personal Data</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='faq-myunhcr.html'
+            title='Frequently Asked Questions'>FAQ</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </section>
 
 <?php echo $this->partial('application/index/footer.phtml');?>

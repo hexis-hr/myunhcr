@@ -1,74 +1,74 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
+
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>Report an Incident</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class='grid'>
-    <div class='grid_column'>
-      <h1 class='sectionTitle'>Report an Incident</h1>
-      <span class='tooltip'></span>
-      
+    <div class='grid_column -medium9 -mediumPlus8'>
       <form action='report-an-incident2.html' class='incident form'>
-        
+
+        <div class='form_item'>
+          <label class='form_label' for=''>Is this report Anonymous ?</label>
+        </div>
+
         <div class='grid'>
-          <div class='grid_column -medium9 -mediumPlus8'>
-
-          <div class='form_item'>
-            <label class='form_label' for=''>Is this report Anonymous</label>
-          </div>
-
-          <div class='grid'>
-            <div class='grid_column -small6'>
-              <div class='form_item'>
-                <label class='form_label' for='yes'>Yes</label>
-                <div class='form_field'>
-                  <input type='radio' name='' value='' placeholder='' id='yes'>
-                </div>
-              </div>
-            </div>
-
-            <div class='grid_column -small6'>
-              <div class='form_item'>
-                <label class='form_label' for='no'>No</label>
-                <div class='form_field'>
-                  <input type='radio' name='' value='' placeholder='' id='no'>
-                </div>
+          <div class='grid_column -small6'>
+            <div class='form_item'>
+              <label class='form_label' for='yes'>Yes</label>
+              <div class='form_field'>
+                <input type='radio' name='' value='' placeholder='' id='yes'>
               </div>
             </div>
           </div>
 
-          <div class='form_item'>
-            <label class='form_label' for='incidentCategory'>The Category of the Incident</label>
-            <div class='form_field customSelect'>
-              <select class='formSelect customSelect_select -custom' id='incidentCategory'>
-                <option>Protection Incident</option>
-              </select>
-              <a unselectable='on' class='customSelect_overlay'>Protection Incident</a>
-            </div>
-          </div>
-
-          <div class='grid'>
-            <div class='grid_column -small5'>
-              <div class='form_item'>
-                <a class='button -submit' href="refugee-feedback.html">Cancel</a>
-              </div>
-            </div>
-            
-            <div class='grid_column -small7'>
-              <div class='form_item'>
-                <input class='button -secondary -submit' type='submit' name='' value='Next'>
+          <div class='grid_column -small6'>
+            <div class='form_item'>
+              <label class='form_label' for='no'>No</label>
+              <div class='form_field'>
+                <input type='radio' name='' value='' placeholder='' id='no'>
               </div>
             </div>
           </div>
+        </div>
 
+        <div class='form_item'>
+          <label class='form_label' for='incidentCategory'>Category of the Incident:</label>
+          <div class='form_field customSelect'>
+            <select class='formSelect customSelect_select -custom' id='incidentCategory'>
+              <option>Protection Incident</option>
+            </select>
+            <a unselectable='on' class='customSelect_overlay'>Protection Incident</a>
           </div>
-        </div><!-- /grid -->
+        </div>
+
+        <div class='grid'>
+          <div class='grid_column -small5'>
+            <div class='form_item'>
+              <a class='button -submit' href="refugee-feedback.html">Cancel</a>
+            </div>
+          </div>
+          
+          <div class='grid_column -small7'>
+            <div class='form_item'>
+              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
+            </div>
+          </div>
+        </div>
 
       </form>
     </div>
   </div>
 </section>
-
-
-<div class="grid"></div>
-
-
 

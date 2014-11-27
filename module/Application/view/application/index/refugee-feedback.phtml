@@ -1,24 +1,47 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <h1 class='sectionTitle'>Refugee Feedback</h1>
-
-      <ul class='serviceList'>
-        <li><a href='take-a-survey.html' title='Take a Survey'>Take a Survey</a
-          ><i class='fa fa-angle-right'></i></li>
-          <!-- Feedback will not be in use ? -->
-          <!-- <li><a href='file-a-complaint.html' title='Your Feedback'>Your Feedback</a
-          ><i class='fa fa-angle-right'></i></li> -->
-        <li><a href='report-an-incident.html' title='Report an Incident'>Report an Incident</a
-          ><i class='fa fa-angle-right'></i></li>
-        <li><a href='faq-refugee.html' title='Frequently Asked Questions'>FAQ</a
-          ><i class='fa fa-angle-right'></i></li>
-      </ul>
-
+  
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>My Feedback</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class='grid'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <ul class='verticalList'>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='take-a-survey.html'
+            title='Take a Survey'>Take a Survey</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='report-an-incident.html'
+            title='Report an Incident'>Report an Incident</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='file-a-complaint.html'
+            title='My Feedback'>My Feedback</a>
+        </li>
+        <li class='verticalList_item'>
+          <a class='button -fullWidth'
+            href='faq-refugee.html'
+            title='Frequently Asked Questions'>FAQ</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </section>
 
 <?php echo $this->partial('application/index/footer.phtml');?>

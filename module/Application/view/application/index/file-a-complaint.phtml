@@ -1,35 +1,38 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
+
+  <div class='sectionHeader'>
+    <div class='grid'>
+      <div class='grid_column'>
+        <div class='sectionHeader_inner'>
+          <h1 class='sectionHeader_title'>Your Feedback</h1>
+          <abbr class='sectionHeader_info'
+            title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos iste consequuntur quia illum qui minima.'
+            ><i class='icon -infoBlack24'></i></abbr>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class='grid'>
-    <div class='grid_column'>
-      <h1 class='sectionTitle'>Your Feedback</h1>
-      
-      <div class='content'>
-        <p class='content_summary'>UNHCR encourages refugees to comment on the organization's performance in order to 
-          improve its services.<br><span class='warningText'>Important:</span> you can provide your feedback 
-          anonymously if you choose to do so.</p>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <div class='sectionContent'>
+        <p class='sectionContent_inner'>UNHCR encourages refugees to comment on the organization's performance in order to improve its services.<br><br><span class='warningText'>Important:&nbsp;</span>you can provide your feedback 
+        anonymously if you choose to do so.</p>
       </div>
 
       <form action='refugee-feedback.html' class='feedback form'>
-        
-        <div class='grid'>
-          <div class='grid_column -medium9 -mediumPlus8'>
-
-            <div class='form_item'>
-              <label class='form_label' for='feedbackMessage'>Your Message</label>
-              <div class='form_field'>
-                <textarea class='formTextarea' id='feedbackMessage' placeholder='...'></textarea>
-              </div>
-            </div>
-
-            <div class='form_item'>
-              <input class='button -primary -submit' type='submit' name='' value='Send'>
-            </div>
-
+        <div class='form_item'>
+          <label class='form_label' for='feedbackMessage'>Your Message</label>
+          <div class='form_field'>
+            <textarea class='formTextarea' id='feedbackMessage' placeholder='...'></textarea>
           </div>
-        </div><!-- /grid -->
+        </div>
 
+        <div class='form_item'>
+          <input class='button -primary -submit floatRight clearfix' type='submit' name='' value='Send'>
+        </div>
       </form>
       
     </div>

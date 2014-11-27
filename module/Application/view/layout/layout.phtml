@@ -18,17 +18,9 @@
     var doc = document.documentElement;
     window.DOMContentLoaded = false;
 
-    var supportCheck = function() {
-      
+    function supportCheck() {
       // Show javascript support
       doc.className = doc.className.replace(/\bno-js\b/,'js');
-
-      // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
-      var logDOMContent = function() {
-        document.addEventListener("DOMContentLoaded", function(){
-          window.DOMContentLoaded = true;
-        });
-      }
 
       // Test for touch support (Modernizr)
       if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
@@ -41,7 +33,6 @@
       if (detectCSSFeature('transform') === true) {
         doc.className += " modern";
       }
-
     }
 
     // Function for vendor feature testing
@@ -65,6 +56,13 @@
         }
       }
       return feature; 
+    }
+
+    // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
+    var logDOMContent = function() {
+      document.addEventListener("DOMContentLoaded", function(){
+        window.DOMContentLoaded = true;
+      });
     }
 
     supportCheck();

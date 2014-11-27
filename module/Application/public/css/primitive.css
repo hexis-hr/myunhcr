@@ -587,7 +587,7 @@ body {
   background: #0077c0;
 }
 
-.mainHeader_wrapper {
+.mainHeader_top {
   text-align: center;
 }
 
@@ -598,6 +598,10 @@ body {
 .mainHeader_logo {
   display: inline-block;
   margin-bottom: 1em;
+}
+
+.mainHeader_menu {
+  display: none;
 }
 
 .mainHeader_nav {
@@ -624,6 +628,10 @@ body {
 }
 .mainHeader_nav_link:hover, .mainHeader_nav_link:focus {
   background: #0097f3;
+}
+
+.mainHeader_bottom {
+  text-align: center;
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/

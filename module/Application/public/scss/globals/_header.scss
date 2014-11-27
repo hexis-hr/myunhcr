@@ -2,15 +2,18 @@
 /* Default styles ————————————————————————————————————————————————————————————*/
 
 .mainHeader { padding:1em; color:white; background:$blue; }
-  .mainHeader_wrapper { text-align:center; }
+  .mainHeader_top { text-align:center; }
     .mainHeader_call { display:none; }
     .mainHeader_logo { display:inline-block; margin-bottom:1em; }
+    .mainHeader_menu {}
+      .mainHeader_menu { display:none; }
     .mainHeader_nav { display:block; margin-bottom:1em; }
       .mainHeader_nav_trigger { display:none; }
       .mainHeader_nav_item { display:block; }
         .mainHeader_nav_link { display:block; margin-bottom:2px; padding:.75em; @include rem(font-size, 0.9rem); font-weight:500; background:lighten($blue, 6);
           &:hover, &:focus { background:lighten($blue, 10); }
         }
+  .mainHeader_bottom { text-align:center; }
 
 } @else {
 /* Modern phone styles ———————————————————————————————————————————————————————*/
@@ -21,29 +24,55 @@
   // Javascript-disabled version of header
   .mainHeader {}
 
-  // Javascript-enabled version of header
+  // If javascript is supported, we make a nice compact little header
   .js {
     body { padding-top:$height; } // We need to offset the .page selement for the fixed header
     .mainHeader { position:fixed; z-index:99; top:0; left:0; width:100%; min-height:$height; padding:0; transform:translateZ(0); }
       .mainHeader_wrapper { position:relative; }
-        .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
-        .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$height; }
-        .mainHeader_menu { @extend %headerButton; display:block; position:absolute; top:0; right:0; }
-          .mainHeader_menu_icon { @include img("icons", "menu-white-h24@2x", 2, inline); }
-        .mainHeader_nav { display:none; margin:0; background:$active-background; }
-          .mainHeader_nav_link { padding:.7em; background:none; }
-          .mainHeader_nav_item {
-            &:first-child .mainHeader_nav_link { padding-top:1.2em; }
-            &:last-child .mainHeader_nav_link { padding-bottom:1.1em; }
-          }
-        .mainHeader_infoLine { display:none; }
+        .mainHeader_top { position:relative; z-index:2; background:$blue; }
+          .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
+          .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$height; }
+          .mainHeader_menu { display:block; @extend %headerButton; display:block; position:absolute; top:0; right:0; padding-right:48px !important; }
+            .mainHeader_menu_label {}
+            .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
+            .mainHeader_menu_open { @include img("icons", "menu-white-h24@2x", 2, inline); }
+            .mainHeader_menu_close { @include img("icons", "close-white-h24@2x", 2, inline); display:none; }
+        .mainHeader_bottom { display:none; padding:0 !important; background:$active-background; }
+          .mainHeader_nav { margin:0; }
+            .mainHeader_nav_link { padding:.7em; background:none; }
+            .mainHeader_nav_item {
+              &:first-child .mainHeader_nav_link { padding-top:1.2em; }
+              &:last-child .mainHeader_nav_link { padding-bottom:1.1em; }
+            }
+          .mainHeader_infoLine { display:none; }
     
+    // Nav open
     .mainHeader.-active {
       .mainHeader_menu { background:darken($blue, 8); }
-        .mainHeader_menu_icon { @include img("icons", "close-white-h24@2x", 2, inline); }
-      .mainHeader_nav { display:block; }
+        .mainHeader_menu_open { display:none; }
+        .mainHeader_menu_close { display:block; }
+      .mainHeader_bottom { display:block; }
     }
 
+    // Modern phones also get pretty animations for nav
+    &.modern {
+      .mainHeader_top { transition-delay:40ms; }
+        .mainHeader_menu_icon { display:block !important; transition:120ms ease-in-out; }
+        .mainHeader_menu_open { transition-delay:40ms; }
+        .mainHeader_menu_close { opacity:0; transform:rotate(-60deg); transition-delay:0ms; }
+      .mainHeader_bottom { display:block; position:absolute; z-index:1; top:$height; right:0; width:100%; transform:translateY(-100%) translateZ(0); transition:250ms ease-in-out; }
+        .mainHeader_nav { opacity:0; transition:150ms ease-out; }
+
+      .mainHeader.-active {
+        .mainHeader_top {}
+          .mainHeader_menu_open { opacity:0; transform:rotate(120deg); transition-delay:0ms; }
+          .mainHeader_menu_close { opacity:1; transform:rotate(0deg); transition-delay:40ms; }
+        .mainHeader_bottom { transform:translateY(0) translateZ(0); }
+          .mainHeader_nav { opacity:1; transition-delay:220ms; }
+      }
+    }
+    
+    // Desktop changes
     @include large {
       .mainHeader_logo { margin-left:-14px; }
     }

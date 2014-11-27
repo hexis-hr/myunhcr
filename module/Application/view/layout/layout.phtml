@@ -18,32 +18,34 @@
     var doc = document.documentElement;
     window.DOMContentLoaded = false;
 
-    var featureTest = function() {
+    var supportCheck = function() {
+      
       // Show javascript support
       doc.className = doc.className.replace(/\bno-js\b/,'js');
-    }
 
-    // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
-    var logDOMContent = function() {
-      document.addEventListener("DOMContentLoaded", function(){
-        window.DOMContentLoaded = true;
-      });
-    }
+      // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
+      var logDOMContent = function() {
+        document.addEventListener("DOMContentLoaded", function(){
+          window.DOMContentLoaded = true;
+        });
+      }
 
-    // Test for touch support (Modernizr)
-    if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
-      doc.className += " touch";
-    } else {
-      doc.className += " no-touch";
-    }
+      // Test for touch support (Modernizr)
+      if( ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch ) {
+        doc.className += " touch";
+      } else {
+        doc.className += " no-touch";
+      }
 
-    // Test for 2d transforms
-    if (detectCSSFeature('transform') === true) {
-      doc.className += " modern";
+      // Test for 2d transforms
+      if (detectCSSFeature('transform') === true) {
+        doc.className += " modern";
+      }
+
     }
 
     // Function for vendor feature testing
-    function detectCSSFeature(featurename){
+    function detectCSSFeature(featurename) {
       var feature = false,
       domPrefixes = ['Webkit', 'Moz', 'ms', 'O'],
       elm = document.createElement('div'),
@@ -65,7 +67,7 @@
       return feature; 
     }
 
-    featureTest();
+    supportCheck();
     logDOMContent();
 
   </script>

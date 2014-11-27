@@ -13,3 +13,4 @@ auto
 none
 Gemfile.lock
 *.css.map
+.sass-cache

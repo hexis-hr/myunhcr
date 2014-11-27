@@ -777,6 +777,11 @@
 .js .mainHeader_wrapper {
   position: relative;
 }
+.js .mainHeader_top {
+  position: relative;
+  z-index: 2;
+  background: #0077c0;
+}
 .js .mainHeader_call {
   display: block;
   position: absolute;
@@ -790,19 +795,35 @@
 }
 .js .mainHeader_menu {
   display: block;
+  display: block;
   position: absolute;
   top: 0;
   right: 0;
+  padding-right: 48px !important;
 }
 .js .mainHeader_menu_icon {
+  position: absolute;
+  top: 17px;
+  right: 14px;
+}
+.js .mainHeader_menu_open {
   width: 26px;
   height: 24px;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAwCAYAAABe6Vn9AAAAAXNSR0IArs4c6QAAAINJREFUaAXt17sOgCAQBEDw///ZR4cQCmPBRodKEMM523ClGAQIvBGo/cf7Ofq15Hk9R1vf1k6+8OyH0lOUUHpC6iNAgAABAgQIzAVuvcS1TT80x1ryxm17CfuDQyX0AMtWAgQIECBAgECYgH4oLJChHLftgSRsQUJhgSiHAAECPxM4AEn+DCJCANtHAAAAAElFTkSuQmCC');
 }
-.js .mainHeader_nav {
+.js .mainHeader_menu_close {
+  width: 26px;
+  height: 24px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAwCAYAAABe6Vn9AAAAAXNSR0IArs4c6QAAAalJREFUaAXtmWmOgzAMhav+6Xl7tplWvR3zjLAUGBbjLSmKpSioxX7+nIW03G7degXarcAwDPfs7M5qihNE4CdgftE/sqAmrZ9J20+WAqKxvXERDkUaaC8WRU8FtRsFKoLyZSgURJYwrGuDQpQ1GA4eArUDw7o6KHjf0SjpPXOFghCNzJEmTUPx2p/NUaGAC9SkVa4ZfPTP6Hvb+qUAaEdVM0FNGvEwPFyRUOkwkVDVYCKgqsN4QgmnsH0D4KSPemFCqxuF0DcPhmGFic2ghD75MBqo5mFOQn0ARG3PZqPJ8av0yFLy8P0OGK6gAaqdkWEY7hVQ7cIsoI7WC00/usd20GTRotcdw4sAl7681JRTwMBltPbWEdK6zrYthPmOB6sQZpxSZ+6tstFoEtT4pMBZErP4hsB5JOQRwwXOMxHPWCq4iAQiYorgIoUjY6/CZQhmaIxwaUJQC9eCQKt/1tODWvcrAY61XqdQ0lume53CCwpR16BCT8jQ3Drs2mA2oEJhCs0llA9MIUAjlQJTaDKUL0whoFuMHEDRo4jpmoo0u0uvQK9AqxX4AxH3EthApH1pAAAAAElFTkSuQmCC');
   display: none;
-  margin: 0;
+}
+.js .mainHeader_bottom {
+  display: none;
+  padding: 0 !important;
   background: #005e97;
+}
+.js .mainHeader_nav {
+  margin: 0;
 }
 .js .mainHeader_nav_link {
   padding: .7em;
@@ -820,13 +841,77 @@
 .js .mainHeader.-active .mainHeader_menu {
   background: #005e97;
 }
-.js .mainHeader.-active .mainHeader_menu_icon {
-  width: 26px;
-  height: 24px;
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAAwCAYAAABe6Vn9AAAAAXNSR0IArs4c6QAAAalJREFUaAXtmWmOgzAMhav+6Xl7tplWvR3zjLAUGBbjLSmKpSioxX7+nIW03G7degXarcAwDPfs7M5qihNE4CdgftE/sqAmrZ9J20+WAqKxvXERDkUaaC8WRU8FtRsFKoLyZSgURJYwrGuDQpQ1GA4eArUDw7o6KHjf0SjpPXOFghCNzJEmTUPx2p/NUaGAC9SkVa4ZfPTP6Hvb+qUAaEdVM0FNGvEwPFyRUOkwkVDVYCKgqsN4QgmnsH0D4KSPemFCqxuF0DcPhmGFic2ghD75MBqo5mFOQn0ARG3PZqPJ8av0yFLy8P0OGK6gAaqdkWEY7hVQ7cIsoI7WC00/usd20GTRotcdw4sAl7681JRTwMBltPbWEdK6zrYthPmOB6sQZpxSZ+6tstFoEtT4pMBZErP4hsB5JOQRwwXOMxHPWCq4iAQiYorgIoUjY6/CZQhmaIxwaUJQC9eCQKt/1tODWvcrAY61XqdQ0lume53CCwpR16BCT8jQ3Drs2mA2oEJhCs0llA9MIUAjlQJTaDKUL0whoFuMHEDRo4jpmoo0u0uvQK9AqxX4AxH3EthApH1pAAAAAElFTkSuQmCC');
+.js .mainHeader.-active .mainHeader_menu_open {
+  display: none;
 }
-.js .mainHeader.-active .mainHeader_nav {
+.js .mainHeader.-active .mainHeader_menu_close {
   display: block;
+}
+.js .mainHeader.-active .mainHeader_bottom {
+  display: block;
+}
+.js.modern .mainHeader_top {
+  -webkit-transition-delay: 40ms;
+          transition-delay: 40ms;
+}
+.js.modern .mainHeader_menu_icon {
+  display: block !important;
+  -webkit-transition: 120ms ease-in-out;
+          transition: 120ms ease-in-out;
+}
+.js.modern .mainHeader_menu_open {
+  -webkit-transition-delay: 40ms;
+          transition-delay: 40ms;
+}
+.js.modern .mainHeader_menu_close {
+  opacity: 0;
+  -webkit-transform: rotate(-60deg);
+      -ms-transform: rotate(-60deg);
+          transform: rotate(-60deg);
+  -webkit-transition-delay: 0ms;
+          transition-delay: 0ms;
+}
+.js.modern .mainHeader_bottom {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 58px;
+  right: 0;
+  width: 100%;
+  -webkit-transform: translateY(-100%) translateZ(0);
+          transform: translateY(-100%) translateZ(0);
+  -webkit-transition: 250ms ease-in-out;
+          transition: 250ms ease-in-out;
+}
+.js.modern .mainHeader_nav {
+  opacity: 0;
+  -webkit-transition: 150ms ease-out;
+          transition: 150ms ease-out;
+}
+.js.modern .mainHeader.-active .mainHeader_menu_open {
+  opacity: 0;
+  -webkit-transform: rotate(120deg);
+      -ms-transform: rotate(120deg);
+          transform: rotate(120deg);
+  -webkit-transition-delay: 0ms;
+          transition-delay: 0ms;
+}
+.js.modern .mainHeader.-active .mainHeader_menu_close {
+  opacity: 1;
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transition-delay: 40ms;
+          transition-delay: 40ms;
+}
+.js.modern .mainHeader.-active .mainHeader_bottom {
+  -webkit-transform: translateY(0) translateZ(0);
+          transform: translateY(0) translateZ(0);
+}
+.js.modern .mainHeader.-active .mainHeader_nav {
+  opacity: 1;
+  -webkit-transition-delay: 220ms;
+          transition-delay: 220ms;
 }
 @media only screen and (min-width: 64.0625em) {
   .js .mainHeader_logo {

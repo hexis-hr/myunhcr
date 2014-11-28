@@ -9,7 +9,7 @@
   $direction: ltr; // Default direction for text, floats, etc.
   $debug: false; // Shows some helpful info while styling
   $file-path: "/module/Application/public"; // Base file path, relative to root
-  $img-path: "'../media/"; // Base filepath, relative to css output
+  $img-path: "../media/"; // Base filepath, relative to css output
 
 
 /*————————————————————————————————————————————————————————————————————————————————
@@ -197,3 +197,4 @@
   // $input-background-color: white;
   $input-border-color: darken($lightGray, 8);
   $input-focus-color: lighten($lightBlue, 15);
+  $input-active-color: $blue;

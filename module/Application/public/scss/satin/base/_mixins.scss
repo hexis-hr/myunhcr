@@ -168,7 +168,7 @@
 ————————————————————————————————————————————————————————————————————————————————*/
   @mixin img($src, $icon, $scale:1, $inline:false){
     $path: $file-path + "/media/#{$src}/#{$icon}.png";
-    $url: $img-path + "/media/#{$src}/#{$icon}.png";
+    $url: $img-path + $src + "/" + $icon + ".png";
 
     @if file_exists($path) {
       $width: image_width($path);
@@ -178,7 +178,7 @@
       height: round($height / $scale);
 
       @if $inline == false {
-        background-image: url('#{$url}');
+        background-image: url("#{$url}");
       } @else {
         background-image: inline_image($path);
       }

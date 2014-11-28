@@ -51,7 +51,7 @@ window.queue = {
  * If it finds a library present, it then starts to execute all the queued jQuery functions from queue.jQuery
  */
 function jQueryExec(){
-  if((window.jQuery || window.Zepto || window.$) && window.DOMContentLoaded === true) {
+  if((window.jQuery || window.Zepto || window.$) && window.app.DOMContentLoaded === true) {
     console.log('Queue ready...');
     $.each(queue.jQueryWaitlist, function(index, value) {
       value();
@@ -210,11 +210,31 @@ queue.jQuery(function(){
   });
 
 
+
+  /*------------------------------------------------------------------------------------
+    Forms
+  ------------------------------------------------------------------------------------*/
+  $('.customSelect_select').on('change', function(event) {
+    $(this).next('.customSelect_overlay').html( $(this).val() );
+  });
+
+
+
   /*------------------------------------------------------------------------------------
     Unsorted
   ------------------------------------------------------------------------------------*/
   console.log(ux.url);
   // $('link[title=modern]')[0].disabled=true;
+
+
+
+  /*------------------------------------------------------------------------------------
+    Load and exec FastClick
+  ------------------------------------------------------------------------------------*/
+  load('scripts/vendor/fastclick.js').thenRun(function () {
+    FastClick.attach(document.body);
+    console.log('FastClick attached');
+  });
 
 
 });
@@ -225,9 +245,8 @@ queue.jQuery(function(){
   Execute queues
 ------------------------------------------------------------------------------------*/
 queue.jQuery(function(){
-  $('html').click(function(event) {
+  $('html').on('click', function(event) {
     globalClick();
   });
 });
-
 jQueryExec();

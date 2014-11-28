@@ -26,36 +26,41 @@
 
   // If javascript is supported, we make a nice compact little header
   .js {
-    body { padding-top:$height; } // We need to offset the .page selement for the fixed header
-    .mainHeader { position:fixed; z-index:99; top:0; left:0; width:100%; min-height:$height; padding:0; transform:translateZ(0); }
+    
+    .mainHeader { min-height:$height; padding:0; }
       .mainHeader_wrapper { position:relative; }
-        .mainHeader_top { position:relative; z-index:2; background:$blue; }
+        .mainHeader_top { position:relative; z-index:2; height:$height; background:$blue; }
           .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
           .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$height; }
+            .mainHeader_logo_expanded { @extend %icon; @include img("globals", "logoHorizontal-white-h42@2x", 2); display:none !important; }
           .mainHeader_menu { display:block; @extend %headerButton; display:block; position:absolute; top:0; right:0; padding-right:48px !important; }
             .mainHeader_menu_label {}
             .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
             .mainHeader_menu_open { @include img("icons", "menu-white-h24@2x", 2, inline); }
             .mainHeader_menu_close { @include img("icons", "close-white-h24@2x", 2, inline); display:none; }
-        .mainHeader_bottom { display:none; padding:0 !important; background:$active-background; }
+        .mainHeader_bottom { display:none; padding:0 !important; background:$active-background; background:linear-gradient(top, $active-background, rgba($active-background, 0.95)); }
           .mainHeader_nav { margin:0; }
-            .mainHeader_nav_link { padding:.7em; background:none; }
-            .mainHeader_nav_item {
-              &:first-child .mainHeader_nav_link { padding-top:1.2em; }
-              &:last-child .mainHeader_nav_link { padding-bottom:1.1em; }
-            }
+            .mainHeader_nav_item {}
+              .mainHeader_nav_link { margin:0; padding:.85em 1em; min-width:200px; font-size:1.1em; font-weight:400; background:none;
+                border-top:1px solid rgba(white, 0.15); border-bottom:1px solid rgba(black,0.15); }
+            .mainHeader_nav_item:first-child .mainHeader_nav_link { border-top:0; } // Remove border from last child
+            .mainHeader_nav_item:last-child .mainHeader_nav_link { border-bottom:0; } // Remove border from last child
           .mainHeader_infoLine { display:none; }
     
     // Nav open
     .mainHeader.-active {
-      .mainHeader_menu { background:darken($blue, 8); }
-        .mainHeader_menu_open { display:none; }
-        .mainHeader_menu_close { display:block; }
+      .mainHeader_top {}
+        .mainHeader_menu { background:darken($blue, 8); }
+          .mainHeader_menu_open { display:none; }
+          .mainHeader_menu_close { display:block; }
       .mainHeader_bottom { display:block; }
     }
 
-    // Modern phones also get pretty animations for nav
+    // Modern phones get pretty animations and a sticky (fixed) header
     &.modern {
+      body { padding-top:$height; } // We need to offset the .page selement for the fixed header
+      .mainHeader { position:fixed; z-index:99; top:0; left:0; width:100%; transform:translateZ(0); }
+
       .mainHeader_top { transition-delay:40ms; }
         .mainHeader_menu_icon { display:block !important; transition:120ms ease-in-out; }
         .mainHeader_menu_open { transition-delay:40ms; }
@@ -71,11 +76,17 @@
           .mainHeader_nav { opacity:1; transition-delay:220ms; }
       }
     }
+
+    @include medium {
+      .mainHeader_logo {}
+        .mainHeader_logo_img { display:none; }
+        .mainHeader_logo_expanded { display:inline-block !important; }
+    }
     
-    // Desktop changes
     @include large {
       .mainHeader_logo { margin-left:-14px; }
     }
+    
   } // End of .js
 
   // Header button commons

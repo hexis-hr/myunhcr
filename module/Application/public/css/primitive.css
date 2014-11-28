@@ -641,6 +641,14 @@ body {
 
 /* Default styles ————————————————————————————————————————————————————————————*/
 /* Default styles ————————————————————————————————————————————————————————————*/
+.form_legend {
+  display: block;
+  margin-bottom: 1.2em;
+  font-size: 18px;
+  color: #0077c0;
+  text-align: center;
+}
+
 .form_item {
   margin-bottom: 28px;
 }
@@ -693,7 +701,23 @@ body {
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/
+.formTextarea {
+  padding-top: .75em;
+  padding-bottom: .75em;
+  min-height: 15em;
+  resize: vertical;
+  -webkit-transition: none;
+          transition: none;
+}
+
 /* Default styles ————————————————————————————————————————————————————————————*/
+/* Default styles ————————————————————————————————————————————————————————————*/
+.bigRadio_label {
+  vertical-align: -1px;
+  font-weight: regular;
+  color: #231f20;
+}
+
 /* Default styles ————————————————————————————————————————————————————————————*/
 .formSwitch {
   margin-bottom: .75em;
@@ -737,7 +761,7 @@ body {
   top: -52%;
   right: 0;
   padding-top: 14px;
-  width: 50px;
+  width: 54px;
   height: 50px;
   text-decoration: none;
   text-align: center;

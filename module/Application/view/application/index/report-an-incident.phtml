@@ -21,23 +21,17 @@
 
         <div class='form_item'>
           <label class='form_label' for=''>Is this report Anonymous ?</label>
-        </div>
-
-        <div class='grid'>
-          <div class='grid_column -small6'>
-            <div class='form_item'>
-              <label class='form_label' for='yes'>Yes</label>
-              <div class='form_field'>
-                <input type='radio' name='' value='' placeholder='' id='yes'>
+          <div class='grid -collapse -clean'>
+            <div class='grid_column -small6 form_subitem'>
+              <div class='bigRadio'>
+                <input class='bigRadio_input' type='radio' name='anonymous' value='yes' id='anonymous-yes'>
+                <label class='bigRadio_label' for='anonymous-yes'>Yes</label>
               </div>
             </div>
-          </div>
-
-          <div class='grid_column -small6'>
-            <div class='form_item'>
-              <label class='form_label' for='no'>No</label>
-              <div class='form_field'>
-                <input type='radio' name='' value='' placeholder='' id='no'>
+            <div class='grid_column -small6 form_subitem'>
+              <div class='bigRadio'>
+                <input class='bigRadio_input' type='radio' name='anonymous' value='no' id='anonymous-no'>
+                <label class='bigRadio_label' for='anonymous-no'>No</label>
               </div>
             </div>
           </div>
@@ -53,17 +47,22 @@
           </div>
         </div>
 
-        <div class='grid'>
-          <div class='grid_column -small5'>
-            <div class='form_item'>
-              <a class='button -submit' href="refugee-feedback.html">Cancel</a>
-            </div>
+        <div class='form_item'>
+          <label class='form_label' for='protectionType'>Which type of protection incident?</label>
+          <div class='form_field customSelect'>
+            <select class='formSelect customSelect_select -custom' id='protectionType'>
+              <option>I don't know</option>
+            </select>
+            <a unselectable='on' class='customSelect_overlay'>I don't know</a>
           </div>
-          
+        </div>
+
+        <div class='grid -reverse'>
           <div class='grid_column -small7'>
-            <div class='form_item'>
-              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
-            </div>
+            <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
+          </div>
+          <div class='grid_column -small5'>
+            <a class='button -fullWidth' href="refugee-feedback.html">Cancel</a>
           </div>
         </div>
 

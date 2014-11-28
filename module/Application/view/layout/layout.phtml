@@ -14,9 +14,17 @@
   <!-- ======= Critical Inline Scripts ======= -->
   <script>
 
-    var ua = navigator.userAgent.toLowerCase();
+
     var doc = document.documentElement;
-    window.DOMContentLoaded = false;
+    window.app = {
+      ua: navigator.userAgent.toLowerCase(),
+      userDevice: '',
+      userDeviceVersion: '',
+      userModernFail: false,
+      DOMContentLoaded: false
+    };
+    // window.DOMContentLoaded = false;
+
 
     function supportCheck() {
       // Show javascript support
@@ -29,11 +37,52 @@
         doc.className += " no-touch";
       }
 
-      // Test for 2d transforms
-      if (detectCSSFeature('transform') === true) {
+      // Show whether the device is modern
+      if ( modernTest() === true ) {
         doc.className += " modern";
       }
     }
+
+
+    // The "modern test"
+    function modernTest() {
+
+      // Android version detect
+      if (app.ua.indexOf("android") >= 0) {
+        app.userDevice = 'Android';
+        app.userDeviceVersion = parseFloat(app.ua.match(/android\s([0-9\.]*)/)[1]);
+        
+        // If it's lower than Android 2.3, fail the modern test
+        if( app.userDeviceVersion < 2.3 ) {
+          console.log ('Failed the Android Test: ' + app.userDeviceVersion);
+          return false;
+        } else { return true; }
+      }
+
+      // iOS version detect
+      else if ( /(iphone|ipad|ipod)/.test(app.ua) ) {
+        app.userDevice = 'iOS';
+        app.userDeviceVersion = parseFloat((navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/)[1]);
+
+        // If it's lower than iOS 6, fail the modern test
+        if( app.userDeviceVersion < 6.1 ) {
+          console.log ('Failed the iOS Test: ' + app.userDeviceVersion);
+          return false;
+        } else { return true; }
+      }
+
+      // Device needs to support 2D css transforms to qualify
+      else if ( detectCSSFeature('transform') !== true ) {
+        console.log ('Failed the 2D CSS transforms test ');
+        return false;
+      }
+
+      // If all those pass, show as modern
+      else {
+        return true;
+      }
+    };
+
 
     // Function for vendor feature testing
     function detectCSSFeature(featurename) {
@@ -58,15 +107,18 @@
       return feature; 
     }
 
+
     // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
     var logDOMContent = function() {
       document.addEventListener("DOMContentLoaded", function(){
-        window.DOMContentLoaded = true;
+        window.app.DOMContentLoaded = true;
       });
     }
 
+
     supportCheck();
     logDOMContent();
+
 
   </script>
 
@@ -90,7 +142,8 @@
 <div id='alertAssertive'></div>
 
 <!-- Secondary script files (async!) -->
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' defer async></script>
+<!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' defer async></script> -->
+<script src='scripts/vendor/zepto.js' defer async></script>
 <script src='scripts/main.js' defer async></script>
 
 </body>

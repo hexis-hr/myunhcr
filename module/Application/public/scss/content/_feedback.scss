@@ -1,0 +1,38 @@
+@if $primitive == true {
+/* Default  styles ————————————————————————————————————————————————————————————*/
+
+
+.feedback { padding:2em; text-align:center; }
+  .feedback_icon { margin-bottom:20px; }
+  .feedback_title { display:block; margin-bottom:20px; font-size:22px; }
+
+
+// Positive
+.feedback.-positive { background:rgba($positive, 0.1);
+  .feedback_icon { @include img("icons", "success-green-h64@2x", 2); }
+  .feedback_title { color:$positive; }
+}
+
+
+// Negative
+.feedback.-negative {
+  .feedback_icon {}
+  .feedback_title { color:$negative; }
+}
+
+
+// Warning
+.feedback.-warning {
+  .feedback_icon {}
+  .feedback_title { color:$warning; }
+}
+
+
+} @else {
+/* Modern phones only —————————————————————————————————————————————————————————*/
+
+
+.feedback {}
+
+
+}

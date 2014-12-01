@@ -14,7 +14,6 @@
   <!-- ======= Critical Inline Scripts ======= -->
   <script>
 
-
     var doc = document.documentElement;
     window.app = {
       ua: navigator.userAgent.toLowerCase(),
@@ -23,8 +22,6 @@
       userModernFail: false,
       DOMContentLoaded: false
     };
-    // window.DOMContentLoaded = false;
-
 
     function supportCheck() {
       // Show javascript support
@@ -37,64 +34,57 @@
         doc.className += " no-touch";
       }
 
-      // Show whether the device is modern
-      if ( modernTest() === true ) {
-        doc.className += " modern";
-      }
-    }
-
-
-    // The "modern test"
-    function modernTest() {
-
       // Android version detect
       if (app.ua.indexOf("android") >= 0) {
         app.userDevice = 'Android';
         app.userDeviceVersion = parseFloat(app.ua.match(/android\s([0-9\.]*)/)[1]);
-        
-        // If it's lower than Android 2.3, fail the modern test
+        doc.className += " android";
         if( app.userDeviceVersion < 2.3 ) {
           console.log ('Failed the Android Test: ' + app.userDeviceVersion);
-          return false;
-        } else { return true; }
+          app.userModernFail = true;
+        }
       }
 
       // iOS version detect
-      else if ( /(iphone|ipad|ipod)/.test(app.ua) ) {
+      if ( /(iphone|ipad|ipod)/.test(app.ua) ) {
         app.userDevice = 'iOS';
         app.userDeviceVersion = parseFloat((navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/)[1]);
-
-        // If it's lower than iOS 6, fail the modern test
+        doc.className += " ios";
         if( app.userDeviceVersion < 6.1 ) {
           console.log ('Failed the iOS Test: ' + app.userDeviceVersion);
-          return false;
-        } else { return true; }
+          app.userModernFail = true;
+        }
       }
 
-      // Device needs to support 2D css transforms to qualify
-      else if ( detectCSSFeature('transform') !== true ) {
+      // Device needs to support 2D Transforms to qualify
+      if ( detectCSSFeature('transform') === true ) {
+        doc.className += " transforms";
+      } else {
         console.log ('Failed the 2D CSS transforms test ');
-        return false;
+        app.userModernFail = true;
       }
 
-      // If all those pass, show as modern
-      else {
-        return true;
+      // Test for ajax support
+      if (typeof XMLHttpRequest !== "undefined") {
+        doc.className += " ajax";
+      } else {
+        app.userModernFail = true;
       }
-    };
 
+      // Show whether the device is modern after all those tests
+      if ( app.userModernFail === false ) {
+        doc.className += " modern";
+      }
+    }
 
     // Function for vendor feature testing
-    function detectCSSFeature(featurename) {
+    function detectCSSFeature(featurename){
       var feature = false,
       domPrefixes = ['Webkit', 'Moz', 'ms', 'O'],
       elm = document.createElement('div'),
       featurenameCapital = null;
-
       featurename = featurename.toLowerCase();
-
       if( elm.style[featurename] !== undefined ) { feature = true; } 
-
       if( feature === false ) {
         featurenameCapital = featurename.charAt(0).toUpperCase() + featurename.substr(1);
         for( var i = 0; i < domPrefixes.length; i++ ) {
@@ -107,7 +97,6 @@
       return feature; 
     }
 
-
     // Log if DOMContentLoaded has fired, for scripts which load asynchronously after the event
     var logDOMContent = function() {
       document.addEventListener("DOMContentLoaded", function(){
@@ -115,10 +104,8 @@
       });
     }
 
-
     supportCheck();
     logDOMContent();
-
 
   </script>
 

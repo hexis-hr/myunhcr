@@ -33,18 +33,10 @@
       direction: ltr;
 
       // Negative margin fix
-      > div, > section, > header, > form {
-        // overflow: hidden;
-        padding-top: 0.1px; 
-      }
+      // > div, > section, > header, > form {
+      //   padding-top: 0.1px; 
+      // }
     }
-
-
-    // Nested grid
-    // .grid {
-    //   @include rem(margin-right, -($grid-spacing / 2));
-    //   @include rem(margin-left, -($grid-spacing / 2));
-    // }
 
   }
 
@@ -128,39 +120,53 @@
   /*————————————————————————————————————————————————————————————————————————————————
     Query this shit
   ————————————————————————————————————————————————————————————————————————————————*/
-  @include small {
-    .grid{ max-width: $grid-small-width; }
-    @include st-gridBreakpoint("small");
+  @if $grid-small-include == true {
+    @include small {
+      .grid{ max-width: $grid-small-width; }
+      @include st-gridBreakpoint("small");
+    }
   }
 
-  @include smallPlus {
-    .grid{ max-width: $grid-smallPlus-width; }
-    @include st-gridBreakpoint("smallPlus");
+  @if $grid-smallPlus-include == true {
+    @include smallPlus {
+      .grid{ max-width: $grid-smallPlus-width; }
+      @include st-gridBreakpoint("smallPlus");
+    }
   }
 
-  @include medium {
-    .grid{ max-width: $grid-medium-width; }
-    @include st-gridBreakpoint("medium");
+  @if $grid-medium-include == true {
+    @include medium {
+      .grid{ max-width: $grid-medium-width; }
+      @include st-gridBreakpoint("medium");
+    }
   }
 
-  @include mediumPlus {
-    .grid{ max-width: $grid-mediumPlus-width; }
-    @include st-gridBreakpoint("mediumPlus");
+  @if $grid-mediumPlus-include == true {
+    @include mediumPlus {
+      .grid{ max-width: $grid-mediumPlus-width; }
+      @include st-gridBreakpoint("mediumPlus");
+    }
   }
 
-  @include large {
-    .grid{ max-width: $grid-large-width; }
-    @include st-gridBreakpoint("large");
+  @if $grid-large-include == true {
+    @include large {
+      .grid{ max-width: $grid-large-width; }
+      @include st-gridBreakpoint("large");
+    }
   }
 
-  @include largePlus {
-    .grid{ max-width: $grid-largePlus-width; }
-    @include st-gridBreakpoint("largePlus");
+  @if $grid-largePlus-include == true {
+    @include largePlus {
+      .grid{ max-width: $grid-largePlus-width; }
+      @include st-gridBreakpoint("largePlus");
+    }
   }
 
-  @include xlarge {
-    .grid{ max-width: $grid-xlarge-width; }
-    @include st-gridBreakpoint("xlarge");
+  @if $grid-xlarge-include == true {
+    @include xlarge {
+      .grid{ max-width: $grid-xlarge-width; }
+      @include st-gridBreakpoint("xlarge");
+    }
   }
 
 }
@@ -191,24 +197,33 @@
       $classes: ".grid, .lt-ie9 .grid";
     }
       
-    // Output default spacing
-    @include st-gridSpacing-margin($classes, $spacing);
+    // With modifier class
+    @if $modifierClass {
+      @include st-gridSpacing-margin($classes, $spacing, false);
+      @if $grid-medium-include == true { @include medium { @include st-gridSpacing-margin($classes, ($spacing * $multiplier), false); } }
+      @if $grid-large-include == true { @include large { @include st-gridSpacing-margin($classes, ($spacing * $multiplier * $multiplier), false); } }
+    }
 
-    // Medium gets a slightly larger spacing
-    @include medium { @include st-gridSpacing-margin($classes, ($spacing * $multiplier)); }
-
-    // Large gets an even larger spacing
-    @include large { @include st-gridSpacing-margin($classes, ($spacing * $multiplier * $multiplier)); }
+    // Root with no modifiers
+    @else {
+      @include st-gridSpacing-margin($classes, $spacing);
+      @if $grid-medium-include == true { @include medium { @include st-gridSpacing-margin($classes, ($spacing * $multiplier)); } }
+      @if $grid-large-include == true { @include large { @include st-gridSpacing-margin($classes, ($spacing * $multiplier * $multiplier)); } }
+    }
 
   }
 }
 
 
 // Spacing helper
-@mixin st-gridSpacing-margin($classes, $spacing){
+@mixin st-gridSpacing-margin($classes, $spacing, $root:true){
   $smallerSpacing: $spacing / 1.3;
   #{$classes} {
     @include rem(margin-top, -($smallerSpacing));
+    @if $root == false {
+      @include rem(margin-left, -($spacing / 2));
+      @include rem(margin-right, -($spacing / 2));
+    }
 
     > .grid_column {
       @include rem(margin-top, $smallerSpacing);
@@ -216,9 +231,11 @@
       @include rem(padding-right, ($spacing / 2));
     }
 
-    .grid {
-      @include rem(margin-left, -($spacing / 2));
-      @include rem(margin-right, -($spacing / 2));
+    @if $root == true {
+      .grid {
+        @include rem(margin-left, -($spacing / 2));
+        @include rem(margin-right, -($spacing / 2));
+      }
     }
   }
 }

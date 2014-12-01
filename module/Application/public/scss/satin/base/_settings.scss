@@ -45,24 +45,31 @@
 
   $grid-small-breakpoint: em(320px); // Media query condition. This one targets entry-level smartphones (usually)
   $grid-small-width: null; // Optional max-width for the container
+  $grid-small-include: true; // Toggles whether this particular grid will be included
 
   $grid-smallPlus-breakpoint: em(428px); // Larger smartphones (usually)
   $grid-smallPlus-width: null;
+  $grid-smallPlus-include: true;
 
   $grid-medium-breakpoint: em(600px); // Tablets (usually)
   $grid-medium-width: null;
+  $grid-medium-include: true;
 
   $grid-mediumPlus-breakpoint: em(800px); // Tablets (usually)
   $grid-mediumPlus-width: null;
+  $grid-mediumPlus-include: true;
 
   $grid-large-breakpoint: em(1025px); // Larger devices (usually). Also IE8 default
   $grid-large-width: 1120px; // Required for IE8
+  $grid-large-include: true;
 
   $grid-largePlus-breakpoint: em(1280px);
   $grid-largePlus-width: null;
+  $grid-largePlus-include: true;
 
   $grid-xlarge-breakpoint: em(1600px);
   $grid-xlarge-width: null;
+  $grid-xlarge-include: true;
 
 
 /*————————————————————————————————————————————————————————————————————————————————

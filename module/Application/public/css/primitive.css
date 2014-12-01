@@ -662,7 +662,7 @@ body {
 
 .form_label {
   display: block;
-  padding-bottom: .4em;
+  padding-bottom: .5em;
   font-size: 0.9em;
   font-weight: 500;
   color: #231f20;
@@ -740,6 +740,7 @@ body {
   display: none;
 }
 
+/* Default styles ————————————————————————————————————————————————————————————*/
 /* Default styles ————————————————————————————————————————————————————————————*/
 /* Default styles ————————————————————————————————————————————————————————————*/
 .sectionHeader {
@@ -853,6 +854,7 @@ body {
   border: 0;
   background: #009851;
   display: block;
+  width: 100%;
   margin-bottom: .5em;
   color: #242424;
   background: #e6e6e6;
@@ -1081,6 +1083,42 @@ body {
 .sitemap_group_title {
   padding: 14px 22px;
   font-size: 20px;
+}
+
+/* Default  styles ————————————————————————————————————————————————————————————*/
+.feedback {
+  padding: 2em;
+  text-align: center;
+}
+
+.feedback_icon {
+  margin-bottom: 20px;
+}
+
+.feedback_title {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.feedback.-positive {
+  background: rgba(91, 189, 114, 0.1);
+}
+.feedback.-positive .feedback_icon {
+  width: 64px;
+  height: 64px;
+  background-image: url("../media/icons/success-green-h64@2x.png");
+}
+.feedback.-positive .feedback_title {
+  color: #5bbd72;
+}
+
+.feedback.-negative .feedback_title {
+  color: #e6656a;
+}
+
+.feedback.-warning .feedback_title {
+  color: #f7941e;
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/

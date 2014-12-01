@@ -147,6 +147,11 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function reportAnIncident5Action()
+    {
+        return new ViewModel();
+    }
+
     public function takeASurveyAction()
     {
         return new ViewModel();

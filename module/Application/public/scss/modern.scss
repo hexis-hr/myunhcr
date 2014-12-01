@@ -9,6 +9,7 @@ $primitive: false;
 // Framework includes
 @include st-grid;
 @include st-gridSpacing($grid-spacing);
+@include st-gridSpacing(($grid-spacing / 3), -compact);
 @include st-ux;
 
 
@@ -30,6 +31,7 @@ $primitive: false;
 @import "form/_checkbox";
 @import "form/_radio";
 @import "form/_switch";
+@import "form/_file";
 @import "form/_datepicker";
 
 
@@ -41,6 +43,7 @@ $primitive: false;
 @import "content/_list";
 @import "content/_links";
 @import "content/_sitemap";
+@import "content/_feedback";
 
 
 // Import pages

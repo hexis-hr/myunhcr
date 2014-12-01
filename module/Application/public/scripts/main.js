@@ -231,7 +231,7 @@ queue.jQuery(function(){
   /*------------------------------------------------------------------------------------
     Load and exec FastClick
   ------------------------------------------------------------------------------------*/
-  load('scripts/vendor/fastclick.js').thenRun(function () {
+  load('scripts/external/fastclick.js').thenRun(function () {
     FastClick.attach(document.body);
     console.log('FastClick attached');
   });

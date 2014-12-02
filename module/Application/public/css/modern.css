@@ -908,22 +908,11 @@
 }
 
 /* Modern phone styles ———————————————————————————————————————————————————————*/
-.mainFooter {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 0;
+.js .mainFooter {
+  display: none;
 }
-.mainFooter.-compact {
-  right: 10px;
-  bottom: 10px;
-  width: auto;
-}
-@media only screen and (min-width: 37.5em) {
-  .mainFooter {
-    position: static;
-  }
+.js .mainFooter.-showFooter {
+  display: block;
 }
 
 /* Modern phone styles ———————————————————————————————————————————————————————*/

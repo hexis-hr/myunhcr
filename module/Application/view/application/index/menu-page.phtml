@@ -1,78 +1,7 @@
 <?php echo $this->partial('application/index/header.phtml');?>
 
 <section class='page'>
-  <div class='grid -collapse -clean -largeExpand'>
-    
-    <div class='grid_column -large4 gapSmall'>
-      <ul class='sitemap'>
-        <li class='sitemap_group'>
-          <h2 class='sitemap_group_title'>Feedback</h2>
-          <ul class='linkGroup'>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='report-an-incident.html'>Report an Incident</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='take-a-survey.html'>Take a Survey</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='faq.html'>FAQ</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div class='grid_column -large4 gapSmall'>
-      <ul class='sitemap'>
-        <li class='sitemap_group'>
-          <h2 class='sitemap_group_title'>Information</h2>
-          <ul class='linkGroup'>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='news-and-events.html'>News and Events</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='map-of-service.html'>Map of Services</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='list-of-organizations.html'>List by Organization</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='list-by-sector.html'>List by Sector</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='faq-refugee.html'>FAQ</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-    <div class='grid_column -large4'>
-      <ul class='sitemap'>
-        <li class='sitemap_group'>
-          <h2 class='sitemap_group_title'>MyUNHCR</h2>
-          <ul class='linkGroup'>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='book-an-appointment.html'>Book an Appointment</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='check-your-status.html'>Check Your Status</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='update-personal-data.html'>Update Personal Data</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='settings.html'>Update Settings</a>
-            </li>
-            <li class='linkGroup_item'>
-              <a class='linkGroup_link' href='faq-myunhcr.html'>FAQ</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-  </div>
+  <?php echo $this->partial('application/index/navigation.phtml');?>
 </section>
 
 <?php echo $this->partial('application/index/footer.phtml');?>

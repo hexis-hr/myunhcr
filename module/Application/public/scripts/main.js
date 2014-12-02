@@ -174,40 +174,40 @@ queue.jQuery(function(){
   /*------------------------------------------------------------------------------------
     Mobile menu
   ------------------------------------------------------------------------------------*/
-  function mobileMenu() {
-    var vars = {
-      selector: $('#header'),
-      className: '-active'
-    };
+  // function mobileMenu() {
+  //   var vars = {
+  //     selector: $('#header'),
+  //     className: '-active'
+  //   };
     
-    this.toggle = function() {
-      vars.selector.toggleClass(vars.className);
-    };
+  //   this.toggle = function() {
+  //     vars.selector.toggleClass(vars.className);
+  //   };
 
-    this.close = function() {
-      vars.selector.removeClass(vars.className);
-    };
+  //   this.close = function() {
+  //     vars.selector.removeClass(vars.className);
+  //   };
 
-    this.open = function() {
-      vars.selector.addClass(vars.className);
-    };
-  }
-  var mobileMenu = new mobileMenu();
+  //   this.open = function() {
+  //     vars.selector.addClass(vars.className);
+  //   };
+  // }
+  // var mobileMenu = new mobileMenu();
 
-  // Toggle mobile menu
-  $('#mobileMenuTrigger').on('click', function(event) {
-    event.stopPropagation();
-    mobileMenu.toggle();
-  });
+  // // Toggle mobile menu
+  // $('#mobileMenuTrigger').on('click', function(event) {
+  //   event.stopPropagation();
+  //   mobileMenu.toggle();
+  // });
 
-  $('#mobileMenuWrapper').on('click', function(event) {
-    event.stopPropagation();
-  });
+  // $('#mobileMenuWrapper').on('click', function(event) {
+  //   event.stopPropagation();
+  // });
 
-  // Close the menu on document click
-  queue.globalClickEvents.push(function(event){
-    mobileMenu.close();
-  });
+  // // Close the menu on document click
+  // queue.globalClickEvents.push(function(event){
+  //   mobileMenu.close();
+  // });
 
 
 

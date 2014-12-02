@@ -107,7 +107,22 @@ function updateOnScroll(){
   ux.viewport.visibleBottom = ux.viewport.height + ux.scroll.offset;
 }
 
-
+function ajaxNavigation() {
+    $(document).on("click",".ajaxNavigation",  function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: $(this).attr("href"),
+            timeout: 300,
+            success: function (data) {
+                $(".page").replaceWith(data)
+            },
+            error: function (xhr, type) {
+                alert('Ajax error!')
+            }
+        })
+    })
+}
 
 /*------------------------------------------------------------------------------------
   Helper: Light scroll (which triggers less often and not in real-time)
@@ -163,9 +178,8 @@ queue.jQuery(function(){
   // Get basic user info
   updateOnResize();
   updateOnScroll();
-
-
-  // Auto-exec function
+    ajaxNavigation();
+    // Auto-exec function
   // (function jqueryTest(){
   //   $('body').prepend('<span style="position:absolute; top:2px; left:2px; width:25px; height:25px; background:#41a240;"></span>');
   // }());
@@ -238,23 +252,6 @@ queue.jQuery(function(){
 
 
 });
-
-
-$("#mobileMenuTrigger").on("click", function(e){
-    e.preventDefault();
-    $.ajax({
-        type: 'GET',
-        url: $(this).attr("href"),
-        timeout: 300,
-        success: function(data){
-            $(".page").replaceWith(data)
-        },
-        error: function(xhr, type){
-            alert('Ajax error!')
-        }
-    })
-})
-
 
 /*------------------------------------------------------------------------------------
   Execute queues

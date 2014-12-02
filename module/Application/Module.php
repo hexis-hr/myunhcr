@@ -22,6 +22,14 @@ class Module
 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setFallbackLocale('en_US');
+
+        $sharedEvents        = $eventManager->getSharedManager();
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+            $result = $e->getResult();
+            if ($result instanceof \Zend\View\Model\ViewModel) {
+                $result->setTerminal($e->getRequest()->isXmlHttpRequest());
+            }
+        });
     }
 
     public function getConfig()

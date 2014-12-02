@@ -240,6 +240,21 @@ queue.jQuery(function(){
 });
 
 
+$("#mobileMenuTrigger").on("click", function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'GET',
+        url: $(this).attr("href"),
+        timeout: 300,
+        success: function(data){
+            $(".page").replaceWith(data)
+        },
+        error: function(xhr, type){
+            alert('Ajax error!')
+        }
+    })
+})
+
 
 /*------------------------------------------------------------------------------------
   Execute queues

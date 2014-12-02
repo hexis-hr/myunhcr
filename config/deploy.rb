@@ -9,7 +9,7 @@ set :webserver_user,        "www-data"
 
 set :use_set_permissions,   true
 
-set :linked_dirs, %w{application/logs}
+set :linked_dirs, %w{application/logs vendor}
 
 set :writable_dirs, ["application/logs"]
 

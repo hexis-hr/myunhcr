@@ -120,22 +120,29 @@
   <meta name='description' content=''>
 
   <!-- ==== Always prefetch navigation page ==== -->
-  <link rel='prefetch' href='menu-page.html'>
-  <link rel='prerender' href='menu-page.html'>
+  <!-- <link rel='prefetch' href='menu-page.html'>
+  <link rel='prerender' href='menu-page.html'> -->
 </head>
 <body class="<?php echo $this->layout()->body_class; ?>">
 
-<?php echo $this->content; ?>
+<?php echo $this->partial('application/index/header.phtml'); ?>
+
+<div id='page'>
+  <?php echo $this->content; ?>
+</div>
+
+<?php echo $this->partial('application/index/footer.phtml'); ?>
 
 <!-- Various helpers -->
+<div id='pageLoad'></div>
 <div id='screenSize'></div>
 <div id='alertPolite'></div>
 <div id='alertAssertive'></div>
 
 <!-- Secondary script files (async!) -->
-<!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' defer async></script> -->
-<script src='scripts/external/zepto.js' defer async></script>
-<script src='scripts/main.js' defer async></script>
+<!-- <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' async defer></script> -->
+<script src='scripts/external/zepto.js' async defer></script>
+<script src='scripts/main.js' async defer></script>
 
 </body>
 </html>

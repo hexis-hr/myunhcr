@@ -106,24 +106,7 @@ function updateOnScroll(){
   ux.viewport.visibleBottom = ux.viewport.height + ux.scroll.offset;
 }
 
-function ajaxNavigation() {
-    $(document).on("click",".ajaxNavigation",  function (e) {
-        e.preventDefault();
-        var href = $(this).attr("href");
-        $.ajax({
-            type: 'GET',
-            url: href,
-            timeout: 300,
-            success: function (data) {
-                History.pushState(null,null,href);
-                $(".page").replaceWith(data)
-            },
-            error: function (xhr, type) {
-                alert('Ajax error!')
-            }
-        })
-    })
-}
+
 
 /*------------------------------------------------------------------------------------
   Helper: Light scroll (which triggers less often and not in real-time)
@@ -171,19 +154,71 @@ function lightResize(callback, delay){
 
 
 /*------------------------------------------------------------------------------------
+  Get page
+------------------------------------------------------------------------------------*/
+function getPage(url) {
+  $('#page').addClass('-loading');
+
+  $.ajax({
+    type: 'GET',
+    url: url,
+    timeout: 1500,
+    success: function(data) {
+      $("html, body").scrollTop(0);
+      History.pushState(null, null, url);
+      $('#page').html(data);
+      $('#page').removeClass('-loading');
+    },
+    error: function(xhr, type) {
+      $('#pageLoad').html("Sorry, this is taking long. We will try one more time...").addClass('-show');
+      setTimeout(function(){
+        window.location = url;
+      }, 250);
+    }
+  })
+}
+
+
+
+/*------------------------------------------------------------------------------------
   Execute when jQuery loads...
 ------------------------------------------------------------------------------------*/
 queue.jQuery(function(){
   
-  
   // Get basic user info
   updateOnResize();
   updateOnScroll();
-    ajaxNavigation();
-    // Auto-exec function
+
+
+
+  /*------------------------------------------------------------------------------------
+    Load and exec History.js for ajax supported browsers and devices
+  ------------------------------------------------------------------------------------*/
+  if ( $('html').hasClass('ajax') === true ) {
+    load('scripts/external/zepto.history.js').thenRun(function () {
+      // Set a click handler for any ajaxNav link
+      $(document).on('click','[ajaxNav]',  function (e) {
+        e.preventDefault();
+        var state = History.getState();
+        var link = $(this).attr('href');
+        getPage(link);
+      });
+
+      // Watch for all sorts of state changes (e.g. back button)
+      History.Adapter.bind(window,'statechange',function(){
+        var state = History.getState();
+        getPage(state.hash);
+      });
+    });
+  }
+
+
+
+  // Auto-exec function
   // (function jqueryTest(){
   //   $('body').prepend('<span style="position:absolute; top:2px; left:2px; width:25px; height:25px; background:#41a240;"></span>');
   // }());
+
 
 
   /*------------------------------------------------------------------------------------
@@ -251,12 +286,9 @@ queue.jQuery(function(){
     console.log('FastClick attached');
   });
 
-  load('scripts/external/zepto.history.js').thenRun(function () {
-      var History = window.History;
-  });
-
-
 });
+
+
 
 /*------------------------------------------------------------------------------------
   Execute queues

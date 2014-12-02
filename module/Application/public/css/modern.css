@@ -711,6 +711,38 @@
   }
 }
 
+#page {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-transition: 300ms;
+          transition: 300ms;
+}
+#page.-loading {
+  -webkit-transform: translateX(-2%) translateZ(0);
+          transform: translateX(-2%) translateZ(0);
+  opacity: 0;
+}
+
+#pageLoad {
+  display: block;
+  position: absolute;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  -webkit-transition: 100ms;
+          transition: 100ms;
+}
+#pageLoad.-show {
+  opacity: 1;
+  height: 100%;
+  color: white;
+}
+
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 .js .mainHeader {
   min-height: 58px;
@@ -1175,12 +1207,4 @@
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 /* Modern phones only —————————————————————————————————————————————————————————*/
 /* Modern phone styles ———————————————————————————————————————————————————————*/
-body.welcome {
-  padding-top: 0;
-}
-
-.welcomeFooter {
-  margin-bottom: 0;
-}
-
 /* Modern phone styles ———————————————————————————————————————————————————————*/

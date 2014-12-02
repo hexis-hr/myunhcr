@@ -580,6 +580,10 @@ body {
   padding: 0 !important;
 }
 
+#pageLoad {
+  display: none;
+}
+
 /* Default styles ————————————————————————————————————————————————————————————*/
 .mainHeader {
   padding: 1em;
@@ -1118,6 +1122,13 @@ body {
 }
 
 /* Default styles ————————————————————————————————————————————————————————————*/
+.welcome {
+  padding-top: 0 !important;
+}
+.welcome .mainHeader {
+  display: none !important;
+}
+
 .welcomeTitle {
   color: #0077c0;
   text-align: center;

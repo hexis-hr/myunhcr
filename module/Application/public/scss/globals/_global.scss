@@ -11,6 +11,8 @@ body { min-height:100%; }
 .page.-extraMargin { margin-top:.5em; }
 .page.-noPadding { padding:0 !important; }
 
+#pageLoad { display:none; }
+
 
 } @else {
 /* Modern phone styles ———————————————————————————————————————————————————————*/
@@ -32,6 +34,16 @@ body { min-height:100%; }
       display: none;
     }
   }
+
+
+// Loading a page with ajax
+#page { transform:translateZ(0); transition:300ms;
+  &.-loading { transform:translateX(-2%) translateZ(0); opacity:0; }
+}
+
+#pageLoad { display:block; position:absolute; position:fixed; z-index:99; top:0; left:0; width:100%; height:0; background:rgba(black,0.2); opacity:0; transition:100ms;
+  &.-show { opacity:1; height:100%; color:white; }
+}
 
 
 }

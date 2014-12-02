@@ -25,7 +25,6 @@ window.ux = {
 window.queue = {
   // We use this to store function which will get executed once jQuery loads
   jQuery: function(func){
-    
     // If there is jQuery / Zepto library present, we simply execute the passed function. Nothing different there...
     if(window.jQuery || window.Zepto || window.$) {
       console.log('Forwarding function...');
@@ -110,11 +109,13 @@ function updateOnScroll(){
 function ajaxNavigation() {
     $(document).on("click",".ajaxNavigation",  function (e) {
         e.preventDefault();
+        var href = $(this).attr("href");
         $.ajax({
             type: 'GET',
-            url: $(this).attr("href"),
+            url: href,
             timeout: 300,
             success: function (data) {
+                History.pushState(null,null,href);
                 $(".page").replaceWith(data)
             },
             error: function (xhr, type) {
@@ -248,6 +249,10 @@ queue.jQuery(function(){
   load('scripts/external/fastclick.js').thenRun(function () {
     FastClick.attach(document.body);
     console.log('FastClick attached');
+  });
+
+  load('scripts/external/zepto.history.js').thenRun(function () {
+      var History = window.History;
   });
 
 

@@ -13,6 +13,8 @@ window.ux = {
   },
   config: {},
   url: {
+    isPushed: false,
+    isLoading: false,
     hash: window.location.hash
   }
 };
@@ -158,12 +160,13 @@ function lightResize(callback, delay){
 ------------------------------------------------------------------------------------*/
 function getPage(url) {
   $('#page').addClass('-loading');
-
   $.ajax({
     type: 'GET',
     url: url,
     timeout: 1500,
     success: function(data) {
+      ux.url.isPushed = true;
+      ux.url.isLoading = false;
       $("html, body").scrollTop(0);
       History.pushState(null, null, url);
       $('#page').html(data);
@@ -173,9 +176,9 @@ function getPage(url) {
       $('#pageLoad').html("Sorry, this is taking long. We will try one more time...").addClass('-show');
       setTimeout(function(){
         window.location = url;
-      }, 250);
+      }, 500);
     }
-  })
+  });
 }
 
 
@@ -197,17 +200,26 @@ queue.jQuery(function(){
   if ( $('html').hasClass('ajax') === true ) {
     load('scripts/external/zepto.history.js').thenRun(function () {
       // Set a click handler for any ajaxNav link
-      $(document).on('click','[ajaxNav]',  function (e) {
-        e.preventDefault();
-        var state = History.getState();
-        var link = $(this).attr('href');
-        getPage(link);
+      $(document).on('click','[ajaxNav]', function(event) {
+        event.preventDefault();
+        if ( ux.url.isLoading === false ){
+          ux.url.isLoading = true;
+          var state = History.getState();
+          var link = $(this).attr('href');
+          getPage(link);
+        }
       });
 
       // Watch for all sorts of state changes (e.g. back button)
       History.Adapter.bind(window,'statechange',function(){
         var state = History.getState();
-        getPage(state.hash);
+        // We check for isPushed to avoid double ajax calls (ongoing issue 96: https://github.com/browserstate/history.js/issues/96)
+        if ( ux.url.isPushed !== true ) {
+          getPage(state.hash);
+        } else {
+          ux.url.isPushed = true;
+        }
+        console.log(state);
       });
     });
   }

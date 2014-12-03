@@ -1,5 +1,8 @@
 /* Load.js - Copyright (c) 2010 Chris O'Hara <cohara87@gmail.com>. MIT Licensed */
-function asyncLoadScript(a){return function(b,c){var d=document.createElement("script");d.type="text/javascript",d.src=a,d.onload=b,d.onerror=c,d.onreadystatechange=function(){var a=this.readyState;if(a==="loaded"||a==="complete")d.onreadystatechange=null,b()},head.insertBefore(d,head.firstChild)}}(function(a){a=a||{};var b={},c,d;c=function(a,d,e){var f=a.halt=!1;a.error=function(a){throw a},a.next=function(c){c&&(f=!1);if(!a.halt&&d&&d.length){var e=d.shift(),g=e.shift();f=!0;try{b[g].apply(a,[e,e.length,g])}catch(h){a.error(h)}}return a};for(var g in b){if(typeof a[g]=="function")continue;(function(e){a[e]=function(){var g=Array.prototype.slice.call(arguments);if(e==="onError"){if(d)return b.onError.apply(a,[g,g.length]),a;var h={};return b.onError.apply(h,[g,g.length]),c(h,null,"onError")}return g.unshift(e),d?(a.then=a[e],d.push(g),f?a:a.next()):c({},[g],e)}})(g)}return e&&(a.then=a[e]),a.call=function(b,c){c.unshift(b),d.unshift(c),a.next(!0)},a.next()},d=a.addMethod=function(d){var e=Array.prototype.slice.call(arguments),f=e.pop();for(var g=0,h=e.length;g<h;g++)typeof e[g]=="string"&&(b[e[g]]=f);--h||(b["then"+d.substr(0,1).toUpperCase()+d.substr(1)]=f),c(a)},d("chain",function(a){var b=this,c=function(){if(!b.halt){if(!a.length)return b.next(!0);try{null!=a.shift().call(b,c,b.error)&&c()}catch(d){b.error(d)}}};c()}),d("run",function(a,b){var c=this,d=function(){c.halt||--b||c.next(!0)},e=function(a){c.error(a)};for(var f=0,g=b;!c.halt&&f<g;f++)null!=a[f].call(c,d,e)&&d()}),d("defer",function(a){var b=this;setTimeout(function(){b.next(!0)},a.shift())}),d("onError",function(a,b){var c=this;this.error=function(d){c.halt=!0;for(var e=0;e<b;e++)a[e].call(c,d)}})})(this);var head=document.getElementsByTagName("head")[0]||document.documentElement;addMethod("load",function(a,b){for(var c=[],d=0;d<b;d++)(function(b){c.push(asyncLoadScript(a[b]))})(d);this.call("run",c)})
+function asyncLoadScript(a){return function(b,c){var d=document.createElement("script");d.type="text/javascript",d.src=a,d.onload=b,d.onerror=c,d.onreadystatechange=function(){var a=this.readyState;if(a==="loaded"||a==="complete")d.onreadystatechange=null,b()},head.insertBefore(d,head.firstChild)}}(function(a){a=a||{};var b={},c,d;c=function(a,d,e){var f=a.halt=!1;a.error=function(a){throw a},a.next=function(c){c&&(f=!1);if(!a.halt&&d&&d.length){var e=d.shift(),g=e.shift();f=!0;try{b[g].apply(a,[e,e.length,g])}catch(h){a.error(h)}}return a};for(var g in b){if(typeof a[g]=="function")continue;(function(e){a[e]=function(){var g=Array.prototype.slice.call(arguments);if(e==="onError"){if(d)return b.onError.apply(a,[g,g.length]),a;var h={};return b.onError.apply(h,[g,g.length]),c(h,null,"onError")}return g.unshift(e),d?(a.then=a[e],d.push(g),f?a:a.next()):c({},[g],e)}})(g)}return e&&(a.then=a[e]),a.call=function(b,c){c.unshift(b),d.unshift(c),a.next(!0)},a.next()},d=a.addMethod=function(d){var e=Array.prototype.slice.call(arguments),f=e.pop();for(var g=0,h=e.length;g<h;g++)typeof e[g]=="string"&&(b[e[g]]=f);--h||(b["then"+d.substr(0,1).toUpperCase()+d.substr(1)]=f),c(a)},d("chain",function(a){var b=this,c=function(){if(!b.halt){if(!a.length)return b.next(!0);try{null!=a.shift().call(b,c,b.error)&&c()}catch(d){b.error(d)}}};c()}),d("run",function(a,b){var c=this,d=function(){c.halt||--b||c.next(!0)},e=function(a){c.error(a)};for(var f=0,g=b;!c.halt&&f<g;f++)null!=a[f].call(c,d,e)&&d()}),d("defer",function(a){var b=this;setTimeout(function(){b.next(!0)},a.shift())}),d("onError",function(a,b){var c=this;this.error=function(d){c.halt=!0;for(var e=0;e<b;e++)a[e].call(c,d)}})})(this);var head=document.getElementsByTagName("head")[0]||document.documentElement;addMethod("load",function(a,b){for(var c=[],d=0;d<b;d++)(function(b){c.push(asyncLoadScript(a[b]))})(d);this.call("run",c)});
+
+// FastClick
+(function(){"use strict";function e(t,r){function s(e,t){return function(){return e.apply(t,arguments)}}var i;r=r||{};this.trackingClick=false;this.trackingClickStart=0;this.targetElement=null;this.touchStartX=0;this.touchStartY=0;this.lastTouchIdentifier=0;this.touchBoundary=r.touchBoundary||10;this.layer=t;this.tapDelay=r.tapDelay||200;this.tapTimeout=r.tapTimeout||700;if(e.notNeeded(t)){return}var o=["onMouse","onClick","onTouchStart","onTouchMove","onTouchEnd","onTouchCancel"];var u=this;for(var a=0,f=o.length;a<f;a++){u[o[a]]=s(u[o[a]],u)}if(n){t.addEventListener("mouseover",this.onMouse,true);t.addEventListener("mousedown",this.onMouse,true);t.addEventListener("mouseup",this.onMouse,true)}t.addEventListener("click",this.onClick,true);t.addEventListener("touchstart",this.onTouchStart,false);t.addEventListener("touchmove",this.onTouchMove,false);t.addEventListener("touchend",this.onTouchEnd,false);t.addEventListener("touchcancel",this.onTouchCancel,false);if(!Event.prototype.stopImmediatePropagation){t.removeEventListener=function(e,n,r){var i=Node.prototype.removeEventListener;if(e==="click"){i.call(t,e,n.hijacked||n,r)}else{i.call(t,e,n,r)}};t.addEventListener=function(e,n,r){var i=Node.prototype.addEventListener;if(e==="click"){i.call(t,e,n.hijacked||(n.hijacked=function(e){if(!e.propagationStopped){n(e)}}),r)}else{i.call(t,e,n,r)}}}if(typeof t.onclick==="function"){i=t.onclick;t.addEventListener("click",function(e){i(e)},false);t.onclick=null}}var t=navigator.userAgent.indexOf("Windows Phone")>=0;var n=navigator.userAgent.indexOf("Android")>0&&!t;var r=/iP(ad|hone|od)/.test(navigator.userAgent)&&!t;var i=r&&/OS 4_\d(_\d)?/.test(navigator.userAgent);var s=r&&/OS ([6-9]|\d{2})_\d/.test(navigator.userAgent);var o=navigator.userAgent.indexOf("BB10")>0;e.prototype.needsClick=function(e){switch(e.nodeName.toLowerCase()){case"button":case"select":case"textarea":if(e.disabled){return true}break;case"input":if(r&&e.type==="file"||e.disabled){return true}break;case"label":case"iframe":case"video":return true}return/\bneedsclick\b/.test(e.className)};e.prototype.needsFocus=function(e){switch(e.nodeName.toLowerCase()){case"textarea":return true;case"select":return!n;case"input":switch(e.type){case"button":case"checkbox":case"file":case"image":case"radio":case"submit":return false}return!e.disabled&&!e.readOnly;default:return/\bneedsfocus\b/.test(e.className)}};e.prototype.sendClick=function(e,t){var n,r;if(document.activeElement&&document.activeElement!==e){document.activeElement.blur()}r=t.changedTouches[0];n=document.createEvent("MouseEvents");n.initMouseEvent(this.determineEventType(e),true,true,window,1,r.screenX,r.screenY,r.clientX,r.clientY,false,false,false,false,0,null);n.forwardedTouchEvent=true;e.dispatchEvent(n)};e.prototype.determineEventType=function(e){if(n&&e.tagName.toLowerCase()==="select"){return"mousedown"}return"click"};e.prototype.focus=function(e){var t;if(r&&e.setSelectionRange&&e.type.indexOf("date")!==0&&e.type!=="time"&&e.type!=="month"){t=e.value.length;e.setSelectionRange(t,t)}else{e.focus()}};e.prototype.updateScrollParent=function(e){var t,n;t=e.fastClickScrollParent;if(!t||!t.contains(e)){n=e;do{if(n.scrollHeight>n.offsetHeight){t=n;e.fastClickScrollParent=n;break}n=n.parentElement}while(n)}if(t){t.fastClickLastScrollTop=t.scrollTop}};e.prototype.getTargetElementFromEventTarget=function(e){if(e.nodeType===Node.TEXT_NODE){return e.parentNode}return e};e.prototype.onTouchStart=function(e){var t,n,s;if(e.targetTouches.length>1){return true}t=this.getTargetElementFromEventTarget(e.target);n=e.targetTouches[0];if(r){s=window.getSelection();if(s.rangeCount&&!s.isCollapsed){return true}if(!i){if(n.identifier&&n.identifier===this.lastTouchIdentifier){e.preventDefault();return false}this.lastTouchIdentifier=n.identifier;this.updateScrollParent(t)}}this.trackingClick=true;this.trackingClickStart=e.timeStamp;this.targetElement=t;this.touchStartX=n.pageX;this.touchStartY=n.pageY;if(e.timeStamp-this.lastClickTime<this.tapDelay){e.preventDefault()}return true};e.prototype.touchHasMoved=function(e){var t=e.changedTouches[0],n=this.touchBoundary;if(Math.abs(t.pageX-this.touchStartX)>n||Math.abs(t.pageY-this.touchStartY)>n){return true}return false};e.prototype.onTouchMove=function(e){if(!this.trackingClick){return true}if(this.targetElement!==this.getTargetElementFromEventTarget(e.target)||this.touchHasMoved(e)){this.trackingClick=false;this.targetElement=null}return true};e.prototype.findControl=function(e){if(e.control!==undefined){return e.control}if(e.htmlFor){return document.getElementById(e.htmlFor)}return e.querySelector("button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea")};e.prototype.onTouchEnd=function(e){var t,o,u,a,f,l=this.targetElement;if(!this.trackingClick){return true}if(e.timeStamp-this.lastClickTime<this.tapDelay){this.cancelNextClick=true;return true}if(e.timeStamp-this.trackingClickStart>this.tapTimeout){return true}this.cancelNextClick=false;this.lastClickTime=e.timeStamp;o=this.trackingClickStart;this.trackingClick=false;this.trackingClickStart=0;if(s){f=e.changedTouches[0];l=document.elementFromPoint(f.pageX-window.pageXOffset,f.pageY-window.pageYOffset)||l;l.fastClickScrollParent=this.targetElement.fastClickScrollParent}u=l.tagName.toLowerCase();if(u==="label"){t=this.findControl(l);if(t){this.focus(l);if(n){return false}l=t}}else if(this.needsFocus(l)){if(e.timeStamp-o>100||r&&window.top!==window&&u==="input"){this.targetElement=null;return false}this.focus(l);this.sendClick(l,e);if(!r||u!=="select"){this.targetElement=null;e.preventDefault()}return false}if(r&&!i){a=l.fastClickScrollParent;if(a&&a.fastClickLastScrollTop!==a.scrollTop){return true}}if(!this.needsClick(l)){e.preventDefault();this.sendClick(l,e)}return false};e.prototype.onTouchCancel=function(){this.trackingClick=false;this.targetElement=null};e.prototype.onMouse=function(e){if(!this.targetElement){return true}if(e.forwardedTouchEvent){return true}if(!e.cancelable){return true}if(!this.needsClick(this.targetElement)||this.cancelNextClick){if(e.stopImmediatePropagation){e.stopImmediatePropagation()}else{e.propagationStopped=true}e.stopPropagation();e.preventDefault();return false}return true};e.prototype.onClick=function(e){var t;if(this.trackingClick){this.targetElement=null;this.trackingClick=false;return true}if(e.target.type==="submit"&&e.detail===0){return true}t=this.onMouse(e);if(!t){this.targetElement=null}return t};e.prototype.destroy=function(){var e=this.layer;if(n){e.removeEventListener("mouseover",this.onMouse,true);e.removeEventListener("mousedown",this.onMouse,true);e.removeEventListener("mouseup",this.onMouse,true)}e.removeEventListener("click",this.onClick,true);e.removeEventListener("touchstart",this.onTouchStart,false);e.removeEventListener("touchmove",this.onTouchMove,false);e.removeEventListener("touchend",this.onTouchEnd,false);e.removeEventListener("touchcancel",this.onTouchCancel,false)};e.notNeeded=function(e){var t;var r;var i;if(typeof window.ontouchstart==="undefined"){return true}r=+(/Chrome\/([0-9]+)/.exec(navigator.userAgent)||[,0])[1];if(r){if(n){t=document.querySelector("meta[name=viewport]");if(t){if(t.content.indexOf("user-scalable=no")!==-1){return true}if(r>31&&document.documentElement.scrollWidth<=window.outerWidth){return true}}}else{return true}}if(o){i=navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);if(i[1]>=10&&i[2]>=3){t=document.querySelector("meta[name=viewport]");if(t){if(t.content.indexOf("user-scalable=no")!==-1){return true}if(document.documentElement.scrollWidth<=window.outerWidth){return true}}}}if(e.style.msTouchAction==="none"){return true}if(e.style.touchAction==="none"){return true}return false};e.attach=function(t,n){return new e(t,n)};if(typeof define=="function"&&typeof define.amd=="object"&&define.amd){define(function(){return e})}else if(typeof module!=="undefined"&&module.exports){module.exports=e.attach;module.exports.FastClick=e}else{window.FastClick=e}})();
 
 
 
@@ -13,11 +16,29 @@ window.ux = {
   },
   config: {},
   url: {
-    isPushed: false,
-    isLoading: false,
-    hash: window.location.hash
+    linkTrigger: false,
+    isLoading: false
   }
 };
+
+
+
+/*------------------------------------------------------------------------------------
+  Dev log function (use instead of console.log)
+------------------------------------------------------------------------------------*/
+window.dlog = function(val) {
+  if ( app.dlog === true ) {
+    if ( app.timestamp === true ) {
+      var d = new Date();
+      var dm = ('0' + d.getMinutes()).slice(-2);
+      var ds = ('0' + d.getSeconds()).slice(-2);
+      var dms = ('00' + d.getMilliseconds()).slice(-3);
+      console.log('[' + dm + 'm ' + ds + 's ' + dms + 'ms] ' + val);
+    } else {
+      console.log(val);
+    }
+  }
+}
 
 
 
@@ -29,7 +50,7 @@ window.queue = {
   jQuery: function(func){
     // If there is jQuery / Zepto library present, we simply execute the passed function. Nothing different there...
     if(window.jQuery || window.Zepto || window.$) {
-      console.log('Forwarding function...');
+      dlog('Forwarding function...');
       func();
     }
 
@@ -53,14 +74,14 @@ window.queue = {
  */
 function jQueryExec(){
   if((window.jQuery || window.Zepto || window.$) && window.app.DOMContentLoaded === true) {
-    console.log('Queue ready...');
+    dlog('Queue ready...');
     $.each(queue.jQueryWaitlist, function(index, value) {
       value();
-      console.log('Queue exec: ' + index);
+      dlog('Queue exec: ' + index);
     });
-    console.log('Queue complete!');
+    dlog('Queue complete!');
   } else {
-    console.log('Queueing...');
+    dlog('Queueing...');
     setTimeout(jQueryExec, 50);
   }
 }
@@ -70,10 +91,10 @@ function jQueryExec(){
 /*------------------------------------------------------------------------------------
   Helper: Call global events only once
 ------------------------------------------------------------------------------------*/
-var globalClick = function(event) {
-  $.each(queue.globalClickEvents, function(index, value) {
+var exec = function(funcQueue, name) {
+  $.each(funcQueue, function(index, value) {
+    if(app.verbose === true){ dlog(name + ' exec: ' + index); }
     value();
-    console.log('globalClick exec: ' + index);
   });
 }
 
@@ -83,6 +104,7 @@ var globalClick = function(event) {
   Helper: Update user info on resize event
 ------------------------------------------------------------------------------------*/
 function updateOnResize(){
+  dlog('Resize updates executed...');
   ux.viewport.width = $(window).width();
   ux.viewport.height = $(window).height();
 }
@@ -93,6 +115,7 @@ function updateOnResize(){
   Helper: Update user info on scroll even
 ------------------------------------------------------------------------------------*/
 function updateOnScroll(){
+  dlog('Scroll updates executed...');
   var treshold = 5;
   ux.scroll.offsetPrevious = ux.scroll.offset;
   ux.scroll.offset = $(window).scrollTop();
@@ -123,6 +146,7 @@ function lightScroll(callback, delay){
     // Count scroll ticks and force callback execution on a specific count
     scrollCounter++;
     if( scrollCounter > 8 ){
+      if(app.verbose === true){ dlog('Scroll tick'); }
       callback();
       scrollCounter = 0;
       timer = false;
@@ -133,6 +157,7 @@ function lightScroll(callback, delay){
     clearTimeout(timer);
     timer = setTimeout(function(){
       scrollCounter = 0;
+      if(app.verbose === true){ dlog('Scroll tick'); }
       callback();
     }, delay);
 
@@ -149,7 +174,10 @@ function lightResize(callback, delay){
       delay = delay || 100;
   $(window).on('resize', function(e) {
     clearTimeout(timer);
-    timer = setTimeout(callback, delay);
+    timer = setTimeout(function(){
+      if(app.verbose === true){ dlog('Resize tick'); } // Show only for verbose
+      callback();
+    }, delay);
   });
 };
 
@@ -159,24 +187,52 @@ function lightResize(callback, delay){
   Get page
 ------------------------------------------------------------------------------------*/
 function getPage(url) {
+  
+  // Log page request
+  dlog('Get page: ' + url + ' started...');
+  var start = new Date().getTime();
+  
+  // Hide the content of the page and show a loader
   $('#page').addClass('-loading');
+  
+  // Start the request
   $.ajax({
     type: 'GET',
     url: url,
-    timeout: 1500,
+    timeout: 10000, // Wait for 10 seconds max
     success: function(data) {
-      ux.url.isPushed = true;
-      ux.url.isLoading = false;
-      $("html, body").scrollTop(0);
+      
+      // Log success and waiting time
+      var execTime = new Date().getTime() - start;
+      dlog('Get page: ' + url + ' success! (' + execTime + 'ms)');
+
+      // Push history state and toggle related switches
       History.pushState(null, null, url);
+      ux.url.linkTrigger = false;
+      ux.url.isLoading = false;
+
+       // Scroll to top
+      $("html, body").scrollTop(0);
+
+      // Swap data and show content
       $('#page').html(data);
       $('#page').removeClass('-loading');
+
     },
     error: function(xhr, type) {
+      
+      // Log error and waiting time
+      var execTime = new Date().getTime() - start;
+      dlog('Get page: ' + url + ' error! Reason: ' + type + '. (' + execTime + 'ms)');
+
+      // Show an error message
       $('#pageLoad').html("Sorry, this is taking long. We will try one more time...").addClass('-show');
+
+      // After a small pause, initiate a redirect to the target url
       setTimeout(function(){
         window.location = url;
       }, 500);
+
     }
   });
 }
@@ -188,10 +244,14 @@ function getPage(url) {
 ------------------------------------------------------------------------------------*/
 queue.jQuery(function(){
   
+
   // Get basic user info
   updateOnResize();
   updateOnScroll();
 
+
+  // Attach FastClick
+  FastClick.attach(document.body);
 
 
   /*------------------------------------------------------------------------------------
@@ -204,6 +264,7 @@ queue.jQuery(function(){
         event.preventDefault();
         if ( ux.url.isLoading === false ){
           ux.url.isLoading = true;
+          ux.url.linkTrigger = true;
           var state = History.getState();
           var link = $(this).attr('href');
           getPage(link);
@@ -213,16 +274,47 @@ queue.jQuery(function(){
       // Watch for all sorts of state changes (e.g. back button)
       History.Adapter.bind(window,'statechange',function(){
         var state = History.getState();
-        // We check for isPushed to avoid double ajax calls (ongoing issue 96: https://github.com/browserstate/history.js/issues/96)
-        if ( ux.url.isPushed !== true ) {
+        dlog('History statechange to: ' + state.hash);
+        
+        // We check for an active linkTrigger to avoid double ajax calls (ongoing issue 96: https://github.com/browserstate/history.js/issues/96)
+        if ( ux.url.linkTrigger === false && ux.url.isLoading === false ) {
           getPage(state.hash);
-        } else {
-          ux.url.isPushed = true;
         }
-        console.log(state);
+
       });
     });
   }
+
+
+
+  /*------------------------------------------------------------------------------------
+    Section Tooltip
+  ------------------------------------------------------------------------------------*/
+  $(document).on('click','#sectionInfo_trigger', function() {
+    var target = $('#sectionInfo');
+    if ( target.height() === 0 ){ sectionInfo.open(); }
+    else { sectionInfo.close(); }
+  });
+
+  $('#page').on('click','#sectionInfo', function(event) {
+    event.stopPropagation();
+  });
+
+  var sectionInfo = {
+    open: function(){
+      $('#sectionInfo').animateAuto().addClass('-show');
+    },
+    close: function(){
+      $('#sectionInfo').removeClass('-show').height(0);
+    }
+  };
+
+  // Close the tooltip on document click
+  queue.globalClickEvents.push(function(event){
+    sectionInfo.close();
+  });
+
+  
 
 
 
@@ -283,20 +375,30 @@ queue.jQuery(function(){
 
 
   /*------------------------------------------------------------------------------------
-    Unsorted
+    Load and exec FastClick
   ------------------------------------------------------------------------------------*/
-  console.log(ux.url);
-  // $('link[title=modern]')[0].disabled=true;
+  // load('scripts/external/fastclick.js').thenRun(function () {
+  //   FastClick.attach(document.body);
+  //   dlog('FastClick attached');
+  // });
 
 
 
   /*------------------------------------------------------------------------------------
-    Load and exec FastClick
+    Helper: Animate height:auto;
   ------------------------------------------------------------------------------------*/
-  load('scripts/external/fastclick.js').thenRun(function () {
-    FastClick.attach(document.body);
-    console.log('FastClick attached');
-  });
+  (function($){
+    $.fn.animateAuto = function(){
+      this.each(function(i, el){
+        var clone = $(el).clone().css({ 'height':'auto', 'width':$(el).width(), 'position':'absolute', 'left':'-3000px' }).appendTo("body");
+        var height = clone.height();
+        clone.remove();
+        $(el).css({'height':height});
+      });
+      return this;
+    }
+  })(window.jQuery || window.Zepto || window.$);
+  
 
 });
 
@@ -307,7 +409,15 @@ queue.jQuery(function(){
 ------------------------------------------------------------------------------------*/
 queue.jQuery(function(){
   $('html').on('click', function(event) {
-    globalClick();
+    exec(queue.globalClickEvents, 'GlobalClick');
   });
+
+  lightResize(function(){
+    exec(queue.globalResizeEvents, 'GlobalResize');
+  }, 300);
+
+  lightScroll(function(){
+    exec(queue.globalResizeEvents, 'GlobalScroll');
+  }, 300);
 });
 jQueryExec();

@@ -15,28 +15,13 @@
 
     .sectionHeader_title {
       display: block;
-      font-size: $h4;
+      font-size: 18px;
       color: $black;
-      text-align: center;
     }
 
-    .sectionHeader_info {
-      position: absolute;
-      top: -52%;
-      right: 0;
-      padding-top: 14px;
-      width: 54px;
-      height: 50px;
-      text-decoration: none;
-      text-align: center;
-      border: 0px !important;
-      opacity: 0.25;
-      transition: 300ms;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
+    .sectionHeader_info { display:none; }
+      .sectionHeader_info_wrapper { height:auto !important; margin-top:-5px; }
+        .sectionHeader_info_body { padding-bottom:1em; font-size:0.85em; }
 
 
 .sectionHeader.-noMargin {
@@ -182,24 +167,69 @@
 /* Modern phone styles ———————————————————————————————————————————————————————*/
 
 
-.sectionHeader {
-  @include responsive(
-    padding-bottom ($gapSmall) ($gapMultiplier),
-    margin-bottom ($gapSmall * 1.3) ($gapMultiplier + 0.1)
-  );
-}
+// .sectionHeader {
+//   @include responsive(
+//     padding-bottom ($gapSmall) ($gapMultiplier),
+//     margin-bottom ($gapSmall * 1.3) ($gapMultiplier + 0.1)
+//   );
+// }
 
   .sectionHeader_inner {}
 
     .sectionHeader_title {
-      @include responsive(font-size 20px 1.1);
+      @include responsive(font-size 19px 1.1);
     }
-    
-    .sectionHeader_info {}
 
 
-  .sectionContent_title{
-    @include responsive(font-size 18px 1.1);
+@include small {  
+  .sectionHeader_info {
+    display: block;
+    position: absolute;
+    z-index: 10;
+    top: -13px;
+    right: 0;
+    padding-top: 14px;
+    width: 54px;
+    height: 50px;
+    text-decoration: none;
+    text-align: center;
+    border: 0px !important;
+    opacity: 0.25;
+    transition: 300ms;
+
+    &:hover {
+      opacity: 1;
+    }
   }
+
+    .sectionHeader_info_wrapper {
+      position: absolute;
+      z-index: 9;
+      top: 100%;
+      margin-top: -5px;
+      left: 0;
+      width: 100%;
+      height: 0;
+      overflow: hidden;
+      background: $white;
+      visibility: hidden;
+      opacity: 0;
+
+      .sectionHeader_info_body {}
+
+      &.-show {
+        opacity: 1;
+        visibility: visible;
+        box-shadow: 0 4px 5px rgba($gray, 0.6);
+        border-bottom: 1px solid $lightGray;
+      }
+    }
+}
+
+@include smallPlus {
+  .sectionHeader_title {
+    text-align: center;
+  }
+}
 
 }

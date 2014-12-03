@@ -589,6 +589,7 @@ body {
   padding: 1em;
   color: white;
   background: #0077c0;
+  font-size: 0.9em;
 }
 
 .mainHeader_top {
@@ -605,7 +606,9 @@ body {
 }
 
 .mainHeader_menu {
-  display: none;
+  display: block;
+  margin-bottom: 1em;
+  text-decoration: underline;
 }
 
 .mainHeader_nav {
@@ -625,8 +628,6 @@ body {
   display: block;
   margin-bottom: 2px;
   padding: .75em;
-  font-size: 14px;
-  font-size: 0.9rem;
   font-weight: 500;
   background: #008adf;
 }
@@ -752,27 +753,22 @@ body {
 
 .sectionHeader_title {
   display: block;
-  font-size: 1.25em;
+  font-size: 18px;
   color: #231f20;
-  text-align: center;
 }
 
 .sectionHeader_info {
-  position: absolute;
-  top: -52%;
-  right: 0;
-  padding-top: 14px;
-  width: 54px;
-  height: 50px;
-  text-decoration: none;
-  text-align: center;
-  border: 0px !important;
-  opacity: 0.25;
-  -webkit-transition: 300ms;
-          transition: 300ms;
+  display: none;
 }
-.sectionHeader_info:hover {
-  opacity: 1;
+
+.sectionHeader_info_wrapper {
+  height: auto !important;
+  margin-top: -5px;
+}
+
+.sectionHeader_info_body {
+  padding-bottom: 1em;
+  font-size: 0.85em;
 }
 
 .sectionHeader.-noMargin .sectionHeader_inner {
@@ -1233,4 +1229,8 @@ body {
 .grid .grid {
   margin-left: -12px;
   margin-right: -12px;
+}
+.grid.-collapse .grid_column {
+  padding-left: 0;
+  padding-right: 0;
 }

@@ -1,16 +1,16 @@
 @if $primitive == true {
 /* Default styles ————————————————————————————————————————————————————————————*/
 
-.mainHeader { padding:1em; color:white; background:$blue; }
+.mainHeader { padding:1em; color:white; background:$blue; font-size:0.9em; }
   .mainHeader_top { text-align:center; }
     .mainHeader_call { display:none; }
     .mainHeader_logo { display:inline-block; margin-bottom:1em; }
     .mainHeader_menu {}
-      .mainHeader_menu { display:none; }
+      .mainHeader_menu { display:block; margin-bottom:1em; text-decoration:underline; }
     .mainHeader_nav { display:block; margin-bottom:1em; }
       .mainHeader_nav_trigger { display:none; }
       .mainHeader_nav_item { display:block; }
-        .mainHeader_nav_link { display:block; margin-bottom:2px; padding:.75em; @include rem(font-size, 0.9rem); font-weight:500; background:lighten($blue, 6);
+        .mainHeader_nav_link { display:block; margin-bottom:2px; padding:.75em; font-weight:500; background:lighten($blue, 6);
           &:hover, &:focus { background:lighten($blue, 10); }
         }
   .mainHeader_bottom { text-align:center; }
@@ -33,7 +33,7 @@
           .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
           .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$height; }
             .mainHeader_logo_expanded { @extend %icon; @include img("globals", "logoHorizontal-white-h42@2x", 2); display:none !important; }
-          .mainHeader_menu { display:block; @extend %headerButton; display:block; position:absolute; top:0; right:0; padding-right:48px !important; }
+          .mainHeader_menu { display:block; @extend %headerButton; display:block; position:absolute; top:0; right:0; padding-right:48px !important; text-decoration:none; }
             .mainHeader_menu_label {}
             .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
             .mainHeader_menu_open { @include img("icons", "menu-white-h24@2x", 2, inline); }

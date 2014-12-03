@@ -30,64 +30,6 @@
   }
 }
 
-// News and Events
-.news{}
-
-  .news_title{
-    display: block;
-    font-size: 18px;
-    color: $darkBlue;
-    text-align: left;
-  }
-
-  .news_release{
-    display: block;
-    font-size: 0.9em;
-    margin:0.5em 0 1em;
-  }
-    .news_date{
-      font-style: italic;
-    }
-
-  .news_description{
-    display: block;
-    font-size: 0.9em;
-    line-height: 1.2;
-    padding-bottom: 1em;
-  }
-
-  .-newsSeperator{
-    margin-bottom: 1em;
-    border-bottom:1px solid lightgray;
-    &:last-child{ margin-bottom: 0; border-bottom: none; }
-  }
-
-// News Article
-.newsArticle{}
-
-  .newsArticle_title{
-    color: $blue;
-    text-align:center;
-  }
-
-  .newsArticle_release{
-    display: block;
-    font-size: 0.9em;
-    margin-top:2em;
-  }
-
-  .newsArticle_link{
-    color: $darkBlue;
-  }
-
-  .newsArticle_body{
-    display: block;
-    font-size: 1em;
-    line-height: 1.4;
-    padding: 1em 0;
-    text-align: justify;
-  }
-
 // Update Personal Data - Summary
 .personalData_body{ 
   line-height: 1.2;
@@ -104,45 +46,6 @@
   .personalData_newData{
     padding: 1.5em 0em 2em;
     color: $lightBlue;
-  }
-
-
-// Accordion
-.accordion {
-  width: 100%;
-}
-
-  .accordion .accTab {
-    display: block;
-    width: 100%;
-    margin-bottom: 1em;
-    text-align: left;
-  }
-
-  .accordion div .accContent {
-    display: none;
-    margin: 5px 0;
-  }
-
-  .accordion div:target .accContent {
-    display: block;
-    padding: 0 1.5em;
-    font-size: 0.9em;
-    text-align: justify;
-    line-height: 1.2;
-  }
-
-  .accordion > div {
-    overflow: hidden;
-  }
-
-  .accordion > div:target {
-    height:auto;
-    margin-bottom: 1em;
-  }
-
-  .accordion .accContent p {
-    margin: 10px 0;
   }
 
 

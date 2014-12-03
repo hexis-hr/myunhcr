@@ -1,0 +1,67 @@
+@if $primitive == true {
+/* Default styles ————————————————————————————————————————————————————————————*/
+
+
+.news{}
+
+  .news_title{
+    display: block;
+    font-size: 18px;
+    color: $blue;
+    text-align: left;
+  }
+
+  .news_release{
+    display: block;
+    font-size: 0.9em;
+    margin:0.5em 0 1em;
+  }
+    .news_date{
+      font-style: italic;
+    }
+
+  .news_description{
+    display: block;
+    font-size: 0.9em;
+    line-height: 1.2;
+    padding-bottom: 1em;
+  }
+
+  .-newsSeperator{
+    margin-bottom: 1em;
+    border-bottom:1px solid lightgray;
+    &:last-child{ margin-bottom: 0; border-bottom: none; }
+  }
+
+// News Article
+.newsArticle{}
+
+  .newsArticle_title{
+    color: $blue;
+    text-align:center;
+  }
+
+  .newsArticle_release{
+    display: block;
+    font-size: 0.9em;
+    margin-top:2em;
+  }
+
+  .newsArticle_link{
+    color: $darkBlue;
+  }
+
+  .newsArticle_body{
+    display: block;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 1em 0;
+    text-align: justify;
+  }
+
+
+} @else {
+/* Modern phone styles ———————————————————————————————————————————————————————*/
+
+
+}

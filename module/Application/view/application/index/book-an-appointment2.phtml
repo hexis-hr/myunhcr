@@ -4,7 +4,7 @@
     <div class='grid'>
       <div class='grid_column'>
         <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'>Book an Appointemnt</h1>
+          <h1 class='sectionHeader_title'><?php echo $this->translate("Book an Appointment");?></h1>
           <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
         </div>
       </div>
@@ -26,14 +26,14 @@
       <form action='book-an-appointment3.html' class='booking form'>
 
         <div class='form_item'>
-          <label class='form_label' for='date'>Please enter Date for Appointment:</label>
+          <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment");?>:</label>
           <div class='form_field'>
             <input class='formInput' type='date' name='' value='' placeholder='' id='date'>
           </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='time'>Please enter Time for Appointment:</label>
+          <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment");?>:</label>
           <div class='form_field'>
             <input class='formInput' type='time' name='' value='' placeholder='' id='time'>
           </div>

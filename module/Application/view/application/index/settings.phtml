@@ -4,13 +4,13 @@
     <div class='grid'>
       <div class='grid_column'>
         <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'>Settings</h1>
+          <h1 class='sectionHeader_title'><?php echo $this->translate("Settings");?></h1>
         </div>
       </div>
     </div>
   </div>
 
-  <form action='menu-page.html' class='settings form'>
+  <form action='menu-page.html' class='settings form' method="POST">
     <div class='grid'>
       <div class='grid_column -medium9 -mediumPlus8'>
 
@@ -24,11 +24,11 @@
         <div class='form_item'>
           <label class='form_label' for='language'>Language:</label>
           <div class='form_field customSelect'>
-            <select class='formSelect customSelect_select -custom' id='language'>
-              <option>English</option>
-              <option>Deutsch</option>
-              <option>Italiano</option>
-              <option>العربية</option>
+            <select class='formSelect customSelect_select -custom' id='language' name="language">
+              <option value="en_US">English</option>
+              <option value="de_DE">Deutsch</option>
+              <option value="it_IT">Italiano</option>
+              <option value="ar_JO">العربية</option>
             </select>
             <a unselectable='on' class='customSelect_overlay'>English</a>
           </div>

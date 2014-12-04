@@ -4,6 +4,9 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Http\Request;
+use Zend\Session\Container;
+
 
 class IndexController extends AbstractActionController
 {
@@ -109,6 +112,33 @@ class IndexController extends AbstractActionController
     public function menuPageAction()
     {
         $this->layout()->setVariable('body_class', 'homepage');
+
+        $request = $this->getRequest();
+
+        $sessionContainer = new Container('locale');
+        if ($request->isPost()) {
+        switch ($request->getPost("language")) {
+            case 'de_DE':
+                $userlocale = 'de_DE';
+                break;
+            case 'it_IT':
+                $userlocale = 'it_IT';
+                break;
+            case 'en_US':
+                $userlocale = 'en_US';
+                break;
+            case 'ar_JO':
+                $userlocale = 'ar_JO';
+                break;
+
+            default :
+                $userlocale = 'en_US';
+        }
+
+        $sessionContainer->offsetSet('userlocale', $userlocale);
+            return $this->redirect()->toUrl('/menu-page.html');
+        }
+
         return new ViewModel();
     }
 

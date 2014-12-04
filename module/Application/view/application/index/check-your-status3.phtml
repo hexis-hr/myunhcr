@@ -4,7 +4,7 @@
     <div class='grid'>
       <div class='grid_column'>
         <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'>Check Your Status</h1>
+          <h1 class='sectionHeader_title'><?php echo $this->translate("Check Your Status");?></h1>
           <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <form action='my-unhcr-services-menu.html' class='survey form'>
 
         <div class='form_item'>
-          <label class='form_label' for='checkWhat'>Your Asylum-Application's status:</label>
+          <label class='form_label' for='checkWhat'><?php echo $this->translate("Your Asylum-Application's status");?>:</label>
           <p class='content_summary warningText -checkStatus'>Decision is pending</p>
         </div>
 

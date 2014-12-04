@@ -19,8 +19,20 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        $sessionContainer = new \Zend\Session\Container('locale');
+
+        // test if session language exists
+        if(!$sessionContainer->offsetExists('userlocale')){
+            // if not use the browser locale
+            if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
+                $sessionContainer->offsetSet('userlocale', \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+            }else{
+                $sessionContainer->offsetSet('userlocale', 'en_US');
+            }
+        }
 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
+        $translator ->setLocale($sessionContainer->userlocale);
         $translator->setFallbackLocale('en_US');
 
         $sharedEvents        = $eventManager->getSharedManager();

@@ -1,153 +1,176 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ZendSkeletonApplication\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-16 20:08-1900\n"
-"PO-Revision-Date: 2013-04-16 20:08-1900\n"
-"Last-Translator: Anas Al-Far <anas@al-far.com>\n"
-"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
-"Language: Arabic\n"
+"POT-Creation-Date: 2014-12-04 22:30+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 16bit\n"
-"X-Poedit-KeywordsList: translate\n"
-"X-Poedit-Language: Arabic\n"
-"X-Poedit-Country: JORDAN\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: ..\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: ../view/layout/layout.phtml:6
-#: ../view/layout/layout.phtml:33
-msgid "Skeleton Application"
-msgstr "تطبيق هيكلي"
+#: application/index/book-an-appointment2.phtml:7
+#: application/index/book-an-appointment4.phtml:7
+#: application/index/book-an-appointment.phtml:7
+#: application/index/navigation.phtml:52
+msgid "Book an Appointment"
+msgstr "حجز موعد"
 
-#: ../view/layout/layout.phtml:36
-msgid "Home"
-msgstr "الرئيسية"
+#: application/index/book-an-appointment2.phtml:29
+msgid "Please enter Date for Appointment"
+msgstr "من فضلك ادخل تاريخ التعيين"
 
-#: ../view/layout/layout.phtml:50
-msgid "All rights reserved."
-msgstr "جميع الحقوق محفوظة لـ "
+#: application/index/book-an-appointment2.phtml:36
+msgid "Please enter Time for Appointment"
+msgstr "من فضلك ادخل حان الوقت لتعيين"
 
-#: ../view/application/index/index.phtml:2
-#, php-format
-msgid "Welcome to %sZend Framework 2%s"
-msgstr "أهلا بك في  %sZend Framework 2%s"
+#: application/index/book-an-appointment3.phtml:7
+msgid "Book an Appointemnt"
+msgstr "حجز Appointemnt"
 
-#: ../view/application/index/index.phtml:3
-#, php-format
-msgid "Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2."
-msgstr "تهانينا! لقد قمت بتثبيت %s التطبيق الهيكلي لـ ZF2 %s بنجاح. أنت تقوم حاليا بتشغيل النسخة %s من Zend Framework. تستطيع أن تستعمل هذا التطبيق الهيكلي كنقطة إنطلاق سهلة لبناء التطبيق الخاص بك باستخدام ZF2.  "
+#: application/index/book-an-appointment3.phtml:29
+#: application/index/check-your-status.phtml:29
+msgid "Please enter your identification number"
+msgstr "من فضلك ادخل رقم الهوية الخاص بك"
 
-#: ../view/application/index/index.phtml:4
-msgid "Fork Zend Framework 2 on GitHub"
-msgstr "قم بتحميل فرع جديد من Zend Framewok 2 على منصة GitHub"
+#: application/index/book-an-appointment4.phtml:28
+msgid "Appointment will be booked for"
+msgstr "سيتم حجز موعد ل"
 
-#: ../view/application/index/index.phtml:10
-msgid "Follow Development"
-msgstr "تابع عملية التطوير"
+#: application/index/book-an-appointment4.phtml:43
+msgid "Press Book button to confirm your booking"
+msgstr "اضغط على زر كتاب لتأكيد الحجز الخاص بك"
 
-#: ../view/application/index/index.phtml:11
-#, php-format
-msgid "Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!"
-msgstr "إن عملية تطوير منظومة Zend Framework 2 نشطة جدا. إذا كنت مهتما بمتابعة عملية التطوير لمنظومة ZF2، فهناك بوابة خاصة بـ ZF2 على الموقع الرسمي لـ Zend Framework والذي يحتوي على وصلات خاصة لـ %sويكيبيديا%s، %sمدونة المطورين%s، %sمتابعة المشاكل%s، وغيرها كثير. إنه مصدر مميز يبقيك على اطلاع بآخر مستجدات عملية التطوير."
+#: application/index/check-your-status2.phtml:7
+#: application/index/check-your-status3.phtml:7
+#: application/index/check-your-status.phtml:7
+#: application/index/navigation.phtml:55
+msgid "Check Your Status"
+msgstr "التحقق من الحالة الخاصة بك"
 
-#: ../view/application/index/index.phtml:12
-msgid "ZF2 Development Portal"
-msgstr "بوابة تطوير ZF2"
+#: application/index/check-your-status2.phtml:29
+msgid "What would you like to check ?"
+msgstr "ما تريد أن تحقق؟"
 
-#: ../view/application/index/index.phtml:16
-msgid "Discover Modules"
-msgstr "إكتشف الوحدات البرمجية"
+#: application/index/check-your-status2.phtml:41
+#: application/index/choose-your-survey.phtml:41
+msgid "Back"
+msgstr "رجوع"
 
-#: ../view/application/index/index.phtml:17
-#, php-format
-msgid "The community is working on developing a community site to serve as a repository and gallery for ZF2 modules. The project is available %son GitHub%s. The site is currently live and currently contains a list of some of the modules already available for ZF2."
-msgstr "إن مجتمع المبرمجين المحترفين يعمل الآن على تطوير موقع خاص بهم ليخدم كمصدر لوحدات ZF2 البرمجية. المشروع متوفر على منصة %sGitHub%s. إن الموقع متوفر الآن ويحتوي على بعض الوحدات البرمجية الجاهزة للاستخدام في ZF2."
+#: application/index/check-your-status3.phtml:29
+msgid "Your Asylum-Application's status"
+msgstr "حالتك اللجوء التطبيق"
 
-#: ../view/application/index/index.phtml:18
-msgid "Explore ZF2 Modules"
-msgstr "استعرض الوحدات البرمجية لـ ZF2"
+#: application/index/check-your-status.phtml:36
+msgid "Please enter your date of birth"
+msgstr "من فضلك ادخل تاريخ ميلادك"
 
-#: ../view/application/index/index.phtml:22
-msgid "Help &amp; Support"
-msgstr "المساعدة والدعم"
+#: application/index/choose-your-survey.phtml:7
+#: application/index/take-a-survey.phtml:7
+#: application/index/what-is-your-gender.phtml:7
+msgid "Survey"
+msgstr "الاستطلاع"
 
-#: ../view/application/index/index.phtml:23
-#, php-format
-msgid "If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We'd love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s."
-msgstr "إذا كنت تحتاج إلى المساعدة أو الدعم أثناء استخدامك ZF2، يمكنك الاتصال بنا من خلال شبكة IRC: %s#zftalk على سيرفر Freenode%s.  سوف نكون سعيدين جدا بالاستماع إلى أي سؤال أو ملاحظة لديك حول النسخ التجريبية. ومن جهة أخرى، تستطيع أن تشترك وترسل أسئلتك إلى %sالقائمة البريدية%s. "
+#: application/index/faq-myunhcr.phtml:7 application/index/faq.phtml:7
+#: application/index/faq-refugee.phtml:7
+msgid "Frequently Asked Questions"
+msgstr "الأسئلة الشائعة"
 
-#: ../view/application/index/index.phtml:24
-msgid "Ping us on IRC"
-msgstr "اتصل بنا على IRC"
+#: application/index/file-a-complaint.phtml:7
+msgid "Your Feedback"
+msgstr "ردك"
 
-#: ../view/error/index.phtml:1
-msgid "An error occurred"
-msgstr "حدث خطأ أثناء تنفيذ العملية"
+#: application/index/footer-save.phtml:2
+msgid "Save"
+msgstr "حفظ"
 
-#: ../view/error/index.phtml:8
-msgid "Additional information"
-msgstr "معلومات إضافية"
+#: application/index/header.phtml:17
+msgid "Menu"
+msgstr "القائمة"
 
-#: ../view/error/index.phtml:11
-#: ../view/error/index.phtml:35
-msgid "File"
-msgstr "ملف"
+#: application/index/header.phtml:32
+msgid "Info line"
+msgstr "معلومات خط"
 
-#: ../view/error/index.phtml:15
-#: ../view/error/index.phtml:39
-msgid "Message"
-msgstr "رسالة"
+#: application/index/home-footer.phtml:2 application/index/index.phtml:6
+msgid "Start"
+msgstr "البداية"
 
-#: ../view/error/index.phtml:19
-#: ../view/error/index.phtml:43
-#: ../view/error/404.phtml:55
-msgid "Stack trace"
-msgstr "تتبع الحدث"
+#: application/index/list-by-sector.phtml:7
+#: application/index/navigation.phtml:36
+msgid "List by Sector"
+msgstr "القائمة عن طريق القطاع"
 
-#: ../view/error/index.phtml:29
-msgid "Previous exceptions"
-msgstr "الاستثناءات السابقة"
+#: application/index/list-of-organizations.phtml:7
+#: application/index/navigation.phtml:33
+msgid "List by Organization"
+msgstr "قائمة من قبل منظمة"
 
-#: ../view/error/index.phtml:58
-msgid "No Exception available"
-msgstr "لم يحدث استثناءات"
+#: application/index/map-of-service.phtml:7
+msgid "Services Available"
+msgstr "الخدمات المتوفرة"
 
-#: ../view/error/404.phtml:1
-msgid "A 404 error occurred"
-msgstr "حدث خطأ 404"
+#: application/index/navigation.phtml:5
+msgid "Feedback"
+msgstr "تواصل معنا"
 
-#: ../view/error/404.phtml:10
-msgid "The requested controller was unable to dispatch the request."
-msgstr "لم تستطع وحدة التحكم معالجة الطلب"
+#: application/index/navigation.phtml:8
+#: application/index/report-an-incident2.phtml:7
+#: application/index/report-an-incident3.phtml:7
+#: application/index/report-an-incident4.phtml:7
+#: application/index/report-an-incident5.phtml:7
+#: application/index/report-an-incident.phtml:7
+msgid "Report an Incident"
+msgstr "التبليغ عن الحوادث"
 
-#: ../view/error/404.phtml:13
-msgid "The requested controller could not be mapped to an existing controller class."
-msgstr "لم يستطع ZF2 من مطابقة وحدة التحكم المطلوبة بالمصنفات الموجودة"
+#: application/index/navigation.phtml:11
+msgid "Take a Survey"
+msgstr "خذ مسح"
 
-#: ../view/error/404.phtml:16
-msgid "The requested controller was not dispatchable."
-msgstr "لم يتم مطابقة وحدة التحكم المطلوبة"
+#: application/index/navigation.phtml:14 application/index/navigation.phtml:39
+#: application/index/navigation.phtml:64
+msgid "FAQ"
+msgstr  "FAQ"
 
-#: ../view/error/404.phtml:19
-msgid "The requested URL could not be matched by routing."
-msgstr ""
+#: application/index/navigation.phtml:24
+msgid "Information"
+msgstr "معلومات"
 
-#: ../view/error/404.phtml:22
-msgid "We cannot determine at this time why a 404 was generated."
-msgstr ""
+#: application/index/navigation.phtml:27
+#: application/index/news-and-events.phtml:7
+#: application/index/news-article.phtml:7
+msgid "News and Events"
+msgstr "الأخبار والأحداث"
 
-#: ../view/error/404.phtml:34
-msgid "Controller"
-msgstr ""
+#: application/index/navigation.phtml:30
+msgid "Map of Services"
+msgstr "خريطة الخدمات"
 
-#: ../view/error/404.phtml:41
-#, php-format
-msgid "resolves to %s"
-msgstr ""
+#: application/index/navigation.phtml:49
+msgid "MyUNHCR"
+msgstr "MyUNHCR"
 
-#: ../view/error/404.phtml:51
-msgid "Exception"
-msgstr ""
+#: application/index/navigation.phtml:58
+#: application/index/update-personal-data2.phtml:7
+#: application/index/update-personal-data3.phtml:7
+#: application/index/update-personal-data4.phtml:7
+#: application/index/update-personal-data.phtml:7
+msgid "Update Personal Data"
+msgstr "تحديث البيانات الشخصية"
+
+#: application/index/navigation.phtml:61
+msgid "Update Settings"
+msgstr "إعدادات التحديث"
+
+#: application/index/settings.phtml:7
+msgid "Settings"
+msgstr "إعدادات"
 

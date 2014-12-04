@@ -4,7 +4,7 @@
     <div class='grid'>
       <div class='grid_column'>
         <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'>Check Your Status</h1>
+          <h1 class='sectionHeader_title'><?php echo $this->translate("Check Your Status");?></h1>
           <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
         </div>
       </div>
@@ -26,7 +26,7 @@
       <form action='check-your-status3.html' class='survey form'>
 
         <div class='form_item'>
-          <label class='form_label' for='checkWhat'>What would you like to check ?</label>
+          <label class='form_label' for='checkWhat'><?php echo $this->translate("What would you like to check ?");?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='checkWhat'>
               <option>Asylum Application</option>
@@ -38,7 +38,7 @@
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="check-your-status.html">Back</a>
+              <a class='button -submit' href="check-your-status.html"><?php echo $this->translate("Back");?></a>
             </div>
           </div>
           

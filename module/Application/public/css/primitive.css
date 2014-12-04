@@ -693,7 +693,7 @@ body {
 /* Default styles ————————————————————————————————————————————————————————————*/
 .formSelect {
   height: 42px;
-  -webkit-appearance: menulist-button;
+  -webkit-appearance: menulist-button
   /* Fix for mac height */
 }
 

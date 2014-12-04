@@ -1,11 +1,11 @@
 {
   "name": "MyUNHCR",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "devDependencies": {
     "gulp": "*",
-    "gulp-autoprefixer": "^1.0.1",
-    "gulp-plumber": "^0.6.6",
-    "gulp-ruby-sass": "^0.7.1"
+    "gulp-autoprefixer": "2.0.0",
+    "gulp-plumber": "0.6.6",
+    "gulp-ruby-sass": "0.7.1"
   }
 }

@@ -27,6 +27,7 @@ gulp.task('css', function (){
         path.root,
         path.scss
       ],
+      "sourcemap=none": true,
       sourcemapPath: path.scss,
       require: [
         path.root + '/sass_modules/list-files.rb',

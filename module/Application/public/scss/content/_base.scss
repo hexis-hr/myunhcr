@@ -4,14 +4,12 @@
 
 .sectionHeader {
   position: relative;
-  margin-bottom: .6em;
-  padding-bottom: .6em;
+  margin-bottom: $primitiveMargin;
+  padding-bottom: $primitiveMargin;
   border-bottom: 1px solid $lightGray;
 }
 
-  .sectionHeader_inner {
-    // position: relative;
-  }
+  .sectionHeader_inner {}
 
     .sectionHeader_title {
       display: block;
@@ -29,24 +27,6 @@
     margin-bottom: 0 !important;
   }
 }
-
-// Update Personal Data - Summary
-.personalData_body{ 
-  line-height: 1.2;
-}
-  
-  .personalData_preformat{
-    display: block;
-    font-size: 0.9em;
-  }
-    .-preformatGap{
-      padding-bottom:1em;
-    }
-
-  .personalData_newData{
-    padding: 1.5em 0em 2em;
-    color: $lightBlue;
-  }
 
 
 // Important text
@@ -84,50 +64,49 @@
     }
 
 
-@include small {  
-  .sectionHeader_info {
-    display: block;
-    position: absolute;
-    z-index: 10;
-    top: -13px;
-    right: 0;
-    padding-top: 14px;
-    width: 54px;
-    height: 50px;
-    text-decoration: none;
-    text-align: center;
-    border: 0px !important;
-    opacity: 0.25;
-    transition: 300ms;
+.sectionHeader_info {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  top: -15px;
+  right: 0;
+  padding-top: 14px;
+  width: 54px;
+  height: 50px;
+  text-decoration: none;
+  text-align: center;
+  border: 0px !important;
+  opacity: 0.25;
+  transition: 300ms;
 
-    &:hover {
+  &:hover {
+    opacity: 1;
+    cursor: help;
+  }
+}
+
+  .sectionHeader_info_wrapper {
+    position: absolute;
+    z-index: 9;
+    top: 100%;
+    margin-top: -5px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    background: $white;
+    visibility: hidden;
+    opacity: 0;
+
+    .sectionHeader_info_body {}
+
+    &.-show {
       opacity: 1;
+      visibility: visible;
+      box-shadow: 0 4px 5px rgba($gray, 0.6);
+      border-bottom: 1px solid $lightGray;
     }
   }
-
-    .sectionHeader_info_wrapper {
-      position: absolute;
-      z-index: 9;
-      top: 100%;
-      margin-top: -5px;
-      left: 0;
-      width: 100%;
-      height: 0;
-      overflow: hidden;
-      background: $white;
-      visibility: hidden;
-      opacity: 0;
-
-      .sectionHeader_info_body {}
-
-      &.-show {
-        opacity: 1;
-        visibility: visible;
-        box-shadow: 0 4px 5px rgba($gray, 0.6);
-        border-bottom: 1px solid $lightGray;
-      }
-    }
-}
 
 @include smallPlus {
   .sectionHeader_title {

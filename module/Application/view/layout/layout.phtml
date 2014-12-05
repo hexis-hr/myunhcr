@@ -16,9 +16,9 @@
 
     var doc = document.documentElement;
     window.app = {
+      name: 'MyUNHCR', // Define a default app name (for untitled pages, etc.)
       dlog: true, // Toggle dev output logs in the console
-      verbose: false, // Toggle some minor info like scroll ticks (requires dlog to be true)
-      timestamp: false, // Toggles time information on dev logs (requires dlog to be true)
+      verbose: true, // Toggle some minor info like scroll ticks (requires dlog to be true)
       ua: navigator.userAgent.toLowerCase(),
       userDevice: '',
       userDeviceVersion: '',

@@ -22,7 +22,7 @@
   $orange: #f7941e;
   $lightOrange: #fdc581;
 
-  $green: lighten(#00743e, 7);
+  $green: lighten(#00743e, 8);
   $darkGreen: #0c331e;
   $lightGreen: #5bbd72;
 
@@ -61,6 +61,15 @@
   $text-strong: $black; // Emphasised text (<h1>, <strong>, ...)
   // $text-light: tint($text, 15%); // De-emphasised text (<small>, <cite>, ...)
   $link: $blue; // Default link color
+
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  LAYOUT: CUSTOM
+————————————————————————————————————————————————————————————————————————————————*/
+  $primitiveMargin: 16px;
+  $modernMargin: 24px;
+
 
 
 /*————————————————————————————————————————————————————————————————————————————————

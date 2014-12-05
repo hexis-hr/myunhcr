@@ -26,19 +26,8 @@ window.ux = {
 /*------------------------------------------------------------------------------------
   Dev log function (use instead of console.log)
 ------------------------------------------------------------------------------------*/
-window.dlog = function(val) {
-  if ( app.dlog === true ) {
-    if ( app.timestamp === true ) {
-      var d = new Date();
-      var dm = ('0' + d.getMinutes()).slice(-2);
-      var ds = ('0' + d.getSeconds()).slice(-2);
-      var dms = ('00' + d.getMilliseconds()).slice(-3);
-      console.log('[' + dm + 'm ' + ds + 's ' + dms + 'ms] ' + val);
-    } else {
-      console.log(val);
-    }
-  }
-}
+window.dlog = function(val) { if ( app.dlog === true ) console.log(val); }
+window.dlog_verbose = function(val) { if ( app.dlog === true && app.verbose === true ) console.log(val); }
 
 
 
@@ -93,7 +82,7 @@ function jQueryExec(){
 ------------------------------------------------------------------------------------*/
 var exec = function(funcQueue, name) {
   $.each(funcQueue, function(index, value) {
-    if(app.verbose === true){ dlog(name + ' exec: ' + index); }
+    dlog_verbose(name + ' exec: ' + index);
     value();
   });
 }
@@ -146,7 +135,7 @@ function lightScroll(callback, delay){
     // Count scroll ticks and force callback execution on a specific count
     scrollCounter++;
     if( scrollCounter > 8 ){
-      if(app.verbose === true){ dlog('Scroll tick'); }
+      dlog_verbose('Scroll tick');
       callback();
       scrollCounter = 0;
       timer = false;
@@ -157,7 +146,7 @@ function lightScroll(callback, delay){
     clearTimeout(timer);
     timer = setTimeout(function(){
       scrollCounter = 0;
-      if(app.verbose === true){ dlog('Scroll tick'); }
+      dlog_verbose('Scroll tick');
       callback();
     }, delay);
 
@@ -175,7 +164,7 @@ function lightResize(callback, delay){
   $(window).on('resize', function(e) {
     clearTimeout(timer);
     timer = setTimeout(function(){
-      if(app.verbose === true){ dlog('Resize tick'); } // Show only for verbose
+      dlog_verbose('Resize tick'); // Show only for verbose
       callback();
     }, delay);
   });
@@ -186,10 +175,12 @@ function lightResize(callback, delay){
 /*------------------------------------------------------------------------------------
   Get page
 ------------------------------------------------------------------------------------*/
-function getPage(url, method, data ) {
+function getPage(url, urlTitle) {
+  var title = urlTitle || app.name;
+  // console.log('TITLE: ' + title);
 
-    // Log page request
-  dlog('Get page: ' + url + ' started...');
+  // Log page request
+  dlog('GET: ' + url + ' started...');
   var start = new Date().getTime();
     if (typeof method === 'undefined') { method = 'GET'; }
     if (typeof data === 'undefined') { data = []; }
@@ -207,10 +198,10 @@ function getPage(url, method, data ) {
       
       // Log success and waiting time
       var execTime = new Date().getTime() - start;
-      dlog('Get page: ' + url + ' success! (' + execTime + 'ms)');
+      dlog('GET: ' + url + ' success! (' + execTime + 'ms)');
 
       // Push history state and toggle related switches
-      History.pushState(null, null, url);
+      History.pushState(null, title, url);
       ux.url.linkTrigger = false;
       ux.url.isLoading = false;
 
@@ -226,7 +217,7 @@ function getPage(url, method, data ) {
       
       // Log error and waiting time
       var execTime = new Date().getTime() - start;
-      dlog('Get page: ' + url + ' error! Reason: ' + type + '. (' + execTime + 'ms)');
+      dlog('GET: ' + url + ' error! Reason: ' + type + '. (' + execTime + 'ms)');
 
       // Show an error message
       $('#pageLoad').html("Sorry, this is taking long. We will try one more time...").addClass('-show');
@@ -282,9 +273,11 @@ queue.jQuery(function(){
         if ( ux.url.isLoading === false ){
           ux.url.isLoading = true;
           ux.url.linkTrigger = true;
-          var state = History.getState();
           var link = $(this).attr('href');
-          getPage(link);
+          var title;
+          if ( $(this).attr('ajaxNav') !== '' ){ title = $(this).attr('ajaxNav') + ' | ' + app.name }
+          else { title = ''; }
+          getPage(link, title);
         }
       });
 
@@ -307,78 +300,47 @@ queue.jQuery(function(){
   /*------------------------------------------------------------------------------------
     Section Tooltip
   ------------------------------------------------------------------------------------*/
-  $(document).on('click','#sectionInfo_trigger', function() {
-    var target = $('#sectionInfo');
-    if ( target.height() === 0 ){ sectionInfo.open(); }
-    else { sectionInfo.close(); }
-  });
-
-  $('#page').on('click','#sectionInfo', function(event) {
-    event.stopPropagation();
-  });
-
   var sectionInfo = {
+    target: $('#sectionInfo'),
+    toggle: function(){
+      dlog_verbose('sectionInfo.toggle()');
+      if ( this.target.height() === 0 ){ sectionInfo.open(); }
+      else { sectionInfo.close(); }
+    },
     open: function(){
-      $('#sectionInfo').animateAuto().addClass('-show');
+      dlog_verbose('sectionInfo.open()');
+      this.target.animateAuto().addClass('-show');
     },
     close: function(){
-      $('#sectionInfo').removeClass('-show').height(0);
+      dlog_verbose('sectionInfo.close()');
+      this.target.removeClass('-show').height(0);
     }
   };
 
-  // Close the tooltip on document click
+  // Open tooltip on click / tap
+  $(document).on('click','#sectionInfo_trigger', function() {
+    sectionInfo.toggle();
+  });
+
+  // Show the tooltip on hover
+  $(document).on('mouseenter','#sectionInfo_trigger', function() {
+    sectionInfo.open();
+  });
+
+  // Hide the tooltip when mouse leaves
+  $(document).on('mouseleave','#sectionInfo_trigger', function() {
+    sectionInfo.close();
+  });
+
+  // Close the tooltip on global click
   queue.globalClickEvents.push(function(event){
     sectionInfo.close();
   });
 
-  
-
-
-
-  // Auto-exec function
-  // (function jqueryTest(){
-  //   $('body').prepend('<span style="position:absolute; top:2px; left:2px; width:25px; height:25px; background:#41a240;"></span>');
-  // }());
-
-
-
-  /*------------------------------------------------------------------------------------
-    Mobile menu
-  ------------------------------------------------------------------------------------*/
-  // function mobileMenu() {
-  //   var vars = {
-  //     selector: $('#header'),
-  //     className: '-active'
-  //   };
-    
-  //   this.toggle = function() {
-  //     vars.selector.toggleClass(vars.className);
-  //   };
-
-  //   this.close = function() {
-  //     vars.selector.removeClass(vars.className);
-  //   };
-
-  //   this.open = function() {
-  //     vars.selector.addClass(vars.className);
-  //   };
-  // }
-  // var mobileMenu = new mobileMenu();
-
-  // // Toggle mobile menu
-  // $('#mobileMenuTrigger').on('click', function(event) {
-  //   event.stopPropagation();
-  //   mobileMenu.toggle();
-  // });
-
-  // $('#mobileMenuWrapper').on('click', function(event) {
-  //   event.stopPropagation();
-  // });
-
-  // // Close the menu on document click
-  // queue.globalClickEvents.push(function(event){
-  //   mobileMenu.close();
-  // });
+  // But, stop propagation when clicked within the info element (to prevent it from closing)
+  $('#page').on('click','#sectionInfo', function(event) {
+    event.stopPropagation();
+  });
 
 
 
@@ -388,16 +350,6 @@ queue.jQuery(function(){
   $('.customSelect_select').on('change', function(event) {
     $(this).next('.customSelect_overlay').html( $(this).val() );
   });
-
-
-
-  /*------------------------------------------------------------------------------------
-    Load and exec FastClick
-  ------------------------------------------------------------------------------------*/
-  // load('scripts/external/fastclick.js').thenRun(function () {
-  //   FastClick.attach(document.body);
-  //   dlog('FastClick attached');
-  // });
 
 
 

@@ -186,19 +186,22 @@ function lightResize(callback, delay){
 /*------------------------------------------------------------------------------------
   Get page
 ------------------------------------------------------------------------------------*/
-function getPage(url) {
-  
-  // Log page request
+function getPage(url, method, data ) {
+
+    // Log page request
   dlog('Get page: ' + url + ' started...');
   var start = new Date().getTime();
-  
-  // Hide the content of the page and show a loader
+    if (typeof method === 'undefined') { method = 'GET'; }
+    if (typeof data === 'undefined') { data = []; }
+
+    // Hide the content of the page and show a loader
   $('#page').addClass('-loading');
   
   // Start the request
   $.ajax({
-    type: 'GET',
+    type: method,
     url: url,
+      data: data,
     timeout: 10000, // Wait for 10 seconds max
     success: function(data) {
       
@@ -260,6 +263,20 @@ queue.jQuery(function(){
   if ( $('html').hasClass('ajax') === true ) {
     load('scripts/external/zepto.history.js').thenRun(function () {
       // Set a click handler for any ajaxNav link
+        $(document).on("submit", "form[ajaxForm]", function (event) {
+            var data = $(this).serialize();
+            console.log(data);
+            event.preventDefault();
+
+            if ( ux.url.isLoading === false ){
+                ux.url.isLoading = true;
+                ux.url.linkTrigger = true;
+                var state = History.getState();
+                var link = $(this).attr('action');
+                getPage(link, $(this).attr("method"), data);
+            }
+        })
+
       $(document).on('click','[ajaxNav]', function(event) {
         event.preventDefault();
         if ( ux.url.isLoading === false ){

@@ -1,5 +1,6 @@
 <?php echo $this->doctype(); ?>
-<html lang='en' class='no-js'>
+<?php $locale = $this->plugin('translate')->getTranslator()->getLocale();?>
+<html lang='<?php echo $locale?>' class='no-js'<?php if($locale == "ar_JO") echo "dir='rtl'"?>>
 <head>
   <meta charset='utf-8'> <!-- Charset should be defined as early as possible to avoid rendering problems -->
 

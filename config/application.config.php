@@ -4,9 +4,10 @@ return array(
     'modules' => array(
         'AssetManager',
         'Application',
-       // 'ZendDeveloperTools',
+        'Administration',
         'DoctrineModule',
         'DoctrineORMModule',
+        //'ZendDeveloperTools',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -65,4 +66,5 @@ return array(
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
+
 );

@@ -7,6 +7,8 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
+namespace Application;
+
 return array(
     'router' => array(
         'router_class' => 'Zend\Mvc\Router\Http\TranslatorAwareTreeRouteStack',

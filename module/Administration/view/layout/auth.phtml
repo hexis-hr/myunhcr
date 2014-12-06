@@ -1,0 +1,86 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle($this->translate('MyUNHCR Admin'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/style.css?1382104445')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/color/jquery-miniColors/jquery.miniColors.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/other/google-code-prettify/prettify.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css')
+        ->prependStylesheet($this->basePath() . '/extend/bootstrap-switch/static/stylesheets/bootstrap-switch.css')
+        ->prependStylesheet($this->basePath() . '/extend/bootstrap-select/bootstrap-select.css')
+        ->prependStylesheet($this->basePath() . '/css/font-awesome/css/font-awesome.min.css')
+        ->prependStylesheet($this->basePath() . '/css/glyphicons.css')
+        ->prependStylesheet($this->basePath() .
+            '/scripts/plugins/system/jquery-ui-1.9.2.custom/css/smoothness/jquery-ui-1.9.2.custom.min.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/notifications/Gritter/css/jquery.gritter.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/notifications/notyfy/themes/default.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/notifications/notyfy/jquery.notyfy.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/forms/select2/select2.css')
+        ->prependStylesheet($this->basePath() . '/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css')
+        ->prependStylesheet($this->basePath() . '/extend/jasny-bootstrap/css/jasny-bootstrap-responsive.min.css')
+        ->prependStylesheet($this->basePath() . '/extend/jasny-bootstrap/css/jasny-bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css'); ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/scripts/plugins/notifications/notyfy/jquery.notyfy.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/notifications/Gritter/js/jquery.gritter.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/google-code-prettify/prettify.js')
+        ->prependFile($this->basePath() . '/scripts/demo/layout.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js')
+        ->prependFile($this->basePath() . '/extend/bootbox.js')
+        ->prependFile($this->basePath() . '/extend/jasny-bootstrap/js/bootstrap-fileupload.js')
+        ->prependFile($this->basePath() . '/extend/jasny-bootstrap/js/jasny-bootstrap.min.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-switch/static/js/bootstrap-switch.min.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-select/bootstrap-select.js')
+        ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/forms/pixelmatrix-uniform/jquery.uniform.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/jquery.ba-resize.js')
+        ->prependFile($this->basePath() . '/scripts/demo/themer.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery.cookie.js')
+        ->prependFile($this->basePath() . '/scripts/demo/twitter.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/holder/holder.js')
+        ->prependFile($this->basePath() . '/scripts/demo/common.js?1382104445')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/jquery-slimScroll/jquery.slimscroll.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/forms/select2/select2.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/color/jquery-miniColors/jquery.miniColors.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/less-1.3.3.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/modernizr.custom.76094.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery-1.8.2.min.js'); ?>
+
+</head>
+<body>
+
+    <!-- Start Content -->
+    <div class="first-container container fluid login">
+
+        <div class="navbar main hidden-print">
+
+            <a href="#" class="appbrand">
+                <span><?php echo $this->translate('MyUNHCR'); ?>
+                    <span><?php echo $this->translate('Administration'); ?></span>
+                </span>
+            </a>
+        </div>
+
+        <!-- Echo Content -->
+        <?php echo $this->content; ?>
+
+    </div>
+
+</body>
+</html>

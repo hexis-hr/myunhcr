@@ -1,0 +1,176 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle($this->translate('MyUNHCR Admin'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/style.css?1382104445')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/color/jquery-miniColors/jquery.miniColors.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/other/google-code-prettify/prettify.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css')
+        ->prependStylesheet($this->basePath() . '/extend/bootstrap-switch/static/stylesheets/bootstrap-switch.css')
+        ->prependStylesheet($this->basePath() . '/extend/bootstrap-select/bootstrap-select.css')
+        ->prependStylesheet($this->basePath() . '/css/font-awesome/css/font-awesome.min.css')
+        ->prependStylesheet($this->basePath() . '/css/glyphicons.css')
+        ->prependStylesheet($this->basePath() .
+            '/scripts/plugins/system/jquery-ui-1.9.2.custom/css/smoothness/jquery-ui-1.9.2.custom.min.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/notifications/Gritter/css/jquery.gritter.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/notifications/notyfy/themes/default.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/notifications/notyfy/jquery.notyfy.css')
+        ->prependStylesheet($this->basePath() . '/scripts/plugins/forms/select2/select2.css')
+        ->prependStylesheet($this->basePath() . '/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css')
+        ->prependStylesheet($this->basePath() . '/extend/jasny-bootstrap/css/jasny-bootstrap-responsive.min.css')
+        ->prependStylesheet($this->basePath() . '/extend/jasny-bootstrap/css/jasny-bootstrap.min.css')
+        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css'); ?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/scripts/plugins/notifications/notyfy/jquery.notyfy.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/notifications/Gritter/js/jquery.gritter.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/google-code-prettify/prettify.js')
+        ->prependFile($this->basePath() . '/scripts/demo/layout.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js')
+        ->prependFile($this->basePath() . '/extend/bootbox.js')
+        ->prependFile($this->basePath() . '/extend/jasny-bootstrap/js/bootstrap-fileupload.js')
+        ->prependFile($this->basePath() . '/extend/jasny-bootstrap/js/jasny-bootstrap.min.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-switch/static/js/bootstrap-switch.min.js')
+        ->prependFile($this->basePath() . '/extend/bootstrap-select/bootstrap-select.js')
+        ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/forms/pixelmatrix-uniform/jquery.uniform.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/jquery.ba-resize.js')
+        ->prependFile($this->basePath() . '/scripts/demo/themer.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery.cookie.js')
+        ->prependFile($this->basePath() . '/scripts/demo/twitter.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/holder/holder.js')
+        ->prependFile($this->basePath() . '/scripts/demo/common.js?1382104445')
+        ->prependFile($this->basePath() . '/scripts/plugins/other/jquery-slimScroll/jquery.slimscroll.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/forms/select2/select2.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/color/jquery-miniColors/jquery.miniColors.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/less-1.3.3.min.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/modernizr.custom.76094.js')
+        ->prependFile($this->basePath() . '/scripts/plugins/system/jquery-1.8.2.min.js'); ?>
+
+    <!-- Global -->
+    <script>
+        var basePath = '',
+            commonPath = '../common/',
+
+
+        // charts data
+            charts_data = {
+
+                // 24 hours
+                graph24hours: {
+                    from: 1381874400000,
+                    to: 1381960800000			},
+
+                // 7 days
+                graph7days: {
+                    from: 1381356000000,
+                    to: 1381960800000			},
+
+                // 14 days
+                graph14days: {
+                    from: 1380751200000,
+                    to: 1381960800000			},
+
+                // main dashboard graph - website traffic
+                website_traffic: {
+                    d1: [[1379455200000, 3781],[1379541600000, 2840],[1379628000000, 3476],[1379714400000, 3296],[1379800800000, 2966],[1379887200000, 3705],[1379973600000, 2158],[1380060000000, 2999],[1380146400000, 2990],[1380232800000, 2995],[1380319200000, 3838],[1380405600000, 2601],[1380492000000, 3809],[1380578400000, 2150],[1380664800000, 3663],[1380751200000, 2160],[1380837600000, 2472],[1380924000000, 2871],[1381010400000, 3198],[1381096800000, 2524],[1381183200000, 3211],[1381269600000, 3872],[1381356000000, 3527],[1381442400000, 2782],[1381528800000, 3957],[1381615200000, 3606],[1381701600000, 2401],[1381788000000, 2866],[1381874400000, 3178],[1381960800000, 2984]],
+                    d2: [[1379455200000, 490],[1379541600000, 475],[1379628000000, 694],[1379714400000, 506],[1379800800000, 539],[1379887200000, 629],[1379973600000, 690],[1380060000000, 695],[1380146400000, 649],[1380232800000, 500],[1380319200000, 415],[1380405600000, 619],[1380492000000, 687],[1380578400000, 514],[1380664800000, 608],[1380751200000, 493],[1380837600000, 643],[1380924000000, 644],[1381010400000, 648],[1381096800000, 510],[1381183200000, 558],[1381269600000, 681],[1381356000000, 478],[1381442400000, 520],[1381528800000, 648],[1381615200000, 589],[1381701600000, 577],[1381788000000, 542],[1381874400000, 474],[1381960800000, 465]]
+                }
+
+            };
+
+        Holder.add_theme("dark", {background:"#000", foreground:"#aaa", size:9})
+
+        var primaryColor = '#4a8bc2',
+            dangerColor = '#b55151',
+            successColor = '#609450',
+            warningColor = '#ab7a4b',
+            inverseColor = '#45484d';
+
+        var themerPrimaryColor = '#DA4C4C';
+
+            //Load the Visualization API and the piechart package.
+//        google.load('visualization', '1.0', {'packages':['table', 'corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+//        google.setOnLoadCallback(charts.traffic_sources_dataTables.init);
+    </script>
+
+</head>
+<body>
+
+<!-- Start Content -->
+<div class="first-container container fluid login">
+
+    <?php echo $this->partial('partial/topNavigation.phtml'); ?>
+
+    <div id="wrapper">
+
+        <?php echo $this->partial('partial/mainNavigation.phtml'); ?>
+
+        <div id="content">
+            <?php if ($this->flashMessenger()->hasMessages()) { ?>
+
+                <div class="alert alert-danger">
+
+                    <?php
+                    $messages = $this->flashMessenger()->getMessages();
+                    foreach($messages as $message) {
+                        echo $this->translate($message);
+                    } ?>
+                </div>
+            <?php } ?>
+
+            <!-- Echo Content -->
+            <?php echo $this->content; ?>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="themer" class="collapse">
+    <div class="wrapper">
+        <span class="close2">&times; close</span>
+        <h4><?php echo $this->translate('Themer'); ?> <span><?php echo $this->translate('color options'); ?></span></h4>
+        <ul>
+            <li><?php echo $this->translate('Theme'); ?>: <select id="themer-theme" class="pull-right"></select>
+                <div class="clearfix"></div></li>
+            <li><?php echo $this->translate('Primary Color'); ?>: <input type="text" data-type="minicolors"
+                data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left"
+                id="themer-primary-cp" /><div class="clearfix"></div></li>
+            <li>
+                <span class="link" id="themer-custom-reset"><?php echo $this->translate('reset theme'); ?></span>
+                <span class="pull-right"><label><?php echo $this->translate('advanced'); ?>
+                        <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
+            </li>
+        </ul>
+        <div id="themer-getcode" class="hide">
+            <hr class="separator" />
+            <button class="btn btn-primary btn-small pull-right btn-icon glyphicons download"
+                    id="themer-getcode-less"><i></i><?php echo $this->translate('Get LESS'); ?></button>
+            <button class="btn btn-inverse btn-small pull-right btn-icon glyphicons download"
+                    id="themer-getcode-css"><i></i><?php echo $this->translate('Get CSS'); ?></button>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -14,11 +14,11 @@ class Module
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $this->serviceManager = $e->getApplication()->getServiceManager();
-        $eventManager->attach('route', array($this, 'loadConfiguration'), 2);
+        $eventManager->attach('route', array($this, 'loadConfiguration'), 100);
 
         //to get user identity in view with $this->auth->getIdentity()
         $myService = $this->serviceManager->get('AuthService');
-        $viewModel = $e->getApplication()->getMvcEvent()->getViewModel();
+        $viewModel = $e->getViewModel();
         $viewModel->auth = $myService;
     }
 
@@ -79,8 +79,7 @@ class Module
             $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController','dispatch',
                 function($e) {
                     $this->serviceManager->get('ControllerPluginManager')->get('Auth')->doAuthorization($e);
-                },2
-            );
+                }, 1);
         }
     }
 

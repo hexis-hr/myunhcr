@@ -16,7 +16,6 @@ window.ux = {
   },
   config: {},
   url: {
-    linkTrigger: false,
     isLoading: false
   }
 };
@@ -52,7 +51,8 @@ window.queue = {
   jQueryWaitlist: [],
   globalClickEvents: [],
   globalScrollEvents: [],
-  globalResizeEvents: []
+  globalResizeEvents: [],
+  globalUnloadEvents: []
 };
 
 
@@ -175,24 +175,25 @@ function lightResize(callback, delay){
 /*------------------------------------------------------------------------------------
   Get page
 ------------------------------------------------------------------------------------*/
-function getPage(url, urlTitle) {
-  var title = urlTitle || app.name;
-  // console.log('TITLE: ' + title);
-
+function getPage(url, title, method, data, timeout) {
+  
   // Log page request
   dlog('GET: ' + url + ' started...');
   var start = new Date().getTime();
-    if (typeof method === 'undefined') { method = 'GET'; }
-    if (typeof data === 'undefined') { data = []; }
 
-    // Hide the content of the page and show a loader
+  // Parse config
+  var title = title || app.name;
+  var method = method || 'GET';
+  var data = data || [];
+
+  // Hide the content of the page and show a loader
   $('#page').addClass('-loading');
   
   // Start the request
   $.ajax({
     type: method,
     url: url,
-      data: data,
+    data: data,
     timeout: 10000, // Wait for 10 seconds max
     success: function(data) {
       
@@ -202,10 +203,9 @@ function getPage(url, urlTitle) {
 
       // Push history state and toggle related switches
       History.pushState(null, title, url);
-      ux.url.linkTrigger = false;
       ux.url.isLoading = false;
 
-       // Scroll to top
+      // Scroll to top
       $("html, body").scrollTop(0);
 
       // Swap data and show content
@@ -234,6 +234,22 @@ function getPage(url, urlTitle) {
 
 
 /*------------------------------------------------------------------------------------
+  Check before leaving page (e.g., if a form is in progress to avoid losing data)
+------------------------------------------------------------------------------------*/
+var beforeUnload = {
+  check: function(){
+    dlog_verbose('beforeUnload.check: ');
+    if ( this.target.height() === 0 ){ sectionInfo.open(); }
+    else { sectionInfo.close(); }
+  },
+  exec: function(){
+    exec(queue.globalUnloadEvents, 'GlobalUnload');
+  }
+};
+
+
+
+/*------------------------------------------------------------------------------------
   Execute when jQuery loads...
 ------------------------------------------------------------------------------------*/
 queue.jQuery(function(){
@@ -253,45 +269,44 @@ queue.jQuery(function(){
   ------------------------------------------------------------------------------------*/
   if ( $('html').hasClass('ajax') === true ) {
     load('scripts/external/zepto.history.js').thenRun(function () {
-      // Set a click handler for any ajaxNav link
-        $(document).on("submit", "form[ajaxForm]", function (event) {
-            var data = $(this).serialize();
-            console.log(data);
-            event.preventDefault();
-
-            if ( ux.url.isLoading === false ){
-                ux.url.isLoading = true;
-                ux.url.linkTrigger = true;
-                var state = History.getState();
-                var link = $(this).attr('action');
-                getPage(link, $(this).attr("method"), data);
-            }
-        })
-
+      
+      // Set a click handler for ajax links
       $(document).on('click','[ajaxNav]', function(event) {
         event.preventDefault();
         if ( ux.url.isLoading === false ){
           ux.url.isLoading = true;
-          ux.url.linkTrigger = true;
           var link = $(this).attr('href');
           var title;
-          if ( $(this).attr('ajaxNav') !== '' ){ title = $(this).attr('ajaxNav') + ' | ' + app.name }
-          else { title = ''; }
+          if( $(this).attr('ajaxNav') !== '' ){ title = $(this).attr('ajaxNav') + ' | ' + app.name } else { title = ''; }
           getPage(link, title);
         }
       });
+
+      // Set a click handler for ajax forms
+      $(document).on('submit', 'form[ajaxForm]', function (event) {
+        event.preventDefault();
+        var data = $(this).serialize();
+        dlog('FORM: ' + data);
+        if ( ux.url.isLoading === false ){
+          ux.url.isLoading = true;
+          var link = $(this).attr('action');
+          var title;
+          if( $(this).attr('ajaxForm') !== '' ){ title = $(this).attr('ajaxForm') + ' | ' + app.name } else { title = ''; }
+          getPage(link, title, $(this).attr('method'), data);
+        }
+      })
 
       // Watch for all sorts of state changes (e.g. back button)
       History.Adapter.bind(window,'statechange',function(){
         var state = History.getState();
         dlog('History statechange to: ' + state.hash);
-        
-        // We check for an active linkTrigger to avoid double ajax calls (ongoing issue 96: https://github.com/browserstate/history.js/issues/96)
-        if ( ux.url.linkTrigger === false && ux.url.isLoading === false ) {
+
+        // We check if loading is in progress to avoid double ajax calls (ongoing issue: https://github.com/browserstate/history.js/issues/96)
+        if ( ux.url.isLoading === false ) {
           getPage(state.hash);
         }
-
       });
+
     });
   }
 
@@ -388,5 +403,9 @@ queue.jQuery(function(){
   lightScroll(function(){
     exec(queue.globalResizeEvents, 'GlobalScroll');
   }, 300);
+
+  $(window).on('beforeunload', function(event) {
+    exec(queue.globalUnloadEvents, 'GlobalUnload');
+  });
 });
 jQueryExec();

@@ -1,7 +1,3 @@
-@if $primitive == true {
-/* Default styles ————————————————————————————————————————————————————————————*/
-
-
 .linkGroup { border-top:1px solid $lightGray; }
   .linkGroup_item {}
     .linkGroup_link {
@@ -10,17 +6,8 @@
       padding: 14px 22px;
       color: $link;
       border-bottom: 1px solid $lightGray;
-    }
 
-
-} @else {
-/* Modern phone styles ———————————————————————————————————————————————————————*/
-
-
-.linkGroup {}
-  .linkGroup_item {}
-    .linkGroup_link {}
-      .linkGroup_link:after {
+      &:after {
         @extend %icon;
         @include img("icons", "arrowRight-blue-h24@2x", 2, inline);
         position: absolute;
@@ -28,7 +15,4 @@
         right: 22px;
         content: '';
       }
-    
-
-
-}
+    }

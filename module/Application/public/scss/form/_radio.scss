@@ -1,39 +1,30 @@
-@if $primitive == true {
-/* Default styles ————————————————————————————————————————————————————————————*/
-
-
 .bigRadio {}
   .bigRadio_input {}
   .bigRadio_label { vertical-align:-1px; font-weight:regular; color:$black; }
 
 
-} @else {
-/* Modern phone styles ———————————————————————————————————————————————————————*/
+@include small {
+  .bigRadio {}
+    .bigRadio_input { position:absolute; opacity:0; }
+    .bigRadio_label {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin-right: -1px;
+      padding: 1em;
+      color:$gray;
+      text-align: center;
+      border: 1px solid $input-border-color;
+    }
 
+    // Active state
+    .bigRadio_input:checked + .bigRadio_label {
+      z-index: 2;
+      color: $input-active-color;
+      border-color: $input-active-color;
+      box-shadow: inset 0 0 0 1px $input-active-color;
+    }
 
-.bigRadio {}
-  .bigRadio_input { position:absolute; opacity:0; }
-  .bigRadio_label {
-    position: relative;
-    z-index: 1;
-    display: block;
-    margin-right: -1px;
-    padding: 1em;
-    color:$gray;
-    text-align: center;
-    border: 1px solid $input-border-color;
-  }
-
-  // Active state
-  .bigRadio_input:checked + .bigRadio_label {
-    z-index: 2;
-    color: $input-active-color;
-    border-color: $input-active-color;
-    box-shadow: inset 0 0 0 1px $input-active-color;
-  }
-
-  // Remove margin for last child
-  .bigRadio .form_subitem:last-child .bigRadio_label { margin-right: 0; }
-
-
+    // Remove margin for last child
+    .bigRadio .form_subitem:last-child .bigRadio_label { margin-right: 0; }
 }

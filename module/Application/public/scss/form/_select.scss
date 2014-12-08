@@ -1,7 +1,3 @@
-@if $primitive == true {
-/* Default styles ————————————————————————————————————————————————————————————*/
-
-
 .formSelect {
   @extend %inputBase;
   height: $input-height;
@@ -12,13 +8,10 @@
   }
 }
 
+
 .customSelect {}
   .customSelect_select {}
   .customSelect_overlay { display:none; }
-
-
-} @else {
-/* Modern phone styles ———————————————————————————————————————————————————————*/
 
 
 .js {
@@ -54,7 +47,4 @@
     .customSelect_select:focus + .customSelect_overlay {
       @extend %inputBase_focus;
     }
-}
-
-
 }

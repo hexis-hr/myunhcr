@@ -1,7 +1,3 @@
-@if $primitive == true {
-/* Default  styles ————————————————————————————————————————————————————————————*/
-
-
 .button {
   @include st-button;
   display: block;
@@ -21,7 +17,13 @@
   &.-sharp {
     border-radius: 0 !important;
   }
+
+  &.-fullWidth {
+    display: block;
+    width: 100% !important;
+  }
 }
+
 
 .button.-primary {
   color: white;
@@ -35,6 +37,7 @@
     background: linear-gradient(top, lighten($color, 2), darken($color, 2));
   }
 }
+
 
 .button.-secondary {
   color: white;
@@ -50,34 +53,11 @@
 }
 
 
-} @else {
-/* Modern phones only —————————————————————————————————————————————————————————*/
-
-
-.button {
-  @include small {
-    display: inline-block;
-    width: auto;
-    margin-bottom: 0;
-    padding: ($button-size / 1.7) $button-size;
-  }
-
-  &.-fullWidth {
-    display: block;
-    width: 100% !important;
-  }
-
-  &.-submit {
-    display: block;
-    width: 100% !important;
-    
-    @include mediumPlus {
-      width: auto !important;
-      padding-left: $button-size * 4;
-      padding-right: $button-size * 4;
-    }
-  }
+@include small {
+  .button { display:inline-block; width:auto; margin-bottom:0; padding:($button-size / 1.7) $button-size; }
+  .button.-submit { display:block; width:100% !important; }
 }
 
-
+@include mediumPlus {
+  .button.-submit { width:auto !important; padding-left:$button-size * 4; padding-right:$button-size * 4; }
 }

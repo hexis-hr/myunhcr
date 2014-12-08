@@ -316,19 +316,19 @@ queue.jQuery(function(){
     Section Tooltip
   ------------------------------------------------------------------------------------*/
   var sectionInfo = {
-    target: $('#sectionInfo'),
+    target: '#sectionInfo',
     toggle: function(){
       dlog_verbose('sectionInfo.toggle()');
-      if ( this.target.height() === 0 ){ sectionInfo.open(); }
+      if ( $(this.target).height() === 0 ){ sectionInfo.open(); }
       else { sectionInfo.close(); }
     },
     open: function(){
       dlog_verbose('sectionInfo.open()');
-      this.target.animateAuto().addClass('-show');
+      $(this.target).animateAuto().addClass('-show');
     },
     close: function(){
       dlog_verbose('sectionInfo.close()');
-      this.target.removeClass('-show').height(0);
+      $(this.target).removeClass('-show').height(0);
     }
   };
 

@@ -1,10 +1,6 @@
 %icon { @include st-icon; }
 
 
-@if $primitive == true {
-/* Default  styles ————————————————————————————————————————————————————————————*/
-
-
 // Standard sizes
 .icon { @extend %icon; }
 .h16 { height:16px !important; }
@@ -16,16 +12,3 @@
 
 // Global icons
 .icon.-infoBlack24 { @include img("icons", "info-black-h24@2x", 2, inline); }
-// .icon.-arrowRightBlue24 { @include img("icons", "arrowRight-blue-h24@2x", 2, inline); }
-
-
-} @else {
-/* Modern phones only —————————————————————————————————————————————————————————*/
-
-
-// Global icons
-// .iconExample { @include img("icons", "example-white-h24", 1); }
-// .iconExampleRetina { @include img("icons", "example-white-h24@2x", 2); }
-
-
-}

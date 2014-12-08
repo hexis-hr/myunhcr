@@ -1,36 +1,17 @@
-@if $primitive == true {
-/* Default styles ————————————————————————————————————————————————————————————*/
-
-
 html { height:100%; font-size:110%; }
 body { min-height:100%; }
 
-.page { padding-top:$primitiveMargin; padding-bottom:$primitiveMargin; }
 
-.page.-extraMargin { margin-top:.5em; }
-.page.-noPadding { padding:0 !important; }
-
-#pageLoad { display:none; }
-
-
-} @else {
-/* Modern phone styles ———————————————————————————————————————————————————————*/
-
-
-// Reduce font size a bit on larger screens
-@include large {
-  html { font-size:105%; }
+// Basic page styling
+.page {
+  @include responsive(
+    padding-top ($basicMargin),
+    padding-bottom ($basicMargin)
+  );
+  &.-extraMargin { margin-top:.5em; }
+  &.-noPadding { padding:0 !important; }
 }
 
-// Increase padding for larger phones
-@include small {
-  .page {
-    @include responsive(
-      padding-top ($gapSmall) ($gapMultiplier),
-      padding-bottom ($gapSmall) ($gapMultiplier)
-    );
-  }
-}
 
 // Loading a page with ajax
 #page { transform:translateZ(0); transition:300ms;
@@ -39,4 +20,7 @@ body { min-height:100%; }
   &.-show { opacity:1; height:100%; color:white; } }
 
 
+// Reduce font size a bit on larger screens
+@include large {
+  html { font-size:105%; }
 }

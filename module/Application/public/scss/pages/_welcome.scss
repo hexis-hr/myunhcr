@@ -1,7 +1,3 @@
-@if $primitive == true {
-/* Default styles ————————————————————————————————————————————————————————————*/
-
-
 .welcome {
   padding-top:0 !important;
   .mainHeader { display:none !important; }
@@ -12,13 +8,3 @@
     .welcomeLogo_img{}
   .welcomeFooter { margin-bottom:1em; }
     .welcomeFooter_button.button { display:block; width:100%; padding-top:.9em; padding-bottom:.9em; }
-
-
-} @else {
-/* Modern phone styles ———————————————————————————————————————————————————————*/
-
-
-.welcome {}
-
-
-}

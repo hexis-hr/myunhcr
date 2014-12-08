@@ -67,8 +67,8 @@
 /*————————————————————————————————————————————————————————————————————————————————
   LAYOUT: CUSTOM
 ————————————————————————————————————————————————————————————————————————————————*/
-  $primitiveMargin: 16px;
-  $modernMargin: 24px;
+  $basicMargin: 18px;
+  $modernMargin: 20px;
 
 
 
@@ -78,7 +78,7 @@
   // $grid-columns: 12; // Total number of columns in a grid
   // $grid-spacing: 2.2rem; // Base spacing for small screens
 
-  // $grid-small-breakpoint: em(320px); // Media query condition. This one targets entry-level smartphones (usually)
+  $grid-small-breakpoint: em(300px); // Media query condition. This one targets entry-level smartphones (usually)
   // $grid-small-width: null; // Optional max-width for the container
   // $grid-small-include: true; // Toggles whether this particular grid will be included
 

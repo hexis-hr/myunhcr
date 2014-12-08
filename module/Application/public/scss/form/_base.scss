@@ -1,5 +1,20 @@
-@if $primitive == true {
-/* Default styles ————————————————————————————————————————————————————————————*/
+@mixin inputBase {
+  width: 100%;
+  padding: 0 .75em;
+  @include rem(font-size, 0.95rem);
+  border: 1px solid $input-border-color;
+  transition: 200ms;
+}
+
+
+@mixin inputBase_focus {
+  box-shadow: 1px 2px 6px rgba(darken($input-focus-color, 20), 0.35), 0 0 0px 1px $input-focus-color !important;
+  outline: 4px $input-focus-color;
+}
+
+
+%inputBase { @include inputBase; }
+%inputBase_focus { @include inputBase_focus; }
 
 
 .form_legend { display:block; margin-bottom:1.2em; font-size:18px; color:$blue; text-align:left; }
@@ -9,28 +24,6 @@
   .form_label { display:block; padding-bottom:.5em; font-size:0.9em; font-weight:500; color:$black; }
 
 
-} @else {
-/* Modern phone styles ———————————————————————————————————————————————————————*/
-
-
 @include smallPlus {
   .form_legend { text-align:center; }
-}
-
-
-}
-
-
-%inputBase {
-  width: 100%;
-  padding: 0 .75em;
-  @include rem(font-size, 0.95rem);
-  border: 1px solid $input-border-color;
-  transition: 200ms;
-}
-
-
-%inputBase_focus {
-  box-shadow: 1px 2px 6px rgba(darken($input-focus-color, 20), 0.35), 0 0 0px 1px $input-focus-color !important;
-  outline: 4px $input-focus-color;
 }

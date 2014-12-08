@@ -2,15 +2,15 @@
 @import "satin/_satin";
 
 
-// Toggle primitive mode
-$primitive: true;
-
-
 // Framework includes
 @include st-reset;
 @include st-type;
 @include st-gaps;
+@include st-grid;
+@include st-gridSpacing($grid-spacing);
+@include st-gridSpacing(($grid-spacing / 3), -compact);
 @include st-visibility;
+@include st-ux;
 
 
 // Import global modules
@@ -50,26 +50,3 @@ $primitive: true;
 // Import pages
 @import "pages/_welcome";
 @import "pages/_homepage";
-
-
-// Custom grid rules for primitives
-.grid {
-  margin-top: -26px;
-  
-  &_column {
-    margin-top: 26px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .grid {
-    margin-left: -12px;
-    margin-right: -12px;
-  }
-
-  &.-collapse .grid_column {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-

@@ -26,7 +26,7 @@
       <form action='report-an-incident4.html' class='incident form' ajaxForm>
 
         <div class='form_item'>
-          <label class='form_label' for='feedbackMessage'>Please describe the incident:</label>
+          <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
           <div class='form_field'>
             <textarea class='formTextarea' id='feedbackMessage'></textarea>
           </div>
@@ -37,7 +37,7 @@
             <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
           </div>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href="report-an-incident2.html">Back</a>
+            <a class='button -fullWidth' href="report-an-incident2.html"><?php echo $this->translate('Back'); ?></a>
           </div>
         </div>
 

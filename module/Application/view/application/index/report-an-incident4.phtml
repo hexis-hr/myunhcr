@@ -27,14 +27,14 @@
 
         <div class='form_item fileUpload'>
           <label class='form_label fileUpload_label' for='feedbackMessage'>
-            Would you like to take/upload a picture of the incident? (optional)
+<?php echo $this->translate('Would you like to take/upload a picture of the incident? (optional)'); ?>
             <input class='fileUpload_input' type='file' accept='image/*;capture=camera' capture='camera'>
           </label>
         </div>
 
         <div class='form_item fileUpload'>
           <label class='form_label fileUpload_label' for='feedbackMessage'>
-            Would you like to record your testimony of the incident? (optional)
+<?php echo $this->translate('Would you like to record your testimony of the incident? (optional)'); ?>
             <input class='fileUpload_input' type='file' accept='audio/*;capture=microphone' capture='microphone'>
           </label>
         </div>
@@ -44,7 +44,7 @@
             <input class='inputSubmit button -primary -fullWidth' type='submit' name='' value='Report'>
           </div>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href="report-an-incident3.html">Back</a>
+            <a class='button -fullWidth' href="report-an-incident3.html"><?php echo $this->translate('Back'); ?></a>
           </div>
         </div>
 

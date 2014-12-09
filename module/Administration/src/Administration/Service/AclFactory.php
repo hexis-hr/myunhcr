@@ -23,13 +23,28 @@ class AclFactory implements FactoryInterface
         $acl->addRole(new Role('user'), 'anonymous');
         $acl->addRole(new Role('admin'), 'user');
 
+        // controllers from administration for controller - action ACL handling
+        $acl->addResource(new Resource('Auth'));
+        $acl->addResource(new Resource('Account'));
+        $acl->addResource(new Resource('Index'));
+        $acl->addResource(new Resource('Translation'));
         $acl->addResource(new Resource('Administration'));
-        $acl->addResource(new Resource('Application'));
 
+        //enable work from console
+        $acl->addResource(new Resource('Cli'));
+        $acl->allow('anonymous', 'Cli');
+
+        //application module if fully accessible
+        $acl->addResource(new Resource('Application'));
         $acl->allow('anonymous', 'Application');
+
+        //global ACL's
         $acl->allow('anonymous', 'Administration', 'Auth');
 
-        $acl->allow('user', 'Administration');
+        $acl->allow('user', 'Administration', 'Index');
+        $acl->allow('user', 'Account', 'profile');
+
+        $acl->allow('admin', 'Administration');
 
         return $acl;
     }

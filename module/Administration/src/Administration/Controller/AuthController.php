@@ -35,6 +35,8 @@ class AuthController extends AbstractActionController {
     {
         //if already login, redirect to success page
         if ($this->getAuthService()->hasIdentity()){
+            $this->flashmessenger()->addMessage('You are not allowed to enter this site.
+            Please log in with another account or contact administrator.');
             return $this->redirect()->toRoute('administration');
         }
 
@@ -44,7 +46,7 @@ class AuthController extends AbstractActionController {
 
         return new ViewModel(array(
             'form' => $form,
-            'messages'  => $this->flashmessenger()->getMessages()
+            'messages'  => $this->flashmessenger()->getMessages(),
         ));
     }
 
@@ -91,6 +93,13 @@ class AuthController extends AbstractActionController {
 
         $this->flashmessenger()->addMessage("You've been logged out");
         return $this->redirect()->toRoute('login');
+    }
+
+    //todo: improve and use
+    public function notAllowedAction()
+    {
+        $this->flashmessenger()->addMessage("You are not allowed to visit this site.");
+        return;
     }
 
 }

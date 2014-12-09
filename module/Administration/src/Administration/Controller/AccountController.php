@@ -100,8 +100,8 @@ class AccountController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            $formValidator = new UserFormFilter();
-            $form->setInputFilter($formValidator->getInputFilter());
+            $formFilter = new UserFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             if (!User::hashPassword($userData, $request->getPost('oldPassword')) && $request->getPost('oldPassword') != "") {
                 $form->setMessages(array(
                     'oldPassword' => array($translate('Old password incorrect')),
@@ -152,85 +152,48 @@ class AccountController extends AbstractActionController {
         return $result;
     }
 
-//    public function profileAction() {
-//
-//        $request = $this->getRequest();
-//        $entityManager = $this->getEntityManager();
-//        $translator = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
-//
-//        $userId = $this->getServiceLocator()->get('AuthService')->getIdentity()->id;
-//
-//        $userData = $entityManager->getRepository('Security\Entity\User')->findOneBy(array('id' => $userId));
-//
-//        $userForm = new \Administration\Form\EditUser();
-//
-//        $userSettings = $entityManager->getRepository('Administration\Entity\UserSettings')
-//            ->findOneBy(array('user' => $userId, 'settingsKey' => 'favouriteTaskType'));
-//
-//        $userForm->add(array(
-//            'name' => 'favouriteTaskType',
-//            'type' => 'Select',
-//            'options' => array(
-//                'label' => 'Favourite task type',
-//                'value_options' => array(
-//                    'GP+S Intern' => 'GP+S Intern',
-//                    'Kundenprojekt' => 'Kundenprojekt',
-//                    'Vertrieb' => 'Vertrieb',
-//                ),
-//            ),
-//        ));
-//
-//        if ($userSettings)
-//            $userForm->get('favouriteTaskType')->setValue($userSettings->getSettingsValue());
-//
-//        $userForm->setHydrator(new DoctrineHydrator($entityManager, 'Security\Entity\User'));
-//        $userForm->bind($userData);
-//
-//        if ($request->isPost()) {
-//
-//            $formValidator = new EditUser();
-//            $userForm->setInputFilter($formValidator->getInputFilter());
-//
-//            if (!User::hashPassword($userData, $request->getPost('oldPassword')) && $request->getPost('oldPassword') != "") {
-//                $userForm->setMessages(array(
-//                    'oldPassword' => array($translator('Old password incorrect')),
-//                ));
-//                return new ViewModel(array(
-//                    'form' => $userForm,
-//                    'userSettings' => $userSettings,
-//                    'id' => $userId,
-//                ));
-//            }
-//
-//            $userForm->setData($request->getPost());
-//
-//            if ($userForm->isValid()) {
-//
-//                //default behavior for settings key
-//                if ($userSettings) {
-//                    $userSettings->setSettingsValue($request->getPost('favouriteTaskType'));
-//
-//                    $entityManager->persist($userSettings);
-//                    $entityManager->flush();
-//                } else {
-//                    $userProp = new UserSettings();
-//
-//                    $userProp->setUser($userData);
-//                    $userProp->setSettingsKey('favouriteTaskType');
-//                    $userProp->setSettingsValue($request->getPost('favouriteTaskType'));
-//
-//                    $entityManager->persist($userProp);
-//                    $entityManager->flush();
-//                }
-//
-//                $entityManager->persist($userData);
-//                $entityManager->flush();
-//
-//                $this->redirect()->toRoute('timetracker');
-//            }
-//        }
-//
-//        return new ViewModel(array('form' => $userForm, 'userSettings' => $userSettings, 'id' => $userId));
-//    }
+    public function profileAction() {
+
+        $request = $this->getRequest();
+        $translator = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
+
+        $userId = $this->getServiceLocator()->get('AuthService')->getIdentity()->getId();
+        $user = $this->getEntityManager()->getRepository('Administration\Entity\User')->findOneBy(array('id' => $userId));
+
+        $form = new UserForm();
+        $form->get('type')->setAttribute('disabled', 'disabled');
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\User'));
+        $form->bind($user);
+
+        if ($request->isPost()) {
+
+            $formFilter = new UserFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+
+            if (!User::hashPassword($user, $request->getPost('oldPassword')) && $request->getPost('oldPassword') != "") {
+                $form->setMessages(array(
+                    'oldPassword' => array($translator('Old password incorrect')),
+                ));
+                return new ViewModel(array(
+                    'form' => $form,
+                    'userId' => $userId,
+                ));
+            }
+
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+
+                $this->getEntityManager()->persist($user);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addMessage($translator('Your profile data successfully changes.'));
+
+                $this->redirect()->toRoute('account/profile');
+            }
+        }
+
+        return new ViewModel(array('form' => $form, 'userId' => $userId, 'type' => $user->getType()));
+    }
 
 }

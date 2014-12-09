@@ -1,28 +1,59 @@
 
-  <?php
-  // add new task form
-  $form = $this->form;
+<?php $form = $this->form; ?>
+<?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
+<?php $form->setAttribute('action', $this->url('account/profile', array('id' => $this->userId)))->prepare(); ?>
+<?php $form->prepare(); ?>
 
-  $form->setAttribute('action', $this->url('security/users',
-      array(
-          'action'     => 'profile',
-          'id'     => $this->id,
-      )
-  ))->prepare();
+<div class="separator bottom"></div>
+<h3 class="glyphicons user"><?php echo $this->translate('My profile'); ?></h3>
+<div class="innerLR">
 
-  echo $this->form()->openTag($form);
+    <?php echo $this->form()->openTag($form); ?>
 
-  echo $this->formRow($form->get('id'));
-  echo $this->formRow($form->get('email')->setAttributes(array('readonly' => 'readonly', 'autocomplete' => 'off')));
-  echo $this->formRow($form->get('oldPassword')->setAttribute('autocomplete', 'off'));
-  echo $this->formRow($form->get('password'));
-  echo $this->formRow($form->get('confirmPassword'));
-  echo $this->formRow($form->get('admin')->setAttribute('onclick', 'return false'));
-  echo $this->formRow($form->get('firstName'));
-  echo $this->formRow($form->get('lastName'));
-  echo $this->formRow($form->get('favouriteTaskType'));
-  echo $this->formRow($form->get('submit'));
+    <div class="widget-body col-md-12">
+        <div class="tab-content">
+            <!-- Row -->
+            <div class="row">
+                <!-- Column -->
+                <div class="col-md-6">
 
-  echo $this->form()->closeTag($form);
+                    <?php echo $this->formRow($form->get('id')); ?>
 
-  ?>
+                    <label><?php echo $this->translate('Email'); ?></label>
+                    <?php echo $this->formRow($form->get('email')); ?>
+                    <div class="separator bottom"></div>
+
+                    <label><?php echo $this->translate('Type'); ?></label>
+                    <?php echo $this->formRow($form->get('type')); ?>
+                    <input type="hidden" name="type" value="<?php echo $this->type; ?>" />
+                    <div class="separator bottom"></div>
+
+                </div>
+                <div class="col-md-6">
+
+                    <label><?php echo $this->translate('Old Password'); ?></label>
+                    <?php echo $this->formRow($form->get('oldPassword')); ?>
+                    <div class="separator bottom"></div>
+
+                    <label><?php echo $this->translate('Password'); ?></label>
+                    <?php echo $this->formRow($form->get('password')); ?>
+                    <div class="separator bottom"></div>
+
+                    <label><?php echo $this->translate('Confirm Password'); ?></label>
+                    <?php echo $this->formRow($form->get('confirmPassword')); ?>
+                    <div class="separator bottom"></div>
+
+                </div>
+            </div>
+
+            <div class="separator"></div>
+            <div class="form-group" style="padding-right: 15px;">
+                <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
+                    <?php echo $this->translate('Save changes'); ?></button>
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->form()->closeTag($form); ?>
+
+</div>

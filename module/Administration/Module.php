@@ -14,12 +14,13 @@ class Module
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $this->serviceManager = $e->getApplication()->getServiceManager();
-        $eventManager->attach('route', array($this, 'loadConfiguration'), 100);
+        $eventManager->attach('dispatch', array($this, 'loadConfiguration'), 100);
 
         //to get user identity in view with $this->auth->getIdentity()
         $myService = $this->serviceManager->get('AuthService');
         $viewModel = $e->getViewModel();
         $viewModel->auth = $myService;
+        $viewModel->acl = $this->serviceManager->get('Administration\Acl');
     }
 
     public function getConfig()
@@ -76,10 +77,10 @@ class Module
 
         $matchedRoute = $router->match($request);
         if (null !== $matchedRoute) {
-            $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController','dispatch',
+            $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch',
                 function($e) {
                     $this->serviceManager->get('ControllerPluginManager')->get('Auth')->doAuthorization($e);
-                }, 1);
+                }, 100);
         }
     }
 

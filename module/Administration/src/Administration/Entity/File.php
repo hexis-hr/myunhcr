@@ -33,6 +33,11 @@ class File {
     /**
      * @ORM\Column(type="string")
      */
+    protected $mimeType = "";
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $type = "";
 
     /**
@@ -104,7 +109,20 @@ class File {
         return $this->type;
     }
 
+    /**
+     * @param mixed $mimeType
+     */
+    public function setMimeType($mimeType)
+    {
+        $this->mimeType = $mimeType;
+    }
 
-
+    /**
+     * @return mixed
+     */
+    public function getMimeType()
+    {
+        return $this->mimeType;
+    }
 
 }

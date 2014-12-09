@@ -26,7 +26,7 @@
       <form action='' class='booking form' ajaxForm>
         
         <div class='form_item'>
-          <label class='form_label' for='location'>Where</label>
+          <label class='form_label' for='location'><?php echo $this->translate('Where:'); ?></label>
           <div class='form_field'>
             <!-- Map to pin point with fallback to input ?  - check map-of-service.phtml -->
             <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='location'>

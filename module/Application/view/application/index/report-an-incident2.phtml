@@ -25,10 +25,10 @@
     <div class='grid_column -medium9 -mediumPlus8'>
       <form action='report-an-incident3.html' class='incident form' ajaxForm>
 
-        <h2 class='form_legend'>Where did this happen?</h2>
+        <h2 class='form_legend'><?php echo $this->translate('Where did this happen?'); ?></h2>
 
         <div class='form_item'>
-          <label class='form_label' for='report_country'>Country</label>
+          <label class='form_label' for='report_country'><?php echo $this->translate('Country'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='report_country'>
               <option>(Autodetect)</option>
@@ -38,7 +38,7 @@
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='report_location'>Location</label>
+          <label class='form_label' for='report_location'><?php echo $this->translate('Location'); ?></label>
           <div class='form_field'>
             <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='report_location'>
           </div>
@@ -49,7 +49,7 @@
             <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
           </div>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href="report-an-incident.html">Back</a>
+            <a class='button -fullWidth' href="report-an-incident.html"><?php echo $this->translate('Back'); ?></a>
           </div>
         </div>
 

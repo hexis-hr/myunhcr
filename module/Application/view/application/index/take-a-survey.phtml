@@ -26,14 +26,14 @@
       <form action='choose-your-survey.html' class='survey form'>
 
         <div class='form_item'>
-          <label class='form_label' for='authentication'>Please enter your identification number:</label>
+          <label class='form_label' for='authentication'><?php echo $this->translate('Please enter your identification number:'); ?></label>
           <div class='form_field'>
             <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
           </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='date'>Please enter your date of birth:</label>
+          <label class='form_label' for='date'><?php echo $this->translate('Please enter your date of birth:'); ?></label>
           <div class='form_field'>
             <input class='formInput' type='date' name='' value='' placeholder='' id='date'>
           </div>
@@ -42,7 +42,7 @@
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="refugee-feedback.html">Cancel</a>
+              <a class='button -submit' href="refugee-feedback.html"><?php echo $this->translate('Cancel'); ?></a>
             </div>
           </div>
           

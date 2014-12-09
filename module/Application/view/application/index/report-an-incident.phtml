@@ -26,7 +26,7 @@
       <form action='report-an-incident2.html' class='incident form' ajaxForm>
 
         <div class='form_item'>
-          <label class='form_label' for=''>Is this report Anonymous ?</label>
+          <label class='form_label' for=''><?php echo $this->translate('Is this report Anonymous ?'); ?></label>
           <div class='grid -collapse -clean'>
             <div class='grid_column -small6 form_subitem'>
               <div class='bigRadio'>
@@ -44,22 +44,22 @@
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='incidentCategory'>Category of the Incident:</label>
+          <label class='form_label' for='incidentCategory'><?php echo $this->translate('Category of the Incident:'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='incidentCategory'>
-              <option>Protection Incident</option>
+              <option><?php echo $this->translate('Protection Incident'); ?></option>
             </select>
-            <a unselectable='on' class='customSelect_overlay'>Protection Incident</a>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Protection Incident'); ?></a>
           </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='protectionType'>Which type of protection incident?</label>
+          <label class='form_label' for='protectionType'><?php echo $this->translate('Which type of protection incident?'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='protectionType'>
-              <option>I don't know</option>
+              <option><?php echo $this->translate('I don\'t know'); ?></option>
             </select>
-            <a unselectable='on' class='customSelect_overlay'>I don't know</a>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('I don\'t know'); ?></a>
           </div>
         </div>
 
@@ -68,7 +68,7 @@
             <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
           </div>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='menu-page.html' ajaxNav>Cancel</a>
+            <a class='button -fullWidth' href='menu-page.html' ajaxNav><?php echo $this->translate('Cancel'); ?></a>
           </div>
         </div>
 

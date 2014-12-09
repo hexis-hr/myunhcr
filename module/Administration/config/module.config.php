@@ -6,9 +6,9 @@ return array(
     'router' => array(
         'routes' => array(
             'login' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/login',
+                    'route'    => '/login[/:notFound]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
                         'controller'    => 'Auth',
@@ -128,6 +128,29 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'profile' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route'    => '/profile[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller'    => 'Account',
+                                'action'        => 'profile',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
+            'translation' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/translation',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller'    => 'Translation',
+                        'action'        => 'index',
+                    ),
                 ),
             ),
         ),
@@ -173,6 +196,7 @@ return array(
             'Administration\Controller\Auth' => 'Administration\Controller\AuthController',
             'Administration\Controller\Index' => 'Administration\Controller\IndexController',
             'Administration\Controller\Account' => 'Administration\Controller\AccountController',
+            'Administration\Controller\Translation' => 'Administration\Controller\TranslationController',
         ),
     ),
     'view_manager' => array(
@@ -212,7 +236,21 @@ return array(
             array(
                 'label' => 'Accounts',
                 'route' => 'account',
+                'resource' => 'Administration',
+                'privilege' => 'Admin',
                 'class' => "glyphicons group"
+            ),
+            array(
+                'label' => 'My Profile',
+                'route' => 'account/profile',
+                'class' => "glyphicons user"
+            ),
+            array(
+                'label' => 'Translations',
+                'route' => 'translation',
+                'resource' => 'Administration',
+                'privilege' => 'Admin',
+                'class' => "glyphicons translate"
             ),
         ),
     ),

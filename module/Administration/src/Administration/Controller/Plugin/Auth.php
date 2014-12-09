@@ -26,6 +26,9 @@ class Auth extends AbstractPlugin
         $controller = $e->getTarget();
         $controllerClass = get_class($controller);
 
+        $matches = $e->getRouteMatch();
+        $action = $matches->getParam('action','');
+
         $namespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
         $class = explode('\\', $controllerClass);
         $privilege =  str_replace("Controller","", end($class));
@@ -35,11 +38,7 @@ class Auth extends AbstractPlugin
         if(!$this->getController()->getServiceLocator()->get('AuthService')->hasIdentity()){
             $role = "anonymous";
         } else {
-            if(!$identity->getType()){
-                $role = "user";
-            } else {
-                $role = "admin";
-            }
+            $role = $identity->getType();
         }
 
         $role = new Role($role);
@@ -47,7 +46,7 @@ class Auth extends AbstractPlugin
         Navigation::setDefaultAcl($acl);
         Navigation::setDefaultRole($role);
 
-        if (!$acl->isAllowed($role, $namespace, $privilege)) {
+        if (!$acl->isAllowed($role, $privilege, $action) && !$acl->isAllowed($role, $namespace, $privilege)) {
 
             $router = $e->getRouter();
             $url    = $router->assemble(array(), array('name' => 'login'));

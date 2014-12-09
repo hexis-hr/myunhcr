@@ -12,20 +12,35 @@
     <div class="widget-body col-md-12">
         <div class="tab-content">
             <div class="row">
-                    <label><?php echo $this->translate('Translation file'); ?></label>
-                    <?php echo $this->formRow($form->get('translation-file')); ?>
-                    <?php echo $this->formElementErrors($form->get('translation-file')); ?>
-                    <div class="separator bottom"></div>
+                <label><?php echo $this->translate('Translation file'); ?></label>
+                <?php echo $this->formRow($form->get('translation-file')); ?>
+                <div class="separator bottom"></div>
+
+                <label><?php echo $this->translate('Translation locale'); ?></label>
+                <?php echo $this->formRow($form->get('locale')); ?>
+                <div class="separator bottom"></div>
             </div>
 
             <div class="separator"></div>
             <div class="form-group" style="padding-right: 15px;">
                 <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
-                    <?php echo $this->translate('Save changes'); ?></button>
+                    <?php echo $this->translate('Upload file'); ?></button>
             </div>
         </div>
     </div>
 
     <?php echo $this->form()->closeTag($form); ?>
+
+    <div class="separator bottom"></div>
+    <h3 class="glyphicons notes"><?php echo $this->translate('Added translations'); ?></h3>
+    <div class="row">
+        <?php foreach ($this->translations as $translation => $translationFile) { ?>
+            <div class="col-md-2 widget-stats">
+                <span class="txt"><strong><?php echo $translation; ?></strong>
+                    <?php echo $this->translate('Filename') . ': ' . $translationFile; ?>
+                </span>
+            </div>
+        <?php } ?>
+    </div>
 
 </div>

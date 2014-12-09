@@ -4,7 +4,7 @@
     <div class='grid'>
       <div class='grid_column'>
         <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'><?php echo $this->translate("Book an Appointment");?></h1>
+          <h1 class='sectionHeader_title'><?php echo $this->translate('Book an Appointment'); ?></h1>
           <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
         </div>
       </div>
@@ -26,19 +26,19 @@
       <form action='book-an-appointment2.html' class='booking form' ajaxForm>
 
         <div class='form_item'>
-          <label class='form_label' for='appointmentType'>What would you like to do at UNHCR ?</label>
+          <label class='form_label' for='appointmentType'><?php echo $this->translate('What would you like to do at UNHCR ?'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='appointmentType'>
-              <option>Registration</option>
+              <option><?php echo $this->translate('Registration'); ?></option>
             </select>
-            <a unselectable='on' class='customSelect_overlay'>Registration</a>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Registration'); ?></a>
           </div>
         </div>
 
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="refugee-feedback.html">Cancel</a>
+              <a class='button -submit' href="refugee-feedback.html"><?php echo $this->translate('Cancel'); ?></a>
             </div>
           </div>
           

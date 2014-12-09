@@ -22,5 +22,13 @@ class TranslationForm extends Form
                 'class' => 'col-md-12 form-control',
             ),
         ));
+
+        $this->add(array(
+            'name' => 'locale',
+            'type' => 'Select',
+            'attributes' => array(
+                'class' => 'col-md-12 form-control',
+            ),
+        ));
     }
 }

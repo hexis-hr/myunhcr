@@ -46,18 +46,18 @@
         </div> -->
 
         <div class='form_item'>
-          <label class='form_label' for=''>What is your Gender ?</label>
+          <label class='form_label' for=''><?php echo $this->translate('What is your Gender ?'); ?></label>
           <div class='grid -collapse -clean'>
             <div class='grid_column -small6 form_subitem'>
               <div class='bigRadio'>
                 <input class='bigRadio_input' type='radio' name='gender' value='male' id='gender-male'>
-                <label class='bigRadio_label' for='gender-male'>I am Male</label>
+                <label class='bigRadio_label' for='gender-male'><?php echo $this->translate('I am Male'); ?></label>
               </div>
             </div>
             <div class='grid_column -small6 form_subitem'>
               <div class='bigRadio'>
                 <input class='bigRadio_input' type='radio' name='gender' value='female' id='gender-female'>
-                <label class='bigRadio_label' for='gender-female'>I am Female</label>
+                <label class='bigRadio_label' for='gender-female'><?php echo $this->translate('I am Female'); ?></label>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="choose-your-survey.html">Back</a>
+              <a class='button -submit' href="choose-your-survey.html"><?php echo $this->translate('Back'); ?></a>
             </div>
           </div>
           

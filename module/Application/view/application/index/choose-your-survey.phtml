@@ -26,12 +26,12 @@
       <form action='what-is-your-gender.html' class='survey form' ajaxForm>
 
         <div class='form_item'>
-          <label class='form_label' for='chooseSurvey'>Choose your survey:</label>
+          <label class='form_label' for='chooseSurvey'><?php echo $this->translate('Choose your survey:'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='chooseSurvey'>
-              <option>Your needs assessment</option>
+              <option><?php echo $this->translate('Your needs assessment'); ?></option>
             </select>
-            <a unselectable='on' class='customSelect_overlay'>Your needs assessment</a>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Your needs assessment'); ?></a>
           </div>
         </div>
 

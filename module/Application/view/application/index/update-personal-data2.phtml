@@ -26,19 +26,19 @@
       <form action='update-personal-data3.html' class='incident form' ajaxForm>
 
         <div class='form_item'>
-          <label class='form_label' for='updateCategory'>What would you like to update ?</label>
+          <label class='form_label' for='updateCategory'><?php echo $this->translate('What would you like to update ?'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='updateCategory'>
-              <option>Address</option>
+              <option><?php echo $this->translate('Address'); ?></option>
             </select>
-            <a unselectable='on' class='customSelect_overlay'>Address</a>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Address'); ?></a>
           </div>
         </div>
 
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="refugee-feedback.html">Back</a>
+              <a class='button -submit' href="refugee-feedback.html"><?php echo $this->translate('Back'); ?></a>
             </div>
           </div>
           

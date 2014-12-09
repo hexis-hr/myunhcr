@@ -26,14 +26,14 @@
       <form action='book-an-appointment3.html' class='booking form' ajaxForm>
 
         <div class='form_item'>
-          <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment");?>:</label>
+          <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment:");?></label>
           <div class='form_field'>
             <input class='formInput' type='date' name='' value='' placeholder='' id='date'>
           </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment");?>:</label>
+          <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment:");?></label>
           <div class='form_field'>
             <input class='formInput' type='time' name='' value='' placeholder='' id='time'>
           </div>
@@ -42,7 +42,7 @@
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="book-an-appointment.html">Back</a>
+              <a class='button -submit' href="book-an-appointment.html"><?php echo $this->translate('Back'); ?></a>
             </div>
           </div>
           

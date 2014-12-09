@@ -25,10 +25,10 @@
     <div class='grid_column -medium9 -mediumPlus8'>
       <form action='update-personal-data4.html' class='incident form' ajaxForm>
 
-        <h2 class='form_legend'>Enter Your New Address information:</h2>
+        <h2 class='form_legend'><?php echo $this->translate('Enter Your New Address information:'); ?></h2>
 
         <div class='form_item'>
-          <label class='form_label' for='country'>Country</label>
+          <label class='form_label' for='country'><?php echo $this->translate('Country'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='country'>
               <option>Jordan</option>
@@ -38,7 +38,7 @@
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='city'>City:</label>
+          <label class='form_label' for='city'><?php echo $this->translate('City:'); ?></label>
           <div class='form_field customSelect'>
             <select class='formSelect customSelect_select -custom' id='city'>
               <option>Amman</option>
@@ -48,21 +48,21 @@
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='address'>Street Address:</label>
+          <label class='form_label' for='address'><?php echo $this->translate('Street Address:'); ?></label>
           <div class='form_field'>
             <input class='formInput' type='text' name='' value='' placeholder='' id='address'>
           </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='postalCode'>Postal Code:</label>
+          <label class='form_label' for='postalCode'><?php echo $this->translate('Postal Code:'); ?></label>
           <div class='form_field'>
             <input class='formInput' type='text' name='' value='' placeholder='' id='postalCode'>
           </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='comments'>Comments:</label>
+          <label class='form_label' for='comments'><?php echo $this->translate('Comments:'); ?></label>
           <div class='form_field'>
             <input class='formInput' type='text' name='' value='' placeholder='' id='comments'>
           </div>
@@ -71,7 +71,7 @@
         <div class='grid'>
           <div class='grid_column -small5'>
             <div class='form_item'>
-              <a class='button -submit' href="refugee-feedback.html">Back</a>
+              <a class='button -submit' href="refugee-feedback.html"><?php echo $this->translate('Back'); ?></a>
             </div>
           </div>
           

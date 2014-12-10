@@ -4,8 +4,10 @@ namespace Administration\Controller;
 
 use Administration\Entity\File;
 use Administration\Form\TranslationForm;
+
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Http\PhpEnvironment\Response;
 
 use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
@@ -28,12 +30,12 @@ class TranslationController extends AbstractActionController {
     public function indexAction()
     {
         $request = $this->getRequest();
-        $locales = $this->serviceLocator->get('config')['translationLocales'];
+        $globalConfig = $this->serviceLocator->get('config');
 
         $addedTranslations = array();
         $files = $this->getEntityManager()->getRepository('Administration\Entity\File')->findAll();
         foreach ($files as $f) {
-            $addedTranslations[substr($f->getName(), 0, 5)] = $f->getName();
+            $addedTranslations[$f->getId()] = $f->getName();
         }
 
         $file = null;
@@ -46,7 +48,7 @@ class TranslationController extends AbstractActionController {
             $file = new File();
 
         $form = new TranslationForm();
-        $form->get('locale')->setValueOptions($locales);
+        $form->get('locale')->setValueOptions($globalConfig['translationLocales']);
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\File'));
         $form->bind($file);
 
@@ -60,11 +62,9 @@ class TranslationController extends AbstractActionController {
             $form->setData($post);
 
             if ($form->isValid()) {
-                $translateFile = $post['translation-file'];
 
-                //todo: change dir to language in application module when compiling is implemented
-                $target_dir = dirname($_SERVER['DOCUMENT_ROOT']) . "/data/uploads/";
-                $target_file = $target_dir . basename($fileName);
+                $translateFile = $post['translation-file'];
+                $target_file = $globalConfig['languageDir'] . basename($fileName);
 
                 if (move_uploaded_file($translateFile['tmp_name'], $target_file)) {
                     $this->flashMessenger()->addMessage('The file ' . basename($translateFile['name']). ' has been uploaded.
@@ -87,6 +87,48 @@ class TranslationController extends AbstractActionController {
         }
 
         return new ViewModel(array('form' => $form, 'translations' => $addedTranslations));
+    }
+
+    function downloadTranslationAction () {
+
+        $globalConfig = $this->serviceLocator->get('config');
+        $id = (int)$this->params()->fromRoute('id');
+
+        $file = $this->getEntityManager()->getRepository('Administration\Entity\File')
+            ->findOneBy(array('id' => $id));
+
+        $target_po = $globalConfig['languageDir'] . basename($file->getName());
+        $translationName = substr($file->getName(), 0, -3);
+
+        $fileNameMo = $translationName . '.mo';
+        $target_mo = $globalConfig['languageDir'] . basename($translationName . '.mo');
+
+        $zip = new \ZipArchive();
+
+        $zipName = $translationName . '.zip';
+        $zipFile = dirname($_SERVER['DOCUMENT_ROOT']) . '/data/uploads/' . $zipName;
+
+        if ($zip->open($zipFile, \ZipArchive::CREATE)!==TRUE) {
+            $this->flashMessenger()->addMessage("Cannot create <$zipName>\n");
+            return $this->redirect()->toRoute('translation');
+        }
+
+        $zip->addFile($target_po,  $file->getName());
+        $zip->addFile($target_mo,  $fileNameMo);
+
+        $zip->close();
+
+        $response = new Response();
+        $response->getHeaders()->addHeaders(array(
+            'Content-Description' => 'File Transfer',
+            'Content-Type' => 'application/zip',
+            'Content-Disposition' => 'attachment; filename="' . $zipName . '"',
+            'Pragma' => 'public',
+            'Content-Length' => filesize($zipFile),
+        ));
+        $response->setContent(file_get_contents($zipFile));
+
+        return $response;
     }
 
 }

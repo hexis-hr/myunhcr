@@ -46,7 +46,7 @@ class Auth extends AbstractPlugin
         Navigation::setDefaultAcl($acl);
         Navigation::setDefaultRole($role);
 
-        if (!$acl->isAllowed($role, $privilege, $action) && !$acl->isAllowed($role, $namespace, $privilege)) {
+        if (!($acl->isAllowed($role, $privilege, $action) || $acl->isAllowed($role, $namespace, $privilege))) {
 
             $router = $e->getRouter();
             $url    = $router->assemble(array(), array('name' => 'login'));

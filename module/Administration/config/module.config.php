@@ -152,6 +152,35 @@ return array(
                         'action'        => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller'    => 'Translation',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'downloadTranslation' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route'    => '/downloadTranslation[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller'    => 'Translation',
+                                'action'        => 'downloadTranslation',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
             ),
         ),
     ),

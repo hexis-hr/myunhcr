@@ -33,14 +33,21 @@
 
     <div class="separator bottom"></div>
     <h3 class="glyphicons notes"><?php echo $this->translate('Added translations'); ?></h3>
-    <div class="row">
-        <?php foreach ($this->translations as $translation => $translationFile) { ?>
-            <div class="col-md-2 widget-stats">
-                <span class="txt"><strong><?php echo $translation; ?></strong>
-                    <?php echo $this->translate('Filename') . ': ' . $translationFile; ?>
-                </span>
-            </div>
+    <?php if (count($this->translations) > 0) { ?>
+        <?php foreach ($this->translations as $translationId => $translationFile) { ?>
+            <a href="<?php  echo $this->url('translation/downloadTranslation', array('id' => $translationId)); ?>">
+                <div class="col-md-2 widget-stats">
+                    <span class="txt"><strong><?php echo substr($translationFile, 0, 5); ?></strong>
+                        <?php echo $this->translate('Filename') . ': ' . $translationFile; ?>
+                    </span>
+                </div>
+            </a>
         <?php } ?>
-    </div>
+    <?php } else { ?>
+        <div class="widget-body center">
+            <span class="gritter-add-regular btn btn-inverse btn-block">
+                <?php echo $this->translate('Translations not found. Please upload new one.'); ?></span>
+        </div>
+    <?php } ?>
 
 </div>

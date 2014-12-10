@@ -65,10 +65,11 @@ class TranslationController extends AbstractActionController {
 
                 $translateFile = $post['translation-file'];
                 $target_file = $globalConfig['languageDir'] . basename($fileName);
+                $newMoFile = $globalConfig['languageDir'] . basename($locale . '.mo');
 
                 if (move_uploaded_file($translateFile['tmp_name'], $target_file)) {
                     exec('msgfmt -cv -o ' . $newMoFile . ' ' . $target_file);
-                    $this->flashMessenger()->addMessage('The file ' . basename($translateFile['name']) . ' has been uploaded.
+                    $this->flashMessenger()->addMessage('The file ' . basename($translateFile['name']). ' has been uploaded.
                      Its name is changed to ' . basename($fileName));
                 } else {
                     $this->flashMessenger()->addMessage('Sorry, there was an error uploading your file.');

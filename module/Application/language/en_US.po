@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-04 19:03+0100\n"
-"PO-Revision-Date: 2014-12-04 19:03+0100\n"
+"POT-Creation-Date: 2014-12-10 15:14+0100\n"
+"PO-Revision-Date: 2014-12-10 15:14+0100\n"
 "Last-Translator: Evan Coury <me@evancoury.com>\n"
 "Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
 "Language: en_US\n"
@@ -14,6 +14,420 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Generator: Poedit 1.6.5\n"
 "X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/application/index/book-an-appointment.phtml:7
+#: ../view/application/index/book-an-appointment2.phtml:7
+#: ../view/application/index/book-an-appointment4.phtml:7
+#: ../view/application/index/navigation.phtml:78
+#: ../view/application/index/navigation.phtml:79
+msgid "Book an Appointment"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment.phtml:29
+msgid "What would you like to do at UNHCR ?"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment.phtml:32
+#: ../view/application/index/book-an-appointment.phtml:34
+msgid "Registration"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment.phtml:41
+#: ../view/application/index/check-your-status.phtml:45
+#: ../view/application/index/report-an-incident.phtml:71
+#: ../view/application/index/take-a-survey.phtml:45
+#: ../view/application/index/update-personal-data.phtml:45
+msgid "Cancel"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment2.phtml:29
+msgid "Please enter Date for Appointment:"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment2.phtml:36
+msgid "Please enter Time for Appointment:"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment2.phtml:45
+#: ../view/application/index/book-an-appointment3.phtml:38
+#: ../view/application/index/book-an-appointment4.phtml:49
+#: ../view/application/index/check-your-status2.phtml:41
+#: ../view/application/index/check-your-status3.phtml:36
+#: ../view/application/index/choose-your-survey.phtml:41
+#: ../view/application/index/news-and-events.phtml:49
+#: ../view/application/index/news-article.phtml:40
+#: ../view/application/index/report-an-incident2.phtml:52
+#: ../view/application/index/report-an-incident3.phtml:40
+#: ../view/application/index/report-an-incident4.phtml:47
+#: ../view/application/index/update-personal-data2.phtml:41
+#: ../view/application/index/update-personal-data3.phtml:74
+#: ../view/application/index/update-personal-data4.phtml:36
+#: ../view/application/index/what-is-your-gender.phtml:69
+msgid "Back"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment3.phtml:7
+msgid "Book an Appointemnt"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment3.phtml:29
+#: ../view/application/index/check-your-status.phtml:29
+#: ../view/application/index/take-a-survey.phtml:29
+#: ../view/application/index/update-personal-data.phtml:29
+msgid "Please enter your identification number:"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment4.phtml:28
+msgid "Appointment will be booked for:"
+msgstr ""
+
+#: ../view/application/index/book-an-appointment4.phtml:43
+msgid "Press \"Book\" button to confirm your booking"
+msgstr ""
+
+#: ../view/application/index/check-your-status.phtml:7
+#: ../view/application/index/check-your-status2.phtml:7
+#: ../view/application/index/check-your-status3.phtml:7
+#: ../view/application/index/navigation.phtml:84
+#: ../view/application/index/navigation.phtml:85
+msgid "Check Your Status"
+msgstr ""
+
+#: ../view/application/index/check-your-status.phtml:36
+#: ../view/application/index/take-a-survey.phtml:36
+#: ../view/application/index/update-personal-data.phtml:36
+msgid "Please enter your date of birth:"
+msgstr ""
+
+#: ../view/application/index/check-your-status2.phtml:29
+msgid "What would you like to check ?"
+msgstr ""
+
+#: ../view/application/index/check-your-status2.phtml:32
+#: ../view/application/index/check-your-status2.phtml:34
+msgid "Asylum Application"
+msgstr ""
+
+#: ../view/application/index/check-your-status3.phtml:29
+msgid "Your Asylum-Application's status:"
+msgstr ""
+
+#: ../view/application/index/check-your-status3.phtml:30
+msgid "Decision is pending"
+msgstr ""
+
+#: ../view/application/index/choose-your-survey.phtml:7
+#: ../view/application/index/take-a-survey.phtml:7
+#: ../view/application/index/what-is-your-gender.phtml:7
+msgid "Survey"
+msgstr ""
+
+#: ../view/application/index/choose-your-survey.phtml:29
+msgid "Choose your survey:"
+msgstr ""
+
+#: ../view/application/index/choose-your-survey.phtml:32
+#: ../view/application/index/choose-your-survey.phtml:34
+msgid "Your needs assessment"
+msgstr ""
+
+#: ../view/application/index/faq-myunhcr.phtml:7
+#: ../view/application/index/faq-refugee.phtml:7
+#: ../view/application/index/faq.phtml:7
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: ../view/application/index/faq-myunhcr.phtml:29
+#: ../view/application/index/faq-refugee.phtml:29
+#: ../view/application/index/faq.phtml:29
+msgid "What is MyUNHCR?"
+msgstr ""
+
+#: ../view/application/index/faq-myunhcr.phtml:35
+#: ../view/application/index/faq-refugee.phtml:35
+#: ../view/application/index/faq.phtml:37
+msgid "How anonymous is this application ?"
+msgstr ""
+
+#: ../view/application/index/faq.phtml:31
+msgid ""
+"My UNHCR is not just a project, it is a Web Application,\n"
+"            that everyone can use either on their Computer or Cellphone, old "
+"or new, it doesn't matter.\n"
+"Just start the site/app and get all informations you need."
+msgstr ""
+
+#: ../view/application/index/faq.phtml:39
+msgid ""
+"My UNHCR is not just a project, it is a Web Application,\n"
+"            that everyone can use either on their Computer or Cellphone, old "
+"or new,\n"
+"             it doesn't matter. Just start the site/app and get all "
+"informations you need."
+msgstr ""
+
+#: ../view/application/index/file-a-complaint.phtml:7
+msgid "Your Feedback"
+msgstr ""
+
+#: ../view/application/index/file-a-complaint.phtml:33
+msgid "Your Message"
+msgstr ""
+
+#: ../view/application/index/footer-save.phtml:2
+msgid "Save"
+msgstr ""
+
+#: ../view/application/index/header.phtml:9
+msgid "Call info"
+msgstr ""
+
+#: ../view/application/index/header.phtml:17
+msgid "Menu"
+msgstr ""
+
+#: ../view/application/index/header.phtml:21
+msgid "Info line:"
+msgstr ""
+
+#: ../view/application/index/home-footer.phtml:3
+#: ../view/application/index/index.phtml:6
+msgid "Start"
+msgstr ""
+
+#: ../view/application/index/index.phtml:4
+#: ../view/application/index/navigation.phtml:73
+#: ../view/layout/layout.phtml:13
+msgid "MyUNHCR"
+msgstr "MyUNHCR"
+
+#: ../view/application/index/list-by-sector.phtml:7
+#: ../view/application/index/navigation.phtml:56
+#: ../view/application/index/navigation.phtml:57
+msgid "List by Sector"
+msgstr ""
+
+#: ../view/application/index/list-of-organizations.phtml:7
+#: ../view/application/index/navigation.phtml:50
+#: ../view/application/index/navigation.phtml:51
+msgid "List by Organization"
+msgstr ""
+
+#: ../view/application/index/map-of-service.phtml:7
+msgid "Services Available"
+msgstr ""
+
+#: ../view/application/index/map-of-service.phtml:29
+msgid "Where:"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:5
+msgid "Feedback"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:10
+#: ../view/application/index/navigation.phtml:11
+#: ../view/application/index/report-an-incident.phtml:7
+#: ../view/application/index/report-an-incident2.phtml:7
+#: ../view/application/index/report-an-incident3.phtml:7
+#: ../view/application/index/report-an-incident4.phtml:7
+#: ../view/application/index/report-an-incident5.phtml:7
+msgid "Report an Incident"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:16
+#: ../view/application/index/navigation.phtml:17
+msgid "Take a Survey"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:22
+#: ../view/application/index/navigation.phtml:23
+#: ../view/application/index/navigation.phtml:62
+#: ../view/application/index/navigation.phtml:63
+#: ../view/application/index/navigation.phtml:102
+#: ../view/application/index/navigation.phtml:103
+msgid "FAQ"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:33
+msgid "Information"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:38
+#: ../view/application/index/navigation.phtml:39
+#: ../view/application/index/news-and-events.phtml:7
+#: ../view/application/index/news-article.phtml:7
+msgid "News and Events"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:44
+#: ../view/application/index/navigation.phtml:45
+msgid "Map of Services"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:90
+#: ../view/application/index/navigation.phtml:91
+#: ../view/application/index/update-personal-data.phtml:7
+#: ../view/application/index/update-personal-data2.phtml:7
+#: ../view/application/index/update-personal-data3.phtml:7
+#: ../view/application/index/update-personal-data4.phtml:7
+msgid "Update Personal Data"
+msgstr ""
+
+#: ../view/application/index/navigation.phtml:96
+#: ../view/application/index/navigation.phtml:97
+msgid "Update Settings"
+msgstr ""
+
+#: ../view/application/index/news-and-events.phtml:37
+msgid "Refugee Camp in Jordan Open"
+msgstr ""
+
+#: ../view/application/index/report-an-incident.phtml:29
+msgid "Is this report Anonymous ?"
+msgstr ""
+
+#: ../view/application/index/report-an-incident.phtml:47
+msgid "Category of the Incident:"
+msgstr ""
+
+#: ../view/application/index/report-an-incident.phtml:50
+#: ../view/application/index/report-an-incident.phtml:52
+msgid "Protection Incident"
+msgstr ""
+
+#: ../view/application/index/report-an-incident.phtml:57
+msgid "Which type of protection incident?"
+msgstr ""
+
+#: ../view/application/index/report-an-incident.phtml:60
+#: ../view/application/index/report-an-incident.phtml:62
+msgid "I don't know"
+msgstr ""
+
+#: ../view/application/index/report-an-incident2.phtml:28
+msgid "Where did this happen?"
+msgstr ""
+
+#: ../view/application/index/report-an-incident2.phtml:31
+#: ../view/application/index/settings.phtml:38
+#: ../view/application/index/update-personal-data3.phtml:31
+msgid "Country"
+msgstr ""
+
+#: ../view/application/index/report-an-incident2.phtml:41
+#: ../view/application/index/settings.phtml:48
+msgid "Location"
+msgstr ""
+
+#: ../view/application/index/report-an-incident3.phtml:29
+msgid "Please describe the incident:"
+msgstr ""
+
+#: ../view/application/index/report-an-incident4.phtml:30
+msgid "Would you like to take/upload a picture of the incident? (optional)"
+msgstr ""
+
+#: ../view/application/index/report-an-incident4.phtml:37
+msgid "Would you like to record your testimony of the incident? (optional)"
+msgstr ""
+
+#: ../view/application/index/report-an-incident5.phtml:29
+msgid "Your report has been sent!"
+msgstr ""
+
+#: ../view/application/index/report-an-incident5.phtml:35
+msgid "Back to Homepage"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:7
+msgid "Settings"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:18
+msgid "Notifications:"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:25
+msgid "Language:"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:28
+msgid "English"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:33
+msgid "English:"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:43
+msgid "Jordan"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:53
+msgid "Ammon"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:58
+msgid "Category"
+msgstr ""
+
+#: ../view/application/index/settings.phtml:64
+msgid "Refugees"
+msgstr ""
+
+#: ../view/application/index/styleguide.phtml:6
+msgid "Page Title"
+msgstr ""
+
+#: ../view/application/index/update-personal-data2.phtml:29
+msgid "What would you like to update ?"
+msgstr ""
+
+#: ../view/application/index/update-personal-data2.phtml:32
+#: ../view/application/index/update-personal-data2.phtml:34
+msgid "Address"
+msgstr ""
+
+#: ../view/application/index/update-personal-data3.phtml:28
+msgid "Enter Your New Address information:"
+msgstr ""
+
+#: ../view/application/index/update-personal-data3.phtml:41
+msgid "City:"
+msgstr ""
+
+#: ../view/application/index/update-personal-data3.phtml:51
+msgid "Street Address:"
+msgstr ""
+
+#: ../view/application/index/update-personal-data3.phtml:58
+msgid "Postal Code:"
+msgstr ""
+
+#: ../view/application/index/update-personal-data3.phtml:65
+msgid "Comments:"
+msgstr ""
+
+#: ../view/application/index/update-personal-data4.phtml:27
+msgid "Please confirm your new address:"
+msgstr ""
+
+#: ../view/application/index/update-personal-data4.phtml:33
+msgid "Confirm"
+msgstr ""
+
+#: ../view/application/index/what-is-your-gender.phtml:49
+msgid "What is your Gender ?"
+msgstr ""
+
+#: ../view/application/index/what-is-your-gender.phtml:54
+msgid "I am Male"
+msgstr ""
+
+#: ../view/application/index/what-is-your-gender.phtml:60
+msgid "I am Female"
+msgstr ""
 
 #: ../view/error/404.phtml:1
 msgid "A 404 error occurred"
@@ -78,8 +492,4 @@ msgstr ""
 
 #: ../view/error/index.phtml:1
 msgid "An error occurred"
-msgstr ""
-
-#: ../view/layout/layout.phtml:12
-msgid "MyUNHCR"
 msgstr ""

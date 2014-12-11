@@ -11,19 +11,18 @@ class IndexController extends AbstractActionController {
 
     protected $em;
 
-    public function setEntityManager(EntityManager $em) {
+    public function setEntityManager (EntityManager $em) {
         $this->em = $em;
     }
 
-    public function getEntityManager() {
+    public function getEntityManager () {
         if (null === $this->em) {
             $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         }
         return $this->em;
     }
 
-    public function indexAction()
-    {
+    public function indexAction () {
         return new ViewModel(array());
     }
 

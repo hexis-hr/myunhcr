@@ -6,11 +6,9 @@ use Zend\Form\Form;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Stdlib\ArrayUtils;
 
-class UserForm extends Form
-{
+class UserForm extends Form {
 
-    public function __construct($name = null)
-    {
+    public function __construct ($name = null) {
 
         parent::__construct('user');
 
@@ -66,8 +64,7 @@ class UserForm extends Form
         ));
     }
 
-    public function setData($data)
-    {
+    public function setData ($data) {
 
         if ($data instanceof \Traversable) {
             $data = ArrayUtils::iteratorToArray($data);

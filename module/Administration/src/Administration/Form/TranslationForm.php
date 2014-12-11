@@ -6,11 +6,9 @@ use Zend\Form\Form;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Stdlib\ArrayUtils;
 
-class TranslationForm extends Form
-{
+class TranslationForm extends Form {
 
-    public function __construct($name = null)
-    {
+    public function __construct ($name = null) {
 
         parent::__construct('translation');
 

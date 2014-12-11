@@ -13,6 +13,8 @@ set :linked_dirs, %w{application/logs vendor}
 
 set :writable_dirs, ["application/logs"]
 
+set :linked_dirs, %w{public/uploads data/uploads}
+
 set :format, :pretty
 set :log_level, :info
 

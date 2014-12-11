@@ -16,19 +16,19 @@ class TranslationController extends AbstractActionController {
 
     protected $em;
 
-    public function setEntityManager(EntityManager $em) {
+    public function setEntityManager (EntityManager $em) {
         $this->em = $em;
     }
 
-    public function getEntityManager() {
+    public function getEntityManager () {
         if (null === $this->em) {
             $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         }
         return $this->em;
     }
 
-    public function indexAction()
-    {
+    public function indexAction () {
+
         $request = $this->getRequest();
         $globalConfig = $this->serviceLocator->get('config');
 
@@ -65,9 +65,11 @@ class TranslationController extends AbstractActionController {
 
                 $translateFile = $post['translation-file'];
                 $target_file = $globalConfig['languageDir'] . basename($fileName);
+                $newMoFile = $globalConfig['languageDir'] . basename($locale . '.mo');
 
                 if (move_uploaded_file($translateFile['tmp_name'], $target_file)) {
-                    $this->flashMessenger()->addMessage('The file ' . basename($translateFile['name']). ' has been uploaded.
+                    exec('msgfmt -cv -o ' . $newMoFile . ' ' . $target_file);
+                    $this->flashMessenger()->addMessage('The file ' . basename($translateFile['name']) . ' has been uploaded.
                      Its name is changed to ' . basename($fileName));
                 } else {
                     $this->flashMessenger()->addMessage('Sorry, there was an error uploading your file.');
@@ -108,13 +110,13 @@ class TranslationController extends AbstractActionController {
         $zipName = $translationName . '.zip';
         $zipFile = dirname($_SERVER['DOCUMENT_ROOT']) . '/data/uploads/' . $zipName;
 
-        if ($zip->open($zipFile, \ZipArchive::CREATE)!==TRUE) {
+        if ($zip->open($zipFile, \ZipArchive::CREATE) !== TRUE) {
             $this->flashMessenger()->addMessage("Cannot create <$zipName>\n");
             return $this->redirect()->toRoute('translation');
         }
 
-        $zip->addFile($target_po,  $file->getName());
-        $zip->addFile($target_mo,  $fileNameMo);
+        $zip->addFile($target_po, $file->getName());
+        $zip->addFile($target_mo, $fileNameMo);
 
         $zip->close();
 

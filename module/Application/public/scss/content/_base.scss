@@ -6,7 +6,7 @@
   );
   border-bottom: 1px solid $lightGray;
 }
-  .sectionHeader_inner {}
+  .sectionHeader_inner { position:relative; }
     .sectionHeader_title { display:block; font-size:18px; color:$black; }
     .sectionHeader_info { display:none; }
       .sectionHeader_info_wrapper { margin-top:-5px; }
@@ -28,7 +28,7 @@
     position: absolute;
     z-index: 10;
     top: -15px;
-    right: 0;
+    right: -18px;
     padding-top: 14px;
     width: 54px;
     height: 50px;

@@ -1,5 +1,7 @@
-<?php echo $this->doctype(); ?>
-<?php $locale = $this->plugin('translate')->getTranslator()->getLocale();?>
+<?php
+  echo $this->doctype();
+  $locale = $this->plugin('translate')->getTranslator()->getLocale();
+?>
 <html lang='<?php echo $locale?>' class='no-js'<?php if($locale == "ar_JO") echo "dir='rtl'"?>>
 <head>
   <meta charset='utf-8'> <!-- Charset should be defined as early as possible to avoid rendering problems -->
@@ -18,6 +20,7 @@
     var doc = document.documentElement;
     window.app = {
       name: 'MyUNHCR', // Define a default app name (for untitled pages, etc.)
+      time24h: false,
       dlog: true, // Toggle dev output logs in the console
       verbose: true, // Toggle some minor info like scroll ticks (requires dlog to be true)
       ua: navigator.userAgent.toLowerCase(),

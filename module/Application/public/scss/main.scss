@@ -32,7 +32,8 @@
 @import "form/_radio";
 @import "form/_switch";
 @import "form/_file";
-@import "form/_datepicker";
+@import "form/_date";
+@import "form/_time";
 
 
 // Import content modules
@@ -50,3 +51,7 @@
 // Import pages
 @import "pages/_welcome";
 @import "pages/_homepage";
+
+
+// Import plugins
+@import "external/picker/_picker";

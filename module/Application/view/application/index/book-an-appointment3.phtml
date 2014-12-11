@@ -23,30 +23,14 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='book-an-appointment4.html' class='booking form' ajaxForm>
-
-        <div class='form_item'>
-          <label class='form_label' for='authentication'><?php echo $this->translate("Please enter your identification number:")?></label>
-          <div class='form_field'>
-            <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
-          </div>
+      <div class='feedback -positive gapSmall'>
+        <i class='feedback_icon icon'></i>
+        <h1 class='feedback_title'><?php echo $this->translate('You have booked your appointment with UNHCR!'); ?></h1>
+        <div class='feedback_description preformat'>
+          <p>Some useful information here lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt rem asperiores at quisquam officiis praesentium!</p>
         </div>
-
-        <div class='grid'>
-          <div class='grid_column -small5'>
-            <div class='form_item'>
-              <a class='button -submit' href="book-an-appointment2.html"><?php echo $this->translate('Back'); ?></a>
-            </div>
-          </div>
-          
-          <div class='grid_column -small7'>
-            <div class='form_item'>
-              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
-            </div>
-          </div>
-        </div>
-
-      </form>
+      </div>
+      <a href='menu-page.html' class='button -fullWidth'><?php echo $this->translate('Back to Homepage'); ?></a>
     </div>
   </div>
 </section>

@@ -35,17 +35,19 @@
           </div>
         </div>
 
-        <div class='grid'>
-          <div class='grid_column -small5'>
-            <div class='form_item'>
-              <a class='button -submit' href="refugee-feedback.html"><?php echo $this->translate('Cancel'); ?></a>
-            </div>
+        <div class='form_item'>
+          <label class='form_label' for='authentication'><?php echo $this->translate("Please enter your identification number:")?> (<?php echo $this->translate("optional")?>)</label>
+          <div class='form_field'>
+            <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
           </div>
-          
+        </div>
+
+        <div class='grid -compact -reverse'>
           <div class='grid_column -small7'>
-            <div class='form_item'>
-              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
-            </div>
+            <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Next'); ?>">
+          </div>
+          <div class='grid_column -small5'>
+            <a class='button -fullWidth' href='menu-page.html' ajaxNav><?php echo $this->translate('Cancel'); ?></a>
           </div>
         </div>
 

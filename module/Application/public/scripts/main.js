@@ -49,6 +49,7 @@ window.queue = {
 
   },
   jQueryWaitlist: [],
+  pageLoadEvents: [],
   globalClickEvents: [],
   globalScrollEvents: [],
   globalResizeEvents: [],
@@ -82,7 +83,7 @@ function jQueryExec(){
 ------------------------------------------------------------------------------------*/
 var exec = function(funcQueue, name) {
   $.each(funcQueue, function(index, value) {
-    dlog_verbose(name + ' exec: ' + index);
+    dlog_verbose(name + ' fired: ' + index);
     value();
   });
 }
@@ -173,6 +174,25 @@ function lightResize(callback, delay){
 
 
 /*------------------------------------------------------------------------------------
+  Helper: Load CSS file
+------------------------------------------------------------------------------------*/
+var loadCSS = function(href) {
+  var cssLink = $("<link rel='stylesheet' type='text/css' href='"+href+"'>");
+  $('head').append(cssLink); 
+};
+
+
+
+/*------------------------------------------------------------------------------------
+  pageLoad events
+------------------------------------------------------------------------------------*/
+function pageLoad(){
+  exec(queue.pageLoadEvents, 'pageLoadEvents');
+}
+
+
+
+/*------------------------------------------------------------------------------------
   Get page
 ------------------------------------------------------------------------------------*/
 function getPage(url, title, method, data, timeout) {
@@ -211,6 +231,9 @@ function getPage(url, title, method, data, timeout) {
       // Swap data and show content
       $('#page').html(data);
       $('#page').removeClass('-loading');
+
+      // Run all pageLoad events
+      pageLoad();
 
     },
     error: function(xhr, type) {
@@ -369,6 +392,48 @@ queue.jQuery(function(){
 
 
   /*------------------------------------------------------------------------------------
+    Check for date and time inputs, and load libraries if required
+  ------------------------------------------------------------------------------------*/
+  queue.pageLoadEvents.push(function(event){
+    if( $('[inputDate]')[0] || $('[inputTime]')[0] ){ // Check if there are date & time fields
+      // Avoid replacing date & time in favor of native device UI
+      if((app.userDevice === 'Android' && app.userDeviceVersion > 4.3) || (app.userDevice === 'iOS' && app.userDeviceVersion > 5)){
+        // Do nothing for these devices since they have their own date & time UI
+      } else {
+        load('scripts/external/picker.js').thenRun(function(){
+          console.log('GET: Picker.js loaded!');
+
+          // Change type to basic inputs
+          $('[inputDate], [inputTime]').attr('type', 'input');
+
+          // Activate custom date picker
+          $('[inputDate]').pickadate({
+            format: 'dd/mm/yyyy',
+            
+            // Disable these dates in the calendar (0 = January)
+            disable: [
+              [2015,0,14],
+              [2015,0,15],
+              [2015,0,16]
+            ]
+          });
+
+          // Activate custom time picker
+          $('[inputTime]').pickatime({
+            format: 'HH:i',
+
+            // Available hours to pick from
+            min: [8,00],
+            max: [16,0]
+          });
+        });
+      }
+    }
+  });
+
+
+
+  /*------------------------------------------------------------------------------------
     Helper: Animate height:auto;
   ------------------------------------------------------------------------------------*/
   (function($){
@@ -382,6 +447,12 @@ queue.jQuery(function(){
       return this;
     }
   })(window.jQuery || window.Zepto || window.$);
+
+
+  /*------------------------------------------------------------------------------------
+    Run all pageLoad events
+  ------------------------------------------------------------------------------------*/
+  pageLoad();
   
 
 });
@@ -393,19 +464,19 @@ queue.jQuery(function(){
 ------------------------------------------------------------------------------------*/
 queue.jQuery(function(){
   $('html').on('click', function(event) {
-    exec(queue.globalClickEvents, 'GlobalClick');
+    exec(queue.globalClickEvents, 'globalClickEvents');
   });
 
   lightResize(function(){
-    exec(queue.globalResizeEvents, 'GlobalResize');
+    exec(queue.globalResizeEvents, 'globalResizeEvents');
   }, 300);
 
   lightScroll(function(){
-    exec(queue.globalResizeEvents, 'GlobalScroll');
+    exec(queue.globalScrollEvents, 'globalScrollEvents');
   }, 300);
 
   $(window).on('beforeunload', function(event) {
-    exec(queue.globalUnloadEvents, 'GlobalUnload');
+    exec(queue.globalUnloadEvents, 'globalUnloadEvents');
   });
 });
 jQueryExec();

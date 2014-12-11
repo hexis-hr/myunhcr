@@ -22,34 +22,29 @@
   </div>
 
   <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
+    <div class='grid_column -medium9 -mediumPlus8 -static'>
       <form action='book-an-appointment3.html' class='booking form' ajaxForm>
 
         <div class='form_item'>
           <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment:");?></label>
           <div class='form_field'>
-            <input class='formInput' type='date' name='' value='' placeholder='' id='date'>
+            <input class='formInput' type='date' placeholder='Day/Month/Year' inputDate>
           </div>
         </div>
 
         <div class='form_item'>
           <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment:");?></label>
           <div class='form_field'>
-            <input class='formInput' type='time' name='' value='' placeholder='' id='time'>
+            <input class='formInput' type='time' placeholder='Hour:Minutes' inputTime>
           </div>
         </div>
 
-        <div class='grid'>
-          <div class='grid_column -small5'>
-            <div class='form_item'>
-              <a class='button -submit' href="book-an-appointment.html"><?php echo $this->translate('Back'); ?></a>
-            </div>
-          </div>
-          
+        <div class='grid -compact -reverse'>
           <div class='grid_column -small7'>
-            <div class='form_item'>
-              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
-            </div>
+            <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Book now'); ?>">
+          </div>
+          <div class='grid_column -small5'>
+            <a class='button -fullWidth' href='book-an-appointment.html' ajaxNav><?php echo $this->translate('Back'); ?></a>
           </div>
         </div>
 

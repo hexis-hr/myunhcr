@@ -1,7 +1,7 @@
 @mixin st-ux {
   
   // Make an element unselectable
-  [unselectable="on"] {
+  %unselectable, [unselectable="on"] {
     user-select: none;
   }
 

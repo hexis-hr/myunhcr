@@ -6,8 +6,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class UserFormFilter implements InputFilterAwareInterface
-{
+class UserFormFilter implements InputFilterAwareInterface {
 
     public $id;
     public $email;
@@ -17,8 +16,7 @@ class UserFormFilter implements InputFilterAwareInterface
     public $lastName;
     protected $inputFilter;
 
-    public function exchangeArray($data)
-    {
+    public function exchangeArray ($data) {
 
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->email = (isset($data['email'])) ? $data['email'] : null;
@@ -28,14 +26,12 @@ class UserFormFilter implements InputFilterAwareInterface
     }
 
     // Add content to these methods:
-    public function setInputFilter(InputFilterInterface $inputFilter)
-    {
+    public function setInputFilter (InputFilterInterface $inputFilter) {
 
         throw new \Exception("Not used");
     }
 
-    public function getInputFilter()
-    {
+    public function getInputFilter () {
 
         if (!$this->inputFilter) {
 
@@ -111,8 +107,7 @@ class UserFormFilter implements InputFilterAwareInterface
         return $this->inputFilter;
     }
 
-    public function getAddInputFilter()
-    {
+    public function getAddInputFilter () {
 
         if (!$this->inputFilter) {
 

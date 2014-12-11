@@ -1,0 +1,93 @@
+
+<div class="separator bottom"></div>
+
+<div class="heading-buttons">
+    <h3 class="glyphicons comments"> <?php echo $this->translate('Frequently Asked Questions'); ?></h3>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('faq/addFaqCategory');?>">
+            <?php echo $this->translate('Add new FAQ Category'); ?></a>
+    </div>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('faq/add');?>">
+            <?php echo $this->translate('Add new FAQ'); ?></a>
+    </div>
+
+    <div class="clearfix" style="clear: both;"></div>
+</div>
+
+<div class="separator bottom"></div>
+
+<div class="innerLR">
+    <div class="widget widget-4">
+        <div class="widget-head">
+            <h4 class="heading"><?php echo $this->translate('FAQ Categories'); ?></h4>
+        </div>
+
+        <?php if (count($this->data) > 0) { ?>
+            <div class="widget-body">
+                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
+                    <thead>
+                    <tr>
+                        <th><?php echo $this->translate('#'); ?></th>
+                        <th><?php echo $this->translate('Category'); ?></th>
+                        <th><?php echo $this->translate('Action'); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->data as $data) { ?>
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
+                            <td><?php echo $data->getId(); ?></td>
+                            <td><?php echo $data->getCategory(); ?></td>
+                            <td>
+                                <a class="btn-action glyphicons pencil btn-success"
+                                   href="<?php echo $this->url('faq/editFaqCategory', array('id' => $data->getId())); ?>"></a>
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete="true"
+                                   data-href="<?php echo $this->url('faq/deleteFaqCategory', array('id' => $data->getId())); ?>"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php } else { ?>
+            <div class="widget-body center">
+            <span class="gritter-add-regular btn btn-inverse btn-block">
+                <?php echo $this->translate('Translations not found. Please upload new one.'); ?></span>
+            </div>
+        <?php } ?>
+
+    </div>
+</div>
+
+<?php
+echo $this->paginationControl(
+    $this->data,
+    'sliding',
+    array('partial/paginator.phtml', 'Administration'),
+    array('route  ' => 'faq/viewFaqCategory', 'routeParams' => array())
+);
+?>
+
+
+<script>
+
+    $('[data-delete="true"]').on('click', function(e){
+
+        e.preventDefault();
+        if (confirm('You will remove chosen item and all items related to this entity, do you want to continue?')) {
+            $.ajax({
+                type: 'POST',
+                url: $(this).data('href'),
+                success: function(response){
+                    $('[data-row="row_' + response.id + '"]').fadeOut(500);
+                },
+                error: function() {
+                    console.log('Error on FAQ category delete');
+                }
+            });
+
+        }
+    });
+</script>

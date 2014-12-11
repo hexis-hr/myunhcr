@@ -1,0 +1,153 @@
+
+<div class="separator bottom"></div>
+
+<div class="heading-buttons">
+    <h3 class="glyphicons comments"> <?php echo $this->translate('Frequently Asked Questions'); ?></h3>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('faq/addFaqCategory');?>">
+            <?php echo $this->translate('Add new FAQ Category'); ?></a>
+    </div>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('faq/add');?>">
+            <?php echo $this->translate('Add new FAQ'); ?></a>
+    </div>
+
+    <div class="clearfix" style="clear: both;"></div>
+</div>
+
+<div class="separator bottom"></div>
+
+<div class="innerLR">
+
+    <?php if (count($this->data) > 0) { ?>
+        <div class="widget widget-tabs widget-tabs-double-2">
+
+            <!-- Widget heading -->
+            <div class="widget-head">
+                <ul>
+                    <?php $active = true; ?>
+                    <?php foreach ($this->categories as $category) { ?>
+                        <?php if ($active) { ?>
+                            <li id="cat_<?php echo $category->getId(); ?>" class="active">
+                                <a class="glyphicons conversation" href="#tab_<?php echo $category->getId(); ?>" data-toggle="tab">
+                                    <i></i><span><?php echo $category->getCategory(); ?></span>
+                                </a>
+                            </li>
+                            <?php $active = false; ?>
+                        <?php } else { ?>
+                            <li id="cat_<?php echo $category->getId(); ?>">
+                                <a class="glyphicons conversation" href="#tab_<?php echo $category->getId(); ?>" data-toggle="tab">
+                                    <i></i><span><?php echo $category->getCategory(); ?></span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
+                </ul>
+            </div>
+            <!-- // Widget heading END -->
+
+            <div class="widget-body">
+                <div class="tab-content">
+
+                    <?php $active = true; ?>
+                    <?php foreach ($this->categories as $category) { ?>
+                        <?php if ($active) { ?>
+                            <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane active">
+                                <div class="panel-group" id="accordion">
+                                    <?php foreach ($this->data as $data) { ?>
+                                        <?php if ($data->getCategory() == $category) { ?>
+                                            <div class="panel panel-default" data-row="row_<?php echo $data->getId(); ?>">
+                                                <div class="panel-heading">
+                                                    <a class="accordion-toggle glyphicons circle_question_mark collapsed col-md-11"
+                                                       data-toggle="collapse"
+                                                       data-parent="#accordion"
+                                                       href="#collapse<?php echo $data->getId(); ?>"
+                                                        ><i></i><?php echo $data->getTitle(); ?>
+                                                    </a>
+                                                    <a class="btn-action glyphicons pencil btn-success "
+                                                       href="<?php echo $this->url('faq/edit', array('id' => $data->getId())); ?>"></a>
+                                                    <a class="btn-action glyphicons remove_2 btn-danger"
+                                                       href="#"
+                                                       data-delete="true"
+                                                       data-href="<?php echo $this->url('faq/delete', array('id' => $data->getId())); ?>"></a>
+                                                </div>
+                                                <div id="collapse<?php echo $data->getId(); ?>"
+                                                     class="panel-collapse collapse"
+                                                     style="height: 0px;"
+                                                    ><div class="panel-body"><?php echo $data->getContent(); ?></div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <?php $active = false; ?>
+                        <?php } else { ?>
+                            <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane"
+                                 data-row="row_<?php echo $category->getId(); ?>">
+                                <div class="panel-group" id="accordion">
+                                    <?php foreach ($this->data as $data) { ?>
+                                        <?php if ($data->getCategory() == $category) { ?>
+                                            <div class="panel panel-default" data-row="row_<?php echo $data->getId(); ?>">
+                                                <div class="panel-heading">
+                                                    <a class="accordion-toggle glyphicons circle_question_mark collapsed col-md-11"
+                                                       data-toggle="collapse"
+                                                       data-parent="#accordion"
+                                                       href="#collapse<?php echo $data->getId(); ?>"
+                                                        ><i></i><?php echo $data->getTitle(); ?>
+                                                    </a>
+                                                    <a class="btn-action glyphicons pencil btn-success"
+                                                       href="<?php echo $this->url('faq/edit', array('id' => $data->getId())); ?>"></a>
+                                                    <a class="btn-action glyphicons remove_2 btn-danger"
+                                                       href="#"
+                                                       data-delete="true"
+                                                       data-href="<?php echo $this->url('faq/delete', array('id' => $data->getId())); ?>"></a>
+                                                </div>
+                                                <div id="collapse<?php echo $data->getId(); ?>" class="panel-collapse collapse" style="height: 0px;">
+                                                    <div class="panel-body">
+                                                        <?php echo $data->getContent(); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="widget-body center">
+            <span class="gritter-add-regular btn btn-inverse btn-block">
+                <?php echo $this->translate('Translations not found. Please upload new one.'); ?></span>
+        </div>
+    <?php } ?>
+
+</div>
+
+<script>
+
+    $('[data-delete="true"]').on('click', function(e){
+
+        e.preventDefault();
+        if (confirm('You will remove chosen item, do you want to continue?')) {
+            $.ajax({
+                type: 'POST',
+                url: $(this).data('href'),
+                success: function(response){
+                    $('[data-row="row_' + response.id + '"]').fadeOut(500);
+                },
+                error: function() {
+                    console.log('Error on FAQ category delete');
+                }
+            });
+
+        }
+    });
+</script>
+

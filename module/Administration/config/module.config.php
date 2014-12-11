@@ -8,59 +8,59 @@ return array(
             'login' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/login[/:notFound]',
+                    'route' => '/login[/:notFound]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller'    => 'Auth',
-                        'action'        => 'login',
+                        'controller' => 'Auth',
+                        'action' => 'login',
                     ),
                 ),
             ),
             'process' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/login/process',
+                    'route' => '/login/process',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller'    => 'Auth',
-                        'action'        => 'authenticate',
+                        'controller' => 'Auth',
+                        'action' => 'authenticate',
                     ),
                 ),
             ),
             'logout' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/logout',
+                    'route' => '/logout',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller'    => 'Auth',
-                        'action'        => 'logout',
+                        'controller' => 'Auth',
+                        'action' => 'logout',
                     ),
                 ),
             ),
             'administration' => array(
-                'type'    => 'Literal',
+                'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/administration',
+                    'route' => '/administration',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
+                        'controller' => 'Index',
+                        'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]][/:id][/:confirm]',
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
-                                'controller'    => 'Auth',
-                                'action'        => 'login',
+                                'controller' => 'Auth',
+                                'action' => 'login',
                             ),
                         ),
                     ),
@@ -69,37 +69,37 @@ return array(
             'account' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/account',
+                    'route' => '/account',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller'    => 'Account',
-                        'action'        => 'index',
+                        'controller' => 'Account',
+                        'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]][/:id][/:confirm]',
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
-                                'controller'    => 'Account',
-                                'action'        => 'index',
+                                'controller' => 'Account',
+                                'action' => 'index',
                             ),
                         ),
                     ),
                     'add' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route'    => '/add',
+                            'route' => '/add',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller'    => 'Account',
-                                'action'        => 'add',
+                                'controller' => 'Account',
+                                'action' => 'add',
                             ),
                         ),
                         'may_terminate' => true,
@@ -107,11 +107,11 @@ return array(
                     'edit' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route'    => '/edit[/:id]',
+                            'route' => '/edit[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller'    => 'Account',
-                                'action'        => 'edit',
+                                'controller' => 'Account',
+                                'action' => 'edit',
                             ),
                         ),
                         'may_terminate' => true,
@@ -119,11 +119,11 @@ return array(
                     'delete' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route'    => '/delete[/:id]',
+                            'route' => '/delete[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller'    => 'Account',
-                                'action'        => 'delete',
+                                'controller' => 'Account',
+                                'action' => 'delete',
                             ),
                         ),
                         'may_terminate' => true,
@@ -131,11 +131,11 @@ return array(
                     'profile' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route'    => '/profile[/:id]',
+                            'route' => '/profile[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller'    => 'Account',
-                                'action'        => 'profile',
+                                'controller' => 'Account',
+                                'action' => 'profile',
                             ),
                         ),
                         'may_terminate' => true,
@@ -145,37 +145,149 @@ return array(
             'translation' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/translation',
+                    'route' => '/translation',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller'    => 'Translation',
-                        'action'        => 'index',
+                        'controller' => 'Translation',
+                        'action' => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
                     'default' => array(
-                        'type'    => 'Segment',
+                        'type' => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]][/:id][/:confirm]',
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
-                                'controller'    => 'Translation',
-                                'action'        => 'index',
+                                'controller' => 'Translation',
+                                'action' => 'index',
                             ),
                         ),
                     ),
                     'downloadTranslation' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route'    => '/downloadTranslation[/:id]',
+                            'route' => '/downloadTranslation[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller'    => 'Translation',
-                                'action'        => 'downloadTranslation',
+                                'controller' => 'Translation',
+                                'action' => 'downloadTranslation',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
+            'faq' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/faq',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Faq',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Faq',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'add' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addFaq',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'add',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'edit' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editFaq[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'edit',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'delete' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/delete[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'delete',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewFaqCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewFaqCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'viewFaqCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addFaqCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addFaqCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'addFaqCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editFaqCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editFaqCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'editFaqCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteFaqCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteFaqCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Faq',
+                                'action' => 'deleteFaqCategory',
                             ),
                         ),
                         'may_terminate' => true,
@@ -189,7 +301,7 @@ return array(
             __NAMESPACE__ . '_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => array(getcwd() . '/module/' . __NAMESPACE__ . '/src/'. __NAMESPACE__ .'/Entity/')
+                'paths' => array(getcwd() . '/module/' . __NAMESPACE__ . '/src/' . __NAMESPACE__ . '/Entity/')
             ),
             'orm_default' => array(
                 'drivers' => array(
@@ -213,7 +325,7 @@ return array(
         ),
     ),
     'doctrinefixtures' => array(
-        'paths' => array( getcwd() . '/module/' . __NAMESPACE__ . '/src/'. __NAMESPACE__ .'/DataFixtures/ORM' )
+        'paths' => array(getcwd() . '/module/' . __NAMESPACE__ . '/src/' . __NAMESPACE__ . '/DataFixtures/ORM')
     ),
     'controller_plugins' => array(
         'invokables' => array(
@@ -226,23 +338,24 @@ return array(
             'Administration\Controller\Index' => 'Administration\Controller\IndexController',
             'Administration\Controller\Account' => 'Administration\Controller\AccountController',
             'Administration\Controller\Translation' => 'Administration\Controller\TranslationController',
+            'Administration\Controller\Faq' => 'Administration\Controller\FaqController',
         ),
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
         'template_map' => array(
-            'layout/administration'      => getcwd() . '/module/'. __NAMESPACE__ . '/view/layout/administration.phtml',
-            'layout/auth'                => getcwd() . '/module/'. __NAMESPACE__ . '/view/layout/auth.phtml',
-            'administration/index/index' => getcwd() . '/module/'. __NAMESPACE__ . '/view/administration/index/index.phtml',
-            'error/404'               => getcwd() . '/module/'. __NAMESPACE__ . '/view/error/404.phtml',
-            'error/index'             => getcwd() . '/module/'. __NAMESPACE__ . '/view/error/index.phtml',
+            'layout/administration' => getcwd() . '/module/' . __NAMESPACE__ . '/view/layout/administration.phtml',
+            'layout/auth' => getcwd() . '/module/' . __NAMESPACE__ . '/view/layout/auth.phtml',
+            'administration/index/index' => getcwd() . '/module/' . __NAMESPACE__ . '/view/administration/index/index.phtml',
+            'error/404' => getcwd() . '/module/' . __NAMESPACE__ . '/view/error/404.phtml',
+            'error/index' => getcwd() . '/module/' . __NAMESPACE__ . '/view/error/index.phtml',
         ),
         'template_path_stack' => array(
-            'administration' => getcwd() . '/module/'. __NAMESPACE__ . '/view/',
+            'administration' => getcwd() . '/module/' . __NAMESPACE__ . '/view/',
         ),
         'strategies' => array(
             'ViewJsonStrategy',
@@ -260,26 +373,38 @@ return array(
             array(
                 'label' => 'Dashboard',
                 'route' => 'administration',
-                'class' => 'glyphicons home'
+                'class' => 'glyphicons home',
             ),
             array(
                 'label' => 'Accounts',
                 'route' => 'account',
                 'resource' => 'Administration',
                 'privilege' => 'Admin',
-                'class' => "glyphicons group"
+                'class' => 'glyphicons group',
             ),
             array(
                 'label' => 'My Profile',
                 'route' => 'account/profile',
-                'class' => "glyphicons user"
+                'class' => 'glyphicons user',
             ),
             array(
                 'label' => 'Translations',
                 'route' => 'translation',
                 'resource' => 'Administration',
                 'privilege' => 'Admin',
-                'class' => "glyphicons translate"
+                'class' => 'glyphicons translate',
+            ),
+            array(
+                'label' => 'FAQ',
+                'route' => 'faq',
+                'class' => 'glyphicons comments',
+                'pages' => array(
+                    array(
+                        'label' => 'FAQ category',
+                        'route' => 'faq/viewFaqCategory',
+                        'class' => 'glyphicons show_big_thumbnails',
+                    ),
+                ),
             ),
         ),
     ),

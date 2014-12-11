@@ -4,17 +4,17 @@ namespace Administration\Form;
 
 use Zend\Form\Form;
 
-class LoginForm extends Form
-{
-    public function __construct($name = null)
-    {
+class LoginForm extends Form {
+
+    public function __construct ($name = null) {
+
         parent::__construct('login');
         $this->setAttribute('method', 'post');
 
         $this->add(array(
             'name' => 'email',
             'attributes' => array(
-                'type'  => 'Email',
+                'type' => 'Email',
                 'class' => 'form-control input-block-level',
                 'placeholder' => 'Email address',
             ),
@@ -22,22 +22,22 @@ class LoginForm extends Form
 
         $this->add(array(
             'name' => 'password',
-            'type'  => 'Password',
+            'type' => 'Password',
             'attributes' => array(
-                'class'  => 'form-control input-block-level',
-                'placeholder'  => 'Password',
+                'class' => 'form-control input-block-level',
+                'placeholder' => 'Password',
             ),
         ));
 
         //checkbox type must have first letter uppercase
         $this->add(array(
             'name' => 'rememberMe',
-            'type'  => 'Checkbox',
+            'type' => 'Checkbox',
         ));
 
         $this->add(array(
             'name' => 'submit',
-            'type'  => 'Submit',
+            'type' => 'Submit',
             'id' => 'loginSubmit',
             'attributes' => array(
                 'value' => 'Log In',

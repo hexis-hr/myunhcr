@@ -6,13 +6,13 @@ use Zend\Mvc\MvcEvent;
 use Zend\Authentication\Storage;
 use Zend\ModuleManager\ModuleManager;
 
-class Module
-{
+class Module {
+
     private $serviceManager;
 
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
+    public function onBootstrap (MvcEvent $e) {
+
+        $eventManager = $e->getApplication()->getEventManager();
         $this->serviceManager = $e->getApplication()->getServiceManager();
         $eventManager->attach('dispatch', array($this, 'loadConfiguration'), 100);
 
@@ -23,13 +23,13 @@ class Module
         $viewModel->acl = $this->serviceManager->get('Administration\Acl');
     }
 
-    public function getConfig()
-    {
+    public function getConfig () {
+
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
-    {
+    public function getAutoloaderConfig () {
+
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -39,14 +39,14 @@ class Module
         );
     }
 
-    public function getServiceConfig()
-    {
+    public function getServiceConfig () {
+
         return array(
-            'factories'=>array(
-                'AuthStorage' => function($sm){
+            'factories' => array(
+                'AuthStorage' => function ($sm) {
                         return new \Administration\Model\AuthStorage('myunhcr');
                     },
-                'AuthService' => function($sm) {
+                'AuthService' => function ($sm) {
                         $auth = $this->serviceManager->get('doctrine.authenticationservice.orm_default');
                         $auth->setStorage($sm->get('AuthStorage'));
 
@@ -57,19 +57,19 @@ class Module
     }
 
     //quickfix
-    public function init(ModuleManager $manager)
-    {
+    public function init (ModuleManager $manager) {
+
         $events = $manager->getEventManager();
         $sharedEvents = $events->getSharedManager();
-        $sharedEvents->attach('Administration', 'dispatch', function($e) {
+        $sharedEvents->attach('Administration', 'dispatch', function ($e) {
             $controller = $e->getTarget();
             $controller->layout('layout/administration');
         }, 100);
     }
 
-    public function loadConfiguration(MvcEvent $e)
-    {
-        $application   = $e->getApplication();
+    public function loadConfiguration (MvcEvent $e) {
+
+        $application = $e->getApplication();
         $sharedManager = $application->getEventManager()->getSharedManager();
 
         $router = $this->serviceManager->get('router');
@@ -78,7 +78,7 @@ class Module
         $matchedRoute = $router->match($request);
         if (null !== $matchedRoute) {
             $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch',
-                function($e) {
+                function ($e) {
                     $this->serviceManager->get('ControllerPluginManager')->get('Auth')->doAuthorization($e);
                 }, 100);
         }

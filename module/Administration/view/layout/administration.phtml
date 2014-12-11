@@ -130,7 +130,7 @@
         <?php echo $this->partial('partial/mainNavigation.phtml',
         array('acl' => $this->acl, 'userRole' => $this->auth->getIdentity()->getType())); ?>
 
-        <div id="content">
+        <div id="content" style="min-height: 600px">
             <?php if ($this->flashMessenger()->hasMessages()) { ?>
                 <div class="alert alert-danger">
 

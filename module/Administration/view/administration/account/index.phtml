@@ -28,7 +28,7 @@
                 </thead>
                 <tbody>
                     <?php foreach($this->data as $data) { ?>
-                        <tr data-account="account_<?php echo $data->getId(); ?>">
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
                             <td><?php echo $data->getId(); ?></td>
                             <td><?php echo $data->getEmail(); ?></td>
                             <td><?php echo ucfirst($data->getType()); ?></td>
@@ -66,7 +66,7 @@ echo $this->paginationControl(
                 type: 'POST',
                 url: $(this).data('href'),
                 success: function(response){
-                   $('[data-account="account_' + response.userId + '"]').fadeOut(500);
+                   $('[data-row="row_' + response.userId + '"]').fadeOut(500);
                 },
                 error: function() {
                     console.log('Error on account delete');

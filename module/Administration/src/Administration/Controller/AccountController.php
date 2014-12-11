@@ -19,18 +19,18 @@ class AccountController extends AbstractActionController {
 
     protected $em;
 
-    public function setEntityManager(EntityManager $em) {
+    public function setEntityManager (EntityManager $em) {
         $this->em = $em;
     }
 
-    public function getEntityManager() {
+    public function getEntityManager () {
         if (null === $this->em) {
             $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         }
         return $this->em;
     }
 
-    public function indexAction() {
+    public function indexAction () {
 
         $mUser = $this->getEntityManager()->getRepository('Administration\Entity\User');
 
@@ -48,7 +48,7 @@ class AccountController extends AbstractActionController {
         ));
     }
 
-    public function addAction() {
+    public function addAction () {
 
         $request = $this->getRequest();
         $user = new User();
@@ -85,7 +85,7 @@ class AccountController extends AbstractActionController {
         return new ViewModel(array('form' => $form));
     }
 
-    public function editAction() {
+    public function editAction () {
 
         $request = $this->getRequest();
         $translate = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
@@ -127,12 +127,12 @@ class AccountController extends AbstractActionController {
         return new ViewModel(array('form' => $form, 'userId' => $id));
     }
 
-    public function deleteAction() {
+    public function deleteAction () {
 
         $request = $this->getRequest();
 
         if ($request->isXmlHttpRequest()) {
-            $id = (int) $this->params()->fromRoute('id');
+            $id = (int)$this->params()->fromRoute('id');
             $user = $this->getEntityManager()->getRepository('Administration\Entity\User')->findOneBy(array('id' => $id));
 
             $this->getEntityManager()->remove($user);
@@ -152,7 +152,7 @@ class AccountController extends AbstractActionController {
         return $result;
     }
 
-    public function profileAction() {
+    public function profileAction () {
 
         $request = $this->getRequest();
         $translator = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');

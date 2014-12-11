@@ -11,9 +11,8 @@ class AuthController extends AbstractActionController {
     protected $storage;
     protected $authservice;
 
-    public function getAuthService()
-    {
-        if (! $this->authservice) {
+    public function getAuthService () {
+        if (!$this->authservice) {
             $this->authservice = $this->getServiceLocator()
                 ->get('AuthService');
         }
@@ -21,9 +20,8 @@ class AuthController extends AbstractActionController {
         return $this->authservice;
     }
 
-    public function getSessionStorage()
-    {
-        if (! $this->storage) {
+    public function getSessionStorage () {
+        if (!$this->storage) {
             $this->storage = $this->getServiceLocator()
                 ->get('AuthStorage');
         }
@@ -31,10 +29,9 @@ class AuthController extends AbstractActionController {
         return $this->storage;
     }
 
-    public function loginAction()
-    {
+    public function loginAction () {
         //if already login, redirect to success page
-        if ($this->getAuthService()->hasIdentity()){
+        if ($this->getAuthService()->hasIdentity()) {
             $this->flashmessenger()->addMessage('You are not allowed to enter this site.
             Please log in with another account or contact administrator.');
             return $this->redirect()->toRoute('administration');
@@ -46,18 +43,17 @@ class AuthController extends AbstractActionController {
 
         return new ViewModel(array(
             'form' => $form,
-            'messages'  => $this->flashmessenger()->getMessages(),
+            'messages' => $this->flashmessenger()->getMessages(),
         ));
     }
 
-    public function authenticateAction()
-    {
+    public function authenticateAction () {
         $form = new LoginForm();
         $redirect = 'login';
         $request = $this->getRequest();
-        if ($request->isPost()){
+        if ($request->isPost()) {
             $form->setData($request->getPost());
-            if ($form->isValid()){
+            if ($form->isValid()) {
 
                 //check authentication...
                 $this->getAuthService()->getAdapter()
@@ -65,8 +61,7 @@ class AuthController extends AbstractActionController {
                     ->setCredential($request->getPost('password'));
 
                 $result = $this->getAuthService()->authenticate();
-                foreach($result->getMessages() as $message)
-                {
+                foreach ($result->getMessages() as $message) {
                     //save message temporary into flashmessenger
                     $this->flashmessenger()->addMessage($message);
                 }
@@ -74,10 +69,10 @@ class AuthController extends AbstractActionController {
                 if ($result->isValid()) {
                     $redirect = 'administration';
                     //check if it has rememberMe :
-                        $this->getSessionStorage()
-                            ->setRememberMe(1);
-                        //set storage again
-                        $this->getAuthService()->setStorage($this->getSessionStorage());
+                    $this->getSessionStorage()
+                        ->setRememberMe(1);
+                    //set storage again
+                    $this->getAuthService()->setStorage($this->getSessionStorage());
                     $this->getAuthService()->getStorage()->write($result->getIdentity());
                 }
             }
@@ -86,8 +81,7 @@ class AuthController extends AbstractActionController {
         return $this->redirect()->toRoute($redirect);
     }
 
-    public function logoutAction()
-    {
+    public function logoutAction () {
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
 
@@ -96,8 +90,7 @@ class AuthController extends AbstractActionController {
     }
 
     //todo: improve and use
-    public function notAllowedAction()
-    {
+    public function notAllowedAction () {
         $this->flashmessenger()->addMessage("You are not allowed to visit this site.");
         return;
     }

@@ -60,7 +60,7 @@
 
     <!-- Le styles -->
     <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-        ->prependStylesheet($this->basePath() . '/css/style.css?1382104445')
+        ->prependStylesheet($this->basePath() . '/css/style.css')
         ->prependStylesheet($this->basePath() . '/scripts/plugins/color/jquery-miniColors/jquery.miniColors.css')
         ->prependStylesheet($this->basePath() . '/scripts/plugins/other/google-code-prettify/prettify.css')
         ->prependStylesheet($this->basePath() . '/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css')
@@ -81,6 +81,8 @@
 
     <!-- Scripts -->
     <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/helper.js')
+        ->prependFile($this->basePath() . '/js/handle.js')
         ->prependFile($this->basePath() . '/scripts/plugins/notifications/notyfy/jquery.notyfy.js')
         ->prependFile($this->basePath() . '/scripts/plugins/notifications/Gritter/js/jquery.gritter.min.js')
         ->prependFile($this->basePath() . '/scripts/plugins/other/google-code-prettify/prettify.js')
@@ -108,7 +110,7 @@
         ->prependFile($this->basePath() . '/scripts/plugins/system/jquery.cookie.js')
         ->prependFile($this->basePath() . '/scripts/demo/twitter.js')
         ->prependFile($this->basePath() . '/scripts/plugins/other/holder/holder.js')
-        ->prependFile($this->basePath() . '/scripts/demo/common.js?1382104445')
+        ->prependFile($this->basePath() . '/scripts/demo/common.js')
         ->prependFile($this->basePath() . '/scripts/plugins/other/jquery-slimScroll/jquery.slimscroll.min.js')
         ->prependFile($this->basePath() . '/scripts/plugins/forms/select2/select2.js')
         ->prependFile($this->basePath() . '/scripts/plugins/color/jquery-miniColors/jquery.miniColors.js')
@@ -127,8 +129,23 @@
 
     <div id="wrapper">
 
-        <?php echo $this->partial('partial/mainNavigation.phtml',
-        array('acl' => $this->acl, 'userRole' => $this->auth->getIdentity()->getType())); ?>
+        <div id="menu" class="hidden-sm hidden-print">
+            <div id="menuInner">
+                <!-- Scrollable menu wrapper with Maximum height -->
+                <div class="slim-scroll" data-scroll-height="420px">
+
+                    <div id="search">
+                        <input type="text" placeholder="Quick search ..." />
+                        <button class="glyphicons search"></button>
+                    </div>
+
+                    <?php echo $this->navigation('navigation')->menu()->setPartial('partial/mainNavigation.phtml'); ?>
+
+                </div>
+            </div>
+        </div>
+<!--        --><?php //echo $this->partial('partial/mainNavigation.phtml',
+//        array('acl' => $this->acl, 'userRole' => $this->auth->getIdentity()->getType())); ?>
 
         <div id="content" style="min-height: 600px">
             <?php if ($this->flashMessenger()->hasMessages()) { ?>

@@ -43,7 +43,7 @@
                             <td>
                                 <a class="btn-action glyphicons pencil btn-success"
                                    href="<?php echo $this->url('faq/editFaqCategory', array('id' => $data->getId())); ?>"></a>
-                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete="true"
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
                                    data-href="<?php echo $this->url('faq/deleteFaqCategory', array('id' => $data->getId())); ?>"></a>
                             </td>
                         </tr>
@@ -54,7 +54,7 @@
         <?php } else { ?>
             <div class="widget-body center">
             <span class="gritter-add-regular btn btn-inverse btn-block">
-                <?php echo $this->translate('Translations not found. Please upload new one.'); ?></span>
+                <?php echo $this->translate('FAQ categories not found. Please upload new one.'); ?></span>
             </div>
         <?php } ?>
 
@@ -69,25 +69,3 @@ echo $this->paginationControl(
     array('route  ' => 'faq/viewFaqCategory', 'routeParams' => array())
 );
 ?>
-
-
-<script>
-
-    $('[data-delete="true"]').on('click', function(e){
-
-        e.preventDefault();
-        if (confirm('You will remove chosen item and all items related to this entity, do you want to continue?')) {
-            $.ajax({
-                type: 'POST',
-                url: $(this).data('href'),
-                success: function(response){
-                    $('[data-row="row_' + response.id + '"]').fadeOut(500);
-                },
-                error: function() {
-                    console.log('Error on FAQ category delete');
-                }
-            });
-
-        }
-    });
-</script>

@@ -1,15 +1,26 @@
-<div id="menu" class="hidden-sm hidden-print">
-    <div id="menuInner">
-        <!-- Scrollable menu wrapper with Maximum height -->
-        <div class="slim-scroll" data-scroll-height="420px">
 
-            <div id="search">
-                <input type="text" placeholder="Quick search ..." />
-                <button class="glyphicons search"></button>
-            </div>
-
-            <?php echo $this->navigation('navigation')->menu(); ?>
-
-        </div>
-    </div>
-</div>
+<ul>
+    <?php foreach ($this->container as $page) { ?>
+        <?php $hasChildren = $page->hasPages(); ?>
+        <li class="<?php echo $hasChildren ? 'hasSubmenu' : $page->getClass(); if ($page->isActive(true)) echo ' active'; ?>">
+            <?php if ($hasChildren) { ?>
+                <a href="#<?php echo $page->getId(); ?>"
+                class="<?php echo $page->getClass(); if (!$page->isActive()) echo ' collapsed'; ?>" data-toggle="collapse"
+            <?php } else { ?>
+                <a href="<?php echo $page->getHref(); ?>"
+            <?php } ?>><span><?php echo $page->getLabel(); ?></span>
+                </a>
+            <?php if ($hasChildren) { ?>
+                <ul class="menuCollapse" id="<?php echo $page->getId();?>">
+                    <?php foreach ($page->getPages() as $child) { ?>
+                        <li class="<?php echo $child->getClass(); if ($child->isActive()) echo ' active'; ?>">
+                            <a href="<?php echo $child->getHref(); ?>">
+                                <span><?php echo $child->getLabel(); ?></span>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            <?php } ?>
+        </li>
+    <?php } ?>
+</ul>

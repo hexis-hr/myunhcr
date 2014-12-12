@@ -140,7 +140,7 @@ class AccountController extends AbstractActionController {
 
             $result = new JsonModel(array(
                 'success' => true,
-                'userId' => $id,
+                'id' => $id,
             ));
 
         } else {

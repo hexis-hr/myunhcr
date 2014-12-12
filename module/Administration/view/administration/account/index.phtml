@@ -35,7 +35,7 @@
                             <td>
                                 <a class="btn-action glyphicons pencil btn-success"
                                    href="<?php echo $this->url('account/edit', array('id' => $data->getId())); ?>"></a>
-                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete="true"
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
                                    data-href="<?php echo $this->url('account/delete', array('id' => $data->getId())); ?>"></a>
                             </td>
                         </tr>
@@ -54,25 +54,3 @@ echo $this->paginationControl(
     array('route  ' => 'account', 'routeParams' => array())
 );
 ?>
-
-
-<script>
-
-    $('[data-delete="true"]').on('click', function(e){
-
-        e.preventDefault();
-        if (confirm('You will remove selected user account, do you want to continue?')) {
-            $.ajax({
-                type: 'POST',
-                url: $(this).data('href'),
-                success: function(response){
-                   $('[data-row="row_' + response.userId + '"]').fadeOut(500);
-                },
-                error: function() {
-                    console.log('Error on account delete');
-                }
-            });
-
-        }
-    });
-</script>

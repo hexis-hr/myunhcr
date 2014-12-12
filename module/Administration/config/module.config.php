@@ -397,8 +397,14 @@ return array(
             array(
                 'label' => 'FAQ',
                 'route' => 'faq',
+                'id' => 'faq',
                 'class' => 'glyphicons comments',
                 'pages' => array(
+                    array(
+                        'label' => 'FAQ',
+                        'route' => 'faq',
+                        'class' => 'glyphicons comments',
+                    ),
                     array(
                         'label' => 'FAQ category',
                         'route' => 'faq/viewFaqCategory',

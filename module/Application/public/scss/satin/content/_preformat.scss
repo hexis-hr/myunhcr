@@ -53,11 +53,11 @@
 
   // Remove margins for certain cases
   > h1:first-child, > h2:first-child, > h3:first-child, > h4:first-child, > h5:first-child, > h6:first-child{ margin-top: -0.2em; }
-  > :last-child{ margin-bottom: 0; }
+  > :last-child{ margin-bottom:0 !important; }
 
   // Compact modifier for some design elements
   &.-compact {
-    line-height: $preformat-line-height / 1.1;
+    line-height: $preformat-line-height / 1.05;
     #{$headers}{
       @include rem(margin-top, (($preformat-gap * 1.5) / 2));
       margin-bottom: 0;

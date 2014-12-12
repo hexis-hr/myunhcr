@@ -217,6 +217,11 @@ function getPage(url, title, method, data, timeout) {
     timeout: 10000, // Wait for 10 seconds max
     success: function(data) {
       
+      // Swap data
+      $('#page').html(data);
+      $('body').removeClass().addClass($('#relay').attr('bodyClass'));
+
+
       // Log success and waiting time
       var execTime = new Date().getTime() - start;
       dlog('GET: ' + url + ' success! (' + execTime + 'ms)');
@@ -228,8 +233,7 @@ function getPage(url, title, method, data, timeout) {
       // Scroll to top
       $("html, body").scrollTop(0);
 
-      // Swap data and show content
-      $('#page').html(data);
+      
       $('#page').removeClass('-loading');
 
       // Run all pageLoad events
@@ -339,19 +343,19 @@ queue.jQuery(function(){
     Section Tooltip
   ------------------------------------------------------------------------------------*/
   var sectionInfo = {
-    target: '#sectionInfo',
+    selector: '#sectionInfo',
     toggle: function(){
       dlog_verbose('sectionInfo.toggle()');
-      if ( $(this.target).height() === 0 ){ sectionInfo.open(); }
+      if ( $(this.selector).height() === 0 ){ sectionInfo.open(); }
       else { sectionInfo.close(); }
     },
     open: function(){
       dlog_verbose('sectionInfo.open()');
-      $(this.target).animateAuto().addClass('-show');
+      $(this.selector).animateAuto().addClass('-show');
     },
     close: function(){
       dlog_verbose('sectionInfo.close()');
-      $(this.target).removeClass('-show').height(0);
+      $(this.selector).removeClass('-show').height(0);
     }
   };
 
@@ -378,6 +382,25 @@ queue.jQuery(function(){
   // But, stop propagation when clicked within the info element (to prevent it from closing)
   $('#page').on('click','#sectionInfo', function(event) {
     event.stopPropagation();
+  });
+
+
+
+  /*------------------------------------------------------------------------------------
+    Accordion
+  ------------------------------------------------------------------------------------*/
+  var accordion = {
+    open: function(target, openItems){
+      dlog_verbose('faq.open()');
+      openItems.removeAttr('accordionOpen').find('[autoHeight]').first().height(0);
+      target.attr('accordionOpen', '').find('[autoHeight]').first().animateAuto();
+    }
+  };
+
+  // Accordion item click
+  $(document).on('click','[accordionItem]', function() {
+    var openItems = $(this).parent().children('[accordionOpen]');
+    accordion.open($(this), openItems);
   });
 
 

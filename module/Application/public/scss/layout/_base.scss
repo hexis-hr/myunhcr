@@ -1,3 +1,5 @@
+#relay { visibility:hidden; width:0; height:0; }
+
 .floatLeft { @include float(left); }
 .floatRight { @include float(right); }
 .clearfix{ @include clearfix; }

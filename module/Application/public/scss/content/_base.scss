@@ -5,9 +5,11 @@
     padding-bottom ($basicMargin)
   );
   border-bottom: 1px solid $lightGray;
+
+  &.-clean { margin-bottom:0 !important; }
 }
   .sectionHeader_inner { position:relative; }
-    .sectionHeader_title { display:block; font-size:18px; color:$black; }
+    .sectionHeader_title { display:block; @include responsive(font-size 18px 1.1); color:$black; }
     .sectionHeader_info { display:none; }
       .sectionHeader_info_wrapper { margin-top:-5px; }
         .sectionHeader_info_body { padding-bottom:1em; font-size:0.85em; }
@@ -67,5 +69,5 @@
 
 
 @include smallPlus {
-  .sectionHeader_title { text-align:center; @include responsive(font-size 19px 1.1); }
+  .sectionHeader_title { text-align:center; }
 }

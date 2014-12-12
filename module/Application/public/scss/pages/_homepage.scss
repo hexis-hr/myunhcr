@@ -1,1 +1,10 @@
-// .homepage .page { padding:0; }
+.pg-homepage {
+  
+  // Remove padding from page
+  .page { padding:0; }
+
+  @include medium {
+    .page { padding:1em 0; }
+  }
+  
+}

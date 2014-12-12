@@ -1,6 +1,7 @@
+<div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
 
-  <div class='sectionHeader'>
+  <div class='sectionHeader -clean'>
     <div class='grid'>
       <div class='grid_column'>
         <div class='sectionHeader_inner'>
@@ -9,7 +10,6 @@
         </div>
       </div>
     </div>
-
     <div id='sectionInfo' class='sectionHeader_info_wrapper' animate>
       <div class='grid -clean'>
         <div class='grid_column'>
@@ -21,29 +21,30 @@
     </div>
   </div>
 
-  <div class='grid'>
+  <div class='grid -clean'>
     <div class='grid_column -medium9 -mediumPlus8'>
-
-      <div class='accordion'>
-        <div id='accTab-1'>
-          <a href='#accTab-1' class='button accTab'><?php echo $this->translate('What is MyUNHCR?'); ?></a>
-          <div class='accContent'>
-            <p><?php echo $this->translate('My UNHCR is not just a project, it is a Web Application,
-            that everyone can use either on their Computer or Cellphone, old or new, it doesn\'t matter.
-Just start the site/app and get all informations you need.'); ?></p>
+      <ul class='faq' accordion>
+        <li class='faq_item -open' accordionItem animate>
+          <h2 class='faq_item_title'><?php echo $this->translate('What is MyUNHCR?'); ?></h2>
+          <div class='faq_item_description preformat -compact' autoHeight animate>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
           </div>
-        </div>
-        <div id='accTab-2'>
-          <a href='#accTab-2' class='button accTab'><?php echo $this->translate('How anonymous is this application ?'); ?></a>
-          <div class='accContent'>
-            <p><?php echo $this->translate('My UNHCR is not just a project, it is a Web Application,
-            that everyone can use either on their Computer or Cellphone, old or new,
-             it doesn\'t matter. Just start the site/app and get all informations you need.'); ?></p>
+        </li>
+        <li class='faq_item' accordionItem animate>
+          <h2 class='faq_item_title'><?php echo $this->translate('Is this application anonymous?'); ?></h2>
+          <div class='faq_item_description preformat -compact' autoHeight animate>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
           </div>
-        </div>
-      </div>
-
+        </li>
+        <li class='faq_item' accordionItem animate>
+          <h2 class='faq_item_title'>Lorem Ipsum Dolor Sit</h2>
+          <div class='faq_item_description preformat -compact' autoHeight animate>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-</section>
 
+</section>

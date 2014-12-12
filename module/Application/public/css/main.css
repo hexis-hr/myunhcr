@@ -1070,8 +1070,8 @@ body {
   min-height: 100%;
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
-  -webkit-transition: 300ms;
-          transition: 300ms;
+  -webkit-transition: opacity 400ms, -webkit-transform 500ms;
+          transition: opacity 400ms, transform 500ms;
 }
 #page.-loading {
   -webkit-transform: translateX(-1%) translateZ(0);
@@ -1319,6 +1319,12 @@ body {
 }
 .js .mainFooter.-showFooter {
   display: block;
+}
+
+#relay {
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }
 
 .floatLeft {
@@ -1602,6 +1608,9 @@ body {
     padding-bottom: 28px;
   }
 }
+.sectionHeader.-clean {
+  margin-bottom: 0 !important;
+}
 
 .sectionHeader_inner {
   position: relative;
@@ -1611,6 +1620,16 @@ body {
   display: block;
   font-size: 18px;
   color: #231f20;
+}
+@media only screen and (min-width: 37.5em) {
+  .sectionHeader_title {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .sectionHeader_title {
+    font-size: 22px;
+  }
 }
 
 .sectionHeader_info {
@@ -1690,20 +1709,8 @@ body {
 @media only screen and (min-width: 26.75em) {
   .sectionHeader_title {
     text-align: center;
-    font-size: 19px;
   }
 }
-@media only screen and (min-width: 26.75em) and (min-width: 37.5em) {
-  .sectionHeader_title {
-    font-size: 21px;
-  }
-}
-@media only screen and (min-width: 26.75em) and (min-width: 64.0625em) {
-  .sectionHeader_title {
-    font-size: 23px;
-  }
-}
-
 .button {
   cursor: pointer;
   position: relative;
@@ -1894,10 +1901,10 @@ body {
   margin-top: -0.2em;
 }
 .preformat > :last-child {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 .preformat.-compact {
-  line-height: 1.27273;
+  line-height: 1.33333;
 }
 .preformat.-compact h1, .preformat.-compact h2, .preformat.-compact h3, .preformat.-compact h4, .preformat.-compact h5, .preformat.-compact h6 {
   margin-top: 16px;
@@ -1975,9 +1982,19 @@ body {
   content: '';
 }
 
-.sitemap_group_title {
+.menu_group_title {
   padding: 14px 22px;
-  font-size: 20px;
+  font-size: 18px;
+}
+@media only screen and (min-width: 37.5em) {
+  .menu_group_title {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .menu_group_title {
+    font-size: 22px;
+  }
 }
 
 .feedback {
@@ -2015,41 +2032,65 @@ body {
   color: #f7941e;
 }
 
-.accordion {
-  width: 100%;
+.faq_item {
+  padding: 1em 0;
+  border-bottom: 1px solid #e6e6e6;
 }
 
-.accordion .accTab {
-  display: block;
-  width: 100%;
-  margin-bottom: 1em;
-  text-align: left;
+.faq_item_title {
+  padding-bottom: 1em;
+  font-size: 18px;
+  color: #0077c0;
+}
+@media only screen and (min-width: 37.5em) {
+  .faq_item_title {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .faq_item_title {
+    font-size: 22px;
+  }
 }
 
-.accordion div .accContent {
-  display: none;
-  margin: 5px 0;
+.faq_item_description {
+  font-size: 16px;
+}
+@media only screen and (min-width: 37.5em) {
+  .faq_item_description {
+    font-size: 20px;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .faq_item_description {
+    font-size: 25px;
+  }
 }
 
-.accordion div:target .accContent {
-  display: block;
-  padding: 0 1.5em;
-  font-size: 0.9em;
-  text-align: justify;
-  line-height: 1.2;
+.js .faq .faq_item_title {
+  padding: 0;
 }
-
-.accordion > div {
+.js .faq .faq_item_description {
+  height: 0;
   overflow: hidden;
+  opacity: 0;
 }
-
-.accordion > div:target {
-  height: auto;
-  margin-bottom: 1em;
+.js .faq [accordionOpen] .faq_item_title {
+  padding-bottom: 1em;
 }
-
-.accordion .accContent p {
-  margin: 10px 0;
+.js .faq [accordionOpen] .faq_item_description {
+  opacity: 1;
+}
+.js .faq [accordionOpen]:after {
+  position: absolute;
+  left: -16px;
+  left: -1rem;
+  right: -16px;
+  right: -1rem;
+  top: -1px;
+  bottom: -1px;
+  background: rgba(0, 119, 192, 0.05);
+  content: '';
 }
 
 .news_title {
@@ -2137,6 +2178,15 @@ body {
   width: 100%;
   padding-top: .9em;
   padding-bottom: .9em;
+}
+
+.pg-homepage .page {
+  padding: 0;
+}
+@media only screen and (min-width: 37.5em) {
+  .pg-homepage .page {
+    padding: 1em 0;
+  }
 }
 
 /* ==========================================================================

@@ -1,0 +1,23 @@
+.faq {}
+  .faq_item { padding:1em 0; border-bottom:1px solid $lightGray; }
+    .faq_item_title { padding-bottom:1em; @include responsive(font-size 18px 1.1); color:$blue; }
+    .faq_item_description { @include responsive(font-size 16px); }
+
+
+.js .faq {
+  .faq_item_title { padding:0; }
+  .faq_item_description { height:0; overflow:hidden; opacity:0; }
+  
+  // Open state
+  [accordionOpen] {
+    .faq_item_title { padding-bottom:1em; }
+    .faq_item_description { opacity:1; }
+    &:after {
+      position: absolute;
+      @include rem(left, -($grid-spacing / 2));
+      @include rem(right, -($grid-spacing / 2));
+      top: -1px;
+      bottom: -1px;
+      background: rgba($blue, .05); content:''; }
+  }
+}

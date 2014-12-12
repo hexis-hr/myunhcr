@@ -1,6 +1,7 @@
 <?php $this->headLink()->appendStylesheet('/css/styleguide.css'); ?>
 
-<div class='page'>
+<div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
+<section class='page'>
   <div class='grid'>
     <div class='grid_column'>
       <h1 class='sectionTitle'><?php echo $this->translate('Page Title'); ?></h1>
@@ -212,4 +213,4 @@
     </div>
   </div>
 
-</div>
+</section>

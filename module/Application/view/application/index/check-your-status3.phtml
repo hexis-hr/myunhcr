@@ -24,28 +24,40 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='my-unhcr-services-menu.html' class='survey form' ajaxForm>
+      
+      <h2 class='pageTitle'>Your Asylum Application status:</h2>
 
-        <div class='form_item'>
-          <label class='form_label' for='checkWhat'><?php echo $this->translate("Your Asylum-Application's status:");?></label>
-          <p class='content_summary warningText -checkStatus'><?php echo $this->translate('Decision is pending'); ?></p>
+      <!--
+        Display only one of these below.
+        Note: Only the class name changes (-positive, -negative, -unknown) so there's no need to keep three separate html blocks
+      -->
+
+      <div class='feedback -unknown gapSmall'>
+        <i class='feedback_icon icon'></i>
+        <h1 class='feedback_title'>Pending</h1>
+        <div class='feedback_description preformat'>
+          <p>Some useful information here lorem ipsum dolor sit amet minima <a>culpa eos cum</a> commodi officia minima.</p>
         </div>
+      </div>
 
-        <div class='grid'>
-          <div class='grid_column -small5'>
-            <div class='form_item'>
-              <a class='button -submit' href='check-your-status2.html'><?php echo $this->translate('Back'); ?></a>
-            </div>
-          </div>
-          
-          <div class='grid_column -small7'>
-            <div class='form_item'>
-              <input class='button -primary -submit floatRight clearfix' type='submit' name='' value='OK'>
-            </div>
-          </div>
+      <div class='feedback -positive gapSmall'>
+        <i class='feedback_icon icon'></i>
+        <h1 class='feedback_title'>Accepted</h1>
+        <div class='feedback_description preformat'>
+          <p>Some useful information here lorem ipsum dolor sit amet minima <a>culpa eos cum</a> commodi officia minima.</p>
         </div>
+      </div>
 
-      </form>
+      <div class='feedback -negative gapSmall'>
+        <i class='feedback_icon icon'></i>
+        <h1 class='feedback_title'>Rejected</h1>
+        <div class='feedback_description preformat'>
+          <p>Some useful information here lorem ipsum dolor sit amet minima <a>culpa eos cum</a> commodi officia minima.</p>
+        </div>
+      </div>
+
+      <a href='menu-page.html' class='button -fullWidth'><?php echo $this->translate('Back to Homepage'); ?></a>
     </div>
   </div>
+
 </section>

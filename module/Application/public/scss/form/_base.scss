@@ -17,7 +17,7 @@
 %inputBase_focus { @include inputBase_focus; }
 
 
-.form_legend { display:block; margin-bottom:1.2em; font-size:18px; color:$blue; text-align:left; }
+.form_legend { display:block; margin-bottom:1.2em; font-size:18px; color:$blue; font-weight:normal; text-align:left; }
 
 .form_item { margin-bottom:$form-item-gap; }
   .form_item_column.-alignRight { @include text-align(right); }

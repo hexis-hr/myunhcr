@@ -1,17 +1,19 @@
 .button {
+  $color: lighten($lightGray, 8);
   @include st-button;
   display: block;
   width: 100%;
   margin-bottom: .5em;
   color: $neutral-dark;
-  background: #e6e6e6;
-  background: linear-gradient(top, lighten(#e6e6e6, 4), darken(#e6e6e6, 4));
+  background: $color;
+  background: linear-gradient(top, lighten($color, 3), darken($color, 4));
   border: 1px solid darken(#e6e6e6, 4);
   border-radius: 3px;
 
   &:hover {
-    background: #efefef;
-    background: linear-gradient(top, lighten(#efefef, 4), darken(#efefef, 4));
+    $color: lighten($lightGray, 4);
+    background: $color;
+    background: linear-gradient(top, lighten($color, 3), darken($color, 4));
   }
 
   &.-sharp {

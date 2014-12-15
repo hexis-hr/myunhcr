@@ -73,12 +73,12 @@
 
   .link {
     padding: 0 1px;
-    color: $red;
+    color: $link;
     text-decoration: underline;
 
     &:hover {
       text-decoration: none;
-      background: rgba($red, 0.1);
+      background: rgba($link, 0.1);
     }
   }
 

@@ -12,18 +12,16 @@
     .sectionHeader_title { display:block; @include responsive(font-size 18px 1.1); color:$black; }
     .sectionHeader_info { display:none; }
       .sectionHeader_info_wrapper { margin-top:-5px; }
-        .sectionHeader_info_body { padding-bottom:1em; font-size:0.85em; }
+        .sectionHeader_info_body { margin-top:1em; font-size:0.85em; }
 
 .sectionHeader.-noMargin .sectionHeader_inner { margin-bottom: 0 !important; }
 
 
-// Important text
-.warningText{ color: $lightRed; }
-.-checkStatus{ text-transform:uppercase; text-align:center; margin:1em 0 2em; color:$red;}
-.verticalList {}
-  .verticalList_item { margin-bottom:1em; }
+// Page title
+.pageTitle { display:block; @include responsive(margin-bottom ($basicMargin), font-size 18px 1.1); font-weight:normal; color:$black; }
 
 
+// Compact it for modern smartphones
 @include small {
   .sectionHeader_info {
     display: block;
@@ -56,7 +54,7 @@
       visibility: hidden;
       opacity: 0;
 
-      .sectionHeader_info_body {}
+      .sectionHeader_info_body { margin:0; padding-bottom:1em; }
 
       &.-show {
         opacity: 1;
@@ -69,5 +67,5 @@
 
 
 @include smallPlus {
-  .sectionHeader_title { text-align:center; }
+  .sectionHeader_title, .pageTitle { text-align:center; }
 }

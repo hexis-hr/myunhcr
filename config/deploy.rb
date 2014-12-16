@@ -28,20 +28,25 @@ set :deploy_to, '/var/www/myunhcr/'
 # Default value for :scm is :git
 set :scm, :git
 
-before "deploy:restart", "deploy:install"
+before "deploy:finished", "deploy:symlink_shared"
+before "deploy:finished", "deploy:install"
 
 namespace :deploy do
 
     desc "run composer update"
     task :install do
-        run "cd #{current_path} && composer update"
-        run "cd #{current_path} && php zf.php orm:schema-tool:update --force"
-        run "cd #{current_path} && chown www-data:www-data /data/DoctrineORMModule/Proxy"
-        run "cd #{current_path} && chown www-data:www-data /module/Application/language"
+        on "deploy@dev.hexis.hr" do
+            execute "cd #{current_path} && composer update"
+            execute "cd #{current_path} && php zf.php orm:schema-tool:update --force"
+            execute :sudo, :chown, "-R www-data:www-data #{current_path}/data/DoctrineORMModule/Proxy/"
+            execute :sudo, :chown, "-R www-data:www-data #{current_path}/module/Application/language/"
+        end
     end
 
     desc "Symlink shared configs and folders on each release."
       task :symlink_shared do
-        run "ln -nfs #{shared_path}/config/doctrine.local.php #{release_path}/config/autoload/doctrine.local.php"
+        on "deploy@dev.hexis.hr" do
+            execute "ln -nfs #{shared_path}/config/doctrine.local.php /var/www/myunhcr/current/config/autoload/doctrine.local.php"
+        end
       end
 end

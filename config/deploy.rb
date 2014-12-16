@@ -13,7 +13,12 @@ set :linked_dirs, %w{application/logs vendor}
 
 set :writable_dirs, ["application/logs"]
 
-set :linked_dirs, %w{public/uploads data/uploads}
+set(:symlinks, [
+  {
+    source: "/public/uploads",
+    link: "/data/uploads"
+  }
+])
 
 set :format, :pretty
 set :log_level, :info
@@ -22,3 +27,12 @@ set :deploy_to, '/var/www/myunhcr/'
 
 # Default value for :scm is :git
 set :scm, :git
+
+before "deploy:restart", "deploy:install"
+
+namespace :deploy do
+    desc "run composer update"
+    task :install do
+        run "cd #{current_path} && composer update"
+    end
+end

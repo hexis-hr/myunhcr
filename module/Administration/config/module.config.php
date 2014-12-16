@@ -3,6 +3,7 @@
 namespace Administration;
 
 return array(
+
     'router' => array(
         'routes' => array(
             'login' => array(
@@ -294,8 +295,125 @@ return array(
                     ),
                 ),
             ),
+            'survey' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/survey',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Survey',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Survey',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'downloadXml' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/survey/downloadXml[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'downloadXml',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'delete' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/survey/delete',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'delete',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
+            'news' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/news',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'News',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'News',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'add' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addNews',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'News',
+                                'action' => 'add',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'edit' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editNews[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'News',
+                                'action' => 'edit',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'delete' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/delete[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'News',
+                                'action' => 'delete',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
         ),
     ),
+
     'doctrine' => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(
@@ -324,14 +442,17 @@ return array(
             ),
         ),
     ),
+
     'doctrinefixtures' => array(
         'paths' => array(getcwd() . '/module/' . __NAMESPACE__ . '/src/' . __NAMESPACE__ . '/DataFixtures/ORM')
     ),
+
     'controller_plugins' => array(
         'invokables' => array(
             'Auth' => 'Administration\Controller\Plugin\Auth',
         )
     ),
+
     'controllers' => array(
         'invokables' => array(
             'Administration\Controller\Auth' => 'Administration\Controller\AuthController',
@@ -339,8 +460,11 @@ return array(
             'Administration\Controller\Account' => 'Administration\Controller\AccountController',
             'Administration\Controller\Translation' => 'Administration\Controller\TranslationController',
             'Administration\Controller\Faq' => 'Administration\Controller\FaqController',
+            'Administration\Controller\Survey' => 'Administration\Controller\SurveyController',
+            'Administration\Controller\News' => 'Administration\Controller\NewsController',
         ),
     ),
+
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions' => true,
@@ -361,6 +485,13 @@ return array(
             'ViewJsonStrategy',
         ),
     ),
+
+    'view_helpers' => array(
+        'invokables' => array(
+            'limitEcho' => 'Administration\View\Helper\LimitEcho',
+        ),
+    ),
+
     'asset_manager' => array(
         'resolver_configs' => array(
             'paths' => array(
@@ -368,6 +499,7 @@ return array(
             ),
         ),
     ),
+
     'navigation' => array(
         'default' => array(
             array(
@@ -412,8 +544,23 @@ return array(
                     ),
                 ),
             ),
+            array(
+                'label' => 'Surveys',
+                'route' => 'survey',
+                'resource' => 'Administration',
+                'privilege' => 'Admin',
+                'class' => 'glyphicons notes_2',
+            ),
+            array(
+                'label' => 'News',
+                'route' => 'news',
+                'resource' => 'Administration',
+                'privilege' => 'Admin',
+                'class' => 'glyphicons keynote',
+            ),
         ),
     ),
+
     'service_manager' => array(
         'factories' => array(
             'Administration\Acl' => 'Administration\Service\AclFactory',

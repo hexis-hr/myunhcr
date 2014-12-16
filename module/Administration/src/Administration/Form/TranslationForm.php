@@ -3,8 +3,6 @@
 namespace Administration\Form;
 
 use Zend\Form\Form;
-use Zend\Form\Exception\InvalidArgumentException;
-use Zend\Stdlib\ArrayUtils;
 
 class TranslationForm extends Form {
 

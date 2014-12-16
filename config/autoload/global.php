@@ -2,6 +2,8 @@
 
 return array(
 
+   'fileDir' => dirname($_SERVER['DOCUMENT_ROOT']) . '/data/uploads/',
+
    'languageDir' => dirname($_SERVER['DOCUMENT_ROOT']) . '/module/Application/language/',
 
    'translationLocales' => array(

@@ -33,7 +33,7 @@ class TranslationController extends AbstractActionController {
         $globalConfig = $this->serviceLocator->get('config');
 
         $addedTranslations = array();
-        $files = $this->getEntityManager()->getRepository('Administration\Entity\File')->findAll();
+        $files = $this->getEntityManager()->getRepository('Administration\Entity\File')->findBy(array('type' => 'translation'));
         foreach ($files as $f) {
             $addedTranslations[$f->getId()] = $f->getName();
         }
@@ -77,7 +77,7 @@ class TranslationController extends AbstractActionController {
                 }
 
                 $file->setName($fileName);
-                $file->setType('translation' . '_' . $locale);
+                $file->setType('translation');
                 $file->setMimeType($translateFile['type']);
                 $file->setSize($translateFile['size']);
 

@@ -4,12 +4,10 @@ namespace Administration\Controller;
 
 use Administration\Entity\Faq;
 use Administration\Entity\FaqCategory;
-use Administration\Entity\FaqCategoryRel;
 use Administration\Form\FaqCategoryForm;
 use Administration\Form\FaqForm;
 
 use Doctrine\ORM\Query;
-use Zend\Form\FormInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -19,7 +17,6 @@ use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use Doctrine\ORM\Query\Expr\Join;
 
 class FaqController extends AbstractActionController {
 
@@ -41,7 +38,6 @@ class FaqController extends AbstractActionController {
 
         $faq = $this->getEntityManager()->getRepository('Administration\Entity\Faq')->findAll();
 
-        //IDENTITY() needed for foreign key instancing
         $dql = 'Select faqCat from Administration\Entity\Faq faq left join Administration\Entity\FaqCategory faqCat
          with faqCat.id = faq.category group by faq.category';
         $categories = $this->getEntityManager()->createQuery($dql)->getResult();
@@ -55,8 +51,6 @@ class FaqController extends AbstractActionController {
     public function addAction () {
 
         $request = $this->getRequest();
-        $globalConfig = $this->serviceLocator->get('config');
-
         $faq = new Faq();
         $form = new FaqForm($this->getEntityManager(), $this->serviceLocator);
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Faq'));
@@ -64,6 +58,7 @@ class FaqController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            //todo
 //            $formFilter = new UserFormFilter();
 //            $form->setInputFilter($formFilter->getAddInputFilter());
             $form->setData($request->getPost());
@@ -94,6 +89,7 @@ class FaqController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            //todo
 //            $formFilter = new UserFormFilter();
 //            $form->setInputFilter($formFilter->getAddInputFilter());
             $form->setData($request->getPost());

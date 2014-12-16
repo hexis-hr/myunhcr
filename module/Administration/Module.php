@@ -56,7 +56,7 @@ class Module {
         );
     }
 
-    //quickfix
+    // changing layout for administration module
     public function init (ModuleManager $manager) {
 
         $events = $manager->getEventManager();

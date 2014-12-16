@@ -17,11 +17,12 @@ return array(
             'orm_default' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
                 'params' => array(
-                    'host' => 'localhost',
-                    'port' => '3306',
-                    'user' => 'unhcr',
-                    'password' => 'unhcr',
-                    'dbname' => 'myunhcr',
+                    'host'      => '10.129.149.127',
+                    'port'      => 3306,
+                    'user'      => 'myunhcr',
+                    'password'  => 'R2DpiGsQudED3z',
+                    'dbname'    => 'myunhcr',
+                    'driverOptions' => array('1002' => 'SET NAMES utf8')//UTF-8 Support
                 )
             )
         )

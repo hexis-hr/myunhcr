@@ -34,6 +34,9 @@ namespace :deploy do
     desc "run composer update"
     task :install do
         run "cd #{current_path} && composer update"
-        run "php zf.php orm:schema-tool:update --force"
+        run "cd #{current_path} && php zf.php orm:schema-tool:update --force"
+        run "cd #{current_path} && cp /config/autoload/doctorine.template.php /config/autoload/doctrine.local.php"
+        run "cd #{current_path} && chown www-data:www-data /data/DoctrineORMModule/Proxy"
+        run "cd #{current_path} && chown www-data:www-data /module/Application/language"
     end
 end

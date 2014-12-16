@@ -34,14 +34,14 @@ namespace :deploy do
 
     desc "run composer update"
     task :install do
-        run "cd #{current_path} && composer update"
+        run "cd #{current_path} && composer install"
         run "cd #{current_path} && php zf.php orm:schema-tool:update --force"
         run "cd #{current_path} && chown www-data:www-data /data/DoctrineORMModule/Proxy"
         run "cd #{current_path} && chown www-data:www-data /module/Application/language"
     end
 
-#    desc "Symlink shared configs and folders on each release."
-#      task :symlink_shared do
-#        run "ln -nfs #{shared_path}/config/doctrine.local.php #{current_path}/config/autoload/doctrine.local.php"
-#      end
+    desc "Symlink shared configs and folders on each release."
+      task :symlink_shared do
+        run "ln -nfs #{shared_path}/config/doctrine.local.php #{current_path}/config/autoload/doctrine.local.php"
+      end
 end

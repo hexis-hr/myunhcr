@@ -51,22 +51,31 @@ class SurveyController extends AbstractActionController {
                 $surveyFile = $post['file'];
                 $target_file = $globalConfig['fileDir'] . basename($surveyFile['name']);
 
-                if (move_uploaded_file($surveyFile['tmp_name'], $target_file)) {
-                    $this->flashMessenger()->addMessage('The file ' . basename($surveyFile['name']) . ' has been uploaded.');
-                } else {
-                    $this->flashMessenger()->addMessage('Sorry, there was an error uploading your file.');
-                    return $this->redirect()->toRoute('translation');
+                $ext = pathinfo($surveyFile['name'], PATHINFO_EXTENSION);
+
+                try {
+                    if ($ext == "xml") {
+                        if (move_uploaded_file($surveyFile['tmp_name'], $target_file)) {
+                            $this->flashMessenger()->addMessage('The file ' . basename($surveyFile['name']) . ' has been uploaded.');
+                        } else
+                            throw new \Exception('Sorry, there was an error uploading your file.');
+
+                        $file->setName($surveyFile['name']);
+                        $file->setType('survey');
+                        $file->setMimeType($surveyFile['type']);
+                        $file->setSize($surveyFile['size']);
+
+                        $this->getEntityManager()->persist($file);
+                        $this->getEntityManager()->flush();
+
+                        return $this->redirect()->toRoute('survey');
+                    } else
+                        throw new \Exception('File must be in .xml format');
+
+                } catch (\Exception $e) {
+                    $this->flashMessenger()->addMessage($e->getMessage());
+                    return $this->redirect()->toRoute('survey');
                 }
-
-                $file->setName($surveyFile['name']);
-                $file->setType('survey');
-                $file->setMimeType($surveyFile['type']);
-                $file->setSize($surveyFile['size']);
-
-                $this->getEntityManager()->persist($file);
-                $this->getEntityManager()->flush();
-
-                return $this->redirect()->toRoute('survey');
             }
         }
 

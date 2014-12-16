@@ -8,6 +8,7 @@ use Zend\Permissions\Acl\Role\GenericRole as Role;
 use Zend\View\Helper\Navigation;
 
 class Auth extends AbstractPlugin {
+
     protected $sesscontainer;
 
     private function getSessContainer () {

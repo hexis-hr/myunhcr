@@ -34,5 +34,6 @@ namespace :deploy do
     desc "run composer update"
     task :install do
         run "cd #{current_path} && composer update"
+        run "php zf.php orm:schema-tool:update --force"
     end
 end

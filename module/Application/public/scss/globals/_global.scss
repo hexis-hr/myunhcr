@@ -3,10 +3,13 @@ body { height:100%; }
 
 
 // Wrapper for ajax content
-#page { min-height:100%; transform:translateZ(0); transition:opacity 400ms, transform 500ms;
-  &.-loading { transform:translateX(-1%) translateZ(0); opacity:0; } }
+#page { position:relative; z-index:z(layout, 1); min-height:100%; transform:translateZ(0); transition:opacity 400ms, transform 500ms;
+  &.-loading { transform:translateX(-1%) translateZ(0); opacity:0; }
+  &.-promoted { z-index:z(modal, 10); }
+}
 #pageLoad { display:block; position:absolute; position:fixed; z-index:99; top:0; left:0; width:100%; height:0; background:rgba(black,0.2); opacity:0; transition:100ms;
-  &.-show { opacity:1; height:100%; color:white; } }
+  &.-show { opacity:1; height:100%; color:white; }
+}
 
 
 // This is not the same as the ID element

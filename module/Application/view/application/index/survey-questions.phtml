@@ -24,27 +24,14 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='refugee-feedback.html' class='survey form' ajaxForm>
+      <form action='survey-finish.html' class='survey form' method='post' ajaxForm>
 
-<!--         <div class='grid'>
-          <div class='grid_column -small6'>
-            <div class='form_item'>
-              <label class='form_label' for='male'>I am Male</label>
-              <div class='form_field'>
-                <input type='radio' name='' value='' placeholder='' id='male'>
-              </div>
-            </div>
+        <div class='form_item'>
+          <label class='form_label' for='authentication'>Some input</label>
+          <div class='form_field'>
+            <input class='formInput' type='text' name=''>
           </div>
-
-          <div class='grid_column -small6'>
-            <div class='form_item'>
-              <label class='form_label' for='female'>I am Female</label>
-              <div class='form_field'>
-                <input type='radio' name='' value='' placeholder='' id='female'>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        </div>
 
         <div class='form_item'>
           <label class='form_label' for=''><?php echo $this->translate('What is your Gender ?'); ?></label>
@@ -64,17 +51,12 @@
           </div>
         </div>
 
-        <div class='grid'>
-          <div class='grid_column -small5'>
-            <div class='form_item'>
-              <a class='button -submit' href="choose-your-survey.html"><?php echo $this->translate('Back'); ?></a>
-            </div>
-          </div>
-          
+        <div class='grid -compact -reverse'>
           <div class='grid_column -small7'>
-            <div class='form_item'>
-              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
-            </div>
+            <input class='button -primary -fullWidth' type='submit' value="<?php echo $this->translate('Finish'); ?>">
+          </div>
+          <div class='grid_column -small5'>
+            <a class='button -fullWidth' href='take-a-survey.html' ajaxNav><?php echo $this->translate('Back'); ?></a>
           </div>
         </div>
 

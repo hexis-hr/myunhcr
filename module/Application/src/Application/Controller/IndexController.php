@@ -59,12 +59,6 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
-    public function chooseYourSurveyAction()
-    {
-        $this->layout()->setVariable('body_class', 'pg-chooseSurvey');
-        return new ViewModel();
-    }
-
     public function faqAction()
     {
         $this->layout()->setVariable('body_class', 'pg-faq -information');
@@ -152,6 +146,12 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function newsArticleAction()
+    {
+        $this->layout()->setVariable('body_class', 'pg-newsArticle');
+        return new ViewModel();
+    }
+
     public function reportAnIncidentAction()
     {
         $this->layout()->setVariable('body_class', 'pg-reportIncident');
@@ -212,11 +212,17 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
-    // public function whatIsYourGenderAction()
-    // {
-    //     $this->layout()->setVariable('body_class', 'pg-updatePersonal');
-    //     return new ViewModel();
-    // }
+    public function surveyQuestionsAction()
+    {
+        $this->layout()->setVariable('body_class', 'pg-surveyQuest');
+        return new ViewModel();
+    }
+
+    public function surveyFinishAction()
+    {
+        $this->layout()->setVariable('body_class', 'pg-surveyFinish');
+        return new ViewModel();
+    }
 
 
 }

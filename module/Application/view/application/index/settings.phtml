@@ -11,7 +11,7 @@
     </div>
   </div>
 <!-- not an ajax form as we need to refresh the whole page after save, due to locale settings. -->
-  <form action='menu-page.html' class='settings form' method="POST" >
+  <form action='menu-page.html' class='settings form' method='POST' ajaxForm>
     <div class='grid'>
       <div class='grid_column -medium9 -mediumPlus8'>
 
@@ -31,7 +31,7 @@
               <option value="it_IT">Italiano</option>
               <option value="ar_JO">العربية</option>
             </select>
-            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('English:'); ?></a>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('English'); ?></a>
           </div>
         </div>
 

@@ -185,10 +185,10 @@ function lightResize(callback, delay){
 /*------------------------------------------------------------------------------------
   Helper: Load CSS file
 ------------------------------------------------------------------------------------*/
-var loadCSS = function(href) {
-  var cssLink = $("<link rel='stylesheet' type='text/css' href='"+href+"'>");
-  $('head').append(cssLink); 
-};
+// var loadCSS = function(href) {
+//   var cssLink = $("<link rel='stylesheet' type='text/css' href='"+href+"'>");
+//   $('head').append(cssLink); 
+// };
 
 
 
@@ -198,6 +198,22 @@ var loadCSS = function(href) {
 function pageLoad(){
   exec(queue.pageLoadEvents, 'pageLoadEvents');
 }
+
+
+
+/*------------------------------------------------------------------------------------
+  Helper: Promotes #page element to the z-index top
+------------------------------------------------------------------------------------*/
+var page = {
+  promote: function(){
+    dlog_verbose('page.promote()');
+    $('#page').addClass('-promoted');
+  },
+  demote: function(){
+    dlog_verbose('page.demote()');
+    $('#page').removeClass('-promoted');
+  }
+};
 
 
 
@@ -442,8 +458,8 @@ queue.jQuery(function(){
   /*------------------------------------------------------------------------------------
     Forms
   ------------------------------------------------------------------------------------*/
-  $('.customSelect_select').on('change', function(event) {
-    $(this).next('.customSelect_overlay').html( $(this).val() );
+  $(document).on('change','.customSelect_select', function() {
+    $(this).next('.customSelect_overlay').html( $(this).find('option:selected').first().text() );
   });
 
 
@@ -465,6 +481,8 @@ queue.jQuery(function(){
 
           // Activate custom date picker
           $('[inputDate]').pickadate({
+            onOpen: function(){ page.promote(); },
+            onClose: function(){ page.demote(); },
             format: 'dd/mm/yyyy',
             
             // Disable these dates in the calendar (0 = January)
@@ -477,9 +495,9 @@ queue.jQuery(function(){
 
           // Activate custom time picker
           $('[inputTime]').pickatime({
+            onOpen: function(){ page.promote(); },
+            onClose: function(){ page.demote(); },
             format: 'HH:i',
-
-            // Available hours to pick from
             min: [8,00],
             max: [16,0]
           });
@@ -504,6 +522,7 @@ queue.jQuery(function(){
       return this;
     }
   })(window.jQuery || window.Zepto || window.$);
+
 
 
   /*------------------------------------------------------------------------------------

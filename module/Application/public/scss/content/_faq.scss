@@ -1,5 +1,5 @@
 .faq {}
-  .faq_item { padding:1em 0; border-bottom:1px solid $lightGray; }
+  .faq_item { padding:1em 0; border-bottom:2px solid $lightGray; }
     .faq_item_title { padding-bottom:1em; @include responsive(font-size 18px 1.1); color:$blue; }
     .faq_item_description { @include responsive(font-size 16px); }
 

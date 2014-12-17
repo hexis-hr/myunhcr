@@ -41,7 +41,8 @@
   }
 
   .showForTouch,
-  .touch .hideForTouch { display: none !important; }
+  .touch .hideForTouch,
+  .js .hide-for-js { display: none !important; }
 
   .hideForTouch,
   .touch .showForTouch { display: inherit !important; }

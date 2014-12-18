@@ -87,10 +87,17 @@ return array(
     'asset_manager' => array(
         'resolver_configs' => array(
             'collections' => array(
-            'scripts/xx.js' => array(
-                'scripts/main.js',
-                'scripts/test.js',
-            ),
+                'scripts/all.js' => array(
+                    'scripts/external/fastclick.js',
+                    'scripts/main.js',
+                    'scripts/internal/_helpers.js',
+                    'scripts/internal/_historyState.js',
+                    'scripts/internal/_ajax.js',
+                    'scripts/internal/_sectionTooltip.js',
+                    'scripts/internal/_dateAndTime.js',
+                    'scripts/internal/_forms.js',
+                    'scripts/internal/_unsorted.js'
+                ),
             ),
         'paths' => array(
                 __DIR__ . '/../public',

@@ -28,4 +28,34 @@ queue.jQuery(function(){
   });
 
 
+
+  /*------------------------------------------------------------------------------------
+    Finally, run everything
+  ------------------------------------------------------------------------------------*/
+  // Run onLoad events
+  page.onLoad();
+
+  // Attach FastClick
+  FastClick.attach(document.body);
+
+
+  // Attach global events
+  $('html').on('click', function(event) {
+    exec(queue.globalClickEvents, 'globalClickEvents');
+  });
+
+  lightResize(function(){
+    exec(queue.globalResizeEvents, 'globalResizeEvents');
+  }, 300);
+
+  lightScroll(function(){
+    exec(queue.globalScrollEvents, 'globalScrollEvents');
+  }, 300);
+
+  $(window).on('beforeunload', function(event) {
+    exec(queue.globalUnloadEvents, 'globalUnloadEvents');
+  });
+
+
 });
+jQueryExec();

@@ -4,13 +4,14 @@ namespace Administration\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * News
+ * Form
  *
- * @ORM\Table(name="news")
+ * @ORM\Table(name="form")
  * @ORM\Entity
  */
-class News {
+class Form {
 
     /**
      * @ORM\Column(name="id", type="bigint", nullable=false)
@@ -23,17 +24,17 @@ class News {
     /**
      * @ORM\Column(type="string")
      */
+    protected $name = "";
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $title = "";
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
-    protected $content = "";
-
-    /**
-     * @ORM\Column(type="date")
-     */
-    protected $date = "";
+    protected $formName = "";
 
     /**
      * @ORM\ManyToOne(targetEntity="Administration\Entity\CodeCountries")
@@ -56,17 +57,17 @@ class News {
     }
 
     /**
-     * @param mixed $content
+     * @param mixed $formName
      */
-    public function setContent ($content) {
-        $this->content = $content;
+    public function setFormName ($formName) {
+        $this->formName = $formName;
     }
 
     /**
      * @return mixed
      */
-    public function getContent () {
-        return $this->content;
+    public function getFormName () {
+        return $this->formName;
     }
 
     /**
@@ -84,19 +85,18 @@ class News {
     }
 
     /**
-     * @param mixed $date
+     * @param mixed $name
      */
-    public function setDate ($date) {
-        $this->date = $date;
+    public function setName ($name) {
+        $this->name = $name;
     }
 
     /**
      * @return mixed
      */
-    public function getDate () {
-        return $this->date;
+    public function getName () {
+        return $this->name;
     }
-
 
     /**
      * @param mixed $title
@@ -112,7 +112,4 @@ class News {
         return $this->title;
     }
 
-    public function __construct() {
-        $this->date = new \DateTime('now');
-    }
 }

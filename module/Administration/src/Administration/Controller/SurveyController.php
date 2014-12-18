@@ -4,6 +4,7 @@ namespace Administration\Controller;
 
 use Administration\Entity\File;
 use Administration\Form\FileForm;
+use ODKParser\ODKParser;
 
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -32,10 +33,11 @@ class SurveyController extends AbstractActionController {
         $globalConfig = $this->serviceLocator->get('config');
         $request = $this->getRequest();
 
+        $odk = new ODKParser($this->getServiceLocator());
         $file = new File();
         $form = new FileForm();
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\File'));
-        $form->bind($file);
+        $form->bind($file);;
 
         if ($request->isPost()) {
 
@@ -68,7 +70,8 @@ class SurveyController extends AbstractActionController {
                         $this->getEntityManager()->persist($file);
                         $this->getEntityManager()->flush();
 
-                        return $this->redirect()->toRoute('survey');
+                        $odk->xmlToForm($target_file);
+
                     } else
                         throw new \Exception('File must be in .xml format');
 
@@ -76,6 +79,8 @@ class SurveyController extends AbstractActionController {
                     $this->flashMessenger()->addMessage($e->getMessage());
                     return $this->redirect()->toRoute('survey');
                 }
+
+                return $this->redirect()->toRoute('survey');
             }
         }
 
@@ -85,7 +90,9 @@ class SurveyController extends AbstractActionController {
             $addedSurveys[$f->getId()] = $f->getName();
         }
 
-        return new ViewModel(array('form' => $form, 'surveys' => $addedSurveys));
+        $form2 = new \Administration\Form\SurveyForm\SecurityIncidentFormv2Form\SecurityIncidentFormv2Form();
+
+        return new ViewModel(array('form' => $form, 'form2' => $form2, 'surveys' => $addedSurveys));
     }
 
     public function downloadAction () {

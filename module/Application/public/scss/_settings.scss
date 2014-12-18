@@ -2,7 +2,7 @@
   ESSENTIALS
 ————————————————————————————————————————————————————————————————————————————————*/
   $baseRem: 16px; // Used to calculate fallback pixel values for browsers which do not support REM units
-  $baseRatio: 1.25; // Used as default scale / multiplier
+  $baseRatio: 1.22; // Used as default scale / multiplier
   $pixelFallback: true; // Set to false if you can work with REM units
   $ie8: true; // Enables IE8 compatile opacity
   $align: left; // Default direction for text, floats, etc.
@@ -54,7 +54,7 @@
   $neutral-light: #D9D9D9; // Very light & sexy backgrounds, borders, etc.
 
   $positive: $lightGreen; // Success messages and such...
-  $negative: $lightRed; // Error messages and such...
+  $negative: darken($lightRed, 5); // Error messages and such...
   $warning: $orange; // I promise I'll be more careful next time, officer.
 
   $text: $gray; // Default text color
@@ -150,7 +150,7 @@
   $arabic-font-size: 1.05rem;
   $arabic-line-height: 1.6;
 
-  // $preformat-line-height: 1.4;
+  $preformat-line-height: 1.4;
   // $preformat-gap: 0.975rem * $preformat-line-height;
 
 

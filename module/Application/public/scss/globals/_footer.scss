@@ -1,8 +1,5 @@
-.mainFooter {}
+.mainFooter { border-top:1px solid $lightGray; }
+  .mainFooter_menu { display:block; padding:1em 0; text-align:center; }
 
-
-.js {
-  .mainFooter { display:none;
-    &.-showFooter { display:block; }
-  }
-}
+// Hide for javascript-enabled devices
+.js .mainFooter { display:none; }

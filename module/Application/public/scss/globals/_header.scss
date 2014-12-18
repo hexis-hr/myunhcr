@@ -6,7 +6,7 @@ $active-background: darken($blue, 8);
 .mainHeader { padding:1em; color:white; background:$blue; font-size:0.9em; }
   .mainHeader_top { text-align:center; }
     .mainHeader_call { display:none; }
-    .mainHeader_logo { display:inline-block; margin-bottom:1em; }
+    .mainHeader_logo { cursor:default !important; display:inline-block; margin-bottom:1em; }
     .mainHeader_menu {}
       .mainHeader_menu { display:block; margin-bottom:1em; text-decoration:underline; }
     .mainHeader_nav { display:block; margin-bottom:1em; }
@@ -24,7 +24,7 @@ $active-background: darken($blue, 8);
     // Header button commons
     %headerButton { height:$headerHeight; line-height:$headerHeight - 2; padding:0 14px; font-size:0.85em; font-weight:bold;
       &_img { vertical-align:-7px; }
-      &:hover { background: $active-background; }
+      &:hover, &:focus { background: $active-background; }
     }
 
     .mainHeader { min-height:$headerHeight; padding:0; }

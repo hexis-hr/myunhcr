@@ -2,19 +2,20 @@
 <section class='page'>
 
   <div class='sectionHeader'>
-    <div class='grid'>
-      <div class='grid_column'>
-        <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'><?php echo $this->translate("Your Feedback");?></h1>
-          <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+    <div class='sectionHeader_top'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_top_inner'>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("File a Complaint");?></h1>
+            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div id='sectionInfo' class='sectionHeader_info_wrapper' animate>
+    <div id='sectionInfo' class='sectionHeader_bottom' animate>
       <div class='grid -clean'>
         <div class='grid_column'>
-          <div class='sectionHeader_info_body preformat'>
+          <div class='sectionHeader_description preformat'>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
           </div>
         </div>
@@ -24,24 +25,32 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <div class='sectionContent'>
-        <p class='sectionContent_inner'>UNHCR encourages refugees to comment on the organization's performance in order to improve its services.<br><br><span class='warningText'>Important:&nbsp;</span>you can provide your feedback 
-        anonymously if you choose to do so.</p>
+      
+      <div class='preformat gap'>
+        <p>UNHCR encourages refugees to comment on the organization's performance in order to improve its services.</p>
+        <p><b>Important:</b> you can provide your feedback anonymously if you choose to do so.</p>
       </div>
 
-      <form action='refugee-feedback.html' class='feedback form' ajaxForm>
+      <form class='form' action='file-a-complaint-finish.html' method='post' ajaxForm>
+        
         <div class='form_item'>
-          <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Your Message'); ?></label>
+          <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
           <div class='form_field'>
-            <textarea class='formTextarea' id='feedbackMessage' placeholder='...'></textarea>
+            <textarea class='formTextarea' id='feedbackMessage'></textarea>
           </div>
         </div>
 
-        <div class='form_item'>
-          <input class='button -primary -submit floatRight clearfix' type='submit' name='' value='Send'>
+        <div class='grid -compact -reverse'>
+          <div class='grid_column -small7'>
+            <input class='button -primary -fullWidth' type='submit' name='' value='Send'>
+          </div>
+          <div class='grid_column -small5'>
+            <a class='button -fullWidth' href='report-an-incident2.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
+          </div>
         </div>
+
       </form>
-      
     </div>
   </div>
+
 </section>

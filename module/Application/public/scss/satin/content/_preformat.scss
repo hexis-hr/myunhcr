@@ -1,7 +1,7 @@
 @mixin st-preformat {
 
   padding-top: 1px; // Fix for negative margin on headers
-  line-height: $preformat-line-height + 0.1;
+  line-height: $preformat-line-height;
   letter-spacing: .01em;
 
   p {
@@ -10,6 +10,11 @@
       font-weight: 300;
       @include large { font-size: 1.2em; }
     }
+  }
+
+  b, strong {
+    font-weight: bold;
+    color: $black;
   }
 
   small {

@@ -107,23 +107,23 @@
   @mixin responsive($items...){
     @each $attribute, $value, $multiplier in $items {
       @if $multiplier == null { $multiplier: $baseRatio; } // If no multiplier is defined, we use the base ratio
-      @if unit($value) == rem { @include rem($attribute, ($value)); }
-      @else { #{$attribute}: #{$value}; }
+      @if unit($value) == px { #{$attribute}: #{$value}; }
+      @else { @include rem($attribute, $value); }
     }
     @include medium {
       @each $attribute, $value, $multiplier in $items {
         @if $multiplier == null { $multiplier: $baseRatio; } // If no multiplier is defined, we use the base ratio
-        $new_value: round( $value * $multiplier );
-        @if unit($value) == rem { @include rem($attribute, ($new_value)); }
-        @else { #{$attribute}: #{$new_value}; }
+        $new_value: $value * $multiplier;
+        @if unit($value) == px { #{$attribute}: round($new_value); }
+        @else { @include rem($attribute, $new_value); }
       }
     }
     @include large {
       @each $attribute, $value, $multiplier in $items {
         @if $multiplier == null { $multiplier: $baseRatio; } // If no multiplier is defined, we use the base ratio
-        $new_value: round( $value * $multiplier * $multiplier );
-        @if unit($value) == rem { @include rem($attribute, ($new_value)) }
-        @else { #{$attribute}: #{$new_value}; }
+        $new_value: $value * $multiplier * $multiplier;
+        @if unit($value) == px { #{$attribute}: round($new_value); }
+        @else { @include rem($attribute, $new_value); }
       }
     }
   }

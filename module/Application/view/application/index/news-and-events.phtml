@@ -2,19 +2,20 @@
 <section class='page'>
 
   <div class='sectionHeader'>
-    <div class='grid'>
-      <div class='grid_column'>
-        <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'><?php echo $this->translate("News and Events");?></h1>
-          <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+    <div class='sectionHeader_top'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_top_inner'>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("News and Events");?></h1>
+            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div id='sectionInfo' class='sectionHeader_info_wrapper' animate>
+    <div id='sectionInfo' class='sectionHeader_bottom' animate>
       <div class='grid -clean'>
         <div class='grid_column'>
-          <div class='sectionHeader_info_body preformat'>
+          <div class='sectionHeader_description preformat'>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
           </div>
         </div>
@@ -24,32 +25,63 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='' class='form'>
-
+      <form action='' class='pageSearch form'>
         <div class='form_item'>
+          <label class='form_label' for='checkWhat'><?php echo $this->translate("Search");?> <?php echo $this->translate("News and Events");?>:</label>
           <div class='form_field'>
-            <input class='formInput' id='searchField' type='text' placeholder='Search..'>
+            <input class='formInput' id='searchField' type='text' placeholder='Type a keyword here...'>
           </div>
         </div>
-
       </form>
 
-      <div class='news -newsSeperator'>
-        <h2 class='news_title'><a href='news-article.html'><?php echo $this->translate('Refugee Camp in Jordan Open'); ?></a></h2>
-        <p class='news_release'>Source:&nbsp;Google News<span class='news_date floatRight clearfix'
-          >05/11/2014</span></p>
-        <p class='news_description'>Lorem refugee Camp is now open for new arrivals into Jordan...</p>
-      </div>
+      <ul class='articleList'>
+        <li class='articleList_item articleSummary'>
+          <h2 class='articleSummary_title'>
+            <a class='articleSummary_title_link' href='news-article.html' ajaxNav tabindex='0'
+              >UNHCR helps gay Congolese rejected by his mother find a new home</a>
+          </h2>
+          <div class='articleSummary_source'>Source: Google News</div>
+          <div class='articleSummary_date'>17.12.2014 at 13:37</div>
+          <div class='articleSummary_body preformat'>
+            <p>Junior Mayema struggled with his sexuality when growing up, but his mother was furious to find out he was gay. Resettlement offers him peace and understanding.</p>
+          </div>
+          <a class='articleSummary_button button -compact' href='news-article.html' ajaxNac>Read more</a>
+        </li>
+        <li class='articleList_item articleSummary'>
+          <h2 class='articleSummary_title'>
+            <a class='articleSummary_title_link' href='news-article.html' ajaxNav tabindex='0'
+              >Coexisting in Congo: rivals set an example for peace in Katanga village</a>
+          </h2>
+          <div class='articleSummary_source'>Source: Google News</div>
+          <div class='articleSummary_date'>17.12.2014 at 11:08</div>
+          <div class='articleSummary_body preformat'>
+            <p>When a group of Twa people fled fighting with the Luba community, they found shelter in the Luba village of Mukondo, setting an example for peace.</p>
+          </div>
+          <a class='articleSummary_button button -compact' href='news-article.html' ajaxNav>Read more</a>
+        </li>
+        <li class='articleList_item articleSummary'>
+          <h2 class='articleSummary_title'>
+            <a class='articleSummary_title_link' href='news-article.html' ajaxNav tabindex='0'
+              >Syrians give back to the country that gave them refuge and hope</a>
+          </h2>
+          <div class='articleSummary_source'>Source: Google News</div>
+          <div class='articleSummary_date'>16.12.2014 at 21:52</div>
+          <div class='articleSummary_body preformat'>
+            <p>While working to integrate into Hungarian life, a reunited Syrian family find a cut and dried way to give back to the country that has given them a home.</p>
+          </div>
+          <a class='articleSummary_button button -compact' href='news-article.html' ajaxNav>Read more</a>
+        </li>
+      </ul>
 
+      <ul class='pagination'>
+        <li class='pagination_item -previous'><a class='pagination_link' href='' ajaxNav tabindex='0'>‹</a></li>
+        <li class='pagination_item -page'><a class='pagination_link' href='' ajaxNav tabindex='0'>1</a></li>
+        <li class='pagination_item -page'><a class='pagination_link' href='' ajaxNav tabindex='0'>2</a></li>
+        <li class='pagination_item'><span class='pagination_separator'>...</span></li>
+        <li class='pagination_item -page'><a class='pagination_link' href='' ajaxNav tabindex='0'>7</a></li>
+        <li class='pagination_item -next'><a class='pagination_link' href='' ajaxNav tabindex='0'>›</a></li>
+      </ul>
     </div>
   </div>
 
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <div class='form_item'>
-        <a class='button -submit' href='menu-page.html'><?php echo $this->translate('Back'); ?></a>
-      </div>
-    </div>
-  </div>
 </section>
-

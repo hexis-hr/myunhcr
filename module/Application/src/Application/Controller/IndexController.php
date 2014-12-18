@@ -83,6 +83,12 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function fileAComplaintFinishAction()
+    {
+        $this->layout()->setVariable('body_class', 'pg-fileComplaint -finish');
+        return new ViewModel();
+    }
+
     public function settingsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-settings');

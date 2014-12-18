@@ -1,0 +1,26 @@
+$paginationHeight: 42px;
+
+.pagination { font-size:0; text-align:center; }
+
+  .pagination_item { display:inline-block; }
+    
+    .pagination_link {
+      display: inherit;
+      height: $paginationHeight;
+      @include rem(font-size, 0.9rem);
+      line-height: $paginationHeight;
+      color: $gray;
+      background: $lightGray;
+      background: linear-gradient(top, lighten($lightGray, 2), darken($lightGray, 2));
+    }
+
+    .pagination_link.-page { display:none; }
+
+    .pagination_separator {}
+
+
+@include smallPlus {
+
+  .pagination_link.-page { display:inherit; }
+
+}

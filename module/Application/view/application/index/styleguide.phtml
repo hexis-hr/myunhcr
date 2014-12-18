@@ -2,6 +2,29 @@
 
 <div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
+
+  <div class='sectionHeader'>
+    <div class='sectionHeader_top'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_top_inner'>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("Styleguide");?></h1>
+            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id='sectionInfo' class='sectionHeader_bottom' animate>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_description preformat'>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class='grid'>
     <div class='grid_column'>
       <h1 class='sectionTitle'><?php echo $this->translate('Page Title'); ?></h1>
@@ -64,7 +87,7 @@
     </div>
   </div>
 
-  <div id='grid'>
+  <div id='grid' class='gapLarge'>
     <div class='grid gapSmall'>
       <div class='grid_column'>
         <div class='demo'><span>grid_column</span></div>
@@ -112,7 +135,7 @@
         <div class='demo'><span>-medium2</span></div>
       </div>
     </div>
-    <div class='grid gapSmall'>
+    <div class='grid'>
       <div class='grid_column'>
         <div class='demo'>
           <span>grid_column</span>
@@ -165,51 +188,126 @@
   </div>
 
   <div class='grid'>
-    <div class='grid_column'>
-      <h1 class='sectionTitle'>Forms</h1>
-      <form action='' class='settings form'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+
+      <div class='grid gapLarge'>
+        <div class='grid_column'>
+          <h1 class='sectionTitle'>Forms</h1>
+          <form action='' class='settings form'>
+                
+            <div class='form_item formSwitch'>
+              <label class='form_label formSwitch_wrapper' for='notifications'>Switch
+                <input class='formSwitch_checkbox' type='checkbox' id='notifications' checked>
+                <span class='formSwitch_custom'></span>
+              </label>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='demoField1'>Basic input</label>
+              <div class='form_field'>
+                <input class="formInput" id='demoField1' type='text' placeholder='Basic input'>
+              </div>
+            </div>
+
+            <div class='form_item -error'>
+              <label class='form_label' for='demoField1'>Input with error</label>
+              <div class='form_field'>
+                <input class="formInput" id='demoField1' type='text' placeholder='Basic input'>
+              </div>
+              <div class='form_error'>This is an error message!</div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='category'>Select</label>
+              <div class='form_field customSelect'>
+                <select class='formSelect customSelect_select -custom' id='category'>
+                  <option>--</option>
+                  <option>Item 1</option>
+                  <option>Item 2</option>
+                  <option>Item 3</option>
+                </select>
+                <a unselectable='on' class='customSelect_overlay'>--</a>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='date'>Date input</label>
+              <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
+              <div class='form_field'>
+                <input class='formInput' type='date' placeholder='Day/Month/Year' inputDate>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='time'>Time input</label>
+              <div class='form_item_help hide-for-js'>Example: 14:30</div>
+              <div class='form_field'>
+                <input class='formInput' type='time' placeholder='Hour:Minutes' inputTime>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for=''>Switch</label>
+              <div class='grid -collapse -clean'>
+                <div class='grid_column -small6 form_subitem'>
+                  <div class='bigRadio'>
+                    <input class='bigRadio_input' type='radio' name='demoSwitch' value='1' id='demoSwitch1'>
+                    <label class='bigRadio_label' for='demoSwitch1'>Answer 1</label>
+                  </div>
+                </div>
+                <div class='grid_column -small6 form_subitem'>
+                  <div class='bigRadio'>
+                    <input class='bigRadio_input' type='radio' name='demoSwitch' value='2' id='demoSwitch2'>
+                    <label class='bigRadio_label' for='demoSwitch2'>Answer 2</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='form_item'>
+              <label class='form_label' for='demoField3'>Textarea</label>
+              <div class='form_field'>
+                <textarea class='formTextarea' id='demoField3' placeholder='Lorem ipsum...'></textarea>
+              </div>
+            </div>
             
-        <div class='form_item formSwitch'>
-          <label class='form_label formSwitch_wrapper' for='notifications'>Switch
-            <input class='formSwitch_checkbox' type='checkbox' id='notifications' checked>
-            <span class='formSwitch_custom'></span>
-          </label>
-        </div>
+            <div class='form_item'>
+              <div class='form_field'>
+                <input class='button -primary -submit' type='submit' name='' value='Submit button'>
+              </div>
+            </div>
 
-        <div class='form_item'>
-          <label class='form_label' for='demoField1'>Input</label>
-          <div class='form_field'>
-            <input class="formInput" id='demoField1' type='text' placeholder='Basic input'>
-          </div>
+          </form>
         </div>
+      </div>
 
-        <div class='form_item'>
-          <label class='form_label' for='category'>Select</label>
-          <div class='form_field customSelect'>
-            <select class='formSelect customSelect_select -custom' id='category'>
-              <option>--</option>
-              <option>Item 1</option>
-              <option>Item 2</option>
-              <option>Item 3</option>
-            </select>
-            <a unselectable='on' class='customSelect_overlay'>--</a>
-          </div>
+      <div class='grid'>
+        <div class='grid_column'>
+          <h1 class='sectionTitle'>FAQ</h1>
+          <ul class='faq' accordion>
+            <li class='faq_item -open' accordionItem animate>
+              <h2 class='faq_item_title'><?php echo $this->translate('What is MyUNHCR?'); ?></h2>
+              <div class='faq_item_description preformat -compact' autoHeight animate>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
+              </div>
+            </li>
+            <li class='faq_item' accordionItem animate>
+              <h2 class='faq_item_title'><?php echo $this->translate('Is this application anonymous?'); ?></h2>
+              <div class='faq_item_description preformat -compact' autoHeight animate>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
+              </div>
+            </li>
+            <li class='faq_item' accordionItem animate>
+              <h2 class='faq_item_title'>Lorem Ipsum Dolor Sit</h2>
+              <div class='faq_item_description preformat -compact' autoHeight animate>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
+              </div>
+            </li>
+          </ul>
         </div>
+      </div>
 
-        <div class='form_item'>
-          <label class='form_label' for='demoField3'>Textarea</label>
-          <div class='form_field'>
-            <textarea class='formTextarea' id='demoField3' placeholder='Lorem ipsum...'></textarea>
-          </div>
-        </div>
-        
-        <div class='form_item'>
-          <div class='form_field'>
-            <input class='button -primary -submit' type='submit' name='' value='Submit button'>
-          </div>
-        </div>
-
-      </form>
     </div>
   </div>
 

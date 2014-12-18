@@ -1,12 +1,16 @@
 var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
     prefix = require('gulp-autoprefixer'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify');
 
 var path = {
   root: __dirname,
   scss: __dirname + '/module/Application/public/scss',
   css: __dirname + '/module/Application/public/css',
+  script_source: __dirname + '/module/Application/public/scripts',
+  script_dist: __dirname + '/module/Application/public/scripts/dist'
 }
 
 
@@ -17,7 +21,7 @@ gulp.task('default', ['css', 'watch']);
 
 
 /*-------------------------------------------------------------------------------------------------
-  CSS
+  Compile CSS
 -------------------------------------------------------------------------------------------------*/
 gulp.task('css', function (){
   gulp.src(path.scss + '/**/*.scss')

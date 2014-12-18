@@ -2,19 +2,20 @@
 <section class='page'>
 
   <div class='sectionHeader'>
-    <div class='grid -clean'>
-      <div class='grid_column'>
-        <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'><?php echo $this->translate("Report an Incident");?></h1>
-          <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+    <div class='sectionHeader_top'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_top_inner'>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("Report an Incident");?></h1>
+            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div id='sectionInfo' class='sectionHeader_info_wrapper' animate>
+    <div id='sectionInfo' class='sectionHeader_bottom' animate>
       <div class='grid -clean'>
         <div class='grid_column'>
-          <div class='sectionHeader_info_body preformat'>
+          <div class='sectionHeader_description preformat'>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
           </div>
         </div>
@@ -69,7 +70,7 @@
             <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
           </div>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='menu-page.html' ajaxNav><?php echo $this->translate('Cancel'); ?></a>
+            <a class='button -fullWidth' href='menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
           </div>
         </div>
 

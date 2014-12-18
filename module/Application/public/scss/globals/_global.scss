@@ -1,8 +1,9 @@
-html { height:100%; font-size:110%; }
+html { height:100%; font-size:100%; }
 body { height:100%; }
 
+// --------------------------------------------------------------------
 
-// Wrapper for ajax content
+// Wrapper for AJAX content
 #page { position:relative; z-index:z(layout, 1); min-height:100%; transform:translateZ(0); transition:opacity 400ms, transform 500ms;
   &.-loading { transform:translateX(-1%) translateZ(0); opacity:0; }
   &.-promoted { z-index:z(modal, 10); }
@@ -11,19 +12,11 @@ body { height:100%; }
   &.-show { opacity:1; height:100%; color:white; }
 }
 
+// --------------------------------------------------------------------
 
-// This is not the same as the ID element
+// Wrapper for the html/css page (Note: this is not the same as #page above)
 .page {
-  @include responsive(
-    padding-top ($basicMargin),
-    padding-bottom ($basicMargin)
-  );
+  @include responsive(padding-bottom $basicMargin);
   &.-extraMargin { margin-top:.5em; }
   &.-noPadding { padding:0 !important; }
-}
-
-
-// Reduce font size a bit on larger screens
-@include large {
-  html { font-size:105%; }
 }

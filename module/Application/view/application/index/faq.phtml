@@ -1,19 +1,21 @@
 <div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
 
-  <div class='sectionHeader -clean'>
-    <div class='grid'>
-      <div class='grid_column'>
-        <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'><?php echo $this->translate("Frequently Asked Questions");?></h1>
-          <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+  <div class='sectionHeader'>
+    <div class='sectionHeader_top'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_top_inner'>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("Frequently Asked Questions");?></h1>
+            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+          </div>
         </div>
       </div>
     </div>
-    <div id='sectionInfo' class='sectionHeader_info_wrapper' animate>
+    <div id='sectionInfo' class='sectionHeader_bottom' animate>
       <div class='grid -clean'>
         <div class='grid_column'>
-          <div class='sectionHeader_info_body preformat'>
+          <div class='sectionHeader_description preformat'>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
           </div>
         </div>
@@ -21,30 +23,38 @@
     </div>
   </div>
 
-  <div class='grid -clean'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <ul class='faq' accordion>
-        <li class='faq_item -open' accordionItem animate>
+  <ul class='faq' accordion>
+    <li class='faq_item -open' accordionItem animateOnReady tabindex='0'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
           <h2 class='faq_item_title'><?php echo $this->translate('What is MyUNHCR?'); ?></h2>
-          <div class='faq_item_description preformat -compact' autoHeight animate>
+          <div class='faq_item_description preformat -compact' autoHeight animateOnReady>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
           </div>
-        </li>
-        <li class='faq_item' accordionItem animate>
+        </div>
+      </div>
+    </li>
+    <li class='faq_item' accordionItem animateOnReady tabindex='0'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
           <h2 class='faq_item_title'><?php echo $this->translate('Is this application anonymous?'); ?></h2>
-          <div class='faq_item_description preformat -compact' autoHeight animate>
+          <div class='faq_item_description preformat -compact' autoHeight animateOnReady>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
           </div>
-        </li>
-        <li class='faq_item' accordionItem animate>
+        </div>
+      </div>
+    </li>
+    <li class='faq_item' accordionItem animateOnReady tabindex='0'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
           <h2 class='faq_item_title'>Lorem Ipsum Dolor Sit</h2>
-          <div class='faq_item_description preformat -compact' autoHeight animate>
+          <div class='faq_item_description preformat -compact' autoHeight animateOnReady>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia totam dolore, fugiat soluta quasi rem!</p>
           </div>
-        </li>
-      </ul>
-    </div>
-  </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 
 </section>

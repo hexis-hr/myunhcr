@@ -86,8 +86,30 @@ return array(
     ),
     'asset_manager' => array(
         'resolver_configs' => array(
-            'paths' => array(
+            'collections' => array(
+            'scripts/xx.js' => array(
+                'scripts/main.js',
+                'scripts/test.js',
+            ),
+            ),
+        'paths' => array(
                 __DIR__ . '/../public',
+            ),
+        ),
+        'filters' => array(
+            'js' => array(
+                array(
+                    // Note: You will need to require the classes used for the filters yourself.
+                    'filter' => 'Assetic\\Filter\\JSMinFilter',  // Allowed format is Filtername[Filter]. Can also be FQCN
+                ),
+            ),
+        ),
+        'caching' => array(
+            'default' => array(
+                'cache'     => 'AssetManager\\Cache\\FilePathCache',
+                'options' => array(
+                    'dir' => 'public/', // path/to/cache
+                ),
             ),
         ),
     ),

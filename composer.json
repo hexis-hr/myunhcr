@@ -9,6 +9,7 @@
         "doctrine/doctrine-orm-module": "0.8.*",
         "doctrine/data-fixtures": "~1.0",
         "rwoverdijk/assetmanager": "~1.4",
-        "zendframework/zftool": "dev-master"
+        "zendframework/zftool": "dev-master",
+        "mrclay/minify": "~2.2"
     }
 }

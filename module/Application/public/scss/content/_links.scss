@@ -6,13 +6,39 @@
       padding: 14px 22px;
       color: $link;
       border-bottom: 1px solid $lightGray;
+      transition: 150ms;
 
       &:after {
         @extend %icon;
         @include img("icons", "arrowRight-blue-h24@2x", 2, inline);
+        display: none;
         position: absolute;
         top: 12px;
         right: 22px;
         content: '';
+        transition: 150ms;
+      }
+
+      &:hover, &:focus {
+        @extend %inputBase_focus;
+        background: rgba($blue, 0.05);
+
+        &:after {
+          right: 18px;
+        }
       }
     }
+
+
+@include small {
+  .linkGroup_link:after {
+    display: inline-block;
+  }
+}
+
+
+@include large {
+  .linkGroup_link:after {
+    display: none;
+  }
+}

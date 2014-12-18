@@ -1,5 +1,5 @@
 .button {
-  $color: lighten($lightGray, 8);
+  $color: lighten($lightGray, 6);
   @include st-button;
   display: block;
   width: 100%;
@@ -7,11 +7,12 @@
   color: $neutral-dark;
   background: $color;
   background: linear-gradient(top, lighten($color, 3), darken($color, 4));
-  border: 1px solid darken(#e6e6e6, 4);
+  border: 1px solid darken(#e6e6e6, 4) !important;
   border-radius: 3px;
 
-  &:hover {
-    $color: lighten($lightGray, 4);
+  &:hover, &:focus {
+    @extend %inputBase_focus;
+    $color: lighten($lightGray, 2);
     background: $color;
     background: linear-gradient(top, lighten($color, 3), darken($color, 4));
   }
@@ -24,6 +25,17 @@
     display: block;
     width: 100% !important;
   }
+
+  &.-compact {
+    display: inline-block !important;
+    width: auto !important;
+    padding: ($button-size / 2.4) ($button-size / 1.5) ($button-size / 2.25) !important;
+    font-size: 0.9em;
+
+    @include medium {
+      padding: ($button-size / 2.2) ($button-size / 1.2) ($button-size / 2.05) !important;
+    }
+  }
 }
 
 
@@ -31,9 +43,9 @@
   color: white;
   background: $primary;
   background: linear-gradient(top, lighten($primary, 2), darken($primary, 2));
-  border: 1px solid darken($primary, 4);
+  border: 1px solid darken($primary, 4) !important;
 
-  &:hover {
+  &:hover, &:focus {
     $color: lighten($primary, 4);
     background: $color;
     background: linear-gradient(top, lighten($color, 2), darken($color, 2));
@@ -45,9 +57,9 @@
   color: white;
   background: $secondary;
   background: linear-gradient(top, lighten($secondary, 2), darken($secondary, 2));
-  border: 1px solid darken($secondary, 4);
+  border: 1px solid darken($secondary, 4) !important;
 
-  &:hover {
+  &:hover, &:focus {
     $color: lighten($secondary, 4);
     background: $color;
     background: linear-gradient(top, lighten($color, 2), darken($color, 2));

@@ -3,6 +3,9 @@
   // Remove padding from page
   .page { padding-top:.25em; }
 
+  // Remove footer
+  .mainFooter { display:none; }
+
   @include medium {
     .page { padding-top:1em; }
   }

@@ -4,7 +4,15 @@
 .floatRight { @include float(right); }
 .clearfix{ @include clearfix; }
 
-[animate] {
+
+%animate, [animate] {
   transition: 300ms ease-out;
   transform:translateZ(0);
+}
+
+
+.ready {
+  %animateOnReady, [animateOnReady] {
+    @extend %animate;
+  }
 }

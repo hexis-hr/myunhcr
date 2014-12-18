@@ -108,6 +108,9 @@
     var logDOMContent = function() {
       document.addEventListener("DOMContentLoaded", function(){
         window.app.DOMContentLoaded = true;
+        setTimeout(function(){
+          doc.className += " ready";
+        }, 1000); 
       });
     }
 

@@ -2,16 +2,29 @@
 <section class='page'>
 
   <div class='sectionHeader'>
-    <div class='grid'>
-      <div class='grid_column'>
-        <div class='sectionHeader_inner'>
-          <h1 class='sectionHeader_title'><?php echo $this->translate("Settings");?></h1>
+    <div class='sectionHeader_top'>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_top_inner'>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("Settings");?></h1>
+            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id='sectionInfo' class='sectionHeader_bottom' animate>
+      <div class='grid -clean'>
+        <div class='grid_column'>
+          <div class='sectionHeader_description preformat'>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<!-- not an ajax form as we need to refresh the whole page after save, due to locale settings. -->
-  <form action='menu-page.html' class='settings form' method='POST' ajaxForm>
+  
+  <!-- not an ajax form as we need to refresh the whole page after save, due to locale settings. -->
+  <form action='menu-page.html' class='settings form' method='post'>
     <div class='grid'>
       <div class='grid_column -medium9 -mediumPlus8'>
 
@@ -68,7 +81,7 @@
 
         <div class='form_item'>
           <div class='form_field'>
-            <input class='button -primary -submit floatRight clearfix' type='submit' name='' value='Save'>
+            <input class='button -primary -submit' type='submit' name='' value='Save'>
           </div>
         </div>
     

@@ -52,6 +52,16 @@ class FormElement {
     protected $parentId = "";
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $groupLabel = "";
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $parentRepeat = 0;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Administration\Entity\FormFieldset")
      * @ORM\JoinColumn(name="fieldset", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -71,6 +81,20 @@ class FormElement {
      * @ORM\Column(type="string")
      */
     protected $required = "";
+
+    /**
+     * @param mixed $parentRepeat
+     */
+    public function setParentRepeat ($parentRepeat) {
+        $this->parentRepeat = $parentRepeat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParentRepeat () {
+        return $this->parentRepeat;
+    }
 
     /**
      * @param mixed $name
@@ -154,6 +178,20 @@ class FormElement {
      */
     public function getParentType () {
         return $this->parentType;
+    }
+
+    /**
+     * @param mixed $groupLabel
+     */
+    public function setGroupLabel ($groupLabel) {
+        $this->groupLabel = $groupLabel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroupLabel () {
+        return $this->groupLabel;
     }
 
     /**

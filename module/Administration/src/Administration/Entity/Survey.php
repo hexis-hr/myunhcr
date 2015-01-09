@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Form
+ * Survey
  *
- * @ORM\Table(name="form")
+ * @ORM\Table(name="survey")
  * @ORM\Entity
  */
-class Form {
+class Survey {
 
     /**
      * @ORM\Column(name="id", type="bigint", nullable=false)
@@ -27,40 +27,21 @@ class Form {
     protected $name = "";
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="boolean")
      */
-    protected $title = "";
+    protected $active = 1;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\Form")
+     * @ORM\JoinColumn(name="form", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $formName = "";
+    protected $form = "";
 
     /**
      * @ORM\ManyToOne(targetEntity="Administration\Entity\CodeCountries")
      * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $country;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\File")
-     * @ORM\JoinColumn(name="file", referencedColumnName="id", onDelete="CASCADE")
-     */
-    protected $file;
-
-    /**
-     * @param mixed $file
-     */
-    public function setFile ($file) {
-        $this->file = $file;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFile () {
-        return $this->file;
-    }
 
     /**
      * @param mixed $country
@@ -77,17 +58,17 @@ class Form {
     }
 
     /**
-     * @param mixed $formName
+     * @param mixed $form
      */
-    public function setFormName ($formName) {
-        $this->formName = $formName;
+    public function setForm ($form) {
+        $this->form = $form;
     }
 
     /**
      * @return mixed
      */
-    public function getFormName () {
-        return $this->formName;
+    public function getForm () {
+        return $this->form;
     }
 
     /**
@@ -119,17 +100,17 @@ class Form {
     }
 
     /**
-     * @param mixed $title
+     * @param mixed $active
      */
-    public function setTitle ($title) {
-        $this->title = $title;
+    public function setActive ($active) {
+        $this->active = $active;
     }
 
     /**
      * @return mixed
      */
-    public function getTitle () {
-        return $this->title;
+    public function getActive () {
+        return $this->active;
     }
 
 }

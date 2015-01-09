@@ -321,6 +321,30 @@ return array(
                             ),
                         ),
                     ),
+                    'add' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addODKSurvey',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'add',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'manageActiveStatus' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/manageActiveStatus[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'manageActiveStatus',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
                     'downloadXml' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
@@ -334,9 +358,9 @@ return array(
                         'may_terminate' => true,
                     ),
                     'delete' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/survey/delete',
+                            'route' => '/survey/delete[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Survey',

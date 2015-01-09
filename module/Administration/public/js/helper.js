@@ -21,3 +21,32 @@ handle('[data-delete]', function () {
         }
     })
 });
+
+handle('[data-activeCheck]', function () {
+    $(this).on('change', function (e) {
+        e.preventDefault();
+
+        var status = false;
+
+        if($(this).attr('checked'))
+            status = true;
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).data('href'),
+            data: {
+                'status' : status
+            },
+            success: function(response){
+                if (response.status == 0) {
+                    $(this).removeAttr('checked');
+                } else {
+                    $(this).attr('checked');
+                }
+            },
+            error: function() {
+                console.log('Error on entity action handle');
+            }
+        });
+    })
+});

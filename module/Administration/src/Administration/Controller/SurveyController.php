@@ -114,7 +114,7 @@ class SurveyController extends AbstractActionController {
 
     }
 
-    public function downloadAction () {
+    public function downloadSurveyAction () {
 
         $globalConfig = $this->serviceLocator->get('config');
         $id = (int)$this->params()->fromRoute('id');
@@ -186,6 +186,7 @@ class SurveyController extends AbstractActionController {
                 ->findOneBy(array('id' => $survey->getForm()->getFile()->getId()));
 
             unlink($globalConfig['fileDir'] . $file->getName());
+            unlink($globalConfig['surveyFormDir'] . $surveyForm->getName());
 
             $this->getEntityManager()->remove($file);
             $this->getEntityManager()->flush();

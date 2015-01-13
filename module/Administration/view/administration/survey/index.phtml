@@ -56,7 +56,7 @@
     <h3 class="glyphicons notes"><?php echo $this->translate('Added surveys'); ?></h3>
     <?php if (count($this->surveys) > 0) { ?>
         <?php foreach ($this->surveys as $surveyId => $surveyFile) { ?>
-            <a href="<?php  echo $this->url('translation/downloadTranslation', array('id' => $surveyId)); ?>">
+            <a href="<?php  echo $this->url('survey/downloadSurvey', array('id' => $surveyId)); ?>">
                 <div class="col-md-3 widget-stats">
                     <span class="txt"><strong><?php echo $surveyFile; ?></strong>
                         <?php echo $this->translate('Filename') . ': ' . $surveyFile; ?>

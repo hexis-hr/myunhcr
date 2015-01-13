@@ -334,7 +334,7 @@ return array(
                         'may_terminate' => true,
                     ),
                     'manageActiveStatus' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
                             'route' => '/manageActiveStatus[/:id]',
                             'defaults' => array(
@@ -345,14 +345,14 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
-                    'downloadXml' => array(
+                    'downloadSurvey' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/survey/downloadXml[/:id]',
+                            'route' => '/survey/downloadSurvey[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Survey',
-                                'action' => 'downloadXml',
+                                'action' => 'downloadSurvey',
                             ),
                         ),
                         'may_terminate' => true,

@@ -63,7 +63,7 @@ class SurveyController extends AbstractActionController {
         $file = new File();
         $form = new FileForm();
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\File'));
-        $form->bind($file);;
+        $form->bind($file);
 
         if ($request->isPost()) {
 
@@ -186,7 +186,7 @@ class SurveyController extends AbstractActionController {
                 ->findOneBy(array('id' => $survey->getForm()->getFile()->getId()));
 
             unlink($globalConfig['fileDir'] . $file->getName());
-            unlink($globalConfig['surveyFormDir'] . $surveyForm->getName());
+            $this->rrmdir($globalConfig['surveyFormDir'] . $survey->getForm()->getFormName());
 
             $this->getEntityManager()->remove($file);
             $this->getEntityManager()->flush();
@@ -209,4 +209,22 @@ class SurveyController extends AbstractActionController {
         return $result;
     }
 
+    private function rrmdir($dir) {
+        if (!file_exists($dir))
+            return true;
+
+        if (!is_dir($dir))
+            return unlink($dir);
+
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..')
+                continue;
+
+            if (!$this->rrmdir($dir . DIRECTORY_SEPARATOR . $item))
+                return false;
+
+        }
+
+        return rmdir($dir);
+    }
 }

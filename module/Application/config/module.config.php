@@ -35,6 +35,17 @@ return array(
                     ),
                 ),
             ),
+            'deliverSurvey' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/deliverSurvey[/:survey]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'deliverSurvey',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

@@ -256,12 +256,12 @@ queue.jQuery(function(){
     $(this).hide();
   });
 
-  $('.survey').steps({
-    headerTag: 'h4',
-    bodyTag: 'widget-body',
-    transitionEffect: "slideLeft",
-    autoFocus: true
-  });
+//  $('.survey').steps({
+//    headerTag: 'h4',
+//    bodyTag: 'widget-body',
+//    transitionEffect: "slideLeft",
+//    autoFocus: true
+//  });
 
   /*------------------------------------------------------------------------------------
     Accordion

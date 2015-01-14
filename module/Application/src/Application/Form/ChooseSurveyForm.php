@@ -12,6 +12,26 @@ class ChooseSurveyForm extends Form {
 
         parent::__construct('chooseSurvey');
 
+        $this->add(array(
+            'name' => 'authentification',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'formInput',
+                'id' => 'authentication',
+                'placeholder' => 'ID Number',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'date',
+            'type' => 'Date',
+            'attributes' => array(
+                'class' => 'formInput',
+                'id' => 'date',
+                'placeholder' => 'Day/Month/Year',
+            ),
+        ));
+
         $mSurveys = $entityManager->getRepository('Administration\Entity\Survey')->findBy(array('active' => 1));
 
         $surveys = array();

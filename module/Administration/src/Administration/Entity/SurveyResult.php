@@ -3,6 +3,7 @@
 namespace Administration\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Stdlib\DateTime;
 
 
 /**
@@ -30,6 +31,16 @@ class SurveyResult {
      * @ORM\Column(type="string")
      */
     protected $fieldValue = "";
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $authId = "";
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $birthDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="Administration\Entity\Form")
@@ -111,6 +122,34 @@ class SurveyResult {
      */
     public function getId () {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $authId
+     */
+    public function setAuthId ($authId) {
+        $this->authId = $authId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthId () {
+        return $this->authId;
+    }
+
+    /**
+     * @param mixed $birthDate
+     */
+    public function setBirthDate ($birthDate) {
+        $this->birthDate = new \DateTime($birthDate);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBirthDate () {
+        return $this->birthDate;
     }
 
 }

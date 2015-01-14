@@ -77,15 +77,6 @@ class IndexController extends AbstractActionController {
         return new ViewModel();
     }
 
-    public function chooseYourSurveyAction()
-    {
-        $this->layout()->setVariable('body_class', 'pg-chooseSurvey');
-
-        $surveyForm = new ChooseSurveyForm($this->getEntityManager());
-
-        return new ViewModel(array('form' => $surveyForm));
-    }
-
     public function faqAction()
     {
         $this->layout()->setVariable('body_class', 'pg-faq -information');
@@ -218,7 +209,10 @@ class IndexController extends AbstractActionController {
     public function takeASurveyAction()
     {
         $this->layout()->setVariable('body_class', 'pg-takeSurvey');
-        return new ViewModel();
+
+        $surveyForm = new ChooseSurveyForm($this->getEntityManager());
+
+        return new ViewModel(array('form' => $surveyForm));
     }
 
     public function updatePersonalDataAction()
@@ -248,7 +242,49 @@ class IndexController extends AbstractActionController {
     public function surveyQuestionsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-surveyQuest');
-        return new ViewModel();
+
+        $request = $this->getRequest();
+
+        if ($request->getPost('survey') != null) {
+            $surveyId = (int) $this->params()->fromPost('survey');
+            $authId = (int) $this->params()->fromPost('authentification');
+            $birthDate = $this->params()->fromPost('date');
+        } else {
+            $surveyId = (int) $this->params()->fromRoute('survey');
+            $authId = (int) $this->params()->fromRoute('authentification');
+            $birthDate = $this->params()->fromRoute('date');
+        }
+
+        $survey = $this->getEntityManager()->getRepository('Administration\Entity\Survey')
+            ->findOneBy(array('id' => $surveyId));
+
+        $formName = 'Administration\Form\SurveyForm\\' . $survey->getForm()->getFormName()
+            . '\\' . $survey->getForm()->getFormName();
+        $form = new $formName();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Form'));
+
+        $postSurvey = $this->params()->fromRoute('survey') != null ? true : false;
+
+        if ($request->isPost() && $postSurvey) {
+
+            foreach ($this->params()->fromPost() as $fieldset) {
+                foreach ($fieldset as $fieldName => $fieldValue) {
+                    $surveyResult = new SurveyResult();
+                    $surveyResult->setFieldName($fieldName);
+                    $surveyResult->setFieldValue($fieldValue);
+                    $surveyResult->setBirthDate($birthDate);
+                    $surveyResult->setAuthId($authId);
+                    $surveyResult->setForm($survey->getForm());
+                    $this->getEntityManager()->persist($surveyResult);
+                    $this->getEntityManager()->flush();
+                }
+            }
+
+            return $this->redirect()->toRoute('app', array('action' => 'menu-page'));
+        }
+
+        return new ViewModel(array('form' => $form, 'surveyId' => $surveyId, 'authId' => $authId, 'birthDate' => $birthDate));
+
     }
 
     public function surveyFinishAction()
@@ -256,45 +292,6 @@ class IndexController extends AbstractActionController {
         $this->layout()->setVariable('body_class', 'pg-surveyFinish');
         return new ViewModel();
     }
-
-    public function deliverSurveyAction() {
-         $this->layout()->setVariable('body_class', 'pg-updatePersonal');
-
-         $request = $this->getRequest();
-
-         if ($request->getPost('survey') != null)
-             $surveyId = (int) $this->params()->fromPost('survey');
-         else
-             $surveyId = (int) $this->params()->fromRoute('survey');
-
-         $survey = $this->getEntityManager()->getRepository('Administration\Entity\Survey')
-             ->findOneBy(array('id' => $surveyId));
-
-         $formName = 'Administration\Form\SurveyForm\\' . $survey->getForm()->getFormName()
-             . '\\' . $survey->getForm()->getFormName();
-         $form = new $formName();
-         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Form'));
-
-         $postSurvey = $this->params()->fromRoute('survey') != null ? true : false;
-
-         if ($request->isPost() && $postSurvey) {
-
-             foreach ($this->params()->fromPost() as $fieldset) {
-                 foreach ($fieldset as $fieldName => $fieldValue) {
-                     $surveyResult = new SurveyResult();
-                     $surveyResult->setFieldName($fieldName);
-                     $surveyResult->setFieldValue($fieldValue);
-                     $surveyResult->setForm($survey->getForm());
-                     $this->getEntityManager()->persist($surveyResult);
-                     $this->getEntityManager()->flush();
-                 }
-             }
-
-             return $this->redirect()->toRoute('app', array('action' => 'menu-page'));
-         }
-
-         return new ViewModel(array('form' => $form, 'surveyId' => $surveyId));
-     }
 
 }
 

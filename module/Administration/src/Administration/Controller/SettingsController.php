@@ -2,118 +2,166 @@
 
 namespace Administration\Controller;
 
+use Administration\Entity\Country;
 use Administration\Entity\News;
+use Administration\Form\CountrySettingsForm;
 use Administration\Form\NewsForm;
-
 use Administration\Provider\ProvidesEntityManager;
+
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Paginator;
 
 use Doctrine\ORM\Query;
-use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
-class NewsController extends AbstractActionController {
+class SettingsController extends AbstractActionController {
 
     use ProvidesEntityManager;
 
     public function indexAction () {
 
-        $mNews = $this->getEntityManager()->getRepository('Administration\Entity\News');
+        $form = new CountrySettingsForm($this->getEntityManager(), $this->getServiceLocator());
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Country'));
 
-        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mNews->createQueryBuilder('News')));
-        $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(20);
+        $activeCountries = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+            ->findBy(array(), array('id' => 'DESC'));
 
-        $page = (int)$this->params()->fromQuery('page');
+        return new ViewModel(array('form' => $form, 'activeCountries' => $activeCountries));
 
-        if ($page)
-            $paginator->setCurrentPageNumber($page);
-
-        return new ViewModel(array(
-            'data' => $paginator,
-        ));
     }
 
-    public function addAction () {
-
-        $request = $this->getRequest();
-
-        $news = new News();
-        $form = new NewsForm($this->getEntityManager(), $this->getServiceLocator());
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\News'));
-        $form->bind($news);
-
-        if ($request->isPost()) {
-
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-
-                $this->getEntityManager()->persist($news);
-                $this->getEntityManager()->flush();
-
-                $this->flashMessenger()->addMessage('New news successfully added.');
-                return $this->redirect()->toRoute('news');
-            }
-        }
-
-        return new ViewModel(array('form' => $form));
-    }
-
-    public function editAction () {
-
-        $request = $this->getRequest();
-        $newsId = (int) $this->params()->fromRoute('id');
-        $news = $this->getEntityManager()->getRepository('Administration\Entity\News')
-            ->findOneBy(array('id' => $newsId));
-
-        $form = new NewsForm($this->getEntityManager(), $this->getServiceLocator());
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\News'));
-        $form->bind($news);
-
-        if ($request->isPost()) {
-
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-
-                $this->getEntityManager()->persist($news);
-                $this->getEntityManager()->flush();
-
-                $this->flashMessenger()->addMessage('New news successfully added.');
-                return $this->redirect()->toRoute('news');
-            }
-        }
-
-        return new ViewModel(array('form' => $form, 'newsId' =>$newsId));
-    }
-
-    public function deleteAction () {
+    public function activateCountryAction () {
 
         $request = $this->getRequest();
 
         if ($request->isXmlHttpRequest()) {
-            $id = (int)$this->params()->fromRoute('id');
-            $faq = $this->getEntityManager()->getRepository('Administration\Entity\News')
+
+            $id = (int) $this->params()->fromPost('countryId');
+            $mCountry = $this->getEntityManager()->getRepository('Administration\Entity\CodeCountries')
                 ->findOneBy(array('id' => $id));
 
-            $this->getEntityManager()->remove($faq);
+            $country = new Country();
+            $country->setCountryId($mCountry->getId());
+            $country->setName($mCountry->getName());
+            $this->getEntityManager()->persist($country);
             $this->getEntityManager()->flush();
 
             $result = new JsonModel(array(
                 'success' => true,
-                'id' => $id,
+                'countryName' => $country->getName(),
+                'countryId' => $country->getId(),
+                'deleteUrl' => $this->url()->fromRoute('settings/deleteActiveCountry', array('id' => $country->getId())),
+                'editUrl' => $this->url()->fromRoute('settings/editActiveCountry', array('id' => $country->getId())),
+                'countrySelectionUrl' => $this->url()->fromRoute('countrySelection', array('id' => $country->getId())),
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function editActiveCountryAction () {
+
+        $countryId = (int) $this->params()->fromRoute('id');
+        $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+            ->findOneBy(array('id' => $countryId));
+
+        $form = new CountrySettingsForm($this->getEntityManager(), $this->getServiceLocator());
+
+        return new ViewModel(array('form' => $form, 'country' => $country, 'languages' => $country->getLanguages()));
+    }
+
+    public function editCountryLanguageAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $id = (int) $this->params()->fromRoute('id');
+            $language = $this->params()->fromPost('language');
+
+            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $id));
+
+            $country->setLanguages($language);
+            $this->getEntityManager()->persist($country);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'language' => $language,
+                'countryId' => $id,
+                'deleteUrl' => $this->url()->fromRoute('settings/deleteActiveLanguage',
+                        array('id' => $id, 'language' => $language)),
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+
+    public function deleteActiveCountryAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $id = (int)$this->params()->fromRoute('id');
+            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $id));
+
+            $name = $country->getName();
+            $this->getEntityManager()->remove($country);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'countryId' => $id,
+                'countryName' => $name,
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function deleteActiveLanguageAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $id = (int)$this->params()->fromRoute('id');
+            $language = $this->params()->fromRoute('language');
+
+            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $id));
+
+            $country->removeLanguage($language);
+            $this->getEntityManager()->persist($country);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'countryId' => $id,
+                'language' => $language,
             ));
 
         } else {

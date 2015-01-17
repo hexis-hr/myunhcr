@@ -13,12 +13,13 @@ class Auth extends AbstractPlugin {
 
     private function getSessContainer () {
         if (!$this->sesscontainer) {
-            $this->sesscontainer = new SessionContainer('myunhcr');
+            $this->sesscontainer = new SessionContainer('MyUnhcr');
         }
         return $this->sesscontainer;
     }
 
     public function doAuthorization ($e) {
+
         $acl = $this->getController()->getServiceLocator()->get('Administration\Acl');
 
         $controller = $e->getTarget();

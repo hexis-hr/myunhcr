@@ -4,13 +4,19 @@ namespace Administration\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 
-class LimitEcho extends AbstractHelper {
+class CountrySelection extends AbstractHelper {
 
-    public function __invoke ($text) {
+    protected $sm;
 
-        if (strlen($text) <= 200)
-            return $text;
-        else
-            return substr($text, 0, 200) . '...';
+    public function __construct ($serviceManager) {
+        $this->sm = $serviceManager;
     }
+
+    public function __invoke () {
+
+        $cs = $this->sm->getServiceLocator()->get('CountryService');
+
+        return $cs->getAllCountries();
+    }
+
 }

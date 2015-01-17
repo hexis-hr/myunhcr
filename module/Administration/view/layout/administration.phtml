@@ -106,9 +106,9 @@
         ->prependFile($this->basePath() . '/scripts/plugins/charts/flot/jquery.flot.pie.js')
         ->prependFile($this->basePath() . '/scripts/plugins/charts/flot/jquery.flot.js')
         ->prependFile($this->basePath() . '/scripts/plugins/charts/sparkline/jquery.sparkline.js')
-        ->prependFile($this->basePath() . '/scripts/demo/themer.js')
+//        ->prependFile($this->basePath() . '/scripts/demo/themer.js')
         ->prependFile($this->basePath() . '/scripts/plugins/system/jquery.cookie.js')
-        ->prependFile($this->basePath() . '/scripts/demo/twitter.js')
+        //->prependFile($this->basePath() . '/scripts/demo/twitter.js')
         ->prependFile($this->basePath() . '/scripts/plugins/other/holder/holder.js')
         ->prependFile($this->basePath() . '/scripts/demo/common.js')
         ->prependFile($this->basePath() . '/scripts/plugins/other/jquery-slimScroll/jquery.slimscroll.min.js')
@@ -144,8 +144,6 @@
                 </div>
             </div>
         </div>
-<!--        --><?php //echo $this->partial('partial/mainNavigation.phtml',
-//        array('acl' => $this->acl, 'userRole' => $this->auth->getIdentity()->getType())); ?>
 
         <div id="content" style="min-height: 600px">
             <?php if ($this->flashMessenger()->hasMessages()) { ?>
@@ -168,32 +166,50 @@
 
 </div>
 
-<div id="themer" class="collapse">
-    <div class="wrapper">
-        <span class="close2">&times; close</span>
-        <h4><?php echo $this->translate('Themer'); ?> <span><?php echo $this->translate('color options'); ?></span></h4>
-        <ul>
-            <li><?php echo $this->translate('Theme'); ?>: <select id="themer-theme" class="pull-right"></select>
-                <div class="clearfix"></div></li>
-            <li><?php echo $this->translate('Primary Color'); ?>: <input type="text" data-type="minicolors"
-                data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left"
-                id="themer-primary-cp" /><div class="clearfix"></div></li>
-            <li>
-                <span class="link" id="themer-custom-reset"><?php echo $this->translate('reset theme'); ?></span>
-                <span class="pull-right"><label><?php echo $this->translate('advanced'); ?>
-                        <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>
-            </li>
-        </ul>
-        <div id="themer-getcode" class="hide">
-            <hr class="separator" />
-            <button class="btn btn-primary btn-small pull-right btn-icon glyphicons download"
-                    id="themer-getcode-less"><i></i><?php echo $this->translate('Get LESS'); ?></button>
-            <button class="btn btn-inverse btn-small pull-right btn-icon glyphicons download"
-                    id="themer-getcode-css"><i></i><?php echo $this->translate('Get CSS'); ?></button>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
+<!--<div id="themer" class="collapse">-->
+<!--    <div class="wrapper">-->
+<!--        <span class="close2">&times; close</span>-->
+<!--        <h4>--><?php //echo $this->translate('Themer'); ?><!-- <span>--><?php //echo $this->translate('color options'); ?><!--</span></h4>-->
+<!--        <ul>-->
+<!--            <li>--><?php //echo $this->translate('Theme'); ?><!--: <select id="themer-theme" class="pull-right"></select>-->
+<!--                <div class="clearfix"></div></li>-->
+<!--            <li>--><?php //echo $this->translate('Primary Color'); ?><!--: <input type="text" data-type="minicolors"-->
+<!--                data-default="#ffffff" data-slider="hue" data-textfield="false" data-position="left"-->
+<!--                id="themer-primary-cp" /><div class="clearfix"></div></li>-->
+<!--            <li>-->
+<!--                <span class="link" id="themer-custom-reset">--><?php //echo $this->translate('reset theme'); ?><!--</span>-->
+<!--                <span class="pull-right"><label>--><?php //echo $this->translate('advanced'); ?>
+<!--                        <input type="checkbox" value="1" id="themer-advanced-toggle" /></label></span>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--        <div id="themer-getcode" class="hide">-->
+<!--            <hr class="separator" />-->
+<!--            <button class="btn btn-primary btn-small pull-right btn-icon glyphicons download"-->
+<!--                    id="themer-getcode-less"><i></i>--><?php //echo $this->translate('Get LESS'); ?><!--</button>-->
+<!--            <button class="btn btn-inverse btn-small pull-right btn-icon glyphicons download"-->
+<!--                    id="themer-getcode-css"><i></i>--><?php //echo $this->translate('Get CSS'); ?><!--</button>-->
+<!--            <div class="clearfix"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="modal fade" id="activateCountryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo $this->translate('Set active country'); ?></h4>
+            </div>
+            <div class="modal-body">
+                <select id="activateCountrySelect" style="width:100%"></select>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-primary" data-activateCountrySubmit
+                   data-href="<?php echo $this->url('countrySelection'); ?>">Set country</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="separator bottom"></div>
 
 <script>
     Holder.add_theme("dark", {background:"#000", foreground:"#aaa", size:9})

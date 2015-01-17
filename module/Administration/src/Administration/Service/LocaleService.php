@@ -7,17 +7,20 @@ use Administration\Provider\ProvidesEntityManager;
 use Administration\Provider\ProvidesServiceLocator;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class CountryService implements ServiceLocatorAwareInterface {
+class LocaleService implements ServiceLocatorAwareInterface {
 
     use ProvidesEntityManager;
 
-    /**
-     * @return object CodeCountries
-    */
-    public function getAllCountries () {
+    public function getLocales () {
 
-        return $this->getEntityManager()->getRepository('Administration\Entity\CodeCountries')->findAll();
+        $local = \ResourceBundle::getLocales('');
 
+        foreach ($local as $localeKey => $localeValue) {
+            $local[$localeValue] = $localeValue;
+            unset($local[$localeKey]);
+        }
+
+        return $local;
     }
 
 }

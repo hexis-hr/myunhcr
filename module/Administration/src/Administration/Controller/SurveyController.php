@@ -4,6 +4,7 @@ namespace Administration\Controller;
 
 use Administration\Entity\File;
 use Administration\Form\FileForm;
+use Administration\Provider\ProvidesEntityManager;
 use ODKParser\ODKParser;
 
 use Zend\View\Model\JsonModel;
@@ -19,18 +20,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
 class SurveyController extends AbstractActionController {
 
-    protected $em;
-
-    public function setEntityManager (EntityManager $em) {
-        $this->em = $em;
-    }
-
-    public function getEntityManager () {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
+    use ProvidesEntityManager;
 
     public function indexAction () {
 

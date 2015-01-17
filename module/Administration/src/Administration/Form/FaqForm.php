@@ -31,17 +31,24 @@ class FaqForm extends Form {
             ),
         ));
 
+        $country = $entityManager->getRepository('Administration\Entity\Country')
+            ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+
+        $languageArray = $country->getLanguages();
+        foreach ($languageArray as $languageKey => $languageValue) {
+            $languageArray[$languageValue] = $languageValue;
+            unset($languageArray[$languageKey]);
+        }
+
         $this->add(array(
             'name' => 'language',
             'type' => 'Select',
-            'id' => 'lang',
             'attributes' => array(
+                'id' => 'lang',
                 'class' => 'col-md-12 form-control',
             ),
             'options' => array(
-                'value_options' =>
-                //todo: check if locales are okay for use here
-                $globalConfig['translationLocales'],
+                'value_options' => $languageArray,
             ),
         ));
 
@@ -63,23 +70,6 @@ class FaqForm extends Form {
             ),
         ));
 
-        $codeCountries = $entityManager->getRepository('Administration\Entity\CodeCountries')->findAll();
-
-        $countries = array();
-        foreach ($codeCountries as $country) {
-            $countries[$country->getId()] = $country->getName();
-        }
-
-        $this->add(array(
-            'name' => 'country',
-            'type' => 'Select',
-            'attributes' => array(
-                'class' => 'col-md-12 form-control',
-            ),
-            'options' => array(
-                'value_options' => $countries,
-            ),
-        ));
     }
 
     //bind method overridden because of foreign object binding
@@ -101,9 +91,6 @@ class FaqForm extends Form {
         }
 
         $this->bindAs = $flags;
-
-        if (property_exists($object, 'country') && !is_null($object->getCountry()))
-            $object->setCountry($object->getCountry()->getId());
 
         if (property_exists($object, 'category') && !is_null($object->getCategory()))
             $object->setCategory($object->getCategory()->getId());

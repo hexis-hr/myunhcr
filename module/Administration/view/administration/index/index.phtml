@@ -13,16 +13,14 @@
         <div class="col-md-4">
             <div class="widget widget-4 margin-none">
                 <div class="widget-head">
-                    <h4 class="heading">Activity</h4>
-                    <a href="" class="details pull-right">view all</a>
+                    <h4 class="heading"><?php echo $this->translate('Active country'); ?></h4>
                 </div>
-                <div class="widget-body list">
-                    <ul>
-                        <li>
-                            <span>Sales today</span>
-                            <span class="count">&euro;5,900</span>
-                        </li>
-                    </ul>
+                <div class="widget-body">
+                    <?php if (isset($_SESSION['countrySettings']['countryName'])) { ?>
+                        <h4><?php echo $_SESSION['countrySettings']['countryName']; ?></h4>
+                    <?php } else { ?>
+                        <h4><?php echo $this->translate('Please choose country in top navigation'); ?></h4>
+                    <?php } ?>
                 </div>
             </div>
         </div>

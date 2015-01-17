@@ -2,27 +2,22 @@
 
 namespace Administration\Provider;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Doctrine\ORM\EntityManager;
 
-trait ProvidesServiceLocator {
+trait ProvidesEntityManager {
 
-    protected $serviceLocator;
+    use ProvidesServiceLocator;
 
-    /**
-     * Set service locator
-     *
-     * @param ServiceLocatorInterface $serviceLocator
-     */
-    public function setServiceLocator (ServiceLocatorInterface $serviceLocator) {
-        $this->serviceLocator = $serviceLocator;
+    protected $em;
+
+    public function setEntityManager (EntityManager $em) {
+        $this->em = $em;
     }
 
-    /**
-     * Get service locator
-     *
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator () {
-        return $this->serviceLocator;
+    public function getEntityManager () {
+        if (null === $this->em) {
+            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        }
+        return $this->em;
     }
 }

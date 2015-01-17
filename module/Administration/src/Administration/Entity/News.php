@@ -36,10 +36,29 @@ class News {
     protected $date = "";
 
     /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\CodeCountries")
+     * @ORM\Column(type="string")
+     */
+    protected $language = "";
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\Country")
      * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $country;
+
+    /**
+     * @param mixed $language
+     */
+    public function setLanguage ($language) {
+        $this->language = $language;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage () {
+        return $this->language;
+    }
 
     /**
      * @param mixed $country

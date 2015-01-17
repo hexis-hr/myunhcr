@@ -4,28 +4,19 @@ namespace Administration\Controller;
 
 use Administration\Entity\File;
 use Administration\Form\TranslationForm;
+use Administration\Provider\ProvidesEntityManager;
 
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Http\PhpEnvironment\Response;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class TranslationController extends AbstractActionController {
 
-    protected $em;
-
-    public function setEntityManager (EntityManager $em) {
-        $this->em = $em;
-    }
-
-    public function getEntityManager () {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
+    use ProvidesEntityManager;
 
     public function indexAction () {
 
@@ -47,8 +38,7 @@ class TranslationController extends AbstractActionController {
         if (is_null($file))
             $file = new File();
 
-        $form = new TranslationForm();
-        $form->get('locale')->setValueOptions($globalConfig['translationLocales']);
+        $form = new TranslationForm($this->getEntityManager());
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\File'));
         $form->bind($file);
 

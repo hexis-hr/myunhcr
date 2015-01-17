@@ -27,7 +27,7 @@ class FaqCategory {
     protected $category = "";
 
     /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\CodeCountries")
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\Country")
      * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $country;

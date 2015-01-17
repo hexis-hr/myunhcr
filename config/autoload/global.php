@@ -8,9 +8,9 @@ return array(
 
    'surveyFormDir' => dirname($_SERVER['DOCUMENT_ROOT']) . '/module/Administration/src/Administration/Form/SurveyForm/',
 
-   'translationLocales' => array(
-       'en_US' => 'en_US',
-       'de_DE' => 'de_DE',
-       'fr_FR' => 'fr_FR',
-   ),
+    'cookie' => array(
+        'rememberMeName' => 'MyUnhcrRememberMe',
+        'rememberMeKey' => 'L8UC9qhgfI0K632LLxpeC8Clj0jF4XBA',
+        'rememberMeSeconds' => 2592000,
+    ),
 );

@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Administration\Entity\SurveyResult;
+use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -16,18 +17,7 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class IndexController extends AbstractActionController {
 
-    protected $em;
-
-    public function setEntityManager (EntityManager $em) {
-        $this->em = $em;
-    }
-
-    public function getEntityManager () {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
+    use ProvidesEntityManager;
 
     public function indexAction()
     {

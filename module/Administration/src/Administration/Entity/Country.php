@@ -8,10 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Country
  *
- * @ORM\Table(name="survey")
+ * @ORM\Table(name="country")
  * @ORM\Entity
  */
-class Survey {
+class Country {
 
     /**
      * @ORM\Column(name="id", type="bigint", nullable=false)
@@ -22,53 +22,52 @@ class Survey {
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $countryId = "";
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $name = "";
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="simple_array", nullable=true)
      */
-    protected $active = 1;
+    protected $languages = array();
 
     /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\Form")
-     * @ORM\JoinColumn(name="form", referencedColumnName="id", onDelete="CASCADE")
+     * @param mixed $countryId
      */
-    protected $form = "";
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\CodeCountries")
-     * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
-     */
-    protected $country;
-
-    /**
-     * @param mixed $country
-     */
-    public function setCountry ($country) {
-        $this->country = $country;
+    public function setCountryId ($countryId) {
+        $this->countryId = $countryId;
     }
 
     /**
      * @return mixed
      */
-    public function getCountry () {
-        return $this->country;
+    public function getCountryId () {
+        return $this->countryId;
     }
 
     /**
-     * @param mixed $form
+     * @param mixed $language
      */
-    public function setForm ($form) {
-        $this->form = $form;
+    public function setLanguages ($language) {
+        $this->languages[] = $language;
     }
 
     /**
      * @return mixed
      */
-    public function getForm () {
-        return $this->form;
+    public function getLanguages () {
+        return $this->languages;
+    }
+
+    public function removeLanguage ($language) {
+        if(($key = array_search($language, $this->languages)) !== false)
+            unset($this->languages[$key]);
+        return $this->languages;
     }
 
     /**
@@ -99,18 +98,5 @@ class Survey {
         return $this->name;
     }
 
-    /**
-     * @param mixed $active
-     */
-    public function setActive ($active) {
-        $this->active = $active;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getActive () {
-        return $this->active;
-    }
 
 }

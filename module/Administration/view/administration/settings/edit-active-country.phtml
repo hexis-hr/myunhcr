@@ -1,10 +1,9 @@
 
 <?php $form = $this->form; ?>
-<?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
-<?php $form->setAttribute('action', $this->url('settings/editActiveCountry', array('id' => $this->countryId)))->prepare(); ?>
+<?php $form->setAttribute('class', 'form-horizontal margin-none')->prepare(); ?>
 
 <div class="separator bottom"></div>
-<h3 class="glyphicons user"><?php echo $this->translate('Edit country languages'); ?></h3>
+<h3 class="glyphicons globe_af"><?php echo $this->translate($this->country->getName() . ' languages'); ?></h3>
 <div class="innerLR">
 
     <?php echo $this->form()->openTag($form); ?>
@@ -14,23 +13,61 @@
             <!-- Row -->
             <div class="row">
                 <!-- Column -->
-                <div class="col-md-12">
+                <div class="col-md-10">
 
                     <label><?php echo $this->translate('Language'); ?></label>
                     <?php echo $this->formRow($form->get('language')); ?>
                     <div class="separator bottom"></div>
 
                 </div>
-            </div>
-
-            <div class="separator"></div>
-            <div class="form-group" style="padding-right: 15px;">
-                <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
-                    <?php echo $this->translate('Save changes'); ?></button>
+                <div class="col-md-2">
+                    <div class="separator"></div>
+                    <div class="form-group" style="padding-right: 15px;">
+                        <a type="button" class="btn btn-icon btn-primary glyphicons circle_plus pull-right"
+                           data-href="<?php echo $this->url('settings/editCountryLanguage', array('id' => $this->country->getId())); ?>"
+                           data-editCountryLanguage><i></i><?php echo $this->translate('Add language'); ?></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <?php echo $this->form()->closeTag($form); ?>
 
+    <div class="col-md-12">
+
+        <div class="separator"></div>
+
+        <h4><?php echo $this->translate('Active languages for ' . $this->country->getName()); ?></h4>
+
+        <div class="activeLanguages">
+        <?php if (!empty($this->languages)) {
+            foreach ($this->languages as $language) { ?>
+                <div class="col-md-2" id="activeLanguage_<?php echo $this->country->getId(); ?>_<?php echo $language; ?>"
+                     style="padding: 0">
+                    <div class="widget-stats">
+                        <div class="col-md-7">
+                            <h5><?php echo $language; ?></h5>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="separator"></div>
+                            <a class="btn btn-sm btn-danger" href="#" data-deleteActiveLanguage
+                               data-href="<?php echo $this->url('settings/deleteActiveLanguage',
+                                   array('id' => $this->country->getId(), 'language' => $language)); ?>">
+                                <strong>Delete</strong></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <div class="col-md-12 activeLanguageMessage">
+                <span class="gritter-add-regular btn btn-inverse btn-block">
+                    <?php echo $this->translate('No languages for ' . $this->country->getName()
+                        . ' found. Please set them.'); ?>
+                </span>
+            </div>
+        <?php } ?>
+        </div>
+    </div>
 </div>

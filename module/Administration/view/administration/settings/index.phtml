@@ -1,85 +1,96 @@
 <div class="separator bottom"></div>
     <div class="heading-buttons">
-        <h3 class="glyphicons notes_2"><?php echo $this->translate('Surveys'); ?></h3>
-        <div class="buttons pull-right">
-            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('survey/add');?>">
-                <?php echo $this->translate('Add ODK survey'); ?></a>
-        </div>
-        <div class="clearfix" style="clear: both;"></div>
+        <h3 class="glyphicons settings"><?php echo $this->translate('Settings'); ?></h3>
     </div>
 <div class="separator bottom"></div>
 
 <div class="innerLR">
-
-    <div class="widget widget-4">
+    <!-- Tabs -->
+    <div class="widget widget-2 widget-tabs widget-tabs-2">
         <div class="widget-head">
-            <h4 class="heading"><?php echo $this->translate('Surveys'); ?></h4>
+            <ul>
+                <li class="active"><a class="glyphicons flag" href="#countrySelection" data-toggle="tab">
+                        <?php echo $this->translate('Active countries'); ?></a></li>
+                <li><a class="glyphicons link" href="#countryLocale" data-toggle="tab">
+                        <?php echo $this->translate('Country languages'); ?></a></li>
+            </ul>
         </div>
         <div class="widget-body">
-            <?php if (count($this->data) > 0) { ?>
-                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
-                    <thead>
-                        <tr>
-                            <th><?php echo $this->translate('Name'); ?></th>
-                            <th><?php echo $this->translate('Active'); ?></th>
-                            <th><?php echo $this->translate('Action'); ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach($this->data as $data) { ?>
-                        <tr data-row="row_<?php echo $data->getId(); ?>">
-                            <td><?php echo $data->getName(); ?></td>
-                            <td><?php echo $data->getActive() == 1 ? '<input type="checkbox" data-activeCheck data-href="'
-                                    . $this->url('survey/manageActiveStatus', array('id' => $data->getId())) . '" checked>'
-                                    : '<input type="checkbox" data-activeCheck data-href="'
-                                    . $this->url('survey/manageActiveStatus', array('id' => $data->getId())) . '">'; ?></td>
-                            <td>
-                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
-                                   data-href="<?php echo $this->url('survey/delete', array('id' => $data->getId())); ?>"></a>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
-            <?php } else { ?>
-                <div class="widget-body center">
-                    <span class="gritter-add-regular btn btn-inverse btn-block">
-                        <?php echo $this->translate('No surveys found. Please upload new one.'); ?>
-                    </span>
+            <div class="tab-content">
+                <div class="tab-pane active" id="countrySelection">
+                    <?php $form = $this->form; ?>
+                    <?php $form->setAttribute('class', 'form-horizontal margin-none')->prepare(); ?>
+
+                    <?php echo $this->form()->openTag($form); ?>
+
+                    <div class="widget-body col-md-12">
+                        <div class="tab-content">
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    <label><?php echo $this->translate('Country'); ?></label>
+                                    <?php echo $this->formRow($form->get('country')); ?>
+                                    <div class="separator bottom"></div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="separator"></div>
+                                    <div class="form-group" style="padding-right: 15px;">
+                                        <a type="button" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"
+                                           data-activateCountry data-href="<?php echo $this->url('settings/activateCountry'); ?>">
+                                            <i></i><?php echo $this->translate('Activate country'); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php echo $this->form()->closeTag($form); ?>
+
+                    <div class="col-md-12">
+
+                        <div class="separator"></div>
+
+                        <h4><?php echo $this->translate('Active countries'); ?></h4>
+
+                        <div class="activeCountries">
+                        <?php if (!empty($this->activeCountries)) {
+                            foreach ($this->activeCountries as $country) { ?>
+                                <div class="col-md-3" id="activeCountry_<?php echo $country->getId(); ?>" style="padding: 0">
+                                    <div class="widget-stats">
+                                        <div class="col-md-8">
+                                            <strong><?php echo $country->getName(); ?></strong>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="btn btn-sm btn-primary"
+                                               href="<?php echo $this->url('settings/editActiveCountry',
+                                                array('id' => $country->getId())); ?>"><strong>Edit</strong></a>
+                                            <a class="btn btn-sm btn-danger" href="#" data-deleteActiveCountry
+                                               data-href="<?php echo $this->url('settings/deleteActiveCountry',
+                                                   array('id' => $country->getId())); ?>"
+                                               data-id="<?php echo $country->getId(); ?>"> <strong>Delete</strong></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <div class="widget-body center activeCountryMessage">
+                                <span class="gritter-add-regular btn btn-inverse btn-block">
+                                    <?php echo $this->translate('No active countries found. Please set them.'); ?>
+                                </span>
+                            </div>
+                        <?php } ?>
+                        </div>
+
+                    </div>
                 </div>
-            <?php } ?>
+                <div class="tab-pane" id="countryLocale">
+                    <h5>Tab content #2</h5>
+                    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec id eros a orci adipiscing accumsan id eget sem. Etiam sit amet neque ligula, ac hendrerit metus. Phasellus convallis nulla nec leo dapibus sed feugiat felis feugiat. Nulla facilisi. Mauris quis tortor eu eros posuere tristique. In turpis leo, iaculis eget tincidunt in, gravida sit amet diam. Vivamus viverra, nisl vitae consectetur volutpat, ipsum risus tempor augue, in convallis leo massa in sem. Maecenas in urna quis purus pulvinar posuere. Fusce blandit viverra placerat. Fusce elementum turpis sed velit blandit elementum.</p>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="separator bottom"></div>
-
-    <h3 class="glyphicons notes"><?php echo $this->translate('Added surveys'); ?></h3>
-    <?php if (count($this->surveys) > 0) { ?>
-        <?php foreach ($this->surveys as $surveyId => $surveyFile) { ?>
-            <a href="<?php  echo $this->url('survey/downloadSurvey', array('id' => $surveyId)); ?>">
-                <div class="col-md-3 widget-stats">
-                    <span class="txt"><strong><?php echo $surveyFile; ?></strong>
-                        <?php echo $this->translate('Filename') . ': ' . $surveyFile; ?>
-                    </span>
-                </div>
-            </a>
-        <?php } ?>
-    <?php } else { ?>
-        <div class="widget-body center">
-            <span class="gritter-add-regular btn btn-inverse btn-block">
-                <?php echo $this->translate('No surveys found. Please upload new one.'); ?></span>
-        </div>
-    <?php } ?>
-
+    <!-- // Tabs END -->
 </div>
-
-<div class="clearfix" style="clear: both;"></div>
-
-<?php
-echo $this->paginationControl(
-    $this->data,
-    'sliding',
-    array('partial/paginator.phtml', 'Administration'),
-    array('route  ' => 'survey', 'routeParams' => array())
-);
-?>

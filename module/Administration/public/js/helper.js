@@ -62,13 +62,13 @@ handle('[data-countrySelection]', function () {
             url: $(this).data('href'),
             success: function(response){
 
-                var active = $('#activeCountry');
+                var active = $('[data-activeCountry]');
                 active.html(response.country);
 
-                var  activeId = active.data('activeId');
+                var activeId = active.data('activeId');
                 $('li #'+ activeId).removeClass('active');
                 $('li #'+ response.countryId).addClass('active');
-                active.data('activeId', response.countryId);
+                active.attr('id', response.countryId);
             },
             error: function() {
                 console.log('Error on entity delete');
@@ -96,8 +96,8 @@ handle('[data-activateCountry]', function () {
                     '<strong>' + response.countryName + '</strong></div><div class="col-md-4">' +
                     '<a class="btn btn-sm btn-primary" href="' + response.editUrl + '"><strong>Edit</strong></a>' +
                     '<a class="btn btn-sm btn-danger" href="#" data-deleteActiveCountry ' +
-                    'data-href="' + response.deleteUrl + '"> <strong>Delete</strong></a></div>' +
-                    '<div class="clearfix"></div></div></div>');
+                    'data-href="' + response.deleteUrl + '" data-id="' + response.countryId + '">' +
+                    '<strong>Delete</strong></a></div><div class="clearfix"></div></div></div>');
 
                 $('ul .activeCountriesNav').prepend('<li id="' + response.countryId + '"><a href="#" ' +
                     'data-href="' + response.countrySelectionUrl + '"' +
@@ -164,7 +164,7 @@ handle('[data-deleteActiveCountry]', function () {
     $(this).on('click', function (e) {
         e.preventDefault();
 
-        if ($('#activeCountry').data('activeid') == $(this).data('id')) {
+        if ($('[data-activeCountry]').attr('id') == $(this).data('id')) {
             alert('Cannot remove currently active country.');
             return;
         }
@@ -207,42 +207,64 @@ handle('[data-deleteActiveLanguage]', function () {
 
 handle('[data-checkActiveCountry]', function () {
 
-    if ($('#activeCountry').length < 0) {
+    if ($('[data-activeCountry]').attr('id') == '') {
 
-        $('.activeCountriesNav li').each(function() {
-            $('#activateCountrySelect').append($('<option></option>').attr("value", $(this).attr('id')).text($(this).text()));
-        });
+        var navLi = $('.activeCountriesNav li');
 
-        var modal = $('#activateCountryModal');
-        modal.modal({
-            backdrop: 'static',
-            keyboard: false
-        });
+        if (navLi.length >= 1) {
 
-        $('[data-activateCountrySubmit]').on('click', function (e) {
-            e.preventDefault();
+            navLi.each(function() {
+                $('#activateCountrySelect').append($('<option></option>').attr("value", $(this).attr('id')).text($(this).text()));
+            });
 
-            $.ajax({
-                type: 'POST',
-                url: $(this).data('href'),
-                data: {
-                    id: $('#activateCountrySelect option:selected').val()
+            var modal = $('#activateCountryModal');
+            modal.modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            $('[data-activateCountrySubmit]').on('click', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).data('href'),
+                    data: {
+                        id: $('#activateCountrySelect option:selected').val()
+                    },
+                    success: function(response){
+
+                        var active = $('[data-activeCountry]');
+                        active.html(response.country);
+
+                        var  activeId = active.attr('id');
+                        $('li [data-activeCountry]').removeClass('active');
+                        $('li #'+ response.countryId).addClass('active');
+
+                        active.attr('id', response.countryId);
+                        modal.modal('toggle');
+                    },
+                    error: function() {
+                        console.log('Error on country activation');
+                    }
+                });
+            })
+        } else {
+
+            $( "#dialogActivateCountry" ).dialog({
+                modal: true,
+                closeOnEscape: false,
+                buttons: {
+                    Ok: function() {
+                        $( this ).dialog( "close" );
+                        window.location.replace('/settings');
+                    }
                 },
-                success: function(response){
-
-                    var active = $('#activeCountry');
-                    active.html(response.country);
-
-                    var  activeId = active.data('activeId');
-                    $('li #'+ activeId).removeClass('active');
-                    $('li #'+ response.countryId).addClass('active');
-
-                    active.data('activeId', response.countryId);modal.modal('toggle');
-                },
-                error: function() {
-                    console.log('Error on country activation');
+                beforeClose: function () {
+                    return false;
                 }
             });
-        })
+
+        }
     }
 });

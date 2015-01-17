@@ -28,13 +28,12 @@
         <li class="hidden-xs"><a href="#themer" data-toggle="collapse" class="glyphicons eyedropper">
                 <span>Themer</span></a>
         </li> -->
-        <li class="hidden-sm hidden-xs" data-checkActiveCountry>
+        <li class="hidden-sm hidden-xs">
             <?php if (isset($_SESSION['countrySettings'])) { ?>
-                <a href="" data-toggle="dropdown" id="activeCountry"
-                   data-activeId="<?php echo $_SESSION['countrySettings']['countryId']; ?>">
-                   <?php echo $_SESSION['countrySettings']['countryName']; ?></a>
+                <a href="" data-toggle="dropdown" id="<?php echo $_SESSION['countrySettings']['countryId']; ?>"
+                   data-activeCountry><?php echo $_SESSION['countrySettings']['countryName']; ?></a>
             <?php } else { ?>
-                <a href="" data-toggle="dropdown" id="activeCountry" data-activeId="">
+                <a href="" data-toggle="dropdown" id="" data-activeCountry>
                    <?php echo $this->translate('Choose country'); ?> </a>
             <?php } ?>
             <ul class="dropdown-menu pull-right activeCountriesNav">

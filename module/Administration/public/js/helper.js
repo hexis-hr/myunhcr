@@ -251,8 +251,11 @@ handle('[data-checkActiveCountry]', function () {
             })
         } else {
 
-            $( "#dialogActivateCountry" ).dialog({
+            var requireCountryModal = $('#requireCountryModal');
+
+            requireCountryModal.dialog({
                 modal: true,
+                width: 600,
                 closeOnEscape: false,
                 buttons: {
                     Ok: function() {

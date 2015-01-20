@@ -2,11 +2,10 @@
 <?php $form = $this->form; ?>
 <?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
 <?php $form->setAttribute('action', $this->url('news/edit', array('id' => $this->newsId)))->prepare(); ?>
-<?php $form->prepare(); ?>
 
 <div class="separator bottom"></div>
 <h3 class="glyphicons user"><?php echo $this->translate('Edit news'); ?></h3>
-<div class="innerLR">
+<div class="innerLR" data-checkActiveCountry>
 
     <?php echo $this->form()->openTag($form); ?>
 
@@ -28,8 +27,8 @@
                 </div>
                 <div class="col-md-6">
 
-                    <label><?php echo $this->translate('Country'); ?></label>
-                    <?php echo $this->formRow($form->get('country')); ?>
+                    <label><?php echo $this->translate('Language'); ?></label>
+                    <?php echo $this->formRow($form->get('language')); ?>
                     <div class="separator bottom"></div>
 
                 </div>

@@ -35,6 +35,17 @@ return array(
                     ),
                 ),
             ),
+            'surveyQuestions' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/surveyQuestions[/:survey][/:authentification][/:date]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'surveyQuestions',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -111,26 +122,13 @@ return array(
                 ),
             ),
         ),
-        'caching' => array(
-            'default' => array(
-                'cache'     => 'AssetManager\\Cache\\FilePathCache',
-                'options' => array(
-                    'dir' => 'public/', // path/to/cache
-                ),
-            ),
-        ),
-    ),
-    'session' => array(
-        'config' => array(
-            'class' => 'Zend\Session\Config\SessionConfig',
-            'options' => array(
-                'name' => 'MyUnhcr',
-            ),
-        ),
-        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
-        'validators' => array(
-            'Zend\Session\Validator\RemoteAddr',
-            'Zend\Session\Validator\HttpUserAgent',
-        ),
+//        'caching' => array(
+//            'default' => array(
+//                'cache'     => 'AssetManager\\Cache\\FilePathCache',
+//                'options' => array(
+//                    'dir' => 'public/', // path/to/cache
+//                ),
+//            ),
+//        ),
     ),
 );

@@ -1,36 +1,50 @@
+
 <div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
 
-  <div class='sectionHeader'>
-    <div class='sectionHeader_top'>
-      <div class='grid -clean'>
-        <div class='grid_column'>
-          <div class='sectionHeader_top_inner'>
-            <h1 class='sectionHeader_title'><?php echo $this->translate("Take a Survey");?></h1>
-            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
-          </div>
+    <div class='sectionHeader'>
+        <div class='sectionHeader_top'>
+            <div class='grid -clean'>
+                <div class='grid_column'>
+                    <div class='sectionHeader_top_inner'>
+                        <h1 class='sectionHeader_title'><?php echo $this->translate("Survey");?></h1>
+                        <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id='sectionInfo' class='sectionHeader_bottom' animate>
-      <div class='grid -clean'>
-        <div class='grid_column'>
-          <div class='sectionHeader_description preformat'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
-          </div>
+        <div id='sectionInfo' class='sectionHeader_bottom' animate>
+            <div class='grid -clean'>
+                <div class='grid_column'>
+                    <div class='sectionHeader_description preformat'>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='survey-finish.html' class='survey form' method='post' ajaxForm>
+<!--      <form action='refugee-feedback.html' class='survey form' ajaxForm>
 
-        <div class='form_item'>
-          <label class='form_label' for='authentication'>Some input</label>
-          <div class='form_field'>
-            <input class='formInput' type='text' name=''>
+         <div class='grid'>
+          <div class='grid_column -small6'>
+            <div class='form_item'>
+              <label class='form_label' for='male'>I am Male</label>
+              <div class='form_field'>
+                <input type='radio' name='' value='' placeholder='' id='male'>
+              </div>
+            </div>
+          </div>
+
+          <div class='grid_column -small6'>
+            <div class='form_item'>
+              <label class='form_label' for='female'>I am Female</label>
+              <div class='form_field'>
+                <input type='radio' name='' value='' placeholder='' id='female'>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -52,16 +66,83 @@
           </div>
         </div>
 
-        <div class='grid -compact -reverse'>
-          <div class='grid_column -small7'>
-            <input class='button -primary -fullWidth' type='submit' value="<?php echo $this->translate('Finish'); ?>">
-          </div>
+        <div class='grid'>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='take-a-survey.html' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+            <div class='form_item'>
+              <a class='button -submit' href="choose-your-survey.html"><?php echo $this->translate('Back'); ?></a>
+            </div>
+          </div>
+
+          <div class='grid_column -small7'>
+            <div class='form_item'>
+              <input class='button -secondary -submit floatRight clearfix' type='submit' name='' value='Next'>
+            </div>
           </div>
         </div>
 
-      </form>
+      </form> -->
+
+        <?php $form = $this->form; ?>
+        <?php $form->setAttribute('class', 'survey form'); ?>
+        <?php $form->setAttribute('action', $this->url('surveyQuestions',
+            array('survey' => $this->surveyId, 'date' => $this->birthDate, 'authentification' => $this->authId)))->prepare(); ?>
+
+            <?php echo $this->form()->openTag($form); ?>
+
+                <?php foreach ($form->getFieldsets() as $fieldset) { ?>
+
+                    <div class="form_item">
+                        <h4 class="heading"><?php echo $fieldset->getLabel(); ?></h4>
+                        <div class="widget-body">
+
+                            <?php $parent = false; $prev = null; ?>
+                            <?php foreach ($fieldset->getElements() as $formElement) { ?>
+                                <?php if ($formElement->getAttribute('data-parent')) {
+                                    if (isset($prev) && $prev->getAttribute('data-parent') != $formElement->getAttribute('data-parent')) { ?>
+                                        <a href="#" class="button -primary -submit floatRight clearfix addSubform"
+                                           data-subform="<?php echo $prev->getAttribute('data-parent') ?>">
+                                            <?php echo $this->translate('Add ' . $prev->getAttribute('data-groupLabel')); ?></a>
+                                        <?php //todo - fix html or implement the better solution ?>
+                                        <br/><br/></div>
+                                        <div class="form_item">
+                                            <h4 class="heading"><?php echo $formElement->getAttribute('data-groupLabel'); ?></h4>
+                                            <div class="surveyRepeat_<?php echo $formElement->getAttribute('data-parent'); ?>">
+                                    <?php } else if (!$parent) { ?>
+                                        <div class="form_item">
+                                            <h4 class="heading"><?php echo $formElement->getAttribute('data-groupLabel'); ?></h4>
+                                            <div class="surveyRepeat_<?php echo $formElement->getAttribute('data-parent'); ?>">
+                                    <?php } ?>
+                                <?php $parent = true; } ?>
+
+                                <label><?php echo $this->translate($formElement->getLabel()); ?></label>
+                                <div class="separator bottom"></div>
+                                <?php echo $this->formElement($formElement); ?>
+                                <div class="separator bottom"></div>
+
+                                <?php if ($parent) $prev = $formElement; ?>
+                            <?php } ?>
+
+                            <?php if ($parent) { ?>
+                                <a href="#" class="button -primary -submit floatRight clearfix addSubform"
+                                   data-subform="<?php echo $prev->getAttribute('data-parent') ?>">
+                                    <?php echo $this->translate('Add ' . $prev->getAttribute('data-groupLabel')); ?></a>
+                                <br/><br/></div>
+                        <?php } ?>
+
+                        </div>
+                    </div>
+                <?php } ?>
+
+                </div>
+
+                <div class="separator"></div>
+                <div class="form-group" style="padding-right: 15px;">
+                    <button type="submit" class="button -secondary -submit floatRight clearfix"><i></i>
+                        <?php echo $this->translate('Submit'); ?></button>
+                </div>
+
+            <?php echo $this->form()->closeTag($form); ?>
+
     </div>
   </div>
 </section>

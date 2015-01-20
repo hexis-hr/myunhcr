@@ -7,32 +7,20 @@ use Administration\Entity\FaqCategory;
 use Administration\Form\FaqCategoryForm;
 use Administration\Form\FaqForm;
 
+use Administration\Provider\ProvidesEntityManager;
 use Doctrine\ORM\Query;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Paginator;
 
-use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
 class FaqController extends AbstractActionController {
 
-    protected $em;
-
-    public function setEntityManager (EntityManager $em) {
-        $this->em = $em;
-    }
-
-    public function getEntityManager () {
-
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
+    use ProvidesEntityManager;
 
     public function indexAction () {
 
@@ -52,7 +40,7 @@ class FaqController extends AbstractActionController {
 
         $request = $this->getRequest();
         $faq = new Faq();
-        $form = new FaqForm($this->getEntityManager(), $this->serviceLocator);
+        $form = new FaqForm($this->getEntityManager(), $this->getServiceLocator());
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Faq'));
         $form->bind($faq);
 
@@ -64,7 +52,9 @@ class FaqController extends AbstractActionController {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $faq->setCountry($country);
                 $this->getEntityManager()->persist($faq);
                 $this->getEntityManager()->flush();
 
@@ -83,7 +73,7 @@ class FaqController extends AbstractActionController {
         $faq = $this->getEntityManager()->getRepository('Administration\Entity\Faq')
             ->findOneBy(array('id' => $faqId));
 
-        $form = new FaqForm($this->getEntityManager(), $this->serviceLocator);
+        $form = new FaqForm($this->getEntityManager(), $this->getServiceLocator());
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Faq'));
         $form->bind($faq);
 
@@ -95,7 +85,9 @@ class FaqController extends AbstractActionController {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $faq->setCountry($country);
                 $this->getEntityManager()->persist($faq);
                 $this->getEntityManager()->flush();
 
@@ -165,7 +157,9 @@ class FaqController extends AbstractActionController {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $faqCategory->setCountry($country);
                 $this->getEntityManager()->persist($faqCategory);
                 $this->getEntityManager()->flush();
 
@@ -193,7 +187,9 @@ class FaqController extends AbstractActionController {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $faqCategory->setCountry($country);
                 $this->getEntityManager()->persist($faqCategory);
                 $this->getEntityManager()->flush();
 

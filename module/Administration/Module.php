@@ -17,10 +17,15 @@ class Module {
         $eventManager->attach('dispatch', array($this, 'loadConfiguration'), 100);
 
         //to get user identity in view with $this->auth->getIdentity()
-        $myService = $this->serviceManager->get('AuthService');
         $viewModel = $e->getViewModel();
-        $viewModel->auth = $myService;
+        $viewModel->auth = $this->serviceManager->get('AuthService');
         $viewModel->acl = $this->serviceManager->get('Administration\Acl');
+
+        //construct helpers
+        $this->serviceManager->get('viewhelpermanager')->setFactory('CountrySelection', function ($sm) use ($e) {
+            return new \Administration\View\Helper\CountrySelection($sm);
+        });
+
     }
 
     public function getConfig () {
@@ -44,13 +49,19 @@ class Module {
         return array(
             'factories' => array(
                 'AuthStorage' => function ($sm) {
-                        return new \Administration\Model\AuthStorage('myunhcr');
+                        return new \Administration\Model\AuthStorage('MyUnhcr');
                     },
                 'AuthService' => function ($sm) {
                         $auth = $this->serviceManager->get('doctrine.authenticationservice.orm_default');
                         $auth->setStorage($sm->get('AuthStorage'));
 
                         return $auth;
+                    },
+                'CountryService' => function ($sm) {
+                        return new \Administration\Service\CountryService($sm);
+                    },
+                'LocaleService' => function ($sm) {
+                        return new \Administration\Service\LocaleService($sm);
                     },
             ),
         );

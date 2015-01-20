@@ -1,39 +1,62 @@
-<?php $form = $this->form; ?>
-<?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
-<?php $form->setAttribute('action', $this->url('survey'))->prepare(); ?>
-<?php $form->prepare(); ?>
-
 <div class="separator bottom"></div>
-<h3 class="glyphicons notes_2"><?php echo $this->translate('Surveys'); ?></h3>
+    <div class="heading-buttons">
+        <h3 class="glyphicons notes_2"><?php echo $this->translate('Surveys'); ?></h3>
+        <div class="buttons pull-right">
+            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('survey/add');?>">
+                <?php echo $this->translate('Add ODK survey'); ?></a>
+        </div>
+        <div class="clearfix" style="clear: both;"></div>
+    </div>
+<div class="separator bottom"></div>
+
 <div class="innerLR">
 
-    <?php echo $this->form()->openTag($form); ?>
-
-    <div class="widget-body col-md-12">
-        <div class="tab-content">
-            <div class="row">
-
-                <label><?php echo $this->translate('ODK survey file'); ?></label>
-                <?php echo $this->formRow($form->get('file')); ?>
-                <div class="separator bottom"></div>
-
-            </div>
-
-            <div class="separator"></div>
-            <div class="form-group" style="padding-right: 15px;">
-                <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
-                    <?php echo $this->translate('Upload file'); ?></button>
-            </div>
+    <div class="widget widget-4">
+        <div class="widget-head">
+            <h4 class="heading"><?php echo $this->translate('Surveys'); ?></h4>
+        </div>
+        <div class="widget-body">
+            <?php if (count($this->data) > 0) { ?>
+                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
+                    <thead>
+                        <tr>
+                            <th><?php echo $this->translate('Name'); ?></th>
+                            <th><?php echo $this->translate('Active'); ?></th>
+                            <th><?php echo $this->translate('Action'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->data as $data) { ?>
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
+                            <td><?php echo $data->getName(); ?></td>
+                            <td><?php echo $data->getActive() == 1 ? '<input type="checkbox" data-activeCheck data-href="'
+                                    . $this->url('survey/manageActiveStatus', array('id' => $data->getId())) . '" checked>'
+                                    : '<input type="checkbox" data-activeCheck data-href="'
+                                    . $this->url('survey/manageActiveStatus', array('id' => $data->getId())) . '">'; ?></td>
+                            <td>
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
+                                   data-href="<?php echo $this->url('survey/delete', array('id' => $data->getId())); ?>"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div class="widget-body center">
+                    <span class="gritter-add-regular btn btn-inverse btn-block">
+                        <?php echo $this->translate('No surveys found. Please upload new one.'); ?>
+                    </span>
+                </div>
+            <?php } ?>
         </div>
     </div>
 
-    <?php echo $this->form()->closeTag($form); ?>
-
     <div class="separator bottom"></div>
+
     <h3 class="glyphicons notes"><?php echo $this->translate('Added surveys'); ?></h3>
     <?php if (count($this->surveys) > 0) { ?>
         <?php foreach ($this->surveys as $surveyId => $surveyFile) { ?>
-            <a href="<?php  echo $this->url('translation/downloadTranslation', array('id' => $surveyId)); ?>">
+            <a href="<?php  echo $this->url('survey/downloadSurvey', array('id' => $surveyId)); ?>">
                 <div class="col-md-3 widget-stats">
                     <span class="txt"><strong><?php echo $surveyFile; ?></strong>
                         <?php echo $this->translate('Filename') . ': ' . $surveyFile; ?>
@@ -49,3 +72,14 @@
     <?php } ?>
 
 </div>
+
+<div class="clearfix" style="clear: both;"></div>
+
+<?php
+echo $this->paginationControl(
+    $this->data,
+    'sliding',
+    array('partial/paginator.phtml', 'Administration'),
+    array('route  ' => 'survey', 'routeParams' => array())
+);
+?>

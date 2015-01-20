@@ -5,6 +5,7 @@ namespace Administration\Controller;
 use Administration\Entity\News;
 use Administration\Form\NewsForm;
 
+use Administration\Provider\ProvidesEntityManager;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -18,19 +19,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
 class NewsController extends AbstractActionController {
 
-    protected $em;
-
-    public function setEntityManager (EntityManager $em) {
-        $this->em = $em;
-    }
-
-    public function getEntityManager () {
-
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
+    use ProvidesEntityManager;
 
     public function indexAction () {
 
@@ -53,8 +42,9 @@ class NewsController extends AbstractActionController {
     public function addAction () {
 
         $request = $this->getRequest();
+
         $news = new News();
-        $form = new NewsForm($this->getEntityManager());
+        $form = new NewsForm($this->getEntityManager(), $this->getServiceLocator());
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\News'));
         $form->bind($news);
 
@@ -66,7 +56,9 @@ class NewsController extends AbstractActionController {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $news->setCountry($country);
                 $this->getEntityManager()->persist($news);
                 $this->getEntityManager()->flush();
 
@@ -78,36 +70,38 @@ class NewsController extends AbstractActionController {
         return new ViewModel(array('form' => $form));
     }
 
-    public function editAction () {
+        public function editAction () {
 
-        $request = $this->getRequest();
-        $newsId = (int) $this->params()->fromRoute('id');
-        $news = $this->getEntityManager()->getRepository('Administration\Entity\News')
-            ->findOneBy(array('id' => $newsId));
+            $request = $this->getRequest();
+            $newsId = (int) $this->params()->fromRoute('id');
+            $news = $this->getEntityManager()->getRepository('Administration\Entity\News')
+                ->findOneBy(array('id' => $newsId));
 
-        $form = new NewsForm($this->getEntityManager());
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\News'));
-        $form->bind($news);
+            $form = new NewsForm($this->getEntityManager(), $this->getServiceLocator());
+            $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\News'));
+            $form->bind($news);
 
-        if ($request->isPost()) {
+            if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
-            $form->setData($request->getPost());
+                //todo
+    //            $formFilter = new UserFormFilter();
+    //            $form->setInputFilter($formFilter->getAddInputFilter());
+                $form->setData($request->getPost());
 
-            if ($form->isValid()) {
+                if ($form->isValid()) {
+                    $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                        ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                    $news->setCountry($country);
+                    $this->getEntityManager()->persist($news);
+                    $this->getEntityManager()->flush();
 
-                $this->getEntityManager()->persist($news);
-                $this->getEntityManager()->flush();
-
-                $this->flashMessenger()->addMessage('New news successfully added.');
-                return $this->redirect()->toRoute('news');
+                    $this->flashMessenger()->addMessage('New news successfully added.');
+                    return $this->redirect()->toRoute('news');
+                }
             }
-        }
 
-        return new ViewModel(array('form' => $form, 'newsId' =>$newsId));
-    }
+            return new ViewModel(array('form' => $form, 'newsId' =>$newsId));
+        }
 
     public function deleteAction () {
 

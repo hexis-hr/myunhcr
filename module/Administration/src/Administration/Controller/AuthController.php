@@ -2,6 +2,11 @@
 namespace Administration\Controller;
 
 use Administration\Form\LoginForm;
+
+use Administration\Provider\ProvidesEntityManager;
+use Zend\Crypt\BlockCipher;
+use Zend\Crypt\Symmetric\Mcrypt;
+use Zend\Http\Header\SetCookie;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -10,6 +15,8 @@ class AuthController extends AbstractActionController {
     protected $form;
     protected $storage;
     protected $authservice;
+
+    use ProvidesEntityManager;
 
     public function getAuthService () {
         if (!$this->authservice) {
@@ -30,6 +37,9 @@ class AuthController extends AbstractActionController {
     }
 
     public function loginAction () {
+
+        $globalConfig = $this->serviceLocator->get('config');
+
         //if already login, redirect to success page
         if ($this->getAuthService()->hasIdentity()) {
             $this->flashmessenger()->addMessage('You are not allowed to enter this site.
@@ -41,6 +51,18 @@ class AuthController extends AbstractActionController {
 
         $form = new LoginForm();
 
+
+//        if (isset($_COOKIE[$globalConfig['cookie']['rememberMeName']])) {
+//
+//            $blockCipher = new BlockCipher(new Mcrypt(array('algo' => 'aes')));
+//            $blockCipher->setKey($globalConfig['cookie']['rememberMeKey']);
+//            $value = $blockCipher->decrypt($_COOKIE[$globalConfig['cookie']['rememberMeName']]);
+//
+//            $userData = $this->getEntityManager()->getRepository('Administration\Entity\User')
+//                ->findOneBy(array('id' => $value));
+//
+//        }
+
         return new ViewModel(array(
             'form' => $form,
             'messages' => $this->flashmessenger()->getMessages(),
@@ -48,9 +70,13 @@ class AuthController extends AbstractActionController {
     }
 
     public function authenticateAction () {
+
+        $request = $this->getRequest();
+        $globalConfig = $this->serviceLocator->get('config');
+
         $form = new LoginForm();
         $redirect = 'login';
-        $request = $this->getRequest();
+
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
@@ -69,10 +95,24 @@ class AuthController extends AbstractActionController {
                 if ($result->isValid()) {
                     $redirect = 'administration';
                     //check if it has rememberMe :
-                    $this->getSessionStorage()
-                        ->setRememberMe(1);
-                    //set storage again
-                    $this->getAuthService()->setStorage($this->getSessionStorage());
+                    if ($request->getPost('rememberMe') == 1) {
+                        $this->getSessionStorage()->setRememberMe();
+
+                        $blockCipher = new BlockCipher(new Mcrypt(array('algo' => 'aes')));
+                        $blockCipher->setKey($globalConfig['cookie']['rememberMeKey']);
+                        $value = $blockCipher->encrypt($result->getIdentity()->getId());
+
+//                        $cookie = new SetCookie($globalConfig['cookie']['rememberMeName'], $value,
+//                            time() + $globalConfig['cookie']['rememberMeSeconds']); // 30 days
+//                        $this->getResponse()->getHeaders()->addHeader($cookie);
+
+                        setcookie($globalConfig['cookie']['rememberMeName'], $value,
+                            time() + $globalConfig['cookie']['rememberMeSeconds']);
+
+                        //set storage again
+                        $this->getAuthService()->setStorage($this->getSessionStorage());
+                    }
+
                     $this->getAuthService()->getStorage()->write($result->getIdentity());
                 }
             }
@@ -82,17 +122,23 @@ class AuthController extends AbstractActionController {
     }
 
     public function logoutAction () {
+
+        $globalConfig = $this->serviceLocator->get('config');
+
         $this->getSessionStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
+//
+//        if (isset($_COOKIE[$globalConfig['cookie']['rememberMeName']])) {
+//
+//            unset($_COOKIE[$globalConfig['cookie']['rememberMeName']]);
+//
+//            $cookie = new SetCookie($globalConfig['cookie']['rememberMeName'], '',
+//                time() - $globalConfig['remember_me_seconds']); // 30 days in past
+//            $this->getResponse()->getHeaders()->addHeader($cookie);
+//        }
 
         $this->flashmessenger()->addMessage("You've been logged out");
         return $this->redirect()->toRoute('login');
-    }
-
-    //todo: improve and use
-    public function notAllowedAction () {
-        $this->flashmessenger()->addMessage("You are not allowed to visit this site.");
-        return;
     }
 
 }

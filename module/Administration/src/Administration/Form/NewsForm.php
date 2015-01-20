@@ -8,7 +8,7 @@ use Zend\Form\FormInterface;
 
 class NewsForm extends Form {
 
-    public function __construct ($entityManager, $name = null) {
+    public function __construct ($entityManager, $serviceLocator, $name = null) {
 
         parent::__construct('news');
 
@@ -28,51 +28,26 @@ class NewsForm extends Form {
             ),
         ));
 
-        $codeCountries = $entityManager->getRepository('Administration\Entity\CodeCountries')->findAll();
+        $country = $entityManager->getRepository('Administration\Entity\Country')
+            ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
 
-        $countries = array();
-        foreach ($codeCountries as $country) {
-            $countries[$country->getId()] = $country->getName();
+        $languageArray = $country->getLanguages();
+        foreach ($languageArray as $languageKey => $languageValue) {
+            $languageArray[$languageValue] = $languageValue;
+            unset($languageArray[$languageKey]);
         }
 
         $this->add(array(
-            'name' => 'country',
+            'name' => 'language',
             'type' => 'Select',
             'attributes' => array(
+                'id' => 'lang',
                 'class' => 'col-md-12 form-control',
             ),
             'options' => array(
-                'value_options' => $countries,
+                'value_options' => $languageArray,
             ),
         ));
     }
 
-    //bind method overridden because of foreign object binding
-    public function bind($object, $flags = FormInterface::VALUES_NORMALIZED)
-    {
-
-        if (!in_array($flags, array(FormInterface::VALUES_NORMALIZED, FormInterface::VALUES_RAW))) {
-            throw new InvalidArgumentException(sprintf(
-                '%s expects the $flags argument to be one of "%s" or "%s"; received "%s"',
-                __METHOD__,
-                'Zend\Form\FormInterface::VALUES_NORMALIZED',
-                'Zend\Form\FormInterface::VALUES_RAW',
-                $flags
-            ));
-        }
-
-        if ($this->baseFieldset !== null) {
-            $this->baseFieldset->setObject($object);
-        }
-
-        $this->bindAs = $flags;
-
-        if (property_exists($object, 'country') && !is_null($object->getCountry()))
-            $object->setCountry($object->getCountry()->getId());
-
-        $this->setObject($object);
-        $this->extract();
-
-        return $this;
-    }
 }

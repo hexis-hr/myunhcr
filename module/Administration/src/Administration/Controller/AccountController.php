@@ -5,6 +5,7 @@ use Administration\Entity\User;
 use Administration\Form\Filter\UserFormFilter;
 use Administration\Form\UserForm;
 
+use Administration\Provider\ProvidesEntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -17,18 +18,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
 class AccountController extends AbstractActionController {
 
-    protected $em;
-
-    public function setEntityManager (EntityManager $em) {
-        $this->em = $em;
-    }
-
-    public function getEntityManager () {
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        }
-        return $this->em;
-    }
+    use ProvidesEntityManager;
 
     public function indexAction () {
 

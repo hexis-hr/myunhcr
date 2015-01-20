@@ -321,22 +321,46 @@ return array(
                             ),
                         ),
                     ),
-                    'downloadXml' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                    'add' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
                         'options' => array(
-                            'route' => '/survey/downloadXml[/:id]',
+                            'route' => '/addODKSurvey',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Survey',
-                                'action' => 'downloadXml',
+                                'action' => 'add',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'manageActiveStatus' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/manageActiveStatus[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'manageActiveStatus',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'downloadSurvey' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/survey/downloadSurvey[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'downloadSurvey',
                             ),
                         ),
                         'may_terminate' => true,
                     ),
                     'delete' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/survey/delete',
+                            'route' => '/survey/delete[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Survey',
@@ -411,6 +435,106 @@ return array(
                     ),
                 ),
             ),
+            'countrySelection' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/countrySelection[/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Index',
+                        'action' => 'countrySelection',
+                    ),
+                ),
+                'may_terminate' => true,
+            ),
+            'settings' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/settings',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Settings',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Settings',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'activateCountry' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/activateCountry',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'activateCountry',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editActiveCountry' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editActiveCountry[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'editActiveCountry',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editCountryLanguage' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editCountryLanguage[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'editCountryLanguage',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteActiveCountry' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteActiveCountry[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'deleteActiveCountry',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteActiveLanguage' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteActiveLanguage[/:id][/:language]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'deleteActiveLanguage',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
         ),
     ),
 
@@ -462,7 +586,11 @@ return array(
             'Administration\Controller\Faq' => 'Administration\Controller\FaqController',
             'Administration\Controller\Survey' => 'Administration\Controller\SurveyController',
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
+            'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
         ),
+        'factories' => array(
+            'entityManagerController' => 'Administration\Factory\EntityManagerFactory'
+        )
     ),
 
     'view_manager' => array(
@@ -489,6 +617,7 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'limitEcho' => 'Administration\View\Helper\LimitEcho',
+            'countrySelection' => 'Administration\View\Helper\CountrySelection',
         ),
     ),
 
@@ -558,6 +687,13 @@ return array(
                 'privilege' => 'Admin',
                 'class' => 'glyphicons keynote',
             ),
+            array(
+                'label' => 'Settings',
+                'route' => 'settings',
+                'resource' => 'Administration',
+                'privilege' => 'Admin',
+                'class' => 'glyphicons settings',
+            ),
         ),
     ),
 
@@ -566,6 +702,23 @@ return array(
             'Administration\Acl' => 'Administration\Service\AclFactory',
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ),
+    ),
+
+    'session' => array(
+        'config' => array(
+            'class' => 'Zend\Session\Config\SessionConfig',
+            'options' => array(
+                'name' => 'MyUnhcr',
+            ),
+        ),
+        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
+        'validators' => array(
+            'Zend\Session\Validator\RemoteAddr',
+            'Zend\Session\Validator\HttpUserAgent',
+        ),
+        'remember_me_seconds' => 2592000,
+        'use_cookies' => true,
+        'cookie_httponly' => true,
     ),
 
 );

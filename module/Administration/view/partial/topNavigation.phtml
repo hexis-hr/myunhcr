@@ -27,18 +27,24 @@
         </li>
         <li class="hidden-xs"><a href="#themer" data-toggle="collapse" class="glyphicons eyedropper">
                 <span>Themer</span></a>
-        </li>
+        </li> -->
         <li class="hidden-sm hidden-xs">
-            <a href="" data-toggle="dropdown"><img src="../images/lang/en.png" alt="en" /></a>
-            <ul class="dropdown-menu pull-right">
-                <li class="active"><a href="#" title="English"><img src="../images/lang/en.png" alt="English"> English</a></li>
-                <li><a href="#" title="Romanian"><img src="../images/lang/ro.png" alt="Romanian"> Romanian</a></li>
-                <li><a href="#" title="Italian"><img src="../images/lang/it.png" alt="Italian"> Italian</a></li>
-                <li><a href="#" title="French"><img src="../images/lang/fr.png" alt="French"> French</a></li>
-                <li><a href="#" title="Polish"><img src="../images/lang/pl.png" alt="Polish"> Polish</a></li>
+            <?php if (isset($_SESSION['countrySettings'])) { ?>
+                <a href="" data-toggle="dropdown" id="<?php echo $_SESSION['countrySettings']['countryId']; ?>"
+                   data-activeCountry><?php echo $_SESSION['countrySettings']['countryName']; ?></a>
+            <?php } else { ?>
+                <a href="" data-toggle="dropdown" id="" data-activeCountry>
+                   <?php echo $this->translate('Choose country'); ?> </a>
+            <?php } ?>
+            <ul class="dropdown-menu pull-right activeCountriesNav">
+                <?php  foreach ($this->CountrySelection() as $country) { ?>
+                    <li id="<?php echo $country->getId(); ?>">
+                        <a href="#" data-href="<?php echo $this->url('countrySelection', array('id' => $country->getId())); ?>"
+                           title="<?php echo $country->getName(); ?>" data-countrySelection><?php echo $country->getName(); ?></a>
+                    </li>
+                <?php } ?>
             </ul>
         </li>
--->
 
         <?php //use hasIdentity method to ensure that user is logged in; else return to login after acl check ?>
         <?php if ($this->auth->hasIdentity()) { ?>

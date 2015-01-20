@@ -72,6 +72,7 @@ class User {
 
     /**
      * @param string $password
+     * @return string
      */
     public function setPassword($plaintextPassword, $salt = FALSE)
     {
@@ -96,6 +97,7 @@ class User {
 
     /**
      * @param string $salt
+     * @return string
      */
     public function setSalt($salt)
     {
@@ -104,7 +106,7 @@ class User {
     }
 
     /**
-     * @param string $email
+     * @return string
      */
     public function getEmail()
     {
@@ -112,6 +114,7 @@ class User {
     }
 
     /**
+     * @param string $email
      * @return string
      */
     public function setEmail($email)

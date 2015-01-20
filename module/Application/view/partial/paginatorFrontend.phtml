@@ -1,0 +1,46 @@
+<?php if ($this->pageCount) { ?>
+    <ul class='pagination'>
+        <?php if (isset($this->previous)) { ?>
+            <li class='pagination_item -previous'>
+                <a class='pagination_link' href='<?php echo $this->url($this->route, $this->routeParams); ?>?
+                  <?php echo http_build_query(array_merge($this->routeParams , array('page' => $this->previous))) ?>'
+                   ajaxNav tabindex='0'>‹</a>
+            </li>
+        <?php } else { ?>
+            <li class="class='pagination_item -previous disabled">
+                <a class='pagination_link' href="#" ajaxNav tabindex='0'>‹</a>
+            </li>
+        <?php } ?>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page) { ?>
+            <?php if ($page != $this->current) { ?>
+                <li class='pagination_item -page'>
+                    <a class='pagination_link'
+                       href="<?php echo $this->url($this->route);?>?<?php echo http_build_query(array_merge($this->routeParams ,
+                        array('page' => $page))); ?>" ajaxNav tabindex='0'><?php echo $page; ?>
+                    </a>
+                </li>
+            <?php } else { ?>
+                <li class='pagination_item -page active'>
+                    <a class='pagination_link' href="#" ajaxNav tabindex='0'><?php echo $page; ?></a>
+                </li>
+            <?php } ?>
+        <?php } ?>
+
+          <!-- Next page link -->
+        <?php if (isset($this->next)) { ?>
+            <li class='pagination_item -next'>
+                <a class='pagination_link'
+                   href="<?php echo $this->url($this->route); ?>?<?php echo http_build_query(array_merge($this->routeParams,
+                    array('page' => $this->next)));?>" ajaxNav tabindex='0'>›</a>
+            </li>
+        <?php } else { ?>
+            <li class="pagination_item -next disabled">
+                <a class='pagination_link' href="#">›</a>
+            </li>
+        <?php } ?>
+    </ul>
+
+<?php } ?>
+

@@ -31,6 +31,16 @@ class News {
     protected $content = "";
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $source = "";
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $sourceUrl = "";
+
+    /**
      * @ORM\Column(type="date")
      */
     protected $date = "";
@@ -58,6 +68,34 @@ class News {
      */
     public function getLanguage () {
         return $this->language;
+    }
+
+    /**
+     * @param mixed $source
+     */
+    public function setSource ($source) {
+        $this->source = $source;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSource () {
+        return $this->source;
+    }
+
+    /**
+     * @param mixed $sourceUrl
+     */
+    public function setSourceUrl ($sourceUrl) {
+        $this->sourceUrl = $sourceUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceUrl () {
+        return $this->sourceUrl;
     }
 
     /**

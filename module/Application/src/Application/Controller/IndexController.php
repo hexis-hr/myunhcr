@@ -8,12 +8,12 @@ use Application\Form\ChooseSurveyForm;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Http\Request;
 use Zend\Session\Container;
+use Zend\Paginator\Paginator;
 
-use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
 class IndexController extends AbstractActionController {
 
@@ -70,19 +70,46 @@ class IndexController extends AbstractActionController {
     public function faqAction()
     {
         $this->layout()->setVariable('body_class', 'pg-faq -information');
-        return new ViewModel();
+
+        $query = $this->getEntityManager()->createQuery('
+            SELECT faq
+            FROM \Administration\Entity\Faq faq
+            LEFT JOIN \Administration\Entity\FaqCategory fac WITH faq.category = fac.id
+            WHERE fac.category = :category');
+        $query->setParameter('category', 'Information');
+        $faq = $query->getResult();
+
+        return new ViewModel(array('faq' => $faq));
     }
 
     public function faqMyunhcrAction()
     {
         $this->layout()->setVariable('body_class', 'pg-faq -myunhcr');
-        return new ViewModel();
+
+        $query = $this->getEntityManager()->createQuery('
+            SELECT faq
+            FROM \Administration\Entity\Faq faq
+            LEFT JOIN \Administration\Entity\FaqCategory fac WITH faq.category = fac.id
+            WHERE fac.category = :category');
+        $query->setParameter('category', 'MyUNHCR');
+        $faq = $query->getResult();
+
+        return new ViewModel(array('faq' => $faq));
     }
 
     public function faqRefugeeAction()
     {
         $this->layout()->setVariable('body_class', 'pg-faq -feedback');
-        return new ViewModel();
+
+        $query = $this->getEntityManager()->createQuery('
+            SELECT faq
+            FROM \Administration\Entity\Faq faq
+            LEFT JOIN \Administration\Entity\FaqCategory fac WITH faq.category = fac.id
+            WHERE fac.category = :category');
+        $query->setParameter('category', 'Feedback');
+        $faq = $query->getResult();
+
+        return new ViewModel(array('faq' => $faq));
     }
 
     public function fileAComplaintAction()
@@ -157,13 +184,33 @@ class IndexController extends AbstractActionController {
     public function newsAndEventsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-newsEvents');
-        return new ViewModel();
+
+        $mNews = $this->getEntityManager()->getRepository('Administration\Entity\News');
+
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mNews->createQueryBuilder('News')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(1);
+
+        $page = (int)$this->params()->fromQuery('page');
+
+        if ($page)
+            $paginator->setCurrentPageNumber($page);
+
+        return new ViewModel(array(
+            'data' => $paginator,
+        ));
     }
 
     public function newsArticleAction()
     {
         $this->layout()->setVariable('body_class', 'pg-newsArticle');
-        return new ViewModel();
+
+        $id = (int) $this->params()->fromRoute('id');
+
+        $news = $this->getEntityManager()->getRepository('Administration\Entity\News')
+            ->findOneBy(array('id' => $id));
+
+        return new ViewModel(array('news' => $news));
     }
 
     public function reportAnIncidentAction()

@@ -27,21 +27,27 @@
     <div class='grid_column -medium9 -mediumPlus8'>
 
       <div class='newsArticle'>
-        <h2 class='newsArticle_title'>Refugee Camp in Jordan Open</h2>
-        <p class='newsArticle_release'>Source:&nbsp;<a class='newsArticle_link' 
-          href='http://www.google.com'>Google News</a><span class='news_date floatRight clearfix'>05/11/2014</span></p>
-        <p class='newsArticle_body'>Lorem refugee Camp is now open for new arrivals into Jordan. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <h2 class='newsArticle_title'><?php echo $this->news->getTitle(); ?></h2>
+        <p class='newsArticle_release'>
+            <?php if ($this->news->getSource() != '') { ?>
+                Source:&nbsp;<a class='newsArticle_link' href='<?php echo $this->news->getSourceUrl(); ?>'>
+                <?php echo $this->news->getSource(); ?></a>
+            <?php } ?>
+            <span class='news_date floatRight clearfix'><?php echo date_format($this->news->getDate(), 'd.m.Y'); ?></span>
+        </p>
       </div>
-
+        <br/>
+        <p class='newsArticle_body'><?php echo $this->news->getContent(); ?></p>
     </div>
   </div>
 
   <div class='grid'>
-    <div class='grid_column'>
-      <div class='form_item'>
-        <a class='button -submit' href="news-and-events.html"><?php echo $this->translate('Back'); ?></a>
+      <div class='grid_column'>
+          <div class='form_item'>
+              <br/><br/>
+            <a class='button -submit' href="/news-and-events.html"><?php echo $this->translate('Back'); ?></a>
+          </div>
       </div>
-    </div>
   </div>
 </section>
 

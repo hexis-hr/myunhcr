@@ -46,6 +46,28 @@ return array(
                     ),
                 ),
             ),
+            'newsArticle' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/newsArticle[/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'newsArticle',
+                    ),
+                ),
+            ),
+            'newsAndEvents' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/newsAndEvents',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'newsAndEvents',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

@@ -40,6 +40,8 @@ namespace :deploy do
             execute "cd #{current_path} && php zf.php orm:schema-tool:update --force"
             execute :sudo, :chown, "-R www-data:www-data #{current_path}/data/DoctrineORMModule/Proxy/"
             execute :sudo, :chown, "-R www-data:www-data #{current_path}/module/Application/language/"
+            execute :sudo, :chown, "-R www-data:www-data #{current_path}/data/uploads/"
+            execute :sudo, :chown, "-R www-data:www-data #{current_path}/module/Administration/src/Administration/Form/"
         end
     end
 

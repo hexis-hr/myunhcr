@@ -24,6 +24,7 @@
                         <tr data-row="row_<?php echo $data->getId(); ?>">
                             <td><?php echo $data->getTitle(); ?></td>
                             <td><?php echo $this->limitEcho($data->getContent()); ?></td>
+                            <td><a href="<?php echo $data->getSourceUrl(); ?>"><?php echo $data->getSource(); ?></a></td>
                             <td><?php echo date_format($data->getDate(), 'd.m.Y'); ?></td>
                             <td>
                                 <a class="btn-action glyphicons pencil btn-success"

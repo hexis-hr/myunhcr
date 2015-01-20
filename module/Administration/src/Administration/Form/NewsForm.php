@@ -28,6 +28,22 @@ class NewsForm extends Form {
             ),
         ));
 
+        $this->add(array(
+            'name' => 'source',
+            'type' => 'Text',
+            'attributes' => array(
+                'class' => 'col-md-12 form-control',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'sourceUrl',
+            'type' => 'Url',
+            'attributes' => array(
+                'class' => 'col-md-12 form-control',
+            ),
+        ));
+
         $country = $entityManager->getRepository('Administration\Entity\Country')
             ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
 

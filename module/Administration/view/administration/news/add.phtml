@@ -27,6 +27,14 @@
                     </div>
                     <div class="col-md-6">
 
+                        <label><?php echo $this->translate('Source'); ?></label>
+                        <?php echo $this->formRow($form->get('source')); ?>
+                        <div class="separator bottom"></div>
+
+                        <label><?php echo $this->translate('Source URL'); ?> (input like http://example.com)</label>
+                        <?php echo $this->formRow($form->get('sourceUrl')); ?>
+                        <div class="separator bottom"></div>
+
                         <label><?php echo $this->translate('Language'); ?></label>
                         <?php echo $this->formRow($form->get('language')); ?>
                         <div class="separator bottom"></div>

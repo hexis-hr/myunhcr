@@ -44,9 +44,9 @@ namespace :deploy do
     end
 
     desc "Symlink shared configs and folders on each release."
-      task :symlink_shared do
-        on "deploy@dev.hexis.hr" do
-            execute "ln -nfs #{shared_path}/config/doctrine.local.php /var/www/myunhcr/current/config/autoload/doctrine.local.php"
+        task :symlink_shared do
+            on "deploy@dev.hexis.hr" do
+                execute "ln -nfs #{shared_path}/config/doctrine.local.php /var/www/myunhcr/current/config/autoload/doctrine.local.php"
+            end
         end
-      end
 end

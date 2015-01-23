@@ -5,6 +5,7 @@ namespace Administration;
 use Zend\Mvc\MvcEvent;
 use Zend\Authentication\Storage;
 use Zend\ModuleManager\ModuleManager;
+use Zend\Console\Adapter\AdapterInterface as Console;
 
 class Module {
 
@@ -41,6 +42,26 @@ class Module {
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
+        );
+    }
+
+    /**
+     * This method is defined in ConsoleBannerProviderInterface
+     */
+    public function getConsoleBanner(Console $console)
+    {
+        return 'Administration module - User management';
+    }
+    /**
+     * This method is defined in ConsoleUsageProviderInterface
+     */
+    public function getConsoleUsage(Console $console)
+    {
+        return array(
+            'user add  <userEmail>' => 'Add user',
+            'user delete  <userEmail>' => 'Delete user',
+            'user reset <userEmail>' => 'Reset user',
+            'user role <userEmail>' => 'Set user role',
         );
     }
 

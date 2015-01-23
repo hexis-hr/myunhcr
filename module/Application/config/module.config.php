@@ -144,13 +144,13 @@ return array(
                 ),
             ),
         ),
-        'caching' => array(
-            'default' => array(
-                'cache'     => 'AssetManager\\Cache\\FilePathCache',
-                'options' => array(
-                    'dir' => 'public/', // path/to/cache
-                ),
-            ),
-        ),
+//        'caching' => array(
+//            'default' => array(
+//                'cache'     => 'AssetManager\\Cache\\FilePathCache',
+//                'options' => array(
+//                    'dir' => 'public/', // path/to/cache
+//                ),
+//            ),
+//        ),
     ),
 );

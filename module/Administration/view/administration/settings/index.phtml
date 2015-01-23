@@ -9,15 +9,18 @@
     <div class="widget widget-2 widget-tabs widget-tabs-2">
         <div class="widget-head">
             <ul>
-                <li class="active"><a class="glyphicons flag" href="#countrySelection" data-toggle="tab">
+                <li class="active"><a class="glyphicons flag" href="#countrySelectionTab" data-toggle="tab">
                         <?php echo $this->translate('Active countries'); ?></a></li>
-                <li><a class="glyphicons link" href="#countryLocale" data-toggle="tab">
-                        <?php echo $this->translate('Country languages'); ?></a></li>
+                <li><a class="glyphicons user" href="#userCategoryTab" data-toggle="tab">
+                        <?php echo $this->translate('User category'); ?></a></li>
+                <li class="countryLocationClass" <?php if(!isset($_SESSION['countrySettings']['countryId'])) { echo 'style="display: none;"'; } ?>>
+                    <a class="glyphicons link" href="#countryLocationTab" data-toggle="tab">
+                        <?php echo $this->translate('Country locations'); ?></a></li>
             </ul>
         </div>
         <div class="widget-body">
             <div class="tab-content">
-                <div class="tab-pane active" id="countrySelection">
+                <div class="tab-pane active" id="countrySelectionTab">
                     <?php $form = $this->form; ?>
                     <?php $form->setAttribute('class', 'form-horizontal margin-none')->prepare(); ?>
 
@@ -85,9 +88,143 @@
 
                     </div>
                 </div>
-                <div class="tab-pane" id="countryLocale">
-                    <h5>Tab content #2</h5>
-                    <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec id eros a orci adipiscing accumsan id eget sem. Etiam sit amet neque ligula, ac hendrerit metus. Phasellus convallis nulla nec leo dapibus sed feugiat felis feugiat. Nulla facilisi. Mauris quis tortor eu eros posuere tristique. In turpis leo, iaculis eget tincidunt in, gravida sit amet diam. Vivamus viverra, nisl vitae consectetur volutpat, ipsum risus tempor augue, in convallis leo massa in sem. Maecenas in urna quis purus pulvinar posuere. Fusce blandit viverra placerat. Fusce elementum turpis sed velit blandit elementum.</p>
+
+                <div class="tab-pane" id="userCategoryTab">
+                    <?php $form2 = $this->form2; ?>
+                    <?php $form2->setAttribute('class', 'form-horizontal margin-none')->prepare(); ?>
+
+                    <?php echo $this->form()->openTag($form2); ?>
+
+                    <div class="widget-body col-md-12">
+                        <div class="tab-content">
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    <label><?php echo $this->translate('User category'); ?></label>
+                                    <?php echo $this->formRow($form2->get('userCategory')); ?>
+                                    <div class="separator bottom"></div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="separator"></div>
+                                    <div class="form-group" style="padding-right: 15px;">
+                                        <a type="button" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"
+                                           data-addUserCategory data-href="<?php echo $this->url('settings/addUserCategory'); ?>">
+                                            <i></i><?php echo $this->translate('Add category'); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php echo $this->form()->closeTag($form2); ?>
+
+                    <div class="col-md-12">
+
+                        <div class="separator"></div>
+
+                        <h4><?php echo $this->translate('User categories'); ?></h4>
+
+                        <div class="userCategories">
+                            <?php if (!empty($this->userCategories)) {
+                                foreach ($this->userCategories as $userCategory) { ?>
+                                    <div class="col-md-3" id="userCategory_<?php echo $userCategory->getId(); ?>" style="padding: 0">
+                                        <div class="widget-stats">
+                                            <div class="col-md-8">
+                                                <strong><?php echo $userCategory->getSettingsValue(); ?></strong>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a class="btn btn-sm btn-primary"
+                                                   href="<?php echo $this->url('settings/editUserCategory',
+                                                       array('id' => $userCategory->getId())); ?>"><strong>Edit</strong></a>
+                                                <a class="btn btn-sm btn-danger" href="#" data-deleteUserCategory
+                                                   data-href="<?php echo $this->url('settings/deleteUserCategory',
+                                                       array('id' => $userCategory->getId())); ?>"
+                                                   data-id="<?php echo $userCategory->getId(); ?>"> <strong>Delete</strong></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <div class="widget-body center userCategoryMessage">
+                                <span class="gritter-add-regular btn btn-inverse btn-block">
+                                    <?php echo $this->translate('No user categories found. Please set them.'); ?>
+                                </span>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="countryLocationTab">
+                    <?php $form3 = $this->form3; ?>
+                    <?php $form3->setAttribute('class', 'form-horizontal margin-none')->prepare(); ?>
+
+                    <?php echo $this->form()->openTag($form3); ?>
+
+                    <div class="widget-body col-md-12">
+                        <div class="tab-content">
+                            <div class="row">
+
+                                <div class="col-md-10">
+                                    <label><?php echo $this->translate('Country location'); ?></label>
+                                    <?php echo $this->formRow($form3->get('locationName')); ?>
+                                    <div class="separator bottom"></div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="separator"></div>
+                                    <div class="form-group" style="padding-right: 15px;">
+                                        <a type="button" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"
+                                           data-href="<?php echo $this->url('settings/addCountryLocation'); ?>"
+                                           data-addCountryLocation><i></i><?php echo $this->translate('Add location'); ?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php echo $this->form()->closeTag($form3); ?>
+
+                    <div class="col-md-12">
+
+                        <div class="separator"></div>
+
+                        <h4><?php echo $this->translate('Country locations'); ?></h4>
+
+                        <div class="countryLocations">
+                            <?php if (!empty($this->countryLocations)) {
+                                foreach ($this->countryLocations as $countryLocation) { ?>
+                                    <div class="col-md-3" id="countryLocation_<?php echo $countryLocation->getId(); ?>" style="padding: 0">
+                                        <div class="widget-stats">
+                                            <div class="col-md-8">
+                                                <strong><?php echo $countryLocation->getName(); ?></strong>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a class="btn btn-sm btn-primary"
+                                                   href="<?php echo $this->url('settings/editCountryLocation',
+                                                       array('id' => $countryLocation->getId())); ?>"><strong>Edit</strong></a>
+                                                <a class="btn btn-sm btn-danger" href="#" data-deleteCountryLocation
+                                                   data-href="<?php echo $this->url('settings/deleteCountryLocation',
+                                                       array('id' => $countryLocation->getId())); ?>"
+                                                   data-id="<?php echo $countryLocation->getId(); ?>"> <strong>Delete</strong></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <div class="widget-body center countryLocationMessage">
+                                <span class="gritter-add-regular btn btn-inverse btn-block">
+                                    <?php echo $this->translate('No country locations found. Please set them.'); ?>
+                                </span>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

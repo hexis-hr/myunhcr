@@ -69,6 +69,7 @@ handle('[data-countrySelection]', function () {
                 $('li #'+ activeId).removeClass('active');
                 $('li #'+ response.countryId).addClass('active');
                 active.attr('id', response.countryId);
+                $('.countryLocationClass').show();
             },
             error: function() {
                 console.log('Error on entity delete');
@@ -108,7 +109,6 @@ handle('[data-activateCountry]', function () {
                 var activeMessage = $('.activeCountryMessage');
                 if (activeMessage)
                     activeMessage.remove();
-
                 //refresh handle
                 $(handleElements);
             },
@@ -270,4 +270,128 @@ handle('[data-checkActiveCountry]', function () {
 
         }
     }
+});
+
+handle('[data-addUserCategory]', function () {
+
+    // prevent form submit on enter
+    $('#userCategoryForm').on('keyup keypress', function(e) {
+        var code = e.keyCode || e.which;
+        if (code  == 13) {
+            e.preventDefault();
+        }
+    });
+
+    $(this).on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).data('href'),
+            data: {
+                userCategory : $('#userCategory').val()
+          },
+            success: function(response){
+
+                $('.userCategories').prepend('<div class="col-md-3" id="userCategory_' + response.userCategoryId +
+                    '" style="padding: 0"><div class="widget-stats"><div class="col-md-8">' +
+                    '<strong>' + response.userCategory + '</strong></div><div class="col-md-4">' +
+                    '<a class="btn btn-sm btn-primary" href="' + response.editUrl + '"><strong>Edit</strong></a>' +
+                    '<a class="btn btn-sm btn-danger" href="#" data-deleteUserCategory ' +
+                    'data-href="' + response.deleteUrl + '" data-id="' + response.userCategoryId + '">' +
+                    '<strong>Delete</strong></a></div><div class="clearfix"></div></div></div>');
+
+                var message = $('.userCategoryMessage');
+                if (message)
+                    message.remove();
+
+                $('#userCategory').val('');
+                //refresh handle
+                $(handleElements);
+            },
+            error: function() {
+                console.log('Error on adding user category');
+            }
+        });
+    })
+});
+
+handle('[data-deleteUserCategory]', function () {
+
+    $(this).on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).data('href'),
+            success: function(response){
+                $('#userCategory_' + response.userCategoryId).remove();
+            },
+            error: function() {
+                console.log('Error on user category deletion');
+            }
+        });
+    })
+});
+
+handle('[data-addCountryLocation]', function () {
+
+    // prevent form submit on enter
+    $('#countryLocationForm').on('keyup keypress', function(e) {
+        var code = e.keyCode || e.which;
+        if (code  == 13) {
+            e.preventDefault();
+        }
+    });
+
+    $(this).on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).data('href'),
+            data: {
+                countryLocation : $('#locationName').val()
+            },
+            success: function(response){
+
+                $('.countryLocations').prepend('<div class="col-md-3" id="countryLocation_' + response.countryLocationId +
+                    '" style="padding: 0"><div class="widget-stats"><div class="col-md-8">' +
+                    '<strong>' + response.countryLocation + '</strong></div><div class="col-md-4">' +
+                    '<a class="btn btn-sm btn-primary" href="' + response.editUrl + '"><strong>Edit</strong></a>' +
+                    '<a class="btn btn-sm btn-danger" href="#" data-deleteCountryLocation ' +
+                    'data-href="' + response.deleteUrl + '" data-id="' + response.countryLocationId + '">' +
+                    '<strong>Delete</strong></a></div><div class="clearfix"></div></div></div>');
+
+                var message = $('.countryLocationMessage');
+                if (message)
+                    message.remove();
+
+                $('#locationName').val('');
+                //refresh handle
+                $(handleElements);
+            },
+            error: function() {
+                console.log('Error on adding country location');
+            }
+        });
+    })
+});
+
+handle('[data-deleteCountryLocation]', function () {
+
+    $(this).on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).data('href'),
+            success: function(response){
+                $('#countryLocation_' + response.countryLocationId).remove();
+            },
+            error: function() {
+                console.log('Error on country location deletion');
+            }
+        });
+    })
 });

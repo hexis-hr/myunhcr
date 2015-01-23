@@ -35,6 +35,8 @@ class AclFactory implements FactoryInterface {
         $acl->addResource(new Resource('Administration'));
 
         //enable work from console
+        $acl->addResource(new Resource('Console'));
+        $acl->allow('anonymous', 'Console');
         $acl->addResource(new Resource('Cli'));
         $acl->allow('anonymous', 'Cli');
 

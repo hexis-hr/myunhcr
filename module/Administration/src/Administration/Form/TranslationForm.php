@@ -11,7 +11,7 @@ class TranslationForm extends Form {
         parent::__construct('translation');
 
         $this->add(array(
-            'name' => 'translation-file',
+            'name' => 'translationFile',
             'type' => 'File',
             'attributes' => array(
                 'id' => 'translation-file',
@@ -19,13 +19,26 @@ class TranslationForm extends Form {
             ),
         ));
 
-        $country = $entityManager->getRepository('Administration\Entity\Country')
-            ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+        $this->add(array(
+            'name' => 'translationName',
+            'type' => 'Text',
+            'attributes' => array(
+                'id' => 'translationName',
+                'class' => 'col-md-12 form-control',
+            ),
+        ));
 
-        $languageArray = $country->getLanguages();
-        foreach ($languageArray as $languageKey => $languageValue) {
-            $languageArray[$languageValue] = $languageValue;
-            unset($languageArray[$languageKey]);
+        if (isset($_SESSION['countrySettings']['countryId'])) {
+            $country = $entityManager->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+
+            $languageArray = $country->getLanguages();
+            foreach ($languageArray as $languageKey => $languageValue) {
+                $languageArray[$languageValue] = $languageValue;
+                unset($languageArray[$languageKey]);
+            }
+        } else {
+            $languageArray = array();
         }
 
         $this->add(array(

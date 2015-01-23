@@ -1,6 +1,7 @@
 <?php
 namespace Administration\Controller;
 
+use Administration\Entity\User;
 use Administration\Form\LoginForm;
 
 use Administration\Provider\ProvidesEntityManager;

@@ -8,8 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @Annotation\Hydrator("Zend\Stdlib\Hydrator\ObjectProperty")
- * @Annotation\Name("File")
+ * File
  *
  * @ORM\Table(name="file")
  * @ORM\Entity

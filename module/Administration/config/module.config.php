@@ -169,6 +169,18 @@ return array(
                             ),
                         ),
                     ),
+                    'add' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addTranslation',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Translation',
+                                'action' => 'add',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
                     'downloadTranslation' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
@@ -533,6 +545,78 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'addUserCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addUserCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'addUserCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editUserCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editUserCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'editUserCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteUserCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteUserCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'deleteUserCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addCountryLocation' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addCountryLocation',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'addCountryLocation',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editCountryLocation' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editCountryLocation[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'editCountryLocation',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteCountryLocation' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteCountryLocation[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Settings',
+                                'action' => 'deleteCountryLocation',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
                 ),
             ),
         ),
@@ -587,6 +671,7 @@ return array(
             'Administration\Controller\Survey' => 'Administration\Controller\SurveyController',
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
             'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
+            'Administration\Controller\Console' => 'Administration\Controller\ConsoleController',
         ),
         'factories' => array(
             'entityManagerController' => 'Administration\Factory\EntityManagerFactory'
@@ -719,6 +804,53 @@ return array(
         'remember_me_seconds' => 2592000,
         'use_cookies' => true,
         'cookie_httponly' => true,
+    ),
+
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'user-reset-password' => array(
+                    'options' => array(
+                        'route'    => 'user reset [--verbose|-v] <userEmail> [<password>]',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Administration\Controller',
+                            'controller'    => 'Console',
+                            'action'     => 'reset-password'
+                        )
+                    )
+                ),
+                'user-add' => array(
+                    'options' => array(
+                        'route'    => 'user add [--verbose|-v] <userEmail>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Administration\Controller',
+                            'controller'    => 'Console',
+                            'action'     => 'add-user'
+                        )
+                    )
+                ),
+                'user-delete' => array(
+                    'options' => array(
+                        'route'    => 'user delete [--verbose|-v] <userEmail>',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Administration\Controller',
+                            'controller'    => 'Console',
+                            'action'     => 'user-delete'
+                        )
+                    )
+                ),
+                'user-role' => array(
+                    'options' => array(
+                        'route'    => 'user role [--verbose|-v] <userEmail> [<role>]',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Administration\Controller',
+                            'controller'    => 'Console',
+                            'action'     => 'user-role'
+                        )
+                    )
+                ),
+            )
+        )
     ),
 
 );

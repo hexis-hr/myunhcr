@@ -3,9 +3,13 @@
 namespace Administration\Controller;
 
 use Administration\Entity\Country;
+use Administration\Entity\CountryLocation;
 use Administration\Entity\News;
+use Administration\Entity\Settings;
+use Administration\Form\CountryLocationForm;
 use Administration\Form\CountrySettingsForm;
 use Administration\Form\NewsForm;
+use Administration\Form\UserCategoryForm;
 use Administration\Provider\ProvidesEntityManager;
 
 use Zend\View\Model\JsonModel;
@@ -25,12 +29,30 @@ class SettingsController extends AbstractActionController {
     public function indexAction () {
 
         $form = new CountrySettingsForm($this->getEntityManager(), $this->getServiceLocator());
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Country'));
 
         $activeCountries = $this->getEntityManager()->getRepository('Administration\Entity\Country')
             ->findBy(array(), array('id' => 'DESC'));
 
-        return new ViewModel(array('form' => $form, 'activeCountries' => $activeCountries));
+        $form2 =  new UserCategoryForm();
+
+        $userCategories = $this->getEntityManager()->getRepository('Administration\Entity\Settings')
+            ->findBy(array('settingsKey' => 'userCategory'), array('id' => 'DESC'));
+
+        $form3 =  new CountryLocationForm();
+
+        $countryLocations = null;
+        if (isset($_SESSION['countrySettings']['countryId']))
+            $countryLocations = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
+                ->findBy(array('country' => $_SESSION['countrySettings']['countryId']));
+
+        return new ViewModel(array(
+            'form' => $form,
+            'activeCountries' => $activeCountries,
+            'form2' => $form2,
+            'userCategories' => $userCategories,
+            'form3' => $form3,
+            'countryLocations' => $countryLocations,
+        ));
 
     }
 
@@ -162,6 +184,200 @@ class SettingsController extends AbstractActionController {
                 'success' => true,
                 'countryId' => $id,
                 'language' => $language,
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function addUserCategoryAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $userCategory = $this->params()->fromPost('userCategory');
+
+            $settings = new Settings();
+            $settings->setSettingsKey('userCategory');
+            $settings->setSettingsValue($userCategory);
+
+            $this->getEntityManager()->persist($settings);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'userCategory' => $userCategory,
+                'userCategoryId' => $settings->getId(),
+                'deleteUrl' => $this->url()->fromRoute('settings/deleteUserCategory', array('id' => $settings->getId())),
+                'editUrl' => $this->url()->fromRoute('settings/editUserCategory', array('id' => $settings->getId())),
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function editUserCategoryAction () {
+
+        $request = $this->getRequest();
+
+        $userCategoryId = (int) $this->params()->fromRoute('id');
+        $settings = $this->getEntityManager()->getRepository('Administration\Entity\Settings')
+            ->findOneBy(array('id' => $userCategoryId));
+
+        $form = new UserCategoryForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Settings'));
+
+        if ($request->isPost()) {
+
+            //todo
+            //$formFilter = new UserFormFilter();
+            //$form->setInputFilter($formFilter->getAddInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+
+                $settings->setSettingsValue($request->getPost('userCategory'));
+                $this->getEntityManager()->persist($settings);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addMessage('User category settings successfully edited.');
+                return $this->redirect()->toRoute('settings');
+            }
+        }
+
+        $form->populateValues(array(
+            'userCategory' => $settings->getSettingsValue(),
+        ));
+
+        return new ViewModel(array('form' => $form, 'userCategoryId' => $userCategoryId));
+    }
+
+    public function deleteUserCategoryAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $id = (int)$this->params()->fromRoute('id');
+            $settings = $this->getEntityManager()->getRepository('Administration\Entity\Settings')
+                ->findOneBy(array('id' => $id));
+
+            $this->getEntityManager()->remove($settings);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'userCategoryId' => $id,
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function addCountryLocationAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $location = $this->params()->fromPost('countryLocation');
+
+            $countryLocation = new CountryLocation();
+            $countryLocation->setName($location);
+
+            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+
+            $countryLocation->setCountry($country);
+
+            $this->getEntityManager()->persist($countryLocation);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'countryLocation' => $location,
+                'countryLocationId' => $countryLocation->getId(),
+                'deleteUrl' => $this->url()->fromRoute('settings/deleteCountryLocation', array('id' => $countryLocation->getId())),
+                'editUrl' => $this->url()->fromRoute('settings/editCountryLocation', array('id' => $countryLocation->getId())),
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function editCountryLocationAction () {
+
+        $request = $this->getRequest();
+
+        $countryLocationId = (int) $this->params()->fromRoute('id');
+        $countryLocation = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
+            ->findOneBy(array('id' => $countryLocationId));
+
+        $form = new CountryLocation();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\CountryLocation'));
+
+        if ($request->isPost()) {
+
+            //todo
+            //$formFilter = new UserFormFilter();
+            //$form->setInputFilter($formFilter->getAddInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+
+                $countryLocation->setName($request->getPost('locationName'));
+                $this->getEntityManager()->persist($countryLocation);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addMessage('Country location successfully edited.');
+                return $this->redirect()->toRoute('settings');
+            }
+        }
+
+        $form->populateValues(array(
+            'countryLocation' => $countryLocation->getName(),
+        ));
+
+        return new ViewModel(array('form' => $form, 'countryLocationId' => $countryLocationId));
+    }
+
+    public function deleteCountryLocationAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $id = (int) $this->params()->fromRoute('id');
+            $countryLocation = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
+                ->findOneBy(array('id' => $id));
+
+            $this->getEntityManager()->remove($countryLocation);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'countryLocationId' => $id,
             ));
 
         } else {

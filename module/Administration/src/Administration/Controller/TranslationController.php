@@ -3,6 +3,7 @@
 namespace Administration\Controller;
 
 use Administration\Entity\File;
+use Administration\Entity\Translation;
 use Administration\Form\TranslationForm;
 use Administration\Provider\ProvidesEntityManager;
 
@@ -20,14 +21,19 @@ class TranslationController extends AbstractActionController {
 
     public function indexAction () {
 
-        $request = $this->getRequest();
-        $globalConfig = $this->serviceLocator->get('config');
-
         $addedTranslations = array();
         $files = $this->getEntityManager()->getRepository('Administration\Entity\File')->findBy(array('type' => 'translation'));
         foreach ($files as $f) {
             $addedTranslations[$f->getId()] = $f->getName();
         }
+
+        return new ViewModel(array('translations' => $addedTranslations));
+    }
+
+    public function addAction (){
+
+        $request = $this->getRequest();
+        $globalConfig = $this->serviceLocator->get('config');
 
         $file = null;
         $locale = $request->getPost('locale');
@@ -53,7 +59,7 @@ class TranslationController extends AbstractActionController {
 
             if ($form->isValid()) {
 
-                $translateFile = $post['translation-file'];
+                $translateFile = $post['translationFile'];
                 $target_file = $globalConfig['languageDir'] . basename($fileName);
                 $newMoFile = $globalConfig['languageDir'] . basename($locale . '.mo');
 
@@ -74,14 +80,26 @@ class TranslationController extends AbstractActionController {
                 $this->getEntityManager()->persist($file);
                 $this->getEntityManager()->flush();
 
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+
+                $translation = new Translation();
+                $translation->setName($post['translationName']);
+                $translation->setCountry($country);
+                $translation->setFile($file);
+
+                $this->getEntityManager()->persist($translation);
+                $this->getEntityManager()->flush();
+
                 return $this->redirect()->toRoute('translation');
             }
         }
 
-        return new ViewModel(array('form' => $form, 'translations' => $addedTranslations));
+        return new ViewModel(array('form' => $form));
     }
 
-    function downloadTranslationAction () {
+
+    public function downloadTranslationAction () {
 
         $globalConfig = $this->serviceLocator->get('config');
         $id = (int)$this->params()->fromRoute('id');

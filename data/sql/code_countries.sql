@@ -53,7 +53,9 @@ CREATE TABLE IF NOT EXISTS `code_countries` (
 -- Dumping data for table `code_countries`
 --
 
-INSERT INTO `code_countries` (`id`, `code`, `name`, `name_long`, `name_formal`, `code2`, `oracle_id`, `nationality`, `major_area`, `region`, `less_developed`, `least_developed`, `bureau`, `bureau_order`, `bureau_full`, `name_fr`, `major_area_fr`, `region_fr`, `active`) VALUES
+INSERT INTO `code_countries` (`id`, `code`, `name`, `nameLong`, `nameFormal`, `code2`, `oracleId`, `nationality`,
+`majorArea`, `region`, `lessDeveloped`, `leastDeveloped`, `bureau`, `bureauOrder`, `bureauFull`, `nameFr`,
+`majorAreaFr`, `regionFr`, `active`) VALUES
 (2, 'AFG', 'Afghanistan', 'Afghanistan', 'the Islamic State of Afghanistan', 'AFG', 9405710474, 'Afghan', 'Asia', 'South-central Asia', 'y', 'y', 0, '2', 'Central Asia, South West Asia, North Africa and the Middle East', 'Afghanistan', 'Asie', 'Sud de l''Asie centrale', 1),
 (3, 'ALB', 'Albania', 'Albania', 'the Republic of Albania', 'ALB', 9248411931, 'Albanian', 'Europe', 'Southern Europe', 'n', 'n', 0, '4', 'Europe', 'Albanie', 'Europe', 'Europe australe', 1),
 (4, 'ALG', 'Algeria', 'Algeria', 'the People''s Democratic Republic of Algeria', 'ALG', 9091113388, 'Algerian', 'Africa', 'Northern Africa', 'y', 'n', 0, '3', 'Central Asia, South West Asia, North Africa and the Middle East', 'Alg', 'Afrique', 'Afrique septentrionale', 1),
@@ -302,7 +304,9 @@ INSERT INTO `code_countries` (`id`, `code`, `name`, `name_long`, `name_formal`, 
 (247, '', 'Taiwan, province of China', '', '', 'VAR', 1556239756, '', '', '', '', '', 0, '', '', '', '', '', NULL),
 (248, '', 'United States Minor Outlying Islands', '', '', 'VAR', 3352970353, '', '', '', '', '', 0, '', '', '', '', '', NULL),
 (249, 'SPM', 'Saint-Pierre-et-Miquelon', '', '', 'VAR', 4589793132, '', '', '', '', '', 0, '', '', '', '', '', NULL);
-INSERT INTO `code_countries` (`id`, `code`, `name`, `name_long`, `name_formal`, `code2`, `oracle_id`, `nationality`, `major_area`, `region`, `less_developed`, `least_developed`, `bureau`, `bureau_order`, `bureau_full`, `name_fr`, `major_area_fr`, `region_fr`, `active`) VALUES
+INSERT INTO `code_countries` (`id`, `code`, `name`, `nameLong`, `nameFormal`, `code2`, `oracleId`, `nationality`,
+`majorArea`, `region`, `lessDeveloped`, `leastDeveloped`, `bureau`, `bureauOrder`, `bureauFull`, `nameFr`,
+`majorAreaFr`, `regionFr`, `active`) VALUES
 (250, 'WLF', 'Wallis and Futuna Islands ', '', '', 'VAR', 3794582009, '', '', '', '', '', 0, '', '', '', '', '', NULL),
 (251, 'SHN', 'Saint Helena', '', '', 'VAR', 7618987304, '', '', '', '', '', 0, '', '', '', '', '', NULL),
 (252, 'PCN', 'Pitcairn', '', '', 'PCN', 6263868363, '', 'Oceania', 'Polynesia', '', '', 0, '2', 'Asia and Pacific', '', 'Oc', 'Polyn', 1),

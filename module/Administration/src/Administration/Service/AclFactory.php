@@ -46,6 +46,8 @@ class AclFactory implements FactoryInterface {
 
         //global ACL's
         $acl->allow('anonymous', 'Administration', 'Auth');
+        $acl->allow('anonymous', 'Survey', 'xmlDeliver');
+        $acl->allow('anonymous', 'Survey', 'transformXml');
 
         $acl->allow('user', 'Administration', 'Index');
         $acl->allow('user', 'Account', 'profile');

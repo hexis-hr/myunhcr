@@ -35,14 +35,14 @@ return array(
                     ),
                 ),
             ),
-            'surveyQuestions' => array(
+            'takeASurvey' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/surveyQuestions[/:survey][/:authentification][/:date]',
+                    'route'    => '/takeASurvey[/:survey][/:authentification][/:date]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',
-                        'action'     => 'surveyQuestions',
+                        'action'     => 'takeASurvey',
                     ),
                 ),
             ),

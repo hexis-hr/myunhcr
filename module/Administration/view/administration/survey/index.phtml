@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th><?php echo $this->translate('Name'); ?></th>
+                            <th><?php echo $this->translate('Link'); ?></th>
                             <th><?php echo $this->translate('Active'); ?></th>
                             <th><?php echo $this->translate('Action'); ?></th>
                         </tr>
@@ -29,6 +30,7 @@
                     <?php foreach($this->data as $data) { ?>
                         <tr data-row="row_<?php echo $data->getId(); ?>">
                             <td><?php echo $data->getName(); ?></td>
+                            <td><a href="<?php echo $data->getUrl(); ?>" target="_blank"><?php echo $data->getUrl(); ?></a></td>
                             <td><?php echo $data->getActive() == 1 ? '<input type="checkbox" data-activeCheck data-href="'
                                     . $this->url('survey/manageActiveStatus', array('id' => $data->getId())) . '" checked>'
                                     : '<input type="checkbox" data-activeCheck data-href="'
@@ -50,26 +52,6 @@
             <?php } ?>
         </div>
     </div>
-
-    <div class="separator bottom"></div>
-
-    <h3 class="glyphicons notes"><?php echo $this->translate('Added surveys'); ?></h3>
-    <?php if (count($this->surveys) > 0) { ?>
-        <?php foreach ($this->surveys as $surveyId => $surveyFile) { ?>
-            <a href="<?php  echo $this->url('survey/downloadSurvey', array('id' => $surveyId)); ?>">
-                <div class="col-md-3 widget-stats">
-                    <span class="txt"><strong><?php echo $surveyFile; ?></strong>
-                        <?php echo $this->translate('Filename') . ': ' . $surveyFile; ?>
-                    </span>
-                </div>
-            </a>
-        <?php } ?>
-    <?php } else { ?>
-        <div class="widget-body center">
-            <span class="gritter-add-regular btn btn-inverse btn-block">
-                <?php echo $this->translate('No surveys found. Please upload new one.'); ?></span>
-        </div>
-    <?php } ?>
 
 </div>
 

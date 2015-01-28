@@ -102,4 +102,5 @@ class ConsoleController extends AbstractActionController {
 
         return "Done! New role for user $userEmail is '$userRole'.\n";
     }
+
 }

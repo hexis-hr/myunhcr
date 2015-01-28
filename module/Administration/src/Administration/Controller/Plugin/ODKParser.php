@@ -114,8 +114,8 @@ class ODKParser extends AbstractPlugin {
             if (isset($field['select']))
                 $this->structFormElement($field, $fieldset, $xml, 'select');
 
-            if (isset($field['group']))
-                $this->groupFormElement($field, $fieldset, $xml);
+//            if (isset($field['group']))
+//                $this->groupFormElement($field, $fieldset, $xml);
 
             if (isset($field['repeat']))
                 $this->repeatFormElement($field, $fieldset, $xml);
@@ -128,21 +128,45 @@ class ODKParser extends AbstractPlugin {
 
     private function groupFormElement ($field, $fieldset = null, $xml) {
 
+//        echo '<pre>'; var_dump($field['group']); die();
         foreach ($field['group'] as $formEl) {
+
+//                if (!isset($formEl['ref'])) {
+//                    echo '<pre>'; var_dump($formEl); die();
+//                }
+
             $groupLabel = '';
 
             $formElement = new FormElement();
             $formElement->setParentType('group');
             $formElement->setFieldset($fieldset);
 
-            preg_match("/('(.*?)')/", $formEl['label']['ref'], $optionMatch);
+            if (isset($formEl['label']))
+                preg_match("/('(.*?)')/", $formEl['label']['ref'], $optionMatch);
+            else
+                preg_match("/('(.*?)')/", $formEl['ref'], $optionMatch);
 
-            foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
-                if ($sub['id'] === $optionMatch[2]) {
-                    $formElement->setLabel($sub['value']);
-                    $groupLabel = $sub['value'];
-                    $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
-                    break;
+//            echo '<pre>'; var_dump($formEl); die();
+
+            if (isset($xml['h:head']['model']['itext']['translation']['text'])) {
+                foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
+                    if ($sub['id'] === $optionMatch[2]) {
+                        $formElement->setLabel($sub['value']);
+                        $groupLabel = $sub['value'];
+                        $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
+                        break;
+                    }
+                }
+            } else {
+                foreach ($xml['h:head']['model']['itext']['translation'] as $translation) {
+                    foreach ($translation['text'] as $sub) {
+                        if ($sub['id'] === $optionMatch[2]) {
+                            $formElement->setLabel($sub['value']);
+                            $groupLabel = $sub['value'];
+                            $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -152,6 +176,25 @@ class ODKParser extends AbstractPlugin {
             if (isset($formEl['repeat'])) {
                 $this->repeatFormElement($formEl['repeat'], $fieldset, $xml, $formElement->getId(), $groupLabel);
             }
+
+            if (isset($formEl['input']))
+                $this->structFormElement($formEl, $fieldset, $xml, 'input', $formElement->getId(), $groupLabel);
+
+            if (isset($formEl['upload']))
+                $this->structFormElement($formEl, $fieldset, $xml, 'upload', $formElement->getId(), $groupLabel);
+
+            if (isset($formEl['select1'])) {
+
+                $this->structFormElement($formEl, $fieldset, $xml, 'select1', $formElement->getId(), $groupLabel);
+            }
+
+            if (isset($formEl['select']))
+                $this->structFormElement($formEl, $fieldset, $xml, 'select', $formElement->getId(), $groupLabel);
+
+            //todo add group parent
+            if (isset($formEl['group']))
+                $this->groupFormElement($formEl, $fieldset, $xml);
+
         }
 
     }
@@ -200,11 +243,23 @@ class ODKParser extends AbstractPlugin {
                 if (isset($formEl['mediatype']))
                     $formElement->setMediaType(substr($formEl['mediatype'], 0, -2));
 
-                foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
-                    if ($sub['id'] === ($formEl['ref'] . ':label')) {
-                        $formElement->setLabel($sub['value']);
-                        $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
-                        break;
+                if (isset($xml['h:head']['model']['itext']['translation']['text'])) {
+                    foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
+                        if ($sub['id'] === ($formEl['ref'] . ':label')) {
+                            $formElement->setLabel($sub['value']);
+                            $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
+                            break;
+                        }
+                    }
+                } else {
+                    foreach ($xml['h:head']['model']['itext']['translation'] as $translation) {
+                        foreach ($translation['text'] as $sub) {
+                            if ($sub['id'] === ($formEl['ref'] . ':label')) {
+                                $formElement->setLabel($sub['value']);
+                                $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -221,10 +276,21 @@ class ODKParser extends AbstractPlugin {
                     $valueOptions = array();
                     foreach ($formEl['item'] as $option) {
                         preg_match("/('(.*?)')/", $option['label']['ref'], $optionMatch);
-                        foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
-                            if ($sub['id'] === $optionMatch[2]) {
-                                $valueOptions[$option['value']] = $sub['value'];
-                                break;
+                        if (isset($xml['h:head']['model']['itext']['translation']['text'])) {
+                            foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
+                                if ($sub['id'] === $optionMatch[2]) {
+                                    $valueOptions[$option['value']] = $sub['value'];
+                                    break;
+                                }
+                            }
+                        } else {
+                            foreach ($xml['h:head']['model']['itext']['translation'] as $translation) {
+                                foreach ($translation['text'] as $sub) {
+                                    if ($sub['id'] === $optionMatch[2]) {
+                                        $valueOptions[$option['value']] = $sub['value'];
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -254,11 +320,23 @@ class ODKParser extends AbstractPlugin {
             if (isset($field[$type]['mediatype']))
                 $formElement->setMediaType(substr($field[$type]['mediatype'], 0, -2));
 
-            foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
-                if ($sub['id'] === ($field[$type]['ref'] . ':label')) {
-                    $formElement->setLabel($sub['value']);
-                    $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
-                    break;
+            if (isset($xml['h:head']['model']['itext']['translation']['text'])) {
+                foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
+                    if ($sub['id'] === ($field[$type]['ref'] . ':label')) {
+                        $formElement->setLabel($sub['value']);
+                        $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
+                        break;
+                    }
+                }
+            } else {
+                foreach ($xml['h:head']['model']['itext']['translation'] as $translation) {
+                    foreach ($translation['text'] as $sub) {
+                        if ($sub['id'] === ($field[$type]['ref'] . ':label')) {
+                            $formElement->setLabel($sub['value']);
+                            $formElement->setName(preg_replace("/[^a-zA-Z0-9]+/", "", strtolower($sub['value'])));
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -275,10 +353,21 @@ class ODKParser extends AbstractPlugin {
                 $valueOptions = array();
                 foreach ($field[$type]['item'] as $option) {
                     preg_match("/('(.*?)')/", $option['label']['ref'], $optionMatch);
-                    foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
-                        if ($sub['id'] === $optionMatch[2]) {
-                            $valueOptions[$option['value']] = $sub['value'];
-                            break;
+                    if (isset($xml['h:head']['model']['itext']['translation']['text'])) {
+                        foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
+                            if ($sub['id'] === $optionMatch[2]) {
+                                $valueOptions[$option['value']] = $sub['value'];
+                                break;
+                            }
+                        }
+                    } else {
+                        foreach ($xml['h:head']['model']['itext']['translation'] as $translation) {
+                            foreach ($translation['text'] as $sub) {
+                                if ($sub['id'] === $optionMatch[2]) {
+                                    $valueOptions[$option['value']] = $sub['value'];
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -295,20 +384,41 @@ class ODKParser extends AbstractPlugin {
 
         preg_match("/('(.*?)')/", $field['label']['ref'], $fieldsetMatch);
 
-        foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
-            if ($sub['id'] === $fieldsetMatch[2]) {
-                $fieldset = $this->getEntityManager()->getRepository('Administration\Entity\FormFieldset')
-                ->findOneBy(array('form' => $form, 'name' => $sub['value']));
+        if (isset($xml['h:head']['model']['itext']['translation']['text'])) {
+            foreach ($xml['h:head']['model']['itext']['translation']['text'] as $sub) {
+                if ($sub['id'] === $fieldsetMatch[2]) {
+                    $fieldset = $this->getEntityManager()->getRepository('Administration\Entity\FormFieldset')
+                        ->findOneBy(array('form' => $form, 'name' => $sub['value']));
 
-                if (!$fieldset) {
-                    $fieldset = new FormFieldset();
-                    $fieldset->setForm($form);
-                    $fieldset->setName($sub['value']);
-                    $fieldset->setFieldsetName(ucfirst(preg_replace("/[^a-zA-Z0-9]+/", "", $sub['value']) . 'Fieldset'));
-                    $this->getEntityManager()->persist($fieldset);
-                    $this->getEntityManager()->flush();
+                    if (!$fieldset) {
+                        $fieldset = new FormFieldset();
+                        $fieldset->setForm($form);
+                        $fieldset->setName($sub['value']);
+                        $fieldset->setFieldsetName(ucfirst(preg_replace("/[^a-zA-Z0-9]+/", "", $sub['value']) . 'Fieldset'));
+                        $this->getEntityManager()->persist($fieldset);
+                        $this->getEntityManager()->flush();
+                    }
+                    return $fieldset;
                 }
-                return $fieldset;
+            }
+        } else {
+            foreach ($xml['h:head']['model']['itext']['translation'] as $translation) {
+                foreach ($translation['text'] as $sub) {
+                    if ($sub['id'] === $fieldsetMatch[2]) {
+                        $fieldset = $this->getEntityManager()->getRepository('Administration\Entity\FormFieldset')
+                        ->findOneBy(array('form' => $form, 'name' => $sub['value']));
+
+                        if (!$fieldset) {
+                            $fieldset = new FormFieldset();
+                            $fieldset->setForm($form);
+                            $fieldset->setName($sub['value']);
+                            $fieldset->setFieldsetName(ucfirst(preg_replace("/[^a-zA-Z0-9]+/", "", $sub['value']) . 'Fieldset'));
+                            $this->getEntityManager()->persist($fieldset);
+                            $this->getEntityManager()->flush();
+                        }
+                        return $fieldset;
+                    }
+                }
             }
         }
 
@@ -582,6 +692,44 @@ class ODKParser extends AbstractPlugin {
         else
             return "\$this->add(array(\n\t'name' => '" . $formEl->getName()
             . "',\n\t'type' => 'Password',\n\t'options' => array(\n\t\t'label' => '" . $formEl->getLabel()
+            . "',\n\t),\n\t'attributes' => array(\n\t\t'required' => '" . $formEl->getRequired() . "',\n\t),\n));\n\n";
+    }
+
+    private function generateBarcodeField ($formEl) {
+
+        $name = $formEl->getName();
+        if ($formEl->getParentRepeat() != 0)
+            $name = $formEl->getName() . '[' . $formEl->getParentRepeat() . ']';
+
+        //todo check for barcode element
+        if ($formEl->getParentId() != 0)
+            return "\$this->add(array(\n\t'name' => '" . $name
+            . "',\n\t'type' => 'File',\n\t'options' => array(\n\t\t'label' => '" . $formEl->getLabel()
+            . "',\n\t),\n\t'attributes' => array(\n\t\t'required' => '" . $formEl->getRequired()
+            . "',\n\t\t'data-parent' => " . $formEl->getParentId()
+            . ",\n\t\t'data-groupLabel' => '" . $formEl->getGroupLabel() . "',\n\t),\n));\n\n";
+        else
+            return "\$this->add(array(\n\t'name' => '" . $formEl->getName()
+            . "',\n\t'type' => 'File',\n\t'options' => array(\n\t\t'label' => '" . $formEl->getLabel()
+            . "',\n\t),\n\t'attributes' => array(\n\t\t'required' => '" . $formEl->getRequired() . "',\n\t),\n));\n\n";
+    }
+
+    private function generateDecimalField ($formEl) {
+
+        $name = $formEl->getName();
+        if ($formEl->getParentRepeat() != 0)
+            $name = $formEl->getName() . '[' . $formEl->getParentRepeat() . ']';
+
+        //todo check for decimal element
+        if ($formEl->getParentId() != 0)
+            return "\$this->add(array(\n\t'name' => '" . $name
+            . "',\n\t'type' => 'File',\n\t'options' => array(\n\t\t'label' => '" . $formEl->getLabel()
+            . "',\n\t),\n\t'attributes' => array(\n\t\t'required' => '" . $formEl->getRequired()
+            . "',\n\t\t'data-parent' => " . $formEl->getParentId()
+            . ",\n\t\t'data-groupLabel' => '" . $formEl->getGroupLabel() . "',\n\t),\n));\n\n";
+        else
+            return "\$this->add(array(\n\t'name' => '" . $formEl->getName()
+            . "',\n\t'type' => 'File',\n\t'options' => array(\n\t\t'label' => '" . $formEl->getLabel()
             . "',\n\t),\n\t'attributes' => array(\n\t\t'required' => '" . $formEl->getRequired() . "',\n\t),\n));\n\n";
     }
 

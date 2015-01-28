@@ -32,7 +32,7 @@ class ChooseSurveyForm extends Form {
             ),
         ));
 
-        $mSurveys = $entityManager->getRepository('Administration\Entity\Survey')->findBy(array('active' => 1));
+        $mSurveys = $entityManager->getRepository('Administration\Entity\SurveyODK')->findBy(array('active' => 1));
 
         $surveys = array();
         foreach ($mSurveys as $survey) {
@@ -43,7 +43,7 @@ class ChooseSurveyForm extends Form {
             'name' => 'survey',
             'type' => 'Select',
             'attributes' => array(
-                'class' => 'formSelect customSelect_select -custom',
+                'class' => 'formSelect -custom',
                 'id' => 'chooseSurvey',
             ),
             'options' => array(

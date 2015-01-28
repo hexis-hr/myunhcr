@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * FormFieldset
+ * SurveyODK
  *
- * @ORM\Table(name="form_fieldset")
+ * @ORM\Table(name="survey_odk")
  * @ORM\Entity
  */
-class FormFieldset {
+class SurveyODK {
 
     /**
      * @ORM\Column(name="id", type="bigint", nullable=false)
@@ -27,42 +27,47 @@ class FormFieldset {
     protected $name = "";
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $active = 1;
+
+    /**
      * @ORM\Column(type="string")
      */
-    protected $fieldsetName = "";
+    protected $url = "";
 
     /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\Form")
-     * @ORM\JoinColumn(name="form", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\Country")
+     * @ORM\JoinColumn(name="country", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $form;
+    protected $country;
 
     /**
-     * @param mixed $form
+     * @param mixed $country
      */
-    public function setForm ($form) {
-        $this->form = $form;
+    public function setCountry ($country) {
+        $this->country = $country;
     }
 
     /**
      * @return mixed
      */
-    public function getFrom () {
-        return $this->form;
+    public function getCountry () {
+        return $this->country;
     }
 
     /**
-     * @param mixed $fieldsetName
+     * @param mixed $url
      */
-    public function setFieldsetName ($fieldsetName) {
-        $this->fieldsetName = $fieldsetName;
+    public function setUrl ($url) {
+        $this->url = $url;
     }
 
     /**
      * @return mixed
      */
-    public function getFieldsetName () {
-        return $this->fieldsetName;
+    public function getUrl () {
+        return $this->url;
     }
 
     /**
@@ -91,6 +96,20 @@ class FormFieldset {
      */
     public function getName () {
         return $this->name;
+    }
+
+    /**
+     * @param mixed $active
+     */
+    public function setActive ($active) {
+        $this->active = $active;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActive () {
+        return $this->active;
     }
 
 }

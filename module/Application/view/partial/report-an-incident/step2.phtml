@@ -1,0 +1,30 @@
+<h2 class='form_legend'><?php echo $this->translate('Where did this happen?'); ?></h2>
+
+<div class='form_item'>
+    <label class='form_label' for='report_country'><?php echo $this->translate('Country'); ?></label>
+
+    <div class='form_field customSelect'>
+        <select class='formSelect customSelect_select -custom' id='report_country'>
+            <option>(Autodetect)</option>
+        </select>
+        <a unselectable='on' class='customSelect_overlay'>(Autodetect)</a>
+    </div>
+</div>
+
+<div class='form_item'>
+    <label class='form_label' for='report_location'><?php echo $this->translate('Location'); ?></label>
+
+    <div class='form_field'>
+        <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='report_location'>
+    </div>
+</div>
+
+<div class='grid -compact -reverse'>
+    <div class='grid_column -small7'>
+        <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
+    </div>
+    <div class='grid_column -small5'>
+        <a class='button -fullWidth' href='<?php echo $this->url('reportAnIncident',
+            array('step' => $step - 1)); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+    </div>
+</div>

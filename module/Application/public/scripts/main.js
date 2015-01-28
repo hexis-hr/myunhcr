@@ -286,7 +286,7 @@ queue.jQuery(function(){
     Forms
   ------------------------------------------------------------------------------------*/
   $('.customSelect_select').on('change', function(event) {
-    $(this).next('.customSelect_overlay').html( $(this).val() );
+    $(this).next('.customSelect_overlay').html( $(this).find(':selected').text() );
   });
 
 

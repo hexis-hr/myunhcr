@@ -6,6 +6,7 @@ use Administration\Entity\SurveyResult;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
+use Application\Form\ReportIncidentForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
@@ -156,25 +157,25 @@ class IndexController extends AbstractActionController {
 
         $sessionContainer = new Container('locale');
         if ($request->isPost()) {
-        switch ($request->getPost("language")) {
-            case 'de_DE':
-                $userlocale = 'de_DE';
-                break;
-            case 'it_IT':
-                $userlocale = 'it_IT';
-                break;
-            case 'en_US':
-                $userlocale = 'en_US';
-                break;
-            case 'ar_JO':
-                $userlocale = 'ar_JO';
-                break;
+            switch ($request->getPost("language")) {
+                case 'de_DE':
+                    $userlocale = 'de_DE';
+                    break;
+                case 'it_IT':
+                    $userlocale = 'it_IT';
+                    break;
+                case 'en_US':
+                    $userlocale = 'en_US';
+                    break;
+                case 'ar_JO':
+                    $userlocale = 'ar_JO';
+                    break;
 
-            default :
-                $userlocale = 'en_US';
-        }
+                default :
+                    $userlocale = 'en_US';
+            }
 
-        $sessionContainer->offsetSet('userlocale', $userlocale);
+            $sessionContainer->offsetSet('userlocale', $userlocale);
             return $this->redirect()->toUrl('/menu-page.html');
         }
 
@@ -215,32 +216,36 @@ class IndexController extends AbstractActionController {
 
     public function reportAnIncidentAction()
     {
-        $this->layout()->setVariable('body_class', 'pg-reportIncident');
-        return new ViewModel();
-    }
+        $step = (int) $this->params()->fromRoute('step', 1);
 
-    public function reportAnIncident2Action()
-    {
-        $this->layout()->setVariable('body_class', 'pg-reportIncident -step2');
-        return new ViewModel();
-    }
+        $this->layout()->setVariable('body_class', 'pg-reportIncident -step' . $step);
 
-    public function reportAnIncident3Action()
-    {
-        $this->layout()->setVariable('body_class', 'pg-reportIncident -step3');
-        return new ViewModel();
-    }
+        $request = $this->getRequest();
+        $form = new ReportIncidentForm($this->getEntityManager(), $this->getServiceLocator());
 
-    public function reportAnIncident4Action()
-    {
-        $this->layout()->setVariable('body_class', 'pg-reportIncident -step4');
-        return new ViewModel();
-    }
+        //save form values in session
+        $container = new Container('incidentForm');
 
-    public function reportAnIncident5Action()
-    {
-        $this->layout()->setVariable('body_class', 'pg-reportIncident -step5');
-        return new ViewModel();
+        if ($request->isPost()) {
+
+            $step++;
+            $postValues = $request->getPost();
+
+            foreach ($postValues as $key => $value) {
+                $container->{$key} = $value;
+            }
+
+            if ($step >= 5) {
+                // get data from session, populate form, validate and create incident
+                $container->getManager()->getStorage()->clear('incidentForm');
+            }
+
+        }
+
+        return new ViewModel(array(
+            'step' => $step,
+            'form' => $form,
+        ));
     }
 
     public function takeASurveyAction()

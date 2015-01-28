@@ -12,6 +12,8 @@ class ReportIncidentForm extends Form {
 
         parent::__construct('reportIncident');
 
+        $this->em = $entityManager;
+
         $this->add(array(
             'name' => 'anonymous',
             'type' => 'Radio',
@@ -26,31 +28,44 @@ class ReportIncidentForm extends Form {
             ),
         ));
 
+        $incidentCategories = $entityManager->getRepository('Administration\Entity\IncidentCategory')->findAll();
+
+        $categories = array(
+            0 => 'Please select one',
+        );
+        foreach ($incidentCategories as $category) {
+            $categories[$category->getId()] = $category->getCategory();
+        }
+
         $this->add(array(
-            'name' => 'incidentCategory',
+            'name' => 'category',
             'type' => 'Select',
             'attributes' => array(
                 'class' => 'formSelect customSelect_select -custom',
-                'id' => 'incidentCategory',
+                'id' => 'category',
             ),
             'options' => array(
-                'value_options' => array(
-                    'Protection Incident' => 'Protection Incident',
-                ),
+                'value_options' => $categories,
             ),
         ));
 
+        $incidentTypes = $entityManager->getRepository('Administration\Entity\IncidentType')->findAll();
+
+        $types = array(
+            0 => 'Please select one',
+        );
+        foreach ($incidentTypes as $type) {
+            $types[$type->getId()] = $type->getType();
+        }
         $this->add(array(
-            'name' => 'protectionType',
+            'name' => 'type',
             'type' => 'Select',
             'attributes' => array(
                 'class' => 'formSelect customSelect_select -custom',
-                'id' => 'protectionType',
+                'id' => 'type',
             ),
             'options' => array(
-                'value_options' => array(
-                    'I don\'t know' => 'I don\'t know',
-                ),
+                'value_options' => $types,
             ),
         ));
 

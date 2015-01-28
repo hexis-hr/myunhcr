@@ -1,0 +1,51 @@
+<div class='form_item'>
+    <label class='form_label' for=''><?php echo $this->translate('Is this report Anonymous ?'); ?></label>
+
+    <div class='grid -collapse -clean'>
+        <div class='grid_column -small6 form_subitem'>
+            <div class='bigRadio'>
+                <input class='bigRadio_input' type='radio' name='anonymous' value='yes' id='anonymous-yes'>
+                <label class='bigRadio_label' for='anonymous-yes'><?php echo $this->translate('Yes'); ?></label>
+            </div>
+        </div>
+        <div class='grid_column -small6 form_subitem'>
+            <div class='bigRadio'>
+                <input class='bigRadio_input' type='radio' name='anonymous' value='no' id='anonymous-no'>
+                <label class='bigRadio_label' for='anonymous-no'><?php echo $this->translate('No'); ?></label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='form_item'>
+    <label class='form_label'
+           for='incidentCategory'><?php echo $this->translate('Category of the Incident:'); ?></label>
+
+    <div class='form_field customSelect'>
+        <?php echo $this->formRow($form->get('category')); ?>
+        <a unselectable='on'
+           class='customSelect_overlay'><?php echo $this->translate(array_values($form->get('category')
+                ->getValueOptions())[0]); ?></a>
+    </div>
+</div>
+
+<div class='form_item'>
+    <label class='form_label'
+           for='protectionType'><?php echo $this->translate('Which type of protection incident?'); ?></label>
+
+    <div class='form_field customSelect'>
+        <?php echo $this->formRow($form->get('type')); ?>
+        <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate(array_values($form->get('type')
+                ->getValueOptions())[0]); ?></a>
+    </div>
+</div>
+
+<div class='grid -compact -reverse'>
+    <div class='grid_column -small7'>
+        <input class='button -primary -fullWidth' type='submit' name='' value='<?php echo $this->translate('Next'); ?>'>
+    </div>
+    <div class='grid_column -small5'>
+        <a class='button -fullWidth' href='/menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel');
+            ?></a>
+    </div>
+</div>

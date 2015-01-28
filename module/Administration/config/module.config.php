@@ -407,6 +407,166 @@ return array(
                     ),
                 ),
             ),
+            'incident' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/incident',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Incident',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Incident',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'add' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addIncident',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'add',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'edit' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editIncident[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'edit',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'delete' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/delete[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'delete',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewIncidentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewIncidentCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'viewIncidentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addIncidentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addIncidentCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'addIncidentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editIncidentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editIncidentCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'editIncidentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteIncidentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteIncidentCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'deleteIncidentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewIncidentType' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewIncidentType',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'viewIncidentType',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addIncidentType' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addIncidentType',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'addIncidentType',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editIncidentType' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editIncidentType[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'editIncidentType',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteIncidentType' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteIncidentType[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'deleteIncidentType',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
             'news' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -693,6 +853,7 @@ return array(
             'Administration\Controller\Translation' => 'Administration\Controller\TranslationController',
             'Administration\Controller\Faq' => 'Administration\Controller\FaqController',
             'Administration\Controller\Survey' => 'Administration\Controller\SurveyController',
+            'Administration\Controller\Incident' => 'Administration\Controller\IncidentController',
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
             'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
             'Administration\Controller\Console' => 'Administration\Controller\ConsoleController',
@@ -788,6 +949,29 @@ return array(
                 'resource' => 'Administration',
                 'privilege' => 'Admin',
                 'class' => 'glyphicons notes_2',
+            ),
+            array(
+                'label' => 'Incidents',
+                'route' => 'incident',
+                'id' => 'incidents',
+                'class' => 'glyphicons comments',
+                'pages' => array(
+                    array(
+                        'label' => 'Incidents',
+                        'route' => 'incident',
+                        'class' => 'glyphicons comments',
+                    ),
+                    array(
+                        'label' => 'Incident category',
+                        'route' => 'incident/viewIncidentCategory',
+                        'class' => 'glyphicons show_big_thumbnails',
+                    ),
+                    array(
+                        'label' => 'Incidents type',
+                        'route' => 'incident/viewIncidentType',
+                        'class' => 'glyphicons show_big_thumbnails',
+                    ),
+                ),
             ),
             array(
                 'label' => 'News',

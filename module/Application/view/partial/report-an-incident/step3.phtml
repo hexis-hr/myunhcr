@@ -1,0 +1,18 @@
+<div class='form_item'>
+    <label class='form_label'
+           for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
+
+    <div class='form_field'>
+        <textarea class='formTextarea' id='feedbackMessage'></textarea>
+    </div>
+</div>
+
+<div class='grid -compact -reverse'>
+    <div class='grid_column -small7'>
+        <input class='button -primary -fullWidth' type='submit' name='' value='Next'>
+    </div>
+    <div class='grid_column -small5'>
+        <a class='button -fullWidth' href='<?php echo $this->url('reportAnIncident',
+            array('step' => $step - 1)); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="separator bottom"></div>
+
+<div class="heading-buttons">
+    <h3 class="glyphicons comments"> <?php echo $this->translate('Incident administration'); ?></h3>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url
+            ('incident/addIncidentCategory');?>">
+            <?php echo $this->translate('Add new Incident Category'); ?></a>
+    </div>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url
+            ('incident/addIncidentType');?>"><?php echo $this->translate('Add new Incident Type'); ?></a>
+    </div>
+
+    <div class="clearfix" style="clear: both;"></div>
+</div>
+
+<div class="separator bottom"></div>
+
+<div class="innerLR" data-checkActiveCountry>
+    <div class="widget widget-4">
+        <div class="widget-head">
+            <h4 class="heading"><?php echo $this->translate('Incident Types'); ?></h4>
+        </div>
+
+        <div class="clearfix" style="clear: both;"></div>
+
+        <?php if (count($this->data) > 0) { ?>
+            <div class="widget-body">
+                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
+                    <thead>
+                    <tr>
+                        <th><?php echo $this->translate('#'); ?></th>
+                        <th><?php echo $this->translate('Type'); ?></th>
+                        <th><?php echo $this->translate('Action'); ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($this->data as $data) { ?>
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
+                            <td><?php echo $data->getId(); ?></td>
+                            <td><?php echo $data->getType(); ?></td>
+                            <td>
+                                <a class="btn-action glyphicons pencil btn-success"
+                                   href="<?php echo $this->url('incident/editIncidentType',
+                                       array('id' => $data->getId())); ?>"></a>
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
+                                   data-href="<?php echo $this->url('incident/deleteIncidentType',
+                                       array('id' => $data->getId())); ?>"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php } else { ?>
+            <div class="widget-body center">
+            <span class="gritter-add-regular btn btn-inverse btn-block">
+                <?php echo $this->translate('Incident types not found. Feel free to add.'); ?></span>
+            </div>
+        <?php } ?>
+
+    </div>
+</div>
+
+<?php
+echo $this->paginationControl(
+    $this->data,
+    'sliding',
+    array('partial/paginator.phtml', 'Administration'),
+    array('route  ' => 'incident/viewIncidentType', 'routeParams' => array())
+);
+?>

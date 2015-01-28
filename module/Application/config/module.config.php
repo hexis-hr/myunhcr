@@ -68,6 +68,17 @@ return array(
                     ),
                 ),
             ),
+            'reportAnIncident' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/reportAnIncident[/:step]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'reportAnIncident',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

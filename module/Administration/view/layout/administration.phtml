@@ -146,6 +146,15 @@
         </div>
 
         <div id="content" style="min-height: 600px">
+            <?php if ($this->flashMessenger()->hasSuccessMessages()) { ?>
+              <div class="alert alert-success">
+                <?php
+                $messages = $this->flashMessenger()->getSuccessMessages();
+                foreach($messages as $message) {
+                  echo $this->translate($message);
+                } ?>
+              </div>
+            <?php } ?>
             <?php if ($this->flashMessenger()->hasMessages()) { ?>
                 <div class="alert alert-danger">
 

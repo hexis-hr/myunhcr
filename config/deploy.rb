@@ -42,6 +42,7 @@ namespace :deploy do
             execute :sudo, :chown, "-R www-data:www-data #{current_path}/module/Application/language/"
             execute :sudo, :chown, "-R www-data:www-data #{current_path}/data/uploads/"
             execute :sudo, :chown, "-R www-data:www-data #{current_path}/module/Administration/src/Administration/Form/"
+            execute :sudo, :chown, "chmod a+w #{current_path}/public/"
         end
     end
 

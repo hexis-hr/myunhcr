@@ -381,6 +381,30 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'xmlDeliver' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/xmlDeliver[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'xmlDeliver',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'transformXml' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/transformXml[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Survey',
+                                'action' => 'transformXml',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
                 ),
             ),
             'news' => array(

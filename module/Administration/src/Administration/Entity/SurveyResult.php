@@ -25,16 +25,6 @@ class SurveyResult {
     /**
      * @ORM\Column(type="string")
      */
-    protected $fieldName = "";
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $fieldValue = "";
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     protected $authId = "";
 
     /**
@@ -43,10 +33,10 @@ class SurveyResult {
     protected $birthDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\Form")
-     * @ORM\JoinColumn(name="form", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\SurveyODK")
+     * @ORM\JoinColumn(name="survey", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $form = "";
+    protected $survey = "";
 
     /**
      * @ORM\ManyToOne(targetEntity="Administration\Entity\Country")
@@ -69,45 +59,17 @@ class SurveyResult {
     }
 
     /**
-     * @param mixed $fieldName
+     * @param mixed $survey
      */
-    public function setFieldName ($fieldName) {
-        $this->fieldName = $fieldName;
+    public function setSurvey ($survey) {
+        $this->survey = $survey;
     }
 
     /**
      * @return mixed
      */
-    public function getFieldName () {
-        return $this->fieldName;
-    }
-
-    /**
-     * @param mixed $fieldValue
-     */
-    public function setFieldValue ($fieldValue) {
-        $this->fieldValue = $fieldValue;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFieldValue () {
-        return $this->fieldValue;
-    }
-
-    /**
-     * @param mixed $form
-     */
-    public function setForm ($form) {
-        $this->form = $form;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getForm () {
-        return $this->form;
+    public function getSurvey () {
+        return $this->survey;
     }
 
     /**

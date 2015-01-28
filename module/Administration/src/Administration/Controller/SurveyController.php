@@ -2,11 +2,9 @@
 
 namespace Administration\Controller;
 
-use Administration\Controller\Plugin\ODKParser;
-use Administration\Entity\File;
-use Administration\Form\FileForm;
+use Administration\Entity\SurveyODK;
+use Administration\Form\SurveyODKForm;
 use Administration\Provider\ProvidesEntityManager;
-//use ODKParser\ODKParser;
 
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -14,7 +12,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Paginator\Paginator;
 
-use Doctrine\ORM\EntityManager;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
@@ -25,9 +22,9 @@ class SurveyController extends AbstractActionController {
 
     public function indexAction () {
 
-        $mSurvey = $this->getEntityManager()->getRepository('Administration\Entity\Survey');
+        $mSurvey = $this->getEntityManager()->getRepository('Administration\Entity\SurveyODK');
 
-        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mSurvey->createQueryBuilder('Survey')));
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mSurvey->createQueryBuilder('SurveyODK')));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(10);
 
@@ -36,66 +33,30 @@ class SurveyController extends AbstractActionController {
         if ($page)
             $paginator->setCurrentPageNumber($page);
 
-        $addedSurveys = array();
-        $files = $this->getEntityManager()->getRepository('Administration\Entity\File')->findBy(array('type' => 'survey'));
-        foreach ($files as $f) {
-            $addedSurveys[$f->getId()] = $f->getName();
-        }
+        return new ViewModel(array('data' => $paginator));
 
-        return new ViewModel(array('data' => $paginator, 'surveys' => $addedSurveys));
     }
 
     public function addAction () {
 
-        $globalConfig = $this->serviceLocator->get('config');
         $request = $this->getRequest();
 
-        $odk = new ODKParser($this->getServiceLocator());
-        $file = new File();
-        $form = new FileForm();
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\File'));
-        $form->bind($file);
+        $surveyODK = new SurveyODK();
+        $form = new SurveyODKForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\SurveyODK'));
+        $form->bind($surveyODK);
 
         if ($request->isPost()) {
 
-            $post = array_merge_recursive(
-                $request->getPost()->toArray(),
-                $request->getFiles()->toArray()
-            );
-
-            $form->setData($post);
-
+            $form->setData($request->getPost());
             if ($form->isValid()) {
 
-                $surveyFile = $post['file'];
-                $target_file = $globalConfig['fileDir'] . basename($surveyFile['name']);
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $surveyODK->setCountry($country);
 
-                $ext = pathinfo($surveyFile['name'], PATHINFO_EXTENSION);
-
-                try {
-                    if ($ext == "xml") {
-                        if (move_uploaded_file($surveyFile['tmp_name'], $target_file)) {
-                            $this->flashMessenger()->addMessage('The file ' . basename($surveyFile['name']) . ' has been uploaded.');
-                        } else
-                            throw new \Exception('Sorry, there was an error uploading your file.');
-
-                        $file->setName($surveyFile['name']);
-                        $file->setType('survey');
-                        $file->setMimeType($surveyFile['type']);
-                        $file->setSize($surveyFile['size']);
-
-                        $this->getEntityManager()->persist($file);
-                        $this->getEntityManager()->flush();
-
-                        $odk->xmlToForm($target_file, $file->getId());
-
-                    } else
-                        throw new \Exception('File must be in .xml format');
-
-                } catch (\Exception $e) {
-                    $this->flashMessenger()->addMessage($e->getMessage());
-                    return $this->redirect()->toRoute('survey');
-                }
+                $this->getEntityManager()->persist($surveyODK);
+                $this->getEntityManager()->flush();
 
                 return $this->redirect()->toRoute('survey');
             }
@@ -135,7 +96,7 @@ class SurveyController extends AbstractActionController {
         if ($request->isXmlHttpRequest()) {
             $id = (int) $this->params()->fromRoute('id');
             $status = $this->params()->fromPost('status');
-            $survey = $this->getEntityManager()->getRepository('Administration\Entity\Survey')
+            $survey = $this->getEntityManager()->getRepository('Administration\Entity\SurveyODK')
                 ->findOneBy(array('id' => $id));
 
             if ($status == 'true')
@@ -198,6 +159,52 @@ class SurveyController extends AbstractActionController {
         }
 
         return $result;
+    }
+
+    public function xmlDeliverAction () {
+
+
+        $globalConfig = $this->serviceLocator->get('config');
+
+        $name = $this->params()->fromRoute('id');
+
+        $targetFile = $globalConfig['fileDir'] . basename($name);
+
+        $response = new Response();
+        $response->getHeaders()->addHeaders(array(
+            'Content-Description' => 'File Transfer',
+            'Content-Type' => 'application/xml',
+            'Content-Disposition' => 'attachment; filename="' . $name . '"',
+            'Pragma' => 'public',
+            'Access-Control-Allow-Origin' => '*',
+            'Content-Length' => filesize($targetFile),
+        ));
+
+        $response->setContent(file_get_contents($targetFile));
+
+        return $response;
+    }
+
+    public function transformXmlAction () {
+
+        $globalConfig = $this->serviceLocator->get('config');
+
+        $name = $this->params()->fromRoute('id');
+        $targetFile = $globalConfig['fileDir'] . basename($name);
+
+        $response = new Response();
+        $response->getHeaders()->addHeaders(array(
+            'Content-Description' => 'File Transfer',
+            'Content-Type' => 'application/xml',
+            'Content-Disposition' => 'attachment; filename="' . $name . '"',
+            'Pragma' => 'public',
+            'Access-Control-Allow-Origin' => '*',
+            'Content-Length' => filesize($targetFile),
+        ));
+
+        $response->setContent(file_get_contents($targetFile));
+
+        return $response;
     }
 
     private function rrmdir($dir) {

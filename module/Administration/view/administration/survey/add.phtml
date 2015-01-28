@@ -1,10 +1,35 @@
+
 <?php $form = $this->form; ?>
 <?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
 <?php $form->setAttribute('action', $this->url('survey/add'))->prepare(); ?>
 
 <div class="separator bottom"></div>
 <h3 class="glyphicons keynote"><?php echo $this->translate('Add ODK survey'); ?></h3>
-<div class="innerLR">
+<div class="innerLR" data-checkActiveCountry>
+
+    <div class="widget widget-2">
+        <div class="widget-head">
+            <h4 class="heading"><?php echo $this->translate('Important note'); ?></h4>
+        </div>
+
+        <div class="widget-body">
+            <span><?php echo $this->translate('On the first step click on the "Upload ODK survey". You will be redirected to
+             new window with ODK aggregate. nClick on the tab "Form Management" and add new form. It is allowed to
+             upload form in XML format. After upload is done, you can test your form by pressing "Enketo" webform
+             button. On this view you should copy you URL address of form and paste it into MyUNHCR application field
+             named "ODK survey URL". Also don\'t forget to enter your form name in "ODK survey name" field. Save the
+             form and you\'re finished with form upload.'); ?></span>
+            <div class="separator bottom"></div>
+            <span><?php echo $this->translate('Test credentials:: username: test, password: test'); ?></span>
+
+            <div class="separator bottom"></div>
+            <a class="btn btn-primary btn-icon glyphicons circle_plus" target="_blank" href="https://survetest.appspot.com/">
+                <?php echo $this->translate('Upload ODK survey'); ?></a>
+
+        </div>
+    </div>
+
+    <div class="separator bottom"></div>
 
     <?php echo $this->form()->openTag($form); ?>
 
@@ -12,8 +37,12 @@
         <div class="tab-content">
             <div class="row">
 
-                <label><?php echo $this->translate('ODK survey file'); ?></label>
-                <?php echo $this->formRow($form->get('file')); ?>
+                <label><?php echo $this->translate('ODK survey name'); ?></label>
+                <?php echo $this->formRow($form->get('name')); ?>
+                <div class="separator bottom"></div>
+
+                <label><?php echo $this->translate('ODK survey URL'); ?></label>
+                <?php echo $this->formRow($form->get('url')); ?>
                 <div class="separator bottom"></div>
 
             </div>
@@ -21,7 +50,7 @@
             <div class="separator"></div>
             <div class="form-group" style="padding-right: 15px;">
                 <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
-                    <?php echo $this->translate('Upload file'); ?></button>
+                    <?php echo $this->translate('Save'); ?></button>
             </div>
         </div>
     </div>

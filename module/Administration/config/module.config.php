@@ -803,6 +803,58 @@ return array(
                     ),
                 ),
             ),
+            'compliant' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/compliant',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Compliant',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Compliant',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'previewCompliant' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/previewCompliant[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Compliant',
+                                'action' => 'previewCompliant',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteCompliant' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteCompliant[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Compliant',
+                                'action' => 'deleteCompliant',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
         ),
     ),
 
@@ -856,6 +908,7 @@ return array(
             'Administration\Controller\Incident' => 'Administration\Controller\IncidentController',
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
             'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
+            'Administration\Controller\Compliant' => 'Administration\Controller\CompliantController',
             'Administration\Controller\Console' => 'Administration\Controller\ConsoleController',
         ),
         'factories' => array(
@@ -986,6 +1039,13 @@ return array(
                 'resource' => 'Administration',
                 'privilege' => 'Admin',
                 'class' => 'glyphicons settings',
+            ),
+            array(
+                'label' => 'Compliants',
+                'route' => 'compliant',
+                'resource' => 'Administration',
+                'privilege' => 'Admin',
+                'class' => 'glyphicons warning_sign',
             ),
         ),
     ),

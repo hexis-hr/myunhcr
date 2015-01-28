@@ -2,7 +2,9 @@
 
 namespace Application\Controller;
 
+use Administration\Entity\Compliant;
 use Administration\Entity\SurveyResult;
+use Administration\Form\CompliantForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
@@ -116,7 +118,37 @@ class IndexController extends AbstractActionController {
     public function fileAComplaintAction()
     {
         $this->layout()->setVariable('body_class', 'pg-fileComplaint');
-        return new ViewModel();
+
+        $request = $this->getRequest();
+        $compliant = new Compliant();
+        $form = new CompliantForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Compliant'));
+        $form->bind($compliant);
+
+        if ($request->isPost()) {
+
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+
+                //todo get country form frontend session
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+
+                $compliant->setContent($request->getPost('feedbackMessage'));
+                $compliant->setCountry($country);
+                $compliant->setDate(new \DateTime('now'));
+
+                $this->getEntityManager()->persist($compliant);
+                $this->getEntityManager()->flush();
+
+                return $this->redirect()->toUrl('/file-a-complaint-finish.html');
+            }
+        }
+
+        return new ViewModel(array(
+            'form' => $form,
+        ));
+
     }
 
     public function fileAComplaintFinishAction()

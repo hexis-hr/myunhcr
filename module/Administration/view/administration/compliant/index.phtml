@@ -1,0 +1,61 @@
+<div class="separator bottom"></div>
+    <div class="heading-buttons">
+        <h3 class="glyphicons notes_2"><?php echo $this->translate('Compliants'); ?></h3>
+        <div class="clearfix" style="clear: both;"></div>
+    </div>
+<div class="separator bottom"></div>
+
+<div class="innerLR">
+
+    <div class="widget widget-4">
+        <div class="widget-head"></div>
+        <div class="widget-body">
+            <?php if (count($this->data) > 0) { ?>
+                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
+                    <thead>
+                        <tr>
+                            <th><?php echo $this->translate('Content'); ?></th>
+                            <th><?php echo $this->translate('Date'); ?></th>
+                            <th><?php echo $this->translate('Country'); ?></th>
+                            <th><?php echo $this->translate('Action'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->data as $data) { ?>
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
+                            <td><a href="<?php echo $this->url('compliant/previewCompliant', array('id' => $data->getId())) ?>">
+                                    <?php echo $this->limitEcho($data->getContent()); ?></a></td>
+                            <td><?php echo date_format($data->getDate(), 'd.m.Y - H:i:s'); ?></td>
+                            <td><?php echo $data->getCountry()->getName(); ?></td>
+                            <td>
+                                <a class="btn-action glyphicons notes btn-success"
+                                   href="<?php echo $this->url('compliant/previewCompliant', array('id' => $data->getId())) ?>"></a>
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
+                                   data-href="<?php echo $this->url('compliant/deleteCompliant', array('id' => $data->getId())); ?>"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div class="widget-body center">
+                    <span class="gritter-add-regular btn btn-inverse btn-block">
+                        <?php echo $this->translate('No compliants found.'); ?>
+                    </span>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+</div>
+
+<div class="clearfix" style="clear: both;"></div>
+
+<?php
+echo $this->paginationControl(
+    $this->data,
+    'sliding',
+    array('partial/paginator.phtml', 'Administration'),
+    array('route  ' => 'compliant', 'routeParams' => array())
+);
+?>

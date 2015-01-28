@@ -79,6 +79,17 @@ return array(
                     ),
                 ),
             ),
+            'fileAComplaint' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/fileAComplaint',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'fileAComplaint',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

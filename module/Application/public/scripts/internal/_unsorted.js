@@ -28,34 +28,31 @@ queue.jQuery(function(){
   });
 
 
-
   /*------------------------------------------------------------------------------------
-    Finally, run everything
+    Something for country?
   ------------------------------------------------------------------------------------*/
-  // Run onLoad events
-  page.onLoad();
-
-  // Attach FastClick
-  FastClick.attach(document.body);
-
-
-  // Attach global events
-  $('html').on('click', function(event) {
-    exec(queue.globalClickEvents, 'globalClickEvents');
-  });
-
-  lightResize(function(){
-    exec(queue.globalResizeEvents, 'globalResizeEvents');
-  }, 300);
-
-  lightScroll(function(){
-    exec(queue.globalScrollEvents, 'globalScrollEvents');
-  }, 300);
-
-  $(window).on('beforeunload', function(event) {
-    exec(queue.globalUnloadEvents, 'globalUnloadEvents');
-  });
+  $(document).on('change', '.settings #country', function(){
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('data-ajax-href'),
+            data: {
+                countryId : $(this).val()
+            },
+            success: function(response){
+                $('#location').html('');
+                $('.location_overlay').html('');
+                if (response.locations) {
+                    $.each(response.locations, function (index, item) {
+                        $('#location').append($('<option>').attr('value', index).html(item));
+                    });
+                    $('.location_overlay').html($('#location option').first().html());
+                }
+            },
+            error: function() {
+                console.log('Error on country activation');
+            }
+        });
+    });
 
 
 });
-jQueryExec();

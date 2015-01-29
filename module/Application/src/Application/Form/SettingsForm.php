@@ -5,6 +5,7 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Form\FormInterface;
+use Zend\Session\Container;
 
 class SettingsForm extends Form {
 
@@ -18,6 +19,7 @@ class SettingsForm extends Form {
             'attributes' => array(
                 'class' => 'formSwitch_checkbox',
                 'id' => 'notifications',
+                'checked' => 'checked',
             ),
         ));
 
@@ -61,6 +63,22 @@ class SettingsForm extends Form {
             ),
         ));
 
+        $locations = array();
+        if ($countries) {
+            $container = new Container('userSettings');
+            $locationCountry = isset($container->country) ? $container->country : array_keys($countries)[0];
+
+            $allLocations = $entityManager->getRepository('Administration\Entity\CountryLocation')
+                ->findBy(array('country' => $locationCountry));
+
+            if ($allLocations) {
+                foreach ($allLocations as $location) {
+                    $locations[$location->getId()] = $location->getName();
+                }
+                asort($locations);
+            }
+        }
+
         $this->add(array(
             'name' => 'location',
             'type' => 'Select',
@@ -70,7 +88,7 @@ class SettingsForm extends Form {
                 'placeholder' => 'Choose country first'
             ),
             'options' => array(
-                'value_options' => array(),
+                'value_options' => $locations,
             ),
         ));
 
@@ -78,7 +96,7 @@ class SettingsForm extends Form {
 
         $categories = array();
         foreach ($allCategories as $category) {
-            $categories[$category->getId()] = $category->getName();
+            $categories[$category->getId()] = $category->getSettingsValue();
         }
         asort($categories);
 

@@ -71,7 +71,7 @@ return array(
             'reportAnIncident' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route'    => '/reportAnIncident[/:step]',
+                    'route'    => '/report-an-incident.html',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',

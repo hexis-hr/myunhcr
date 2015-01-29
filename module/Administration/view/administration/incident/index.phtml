@@ -68,7 +68,7 @@
                                                        data-toggle="collapse"
                                                        data-parent="#accordion"
                                                        href="#collapse<?php echo $data->getId(); ?>"
-                                                        ><i></i><?php echo $data->getTitle(); ?>
+                                                        ><i></i><?php echo $data->getType()->getType(); ?>
                                                     </a>
                                                     <a class="btn-action glyphicons pencil btn-success "
                                                        href="<?php echo $this->url('incident/edit', array('id' => $data->getId())); ?>"></a>
@@ -81,7 +81,7 @@
                                                      class="panel-collapse collapse"
                                                      style="height: 0px;"
                                                     >
-                                                    <div class="panel-body"><?php echo $data->getContent(); ?></div>
+                                                    <div class="panel-body"><?php echo $data->getDescription(); ?></div>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -102,7 +102,7 @@
                                                        data-toggle="collapse"
                                                        data-parent="#accordion"
                                                        href="#collapse<?php echo $data->getId(); ?>"
-                                                        ><i></i><?php echo $data->getTitle(); ?>
+                                                        ><i></i><?php echo $data->getType()->getType(); ?>
                                                     </a>
                                                     <a class="btn-action glyphicons pencil btn-success"
                                                        href="<?php echo $this->url('incident/edit', array('id' => $data->getId())); ?>"></a>
@@ -114,7 +114,7 @@
                                                 <div id="collapse<?php echo $data->getId(); ?>"
                                                      class="panel-collapse collapse" style="height: 0px;">
                                                     <div class="panel-body">
-                                                        <?php echo $data->getContent(); ?>
+                                                        <?php echo $data->getDescription(); ?>
                                                     </div>
                                                 </div>
                                             </div>

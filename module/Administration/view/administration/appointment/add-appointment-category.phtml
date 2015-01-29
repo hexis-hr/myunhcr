@@ -1,0 +1,33 @@
+
+<?php $form = $this->form; ?>
+<?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
+<?php $form->setAttribute('action', $this->url('appointment/addAppointmentCategory'))->prepare(); ?>
+
+<div class="separator bottom"></div>
+<h3 class="glyphicons user"><?php echo $this->translate('Add Appointment Category'); ?></h3>
+<div class="innerLR" data-checkActiveCountry>
+
+    <?php echo $this->form()->openTag($form); ?>
+
+        <div class="widget-body col-md-12">
+            <div class="tab-content">
+                <!-- Row -->
+                <div class="row">
+
+                    <label><?php echo $this->translate('Appointment category'); ?></label>
+                    <?php echo $this->formRow($form->get('category')); ?>
+                    <div class="separator bottom"></div>
+
+                </div>
+
+                <div class="separator"></div>
+                <div class="form-group" style="padding-right: 15px;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
+                        <?php echo $this->translate('Add category'); ?></button>
+                </div>
+            </div>
+        </div>
+
+    <?php echo $this->form()->closeTag($form); ?>
+
+</div>

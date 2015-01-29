@@ -27,29 +27,34 @@
     <div class='grid_column -medium9 -mediumPlus8'>
       
       <div class='preformat gap'>
-        <p>UNHCR encourages refugees to comment on the organization's performance in order to improve its services.</p>
-        <p><b>Important:</b> you can provide your feedback anonymously if you choose to do so.</p>
+        <p><?php echo $this->translate('UNHCR encourages refugees to comment on the organization\'s performance in order to improve its services.'); ?></p>
+        <p><?php echo $this->translate("<b>Important:</b> You can provide your feedback anonymously if you choose to do so."); ?></p>
       </div>
 
-      <form class='form' action='file-a-complaint-finish.html' method='post' ajaxForm>
-        
+        <?php $form = $this->form; ?>
+        <?php $form->setAttribute('class', 'form'); ?>
+        <?php $form->setAttribute('action', $this->url('fileAComplaint'))->prepare(); ?>
+
+        <?php echo $this->form()->openTag($form); ?>
+
         <div class='form_item'>
-          <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
-          <div class='form_field'>
-            <textarea class='formTextarea' id='feedbackMessage'></textarea>
-          </div>
+            <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
+            <div class='form_field'>
+                <?php echo $this->formRow($form->get('feedbackMessage')); ?>
+            </div>
         </div>
 
         <div class='grid -compact -reverse'>
-          <div class='grid_column -small7'>
-            <input class='button -primary -fullWidth' type='submit' name='' value='Send'>
-          </div>
-          <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='report-an-incident2.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
-          </div>
+            <div class='grid_column -small7'>
+                <input class='button -primary -fullWidth' type='submit' value="<?php echo $this->translate('Next'); ?>">
+            </div>
+            <div class='grid_column -small5'>
+                <a class='button -fullWidth' href='/menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
+            </div>
         </div>
 
-      </form>
+        <?php echo $this->form()->closeTag($form); ?>
+
     </div>
   </div>
 

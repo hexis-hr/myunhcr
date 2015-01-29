@@ -58,7 +58,7 @@ class FaqController extends AbstractActionController {
                 $this->getEntityManager()->persist($faq);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('New FAQ successfully added.');
+                $this->flashMessenger()->addSuccessMessage('New FAQ successfully added.');
                 return $this->redirect()->toRoute('faq');
             }
         }
@@ -91,7 +91,7 @@ class FaqController extends AbstractActionController {
                 $this->getEntityManager()->persist($faq);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('New FAQ successfully added.');
+                $this->flashMessenger()->addSuccessMessage('New FAQ successfully added.');
                 return $this->redirect()->toRoute('faq');
             }
         }
@@ -163,7 +163,7 @@ class FaqController extends AbstractActionController {
                 $this->getEntityManager()->persist($faqCategory);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('New FAQ category successfully added.');
+                $this->flashMessenger()->addSuccessMessage('New FAQ category successfully added.');
                 return $this->redirect()->toRoute('faq/viewFaqCategory');
             }
         }
@@ -193,7 +193,7 @@ class FaqController extends AbstractActionController {
                 $this->getEntityManager()->persist($faqCategory);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('FAQ category successfully edited.');
+                $this->flashMessenger()->addSuccessMessage('FAQ category successfully edited.');
                 return $this->redirect()->toRoute('faq/viewFaqCategory');
             }
         }

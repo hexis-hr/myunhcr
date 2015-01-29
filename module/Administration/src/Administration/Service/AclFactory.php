@@ -24,16 +24,18 @@ class AclFactory implements FactoryInterface {
         $acl->addRole(new Role('admin'), 'user');
 
         // controllers from administration for controller - action ACL handling
-        $acl->addResource(new Resource('Auth'));
         $acl->addResource(new Resource('Account'));
-        $acl->addResource(new Resource('Index'));
-        $acl->addResource(new Resource('Translation'));
+        $acl->addResource(new Resource('Administration'));
+        $acl->addResource(new Resource('Appointment'));
+        $acl->addResource(new Resource('Auth'));
+        $acl->addResource(new Resource('Compliant'));
         $acl->addResource(new Resource('Faq'));
-        $acl->addResource(new Resource('Survey'));
         $acl->addResource(new Resource('Incident'));
+        $acl->addResource(new Resource('Index'));
         $acl->addResource(new Resource('News'));
         $acl->addResource(new Resource('Settings'));
-        $acl->addResource(new Resource('Administration'));
+        $acl->addResource(new Resource('Survey'));
+        $acl->addResource(new Resource('Translation'));
 
         //enable work from console
         $acl->addResource(new Resource('Console'));

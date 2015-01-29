@@ -43,11 +43,12 @@ class ChooseSurveyForm extends Form {
             'name' => 'survey',
             'type' => 'Select',
             'attributes' => array(
-                'class' => 'formSelect -custom',
+                'class' => 'formSelect customSelect_select -custom',
                 'id' => 'chooseSurvey',
             ),
             'options' => array(
                 'value_options' => $surveys,
+                'empty_option' => 'Choose survey',
             ),
         ));
 

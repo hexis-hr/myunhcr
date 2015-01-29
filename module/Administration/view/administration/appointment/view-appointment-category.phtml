@@ -2,16 +2,11 @@
 <div class="separator bottom"></div>
 
 <div class="heading-buttons">
-    <h3 class="glyphicons comments"> <?php echo $this->translate('Frequently Asked Questions'); ?></h3>
+    <h3 class="glyphicons comments"> <?php echo $this->translate('Appointments'); ?></h3>
 
     <div class="buttons pull-right">
-        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('faq/addFaqCategory');?>">
-            <?php echo $this->translate('Add new FAQ Category'); ?></a>
-    </div>
-
-    <div class="buttons pull-right">
-        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('faq/add');?>">
-            <?php echo $this->translate('Add new FAQ'); ?></a>
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('appointment/addAppointmentCategory');?>">
+            <?php echo $this->translate('Add Appointment Category'); ?></a>
     </div>
 
     <div class="clearfix" style="clear: both;"></div>
@@ -22,11 +17,11 @@
 <div class="innerLR" data-checkActiveCountry>
     <div class="widget widget-4">
         <div class="widget-head">
-            <h4 class="heading"><?php echo $this->translate('FAQ Categories'); ?></h4>
+            <h4 class="heading"><?php echo $this->translate('Appointment Categories'); ?></h4>
         </div>
 
-        <h5><?php echo $this->translate('NOTE: There are some default FAQ Categories which are shown in frontend
-        and they are: Feedback, Information and MyUNHCR'); ?></h5>
+        <h5><?php echo $this->translate('NOTE: There should be added at least one Appointment Categorie which will be used
+         in frontend form for booking an appointment'); ?></h5>
         <div class="clearfix" style="clear: both;"></div>
 
         <?php if (count($this->data) > 0) { ?>
@@ -46,9 +41,11 @@
                             <td><?php echo $data->getCategory(); ?></td>
                             <td>
                                 <a class="btn-action glyphicons pencil btn-success"
-                                   href="<?php echo $this->url('faq/editFaqCategory', array('id' => $data->getId())); ?>"></a>
+                                   href="<?php echo $this->url('appointment/editAppointmentCategory',
+                                       array('id' => $data->getId())); ?>"></a>
                                 <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
-                                   data-href="<?php echo $this->url('faq/deleteFaqCategory', array('id' => $data->getId())); ?>"></a>
+                                   data-href="<?php echo $this->url('appointment/deleteAppointmentCategory',
+                                       array('id' => $data->getId())); ?>"></a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -58,7 +55,7 @@
         <?php } else { ?>
             <div class="widget-body center">
             <span class="gritter-add-regular btn btn-inverse btn-block">
-                <?php echo $this->translate('FAQ categories not found. Please upload new one.'); ?></span>
+                <?php echo $this->translate('Appointment categories not found. Please add new one.'); ?></span>
             </div>
         <?php } ?>
 
@@ -70,6 +67,6 @@ echo $this->paginationControl(
     $this->data,
     'sliding',
     array('partial/paginator.phtml', 'Administration'),
-    array('route  ' => 'faq/viewFaqCategory', 'routeParams' => array())
+    array('route  ' => 'appointment/viewAppointmentCategory', 'routeParams' => array())
 );
 ?>

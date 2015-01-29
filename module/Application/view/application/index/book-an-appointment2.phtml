@@ -25,22 +25,31 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8 -static'>
-      <form action='book-an-appointment3.html' class='booking form' ajaxForm>
+
+
+        <?php $form = $this->form; ?>
+        <?php $form->setAttribute('class', 'booking form'); ?>
+        <?php $form->setAttribute('action', $this->url('bookAnAppointment2', array(
+            'appointmentType' => $this->appointmentType,
+            'authentification' => $this->authentification,
+        )))->prepare(); ?>
+
+        <?php echo $this->form()->openTag($form); ?>
 
         <div class='form_item'>
-          <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment:");?></label>
-          <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
-          <div class='form_field'>
-            <input class='formInput' type='date' placeholder='Day/Month/Year' inputDate>
-          </div>
+            <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment:");?></label>
+            <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
+            <div class='form_field'>
+                <?php echo $this->formRow($this->form->get('appointmentDate')); ?>
+            </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment:");?></label>
-          <div class='form_item_help hide-for-js'>Example: 14:30</div>
-          <div class='form_field'>
-            <input class='formInput' type='time' placeholder='Hour:Minutes' inputTime>
-          </div>
+            <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment:");?></label>
+            <div class='form_item_help hide-for-js'>Example: 14:30</div>
+            <div class='form_field'>
+                <?php echo $this->formRow($this->form->get('appointmentTime')); ?>
+            </div>
         </div>
 
         <div class='grid -compact -reverse'>
@@ -48,11 +57,12 @@
             <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Book now'); ?>">
           </div>
           <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='book-an-appointment.html' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+            <a class='button -fullWidth' href='<?php echo $this->url('app', array('action' => 'menu-page')); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
           </div>
         </div>
 
-      </form>
+        <?php echo $this->form()->closeTag($form); ?>
+
     </div>
   </div>
 </section>

@@ -1,4 +1,8 @@
 <?php
+
+/** set default timezone */
+date_default_timezone_set('Europe/Zagreb');
+
 /**
  * The displayed execution time in the toolbar will be highly inaccurate
  * if we don't define REQUEST_MICROTIME in PHP < 5.4.0.

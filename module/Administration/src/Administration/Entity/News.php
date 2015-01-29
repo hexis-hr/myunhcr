@@ -154,7 +154,6 @@ class News {
         return $this->date;
     }
 
-
     /**
      * @param mixed $title
      */

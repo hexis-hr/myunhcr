@@ -26,7 +26,8 @@ class AppointmentController extends AbstractActionController {
 
     public function indexAction () {
 
-        $appointment = $this->getEntityManager()->getRepository('Administration\Entity\Appointment')->findAll();
+        $appointment = $this->getEntityManager()->getRepository('Administration\Entity\Appointment')
+            ->findBy(array(), array('date' => 'ASC'));
 
         $dql = 'Select appCat from Administration\Entity\Appointment app left join Administration\Entity\AppointmentCategory appCat
          with appCat.id = app.category group by app.category';

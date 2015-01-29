@@ -40,18 +40,7 @@ class IndexController extends AbstractActionController {
     {
         $this->layout()->setVariable('body_class', 'pg-bookAppoint');
 
-        $request = $this->getRequest();
         $form = new BookAnAppointmentForm($this->getEntityManager());
-
-        if ($request->isPost()) {
-
-            $appointmentType = $request->getPost('appointmentType');
-            $authentification = $request->getPost('authentification');
-            return $this->redirect()->toRoute('bookAnAppointment2', array(
-                'appointmentType' => $appointmentType,
-                'authentification' => $authentification
-            ));
-        }
 
         return new ViewModel(array(
             'form' => $form,
@@ -68,7 +57,7 @@ class IndexController extends AbstractActionController {
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Appointment'));
         $form->bind($appointment);
 
-        if ($request->isPost()) {
+        if ($request->isPost() && $this->params()->fromQuery('step') == 'done') {
 
             //todo get country form frontend session
             $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
@@ -86,13 +75,13 @@ class IndexController extends AbstractActionController {
             $this->getEntityManager()->persist($appointment);
             $this->getEntityManager()->flush();
 
-            return $this->redirect()->toUrl('/book-an-appointment3.html');
+            return $this->redirect()->toRoute('app', array('action' => 'book-an-appointment3'));
         }
 
         return new ViewModel(array(
             'form' => $form,
-            'appointmentType' => $this->params()->fromRoute('appointmentType'),
-            'authentification' => $this->params()->fromRoute('authentification'),
+            'appointmentType' => $this->params()->fromPost('appointmentType'),
+            'authentification' => $this->params()->fromPost('authentification'),
         ));
 
     }

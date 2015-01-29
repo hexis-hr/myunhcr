@@ -1,0 +1,3 @@
+queue.jQuery(function(){queue.pageLoadEvents.push(function(event){if($('[inputDate]')[0]||$('[inputTime]')[0]){if((app.userDevice==='Android'&&app.userDeviceVersion>4.3)||(app.userDevice==='iOS'&&app.userDeviceVersion>5)){}
+else{load('scripts/external/picker.js').thenRun(function(){console.log('GET: Picker.js loaded!');$('[inputDate], [inputTime]').attr('type','input');$('[inputDate]').pickadate({container:'body',format:'dd/mm/yyyy',disable:[[2015,0,14],[2015,0,15],[2015,0,16]]});$('[inputTime]').pickatime({container:'body',format:'HH:i',min:[8,00],max:[16,0]});});}
+$(document).on('click','.picker__button--close',function(){dlog('picker.close()');});}});queue.pageUnloadEvents.push(function(event){$('.picker').remove();});});

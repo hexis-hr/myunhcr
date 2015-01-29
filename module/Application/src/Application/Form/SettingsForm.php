@@ -5,7 +5,6 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Form\FormInterface;
-use Zend\Session\Container;
 
 class SettingsForm extends Form {
 
@@ -19,7 +18,6 @@ class SettingsForm extends Form {
             'attributes' => array(
                 'class' => 'formSwitch_checkbox',
                 'id' => 'notifications',
-                'checked' => 'checked',
             ),
         ));
 
@@ -63,27 +61,6 @@ class SettingsForm extends Form {
             ),
         ));
 
-        $locations = array();
-        if ($countries) {
-            $container = new Container('userSettings');
-            if (isset($container->id)) {
-                $settings = $entityManager->getRepository('Administration\Entity\UserSettings')
-                    ->findOneBy(array('guid' => $container->id));
-                $locationCountry = $settings->getCountry()->getId();
-            } else
-                $locationCountry = array_keys($countries)[0];
-
-            $allLocations = $entityManager->getRepository('Administration\Entity\CountryLocation')
-                ->findBy(array('country' => $locationCountry));
-
-            if ($allLocations) {
-                foreach ($allLocations as $location) {
-                    $locations[$location->getId()] = $location->getName();
-                }
-                asort($locations);
-            }
-        }
-
         $this->add(array(
             'name' => 'location',
             'type' => 'Select',
@@ -93,7 +70,7 @@ class SettingsForm extends Form {
                 'placeholder' => 'Choose country first'
             ),
             'options' => array(
-                'value_options' => $locations,
+                'value_options' => array(),
             ),
         ));
 
@@ -101,7 +78,7 @@ class SettingsForm extends Form {
 
         $categories = array();
         foreach ($allCategories as $category) {
-            $categories[$category->getId()] = $category->getSettingsValue();
+            $categories[$category->getId()] = $category->getName();
         }
         asort($categories);
 

@@ -112,17 +112,6 @@ return array(
                     ),
                 ),
             ),
-            'showCountryLocation' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route'    => '/showCountryLocation',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Index',
-                        'action'     => 'showCountryLocation',
-                    ),
-                ),
-            ),
         ),
     ),
     'service_manager' => array(

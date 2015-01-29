@@ -334,7 +334,7 @@ class SettingsController extends AbstractActionController {
         $countryLocation = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
             ->findOneBy(array('id' => $countryLocationId));
 
-        $form = new CountryLocationForm();
+        $form = new CountryLocation();
         $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\CountryLocation'));
 
         if ($request->isPost()) {

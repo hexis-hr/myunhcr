@@ -5,16 +5,13 @@ namespace Application\Controller;
 use Administration\Entity\Appointment;
 use Administration\Entity\Complaint;
 use Administration\Entity\SurveyResult;
-use Administration\Entity\UserSettings;
 use Application\Form\BookAnAppointmentForm;
 use Application\Form\ComplaintForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
 use Application\Form\ReportIncidentForm;
-use Application\Form\SettingsForm;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Zend\Paginator\Paginator;
@@ -62,11 +59,9 @@ class IndexController extends AbstractActionController {
 
         if ($request->isPost() && $this->params()->fromQuery('step') == 'done') {
 
-            $container = new Container('userSettings');
-            $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
-                ->findOneBy(array('guid' => $container->id));
+            //todo get country form frontend session
             $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
+                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
             $appointment->setCountry($country);
 
             $category = $this->getEntityManager()->getRepository('Administration\Entity\AppointmentCategory')
@@ -175,11 +170,9 @@ class IndexController extends AbstractActionController {
             $form->setData($request->getPost());
             if ($form->isValid()) {
 
-                $container = new Container('userSettings');
-                $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
-                    ->findOneBy(array('guid' => $container->id));
+                //todo get country form frontend session
                 $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                    ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
 
                 $complaint->setContent($request->getPost('feedbackMessage'));
                 $complaint->setCountry($country);
@@ -207,150 +200,7 @@ class IndexController extends AbstractActionController {
     public function settingsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-settings');
-
-        $container = new Container('userSettings');
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-
-            //save user settings
-            if (isset($container->id)) {
-                $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
-                    ->findOneBy(array('guid' => $container->id));
-            }
-            if (!$userSettings) {
-                $userSettings = new UserSettings();
-                $userSettings->setGuid(uniqid());
-                $container->id = $userSettings->getGuid();
-            }
-
-            $userSettings->setNotifications($request->getPost('notifications'));
-
-            $language = $this->getEntityManager()->getRepository('Administration\Entity\Translation')
-                ->findOneBy(array('id' => $request->getPost('language')));
-            $userSettings->setLanguage($language);
-            $languageFile = $this->getEntityManager()->getRepository('Administration\Entity\File')
-                ->findOneBy(array('id' => $language->getFile()->getId()));
-            $container->offsetSet('userlocale', substr($languageFile->getName(), 0, 5));
-
-            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                ->findOneBy(array('id' => $request->getPost('country')));
-            $userSettings->setCountry($country);
-
-            $location = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
-                ->findOneBy(array('id' => $request->getPost('location')));
-            $userSettings->setLocation($location);
-
-            $category = $this->getEntityManager()->getRepository('Administration\Entity\Settings')
-                ->findOneBy(array('id' => $request->getPost('category')));
-            $userSettings->setCategory($category);
-
-            $this->getEntityManager()->persist($userSettings);
-            $this->getEntityManager()->flush();
-
-            return $this->redirect()->toUrl('/menu-page.html');
-        }
-
-        $settingsForm = new SettingsForm($this->getEntityManager());
-
-        if (isset($container->id))
-            $settings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
-                ->findOneBy(array('guid' => $container->id));
-
-        if (isset ($settings) && !$settings->getNotifications()) {
-            $row = $settingsForm->get('notifications');
-            $row->setAttributes(array(
-                'checked' => null,
-            ));
-        }
-
-        $row = $settingsForm->get('language');
-        if (isset ($settings) && $settings->getLanguage()) {
-            $row->setAttributes(array(
-                'value' => $settings->getLanguage()->getId(),
-                'selected' => true,
-            ));
-            $overlayValues ['language'] = $row->getValueOptions()[$settings->getLanguage()->getId()];
-        } else {
-            $overlayValues ['language'] = isset(array_values($row->getValueOptions())[0]) ?
-                array_values($row->getValueOptions())[0] : '';
-        }
-
-        $row = $settingsForm->get('country');
-        $row->setAttribute('data-ajax-href', $this->url()->fromRoute('showCountryLocation'));
-        if (isset ($settings) && $settings->getCountry()) {
-            $row->setAttributes(array(
-                'value' => $settings->getCountry()->getId(),
-                'selected' => true,
-            ));
-            $overlayValues ['country'] = $row->getValueOptions()[$settings->getCountry()->getId()];
-        } else {
-            $overlayValues ['country'] = isset(array_values($row->getValueOptions())[0]) ?
-                array_values($row->getValueOptions())[0] : '';
-        }
-
-        $row = $settingsForm->get('location');
-        if (isset ($settings) && $settings->getLocation()) {
-            $row->setAttributes(array(
-                'value' => $settings->getLocation()->getId(),
-                'selected' => true,
-            ));
-            $overlayValues ['location'] = $row->getValueOptions()[$settings->getLocation()->getId()];
-        } else {
-            $overlayValues ['location'] = isset(array_values($row->getValueOptions())[0]) ?
-                array_values($row->getValueOptions())[0] : '';
-        }
-
-        $row = $settingsForm->get('category');
-        if (isset ($settings) && $settings->getCategory()) {
-            $row->setAttributes(array(
-                'value' => $settings->getCategory()->getId(),
-                'selected' => true,
-            ));
-            $overlayValues ['category'] = $row->getValueOptions()[$settings->getCategory()->getId()];
-        } else {
-            $overlayValues ['category'] = isset(array_values($row->getValueOptions())[0]) ?
-                array_values($row->getValueOptions())[0] : '';
-        }
-
-
-        return new ViewModel(array('form' => $settingsForm, 'overlayValues' => $overlayValues));
-    }
-    public function showCountryLocationAction ()
-    {
-        $request = $this->getRequest();
-
-        if ($request->isXmlHttpRequest()) {
-
-            $countryId = (int)$this->params()->fromPost('countryId');
-            $allLocations = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
-                ->findBy(array('country' => $countryId));
-
-            if ($allLocations) {
-                $locations = array();
-                foreach ($allLocations as $location) {
-                    $locations[$location->getId()] = $location->getName();
-                }
-                asort($locations);
-
-                $result = new JsonModel(array(
-                    'success' => true,
-                    'countryId' => $countryId,
-                    'locations' => $locations,
-                ));
-            } else {
-                $result = new JsonModel(array(
-                    'success' => true,
-                    'countryId' => $countryId,
-                ));
-            }
-
-        } else {
-            $result = new JsonModel(array(
-                'error' => true,
-            ));
-        }
-
-        return $result;
+        return new ViewModel();
     }
 
     public function listBySectorAction()
@@ -374,6 +224,32 @@ class IndexController extends AbstractActionController {
     public function menuPageAction()
     {
         $this->layout()->setVariable('body_class', 'pg-homepage');
+
+        $request = $this->getRequest();
+
+        $sessionContainer = new Container('locale');
+        if ($request->isPost()) {
+            switch ($request->getPost("language")) {
+                case 'de_DE':
+                    $userlocale = 'de_DE';
+                    break;
+                case 'it_IT':
+                    $userlocale = 'it_IT';
+                    break;
+                case 'en_US':
+                    $userlocale = 'en_US';
+                    break;
+                case 'ar_JO':
+                    $userlocale = 'ar_JO';
+                    break;
+
+                default :
+                    $userlocale = 'en_US';
+            }
+
+            $sessionContainer->offsetSet('userlocale', $userlocale);
+            return $this->redirect()->toUrl('/menu-page.html');
+        }
 
         return new ViewModel();
     }
@@ -464,11 +340,8 @@ class IndexController extends AbstractActionController {
             $surveyResults->setAuthId($authId);
             $surveyResults->setBirthDate($birthDate);
 
-            $container = new Container('userSettings');
-            $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
-                ->findOneBy(array('guid' => $container->id));
             $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
+                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
             $surveyResults->setCountry($country);
 
             $survey = $this->getEntityManager()->getRepository('Administration\Entity\SurveyODK')

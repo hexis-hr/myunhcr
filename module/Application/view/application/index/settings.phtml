@@ -22,73 +22,71 @@
       </div>
     </div>
   </div>
-
-    <!-- not an ajax form as we need to refresh the whole page after save, due to locale settings. -->
-    <?php $form = $this->form; ?>
-    <?php $form->setAttribute('class', 'settings form'); ?>
-    <?php echo $this->form()->openTag($form); ?>
-
+  
+  <!-- not an ajax form as we need to refresh the whole page after save, due to locale settings. -->
+  <form action='menu-page.html' class='settings form' method='post'>
     <div class='grid'>
-        <div class='grid_column -medium9 -mediumPlus8'>
+      <div class='grid_column -medium9 -mediumPlus8'>
 
-            <div class='form_item formSwitch'>
-                <label class='form_label formSwitch_wrapper' for='notifications'><?php echo $this->translate('Notifications:'); ?>
-                    <?php echo $this->formRow($form->get('notifications')); ?>
-                    <span class='formSwitch_custom'></span>
-                </label>
-            </div>
-
-            <div class='form_item'>
-                <label class='form_label' for='language'><?php echo $this->translate('Language:'); ?></label>
-                <div class='form_field customSelect'>
-                    <?php echo $this->formRow($form->get('language')); ?>
-                    <a unselectable='on' class='customSelect_overlay'>
-                        <?php echo $this->translate($overlayValues['language']); ?>
-                    </a>
-                </div>
-            </div>
-
-            <div class='form_item'>
-                <label class='form_label' for='country'><?php echo $this->translate('Country'); ?></label>
-                <div class='form_field customSelect'>
-                    <?php echo $this->formRow($form->get('country'));
-                    ?>
-                    <a unselectable='on' class='customSelect_overlay'>
-                        <?php echo $this->translate($overlayValues['country']); ?>
-                    </a>
-                </div>
-            </div>
-
-            <div class='form_item'>
-                <label class='form_label' for='location'><?php echo $this->translate('Location'); ?></label>
-                <div class='form_field customSelect'>
-                    <?php echo $this->formRow($form->get('location')); ?>
-                    <a unselectable='on' class='customSelect_overlay location_overlay'>
-                        <?php echo $this->translate($overlayValues['location']); ?>
-                    </a>
-                </div>
-            </div>
-
-            <div class='form_item'>
-                <label class='form_label' for='category'><?php echo $this->translate('Category'); ?></label>
-                <div class='form_field customSelect'>
-                    <?php echo $this->formRow($form->get('category')); ?>
-                    <a unselectable='on' class='customSelect_overlay'>
-                        <?php echo $this->translate($overlayValues['category']); ?>
-                    </a>
-                </div>
-            </div>
-
-            <div class='form_item'>
-                <div class='form_field'>
-                    <input class='button -primary -submit' type='submit' name='' value='Save'>
-                </div>
-            </div>
-
+        <div class='form_item formSwitch'>
+          <label class='form_label formSwitch_wrapper' for='notifications'><?php echo $this->translate('Notifications:'); ?>
+            <input class='formSwitch_checkbox' type='checkbox' id='notifications' checked>
+            <span class='formSwitch_custom'></span>
+          </label>
         </div>
-    </div>
 
-    <?php echo $this->form()->closeTag($form); ?>
+        <div class='form_item'>
+          <label class='form_label' for='language'><?php echo $this->translate('Language:'); ?></label>
+          <div class='form_field customSelect'>
+            <select class='formSelect customSelect_select -custom' id='language' name="language">
+              <option value="en_US"><?php echo $this->translate('English'); ?></option>
+              <option value="de_DE">Deutsch</option>
+              <option value="it_IT">Italiano</option>
+              <option value="ar_JO">العربية</option>
+            </select>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('English'); ?></a>
+          </div>
+        </div>
 
+        <div class='form_item'>
+          <label class='form_label' for='country'><?php echo $this->translate('Country'); ?></label>
+          <div class='form_field customSelect'>
+            <select class='formSelect customSelect_select -custom' id='country'>
+              <option>Jordan</option>
+            </select>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Jordan'); ?></a>
+          </div>
+        </div>
+
+        <div class='form_item'>
+          <label class='form_label' for='location'><?php echo $this->translate('Location'); ?></label>
+          <div class='form_field customSelect'>
+            <select class='formSelect customSelect_select -custom' id='location'>
+              <option>Ammon</option>
+            </select>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Ammon'); ?></a>
+          </div>
+        </div>
+
+        <div class='form_item'>
+          <label class='form_label' for='category'><?php echo $this->translate('Category'); ?></label>
+          <div class='form_field customSelect'>
+            <select class='formSelect customSelect_select -custom' id='category'>
+              <option>Refugee</option>
+              <option>Refugee</option>
+            </select>
+            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Refugees'); ?></a>
+          </div>
+        </div>
+
+        <div class='form_item'>
+          <div class='form_field'>
+            <input class='button -primary -submit' type='submit' name='' value='Save'>
+          </div>
+        </div>
+    
+      </div>
+    </div><!-- /grid -->
+  </form>
 
 </section>

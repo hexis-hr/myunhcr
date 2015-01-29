@@ -19,7 +19,7 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        $sessionContainer = new \Zend\Session\Container('userSettings');
+        $sessionContainer = new \Zend\Session\Container('locale');
 
         // test if session language exists
         if(!$sessionContainer->offsetExists('userlocale')){

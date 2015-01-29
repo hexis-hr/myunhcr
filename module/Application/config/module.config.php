@@ -90,6 +90,28 @@ return array(
                     ),
                 ),
             ),
+            'bookAnAppointment' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/bookAnAppointment',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'bookAnAppointment',
+                    ),
+                ),
+            ),
+            'bookAnAppointment2' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/bookAnAppointment2[/:appointmentType][/:authentification]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'bookAnAppointment2',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

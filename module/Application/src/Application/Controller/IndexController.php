@@ -2,9 +2,11 @@
 
 namespace Application\Controller;
 
+use Administration\Entity\Appointment;
 use Administration\Entity\Compliant;
 use Administration\Entity\SurveyResult;
-use Administration\Form\CompliantForm;
+use Application\Form\BookAnAppointmentForm;
+use Application\Form\CompliantForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
@@ -37,13 +39,62 @@ class IndexController extends AbstractActionController {
     public function bookAnAppointmentAction()
     {
         $this->layout()->setVariable('body_class', 'pg-bookAppoint');
-        return new ViewModel();
+
+        $request = $this->getRequest();
+        $form = new BookAnAppointmentForm($this->getEntityManager());
+
+        if ($request->isPost()) {
+
+            $appointmentType = $request->getPost('appointmentType');
+            $authentification = $request->getPost('authentification');
+            return $this->redirect()->toRoute('bookAnAppointment2', array(
+                'appointmentType' => $appointmentType,
+                'authentification' => $authentification
+            ));
+        }
+
+        return new ViewModel(array(
+            'form' => $form,
+        ));
     }
 
     public function bookAnAppointment2Action()
     {
         $this->layout()->setVariable('body_class', 'pg-bookAppoint -step2');
-        return new ViewModel();
+
+        $request = $this->getRequest();
+        $appointment = new Appointment();
+        $form = new BookAnAppointmentForm($this->getEntityManager());
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Appointment'));
+        $form->bind($appointment);
+
+        if ($request->isPost()) {
+
+            //todo get country form frontend session
+            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+            $appointment->setCountry($country);
+
+            $category = $this->getEntityManager()->getRepository('Administration\Entity\AppointmentCategory')
+                ->findOneBy(array('id' => $this->params()->fromRoute('appointmentType')));
+            $appointment->setCategory($category);
+
+            $appointment->setAuthId($this->params()->fromRoute('authentification'));
+            $appointment->setDate(new \DateTime($this->params()->fromPost('appointmentDate')));
+            $appointment->setTime(new \DateTime($this->params()->fromPost('appointmentTime')));
+
+            $this->getEntityManager()->persist($appointment);
+            $this->getEntityManager()->flush();
+
+            return $this->redirect()->toUrl('/book-an-appointment3.html');
+        }
+
+        return new ViewModel(array(
+            'form' => $form,
+            'appointmentType' => $this->params()->fromRoute('appointmentType'),
+            'authentification' => $this->params()->fromRoute('authentification'),
+        ));
+
     }
 
     public function bookAnAppointment3Action()

@@ -8,19 +8,26 @@ class BookAnAppointmentForm extends Form {
 
     public function __construct ($entityManager, $name = null) {
 
-        parent::__construct('bookAnAppointment');
+        parent::__construct('appointmentForm');
+
+        $appointmentCategories = $entityManager->getRepository('Administration\Entity\AppointmentCategory')->findAll();
+
+        $categories = array();
+        foreach ($appointmentCategories as $category)
+            $categories[$category->getId()] = $category->getCategory();
+
+        asort($categories);
 
         $this->add(array(
             'name' => 'appointmentType',
             'type' => 'Select',
             'attributes' => array(
-                'class' => 'formSelect customSelect_select -custom',
                 'id' => 'appointmentType',
+                'class' => 'formSelect customSelect_select -custom',
             ),
             'options' => array(
-                'value_options' => array(
-                    'Registration' => 'Registration',
-                ),
+                'value_options' => $categories,
+                'empty_option' => 'Choose type',
             ),
         ));
 

@@ -4,18 +4,18 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 
-class FileACompliantForm extends Form {
+class CompliantForm extends Form {
 
-    public function __construct ($entityManager, $name = null) {
+    public function __construct ($name = null) {
 
-        parent::__construct('fileACompliant');
+        parent::__construct('compliantForm');
 
         $this->add(array(
             'name' => 'feedbackMessage',
             'type' => 'Textarea',
             'attributes' => array(
-                'class' => 'formTextarea',
                 'id' => 'feedbackMessage',
+                'class' => 'formTextarea',
             ),
         ));
     }

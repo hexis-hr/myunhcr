@@ -855,6 +855,94 @@ return array(
                     ),
                 ),
             ),
+            'appointment' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/appointment',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Appointment',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Appointment',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'deleteAppointment' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteAppointment[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Appointment',
+                                'action' => 'deleteAppointment',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewAppointmentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewAppointmentCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Appointment',
+                                'action' => 'viewAppointmentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addAppointmentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addAppointmentCategory',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Appointment',
+                                'action' => 'addAppointmentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editAppointmentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editAppointmentCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Appointment',
+                                'action' => 'editAppointmentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteAppointmentCategory' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteAppointmentCategory[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Appointment',
+                                'action' => 'deleteAppointmentCategory',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
         ),
     ),
 
@@ -909,6 +997,7 @@ return array(
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
             'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
             'Administration\Controller\Compliant' => 'Administration\Controller\CompliantController',
+            'Administration\Controller\Appointment' => 'Administration\Controller\AppointmentController',
             'Administration\Controller\Console' => 'Administration\Controller\ConsoleController',
         ),
         'factories' => array(
@@ -1046,6 +1135,24 @@ return array(
                 'resource' => 'Administration',
                 'privilege' => 'Admin',
                 'class' => 'glyphicons warning_sign',
+            ),
+            array(
+                'label' => 'Appointment',
+                'route' => 'appointment',
+                'id' => 'appointment',
+                'class' => 'glyphicons group',
+                'pages' => array(
+                    array(
+                        'label' => 'Appointment',
+                        'route' => 'appointment',
+                        'class' => 'glyphicons group',
+                    ),
+                    array(
+                        'label' => 'Appointment category',
+                        'route' => 'appointment/viewAppointmentCategory',
+                        'class' => 'glyphicons parents',
+                    ),
+                ),
             ),
         ),
     ),

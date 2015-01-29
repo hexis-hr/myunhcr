@@ -26,6 +26,7 @@ class AclFactory implements FactoryInterface {
         // controllers from administration for controller - action ACL handling
         $acl->addResource(new Resource('Account'));
         $acl->addResource(new Resource('Administration'));
+        $acl->addResource(new Resource('Appointment'));
         $acl->addResource(new Resource('Auth'));
         $acl->addResource(new Resource('Compliant'));
         $acl->addResource(new Resource('Faq'));

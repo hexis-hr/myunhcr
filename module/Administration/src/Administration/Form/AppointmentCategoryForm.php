@@ -3,20 +3,23 @@
 namespace Administration\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Exception\InvalidArgumentException;
+use Zend\Form\FormInterface;
 
-class CountryLocationForm extends Form {
+class AppointmentCategoryForm extends Form {
 
     public function __construct ($name = null) {
 
-        parent::__construct('countryLocationForm');
+        parent::__construct('appointmentCategoryForm');
 
         $this->add(array(
-            'name' => 'locationName',
+            'name' => 'category',
             'type' => 'Text',
             'attributes' => array(
-                'id' => 'locationName',
                 'class' => 'col-md-12 form-control',
             ),
         ));
+
     }
+
 }

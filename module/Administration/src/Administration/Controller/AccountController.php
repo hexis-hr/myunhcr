@@ -57,7 +57,7 @@ class AccountController extends AbstractActionController {
                 array('email' => $form->get('email')->getValue()))
             ) {
 
-                $this->flashMessenger()->addMessage('Email address you entered is already in use. Please enter new one.');
+                $this->flashMessenger()->addErrorMessage('Email address you entered is already in use. Please enter new one.');
 
                 return $this->redirect()->toRoute('account/add');
 
@@ -66,7 +66,7 @@ class AccountController extends AbstractActionController {
                 $this->getEntityManager()->persist($user);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('New user successfully added.');
+                $this->flashMessenger()->addSuccessMessage('New user successfully added.');
 
                 return $this->redirect()->toRoute('account');
             }
@@ -177,7 +177,7 @@ class AccountController extends AbstractActionController {
                 $this->getEntityManager()->persist($user);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage($translator('Your profile data successfully changes.'));
+                $this->flashMessenger()->addSuccessMessage($translator('Your profile data successfully changes.'));
 
                 $this->redirect()->toRoute('account/profile');
             }

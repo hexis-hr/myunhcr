@@ -25,35 +25,40 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='book-an-appointment2.html' class='booking form' ajaxForm>
+
+        <?php $form = $this->form; ?>
+        <?php $form->setAttribute('class', 'booking form'); ?>
+        <?php $form->setAttribute('action', $this->url('bookAnAppointment'))->prepare(); ?>
+
+        <?php echo $this->form()->openTag($form); ?>
 
         <div class='form_item'>
-          <label class='form_label' for='appointmentType'><?php echo $this->translate('What would you like to do at UNHCR ?'); ?></label>
-          <div class='form_field customSelect'>
-            <select class='formSelect customSelect_select -custom' id='appointmentType'>
-              <option><?php echo $this->translate('Registration'); ?></option>
-            </select>
-            <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate('Registration'); ?></a>
-          </div>
+            <label class='form_label' for='appointmentType'><?php echo $this->translate('What would you like to do at UNHCR ?'); ?></label>
+            <div class='form_field customSelect'>
+                <?php echo $this->formRow($this->form->get('appointmentType')); ?>
+                <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate($form->get('appointmentType')
+                        ->getEmptyOption()); ?></a>
+            </div>
         </div>
 
         <div class='form_item'>
-          <label class='form_label' for='authentication'><?php echo $this->translate("Please enter your identification number:")?> (<?php echo $this->translate("optional")?>)</label>
-          <div class='form_field'>
-            <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
-          </div>
+            <label class='form_label' for='authentication'><?php echo $this->translate("Please enter your identification number:")?> (<?php echo $this->translate("optional")?>)</label>
+            <div class='form_field'>
+                <?php echo $this->formRow($this->form->get('authentification')); ?>
+            </div>
         </div>
 
         <div class='grid -compact -reverse'>
-          <div class='grid_column -small7'>
-            <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Next'); ?>">
-          </div>
-          <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
-          </div>
+            <div class='grid_column -small7'>
+                <input class='button -primary -fullWidth' type='submit' value="<?php echo $this->translate('Next'); ?>">
+            </div>
+            <div class='grid_column -small5'>
+                <a class='button -fullWidth' href='menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
+            </div>
         </div>
 
-      </form>
+        <?php echo $this->form()->closeTag($form); ?>
+
     </div>
   </div>
 </section>

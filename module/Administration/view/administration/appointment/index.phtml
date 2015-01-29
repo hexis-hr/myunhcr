@@ -1,0 +1,113 @@
+<div class="separator bottom"></div>
+
+<div class="heading-buttons">
+    <h3 class="glyphicons group"> <?php echo $this->translate('Appointments'); ?></h3>
+
+    <div class="buttons pull-right">
+        <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('appointment/addAppointmentCategory');?>">
+            <?php echo $this->translate('Add Appointment Category'); ?></a>
+    </div>
+
+    <div class="clearfix" style="clear: both;"></div>
+</div>
+
+<div class="separator bottom"></div>
+
+<div class="innerLR" data-checkActiveCountry>
+
+    <?php if (count($this->data) > 0) { ?>
+        <div class="widget widget-tabs widget-tabs-double-2">
+
+            <!-- Widget heading -->
+            <div class="widget-head">
+                <ul>
+                    <?php $active = true; ?>
+                    <?php foreach ($this->categories as $category) { ?>
+                        <?php if ($active) { ?>
+                            <li id="cat_<?php echo $category->getId(); ?>" class="active">
+                                <a class="glyphicons conversation" href="#tab_<?php echo $category->getId(); ?>" data-toggle="tab">
+                                    <i></i><span><?php echo $category->getCategory(); ?></span>
+                                </a>
+                            </li>
+                            <?php $active = false; ?>
+                        <?php } else { ?>
+                            <li id="cat_<?php echo $category->getId(); ?>">
+                                <a class="glyphicons conversation" href="#tab_<?php echo $category->getId(); ?>" data-toggle="tab">
+                                    <i></i><span><?php echo $category->getCategory(); ?></span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
+                </ul>
+            </div>
+            <!-- // Widget heading END -->
+
+            <div class="widget-body">
+                <div class="tab-content">
+
+                    <?php $active = true; ?>
+                    <?php foreach ($this->categories as $category) { ?>
+                        <?php if ($active) { ?>
+                            <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane active">
+                                <div class="panel-group">
+                                    <?php foreach ($this->data as $data) { ?>
+                                        <?php if ($data->getCategory() == $category) { ?>
+                                            <div class="well margin-none col-md-12" data-row="row_<?php echo $data->getId(); ?>">
+                                                <address class="margin-none">
+                                                    <strong><?php echo date_format($data->getDate(), 'd.m.Y'); ?></strong>
+                                                    <?php echo $this->translate('at'); ?>
+                                                    <strong><?php echo date_format($data->getTime(), 'H:i'); ?></strong><br>
+                                                    <abbr title="Work email"><?php echo $this->translate('Auth ID'); ?>:</abbr>
+                                                    <?php echo $data->getAuthId(); ?><br/>
+                                                    <abbr title="Work Phone"><?php echo $this->translate('From'); ?>:</abbr>
+                                                    <?php echo $data->getCountry()->getName(); ?><br/>
+                                                    <a class="btn-action glyphicons remove_2 btn-danger pull-right" href="#" data-delete
+                                                       style="margin-top: -50px"
+                                                       data-href="<?php echo $this->url('appointment/deleteAppointment',
+                                                           array('id' => $data->getId())); ?>"></a>
+                                                </address>
+                                            </div>
+                                             <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <?php $active = false; ?>
+                        <?php } else { ?>
+                            <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane"
+                                 data-row="row_<?php echo $category->getId(); ?>">
+                                <div class="panel-group" id="accordion">
+                                    <?php foreach ($this->data as $data) { ?>
+                                        <?php if ($data->getCategory() == $category) { ?>
+                                            <div class="well margin-none col-md-12" data-row="row_<?php echo $data->getId(); ?>">
+                                                <address class="margin-none">
+                                                    <strong><?php echo date_format($data->getDate(), 'd.m.Y'); ?></strong>
+                                                    <?php echo $this->translate('at'); ?>
+                                                    <strong><?php echo date_format($data->getTime(), 'H:i'); ?></strong><br>
+                                                    <abbr title="Work email"><?php echo $this->translate('Auth ID'); ?>:</abbr>
+                                                    <?php echo $data->getAuthId(); ?><br/>
+                                                    <abbr title="Work Phone"><?php echo $this->translate('From'); ?>:</abbr>
+                                                    <?php echo $data->getCountry()->getName(); ?><br/>
+                                                    <a class="btn-action glyphicons remove_2 btn-danger pull-right" href="#" data-delete
+                                                       style="margin-top: -50px"
+                                                       data-href="<?php echo $this->url('appointment/deleteAppointment',
+                                                           array('id' => $data->getId())); ?>"></a>
+                                                </address>
+                                            </div>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+
+                </div>
+            </div>
+        </div>
+    <?php } else { ?>
+        <div class="widget-body center">
+            <span class="gritter-add-regular btn btn-inverse btn-block">
+                <?php echo $this->translate('No booked appointments found. Add some appointments categories for frontent.'); ?></span>
+        </div>
+    <?php } ?>
+
+</div>

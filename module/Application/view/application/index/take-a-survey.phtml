@@ -92,6 +92,8 @@
                 <label class='form_label' for='chooseSurvey'><?php echo $this->translate('Choose your survey:'); ?></label>
                 <div class='form_field customSelect'>
                     <?php echo $this->formRow($form->get('survey')); ?>
+                    <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate($form->get('survey')
+                            ->getEmptyOption()); ?></a>
                 </div>
             </div>
 

@@ -33,6 +33,7 @@
 
         <?php $form = $this->form; ?>
         <?php $form->setAttribute('class', 'form'); ?>
+        <?php $form->setAttribute('ajaxForm', ''); ?>
         <?php $form->setAttribute('action', $this->url('fileAComplaint'))->prepare(); ?>
 
         <?php echo $this->form()->openTag($form); ?>

@@ -28,40 +28,38 @@
 
 
         <?php $form = $this->form; ?>
-        <?php $form->setAttribute('class', 'booking form'); ?>
-        <?php $form->setAttribute('action', $this->url('bookAnAppointment2', array(
+
+        <form action="<?php echo $this->url('bookAnAppointment2', array(
             'appointmentType' => $this->appointmentType,
-            'authentification' => $this->authentification,
-        )))->prepare(); ?>
+            'authentification' => $this->authentification), array('query' => array('step' => 'done'))); ?>"
+              method="POST" name="appointmentForm" class="booking form" id="appointmentForm" ajaxForm>
 
-        <?php echo $this->form()->openTag($form); ?>
-
-        <div class='form_item'>
-            <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment:");?></label>
-            <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
-            <div class='form_field'>
-                <?php echo $this->formRow($this->form->get('appointmentDate')); ?>
+            <div class='form_item'>
+                <label class='form_label' for='date'><?php echo $this->translate("Please enter Date for Appointment:");?></label>
+                <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
+                <div class='form_field'>
+                    <?php echo $this->formRow($this->form->get('appointmentDate')); ?>
+                </div>
             </div>
-        </div>
 
-        <div class='form_item'>
-            <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment:");?></label>
-            <div class='form_item_help hide-for-js'>Example: 14:30</div>
-            <div class='form_field'>
-                <?php echo $this->formRow($this->form->get('appointmentTime')); ?>
+            <div class='form_item'>
+                <label class='form_label' for='time'><?php echo $this->translate("Please enter Time for Appointment:");?></label>
+                <div class='form_item_help hide-for-js'>Example: 14:30</div>
+                <div class='form_field'>
+                    <?php echo $this->formRow($this->form->get('appointmentTime')); ?>
+                </div>
             </div>
-        </div>
 
-        <div class='grid -compact -reverse'>
-          <div class='grid_column -small7'>
-            <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Book now'); ?>">
-          </div>
-          <div class='grid_column -small5'>
-            <a class='button -fullWidth' href='<?php echo $this->url('app', array('action' => 'menu-page')); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
-          </div>
-        </div>
+            <div class='grid -compact -reverse'>
+              <div class='grid_column -small7'>
+                <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Book now'); ?>">
+              </div>
+              <div class='grid_column -small5'>
+                <a class='button -fullWidth' href='<?php echo $this->url('app', array('action' => 'menu-page')); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
+              </div>
+            </div>
 
-        <?php echo $this->form()->closeTag($form); ?>
+        </form>
 
     </div>
   </div>

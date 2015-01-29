@@ -84,6 +84,7 @@
 
         <?php $form = $this->form; ?>
         <?php $form->setAttribute('class', 'survey form'); ?>
+        <?php $form->setAttribute('ajaxForm', ''); ?>
         <?php $form->setAttribute('action', $this->url('surveyQuestions',
             array('survey' => $this->surveyId, 'date' => $this->birthDate, 'authentification' => $this->authId)))->prepare(); ?>
 

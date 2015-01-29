@@ -16,15 +16,15 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 
-class CompliantController extends AbstractActionController {
+class ComplaintController extends AbstractActionController {
 
     use ProvidesEntityManager;
 
     public function indexAction () {
 
-        $mCompliant = $this->getEntityManager()->getRepository('Administration\Entity\Compliant');
+        $mComplaint = $this->getEntityManager()->getRepository('Administration\Entity\Complaint');
 
-        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mCompliant->createQueryBuilder('Compliant')));
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mComplaint->createQueryBuilder('Complaint')));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(20);
 
@@ -38,21 +38,21 @@ class CompliantController extends AbstractActionController {
         ));
     }
 
-    public function previewCompliantAction () {
+    public function previewComplaintAction () {
 
         $request = $this->getRequest();
 
         $id = (int)$this->params()->fromRoute('id');
 
-        $compliant = $this->getEntityManager()->getRepository('Administration\Entity\Compliant')
+        $complaint = $this->getEntityManager()->getRepository('Administration\Entity\Complaint')
             ->findOneBy(array('id' => $id));
 
         return new ViewModel(array(
-            'compliant' => $compliant,
+            'complaint' => $complaint,
         ));
     }
 
-    public function deleteAction () {
+    public function deleteComplaintAction () {
 
         $request = $this->getRequest();
 
@@ -60,10 +60,10 @@ class CompliantController extends AbstractActionController {
 
             $id = (int)$this->params()->fromRoute('id');
 
-            $compliant = $this->getEntityManager()->getRepository('Administration\Entity\Compliant')
+            $complaint = $this->getEntityManager()->getRepository('Administration\Entity\Complaint')
                 ->findOneBy(array('id' => $id));
 
-            $this->getEntityManager()->remove($compliant);
+            $this->getEntityManager()->remove($complaint);
             $this->getEntityManager()->flush();
 
             $result = new JsonModel(array(

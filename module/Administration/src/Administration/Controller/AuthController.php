@@ -90,7 +90,7 @@ class AuthController extends AbstractActionController {
                 $result = $this->getAuthService()->authenticate();
                 foreach ($result->getMessages() as $message) {
                     //save message temporary into flashmessenger
-                    $this->flashmessenger()->addMessage($message);
+                    $this->flashmessenger()->addInfoMessage($message);
                 }
 
                 if ($result->isValid()) {

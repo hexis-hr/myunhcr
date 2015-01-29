@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Compliant
+ * Complaint
  *
- * @ORM\Table(name="compliant")
+ * @ORM\Table(name="complaint")
  * @ORM\Entity
  */
-class Compliant {
+class Complaint {
 
     /**
      * @ORM\Column(name="id", type="bigint", nullable=false)

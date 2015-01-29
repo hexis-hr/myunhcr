@@ -3,10 +3,10 @@
 namespace Application\Controller;
 
 use Administration\Entity\Appointment;
-use Administration\Entity\Compliant;
+use Administration\Entity\Complaint;
 use Administration\Entity\SurveyResult;
 use Application\Form\BookAnAppointmentForm;
-use Application\Form\CompliantForm;
+use Application\Form\ComplaintForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
@@ -171,10 +171,10 @@ class IndexController extends AbstractActionController {
         $this->layout()->setVariable('body_class', 'pg-fileComplaint');
 
         $request = $this->getRequest();
-        $compliant = new Compliant();
-        $form = new CompliantForm();
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Compliant'));
-        $form->bind($compliant);
+        $complaint = new Complaint();
+        $form = new ComplaintForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Complaint'));
+        $form->bind($complaint);
 
         if ($request->isPost()) {
 
@@ -185,11 +185,11 @@ class IndexController extends AbstractActionController {
                 $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
                     ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
 
-                $compliant->setContent($request->getPost('feedbackMessage'));
-                $compliant->setCountry($country);
-                $compliant->setDate(new \DateTime('now'));
+                $complaint->setContent($request->getPost('feedbackMessage'));
+                $complaint->setCountry($country);
+                $complaint->setDate(new \DateTime('now'));
 
-                $this->getEntityManager()->persist($compliant);
+                $this->getEntityManager()->persist($complaint);
                 $this->getEntityManager()->flush();
 
                 return $this->redirect()->toUrl('/file-a-complaint-finish.html');

@@ -4,11 +4,11 @@ namespace Application\Form;
 
 use Zend\Form\Form;
 
-class CompliantForm extends Form {
+class ComplaintForm extends Form {
 
     public function __construct ($name = null) {
 
-        parent::__construct('compliantForm');
+        parent::__construct('complaintForm');
 
         $this->add(array(
             'name' => 'feedbackMessage',

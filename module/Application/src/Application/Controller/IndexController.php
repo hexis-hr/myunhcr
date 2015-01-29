@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Administration\Entity\Appointment;
 use Administration\Entity\Complaint;
 use Administration\Entity\SurveyResult;
+use Administration\Entity\UserSettings;
 use Application\Form\BookAnAppointmentForm;
 use Application\Form\ComplaintForm;
 use Administration\Provider\ProvidesEntityManager;
@@ -206,70 +207,105 @@ class IndexController extends AbstractActionController {
         $container = new Container('userSettings');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            //save user settings in session
-            $container->notifications = $request->getPost('notifications');
-            $container->language = $request->getPost('language');
-            $container->country = $request->getPost('country');
-            $container->location = $request->getPost('location');
-            $container->category = $request->getPost('category');
+
+            //save user settings
+            if (isset($container->id)) {
+                $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
+                    ->findOneBy(array('guid' => $container->id));
+            }
+            if (!$userSettings) {
+                $userSettings = new UserSettings();
+                $userSettings->setGuid(uniqid());
+                $container->id = $userSettings->getGuid();
+            }
+
+            $userSettings->setNotifications($request->getPost('notifications'));
+
+            $language = $this->getEntityManager()->getRepository('Administration\Entity\Translation')
+                ->findOneBy(array('id' => $request->getPost('language')));
+            $userSettings->setLanguage($language);
+            $languageFile = $this->getEntityManager()->getRepository('Administration\Entity\File')
+                ->findOneBy(array('id' => $language->getFile()->getId()));
+            $container->offsetSet('userlocale', substr($languageFile->getName(), 0, 5));
+
+            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                ->findOneBy(array('id' => $request->getPost('country')));
+            $userSettings->setCountry($country);
+
+            $location = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
+                ->findOneBy(array('id' => $request->getPost('location')));
+            $userSettings->setLocation($location);
+
+            $category = $this->getEntityManager()->getRepository('Administration\Entity\Settings')
+                ->findOneBy(array('id' => $request->getPost('category')));
+            $userSettings->setCategory($category);
+
+            $this->getEntityManager()->persist($userSettings);
+            $this->getEntityManager()->flush();
 
             return $this->redirect()->toUrl('/menu-page.html');
         }
 
         $settingsForm = new SettingsForm($this->getEntityManager());
 
-        if (isset($container->notifications)) {
-            if (!$container->notifications) {
-                $row = $settingsForm->get('notifications');
-                $row->setAttributes(array(
-                    'checked' => null,
-                ));
-            }
+        if (isset($container->id))
+            $settings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
+                ->findOneBy(array('guid' => $container->id));
+
+        if (isset ($settings) && !$settings->getNotifications()) {
+            $row = $settingsForm->get('notifications');
+            $row->setAttributes(array(
+                'checked' => null,
+            ));
         }
 
         $row = $settingsForm->get('language');
-        if (isset($container->language)) {
+        if (isset ($settings) && $settings->getLanguage()) {
             $row->setAttributes(array(
-                'value' => $container->language,
+                'value' => $settings->getLanguage()->getId(),
                 'selected' => true,
             ));
-            $overlayValues ['language'] = $row->getValueOptions()[$container->language];
+            $overlayValues ['language'] = $row->getValueOptions()[$settings->getLanguage()->getId()];
         } else {
-            $overlayValues ['language'] = array_values($row->getValueOptions())[0];
+            $overlayValues ['language'] = isset(array_values($row->getValueOptions())[0]) ?
+                array_values($row->getValueOptions())[0] : '';
         }
 
         $row = $settingsForm->get('country');
         $row->setAttribute('data-ajax-href', $this->url()->fromRoute('showCountryLocation'));
-        if (isset($container->country)) {
+        if (isset ($settings) && $settings->getCountry()) {
             $row->setAttributes(array(
-                'value' => $container->country,
+                'value' => $settings->getCountry()->getId(),
                 'selected' => true,
             ));
-            $overlayValues ['country'] = $row->getValueOptions()[$container->country];
+            $overlayValues ['country'] = $row->getValueOptions()[$settings->getCountry()->getId()];
         } else {
-            $overlayValues ['country'] = array_values($row->getValueOptions())[0];
+            $overlayValues ['country'] = isset(array_values($row->getValueOptions())[0]) ?
+                array_values($row->getValueOptions())[0] : '';
         }
 
         $row = $settingsForm->get('location');
-        if (isset($container->location)) {
+        if (isset ($settings) && $settings->getLocation()) {
             $row->setAttributes(array(
-                'value' => $container->location,
+                'value' => $settings->getLocation()->getId(),
                 'selected' => true,
             ));
-            $overlayValues ['location'] = $row->getValueOptions()[$container->location];
+            $overlayValues ['location'] = $row->getValueOptions()[$settings->getLocation()->getId()];
         } else {
-            $overlayValues ['location'] = array_values($row->getValueOptions())[0];
+            $overlayValues ['location'] = isset(array_values($row->getValueOptions())[0]) ?
+                array_values($row->getValueOptions())[0] : '';
         }
 
         $row = $settingsForm->get('category');
-        if (isset($container->category)) {
+        if (isset ($settings) && $settings->getCategory()) {
             $row->setAttributes(array(
-                'value' => $container->category,
+                'value' => $settings->getCategory()->getId(),
                 'selected' => true,
             ));
-            $overlayValues ['category'] = $row->getValueOptions()[$container->category];
+            $overlayValues ['category'] = $row->getValueOptions()[$settings->getCategory()->getId()];
         } else {
-            $overlayValues ['category'] = array_values($row->getValueOptions())[0];
+            $overlayValues ['category'] = isset(array_values($row->getValueOptions())[0]) ?
+                array_values($row->getValueOptions())[0] : '';
         }
 
 
@@ -334,32 +370,6 @@ class IndexController extends AbstractActionController {
     public function menuPageAction()
     {
         $this->layout()->setVariable('body_class', 'pg-homepage');
-
-        $request = $this->getRequest();
-
-        $sessionContainer = new Container('locale');
-        if ($request->isPost()) {
-            switch ($request->getPost("language")) {
-                case 'de_DE':
-                    $userlocale = 'de_DE';
-                    break;
-                case 'it_IT':
-                    $userlocale = 'it_IT';
-                    break;
-                case 'en_US':
-                    $userlocale = 'en_US';
-                    break;
-                case 'ar_JO':
-                    $userlocale = 'ar_JO';
-                    break;
-
-                default :
-                    $userlocale = 'en_US';
-            }
-
-            $sessionContainer->offsetSet('userlocale', $userlocale);
-            return $this->redirect()->toUrl('/menu-page.html');
-        }
 
         return new ViewModel();
     }

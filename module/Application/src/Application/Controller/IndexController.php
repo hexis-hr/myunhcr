@@ -61,9 +61,11 @@ class IndexController extends AbstractActionController {
 
         if ($request->isPost() && $this->params()->fromQuery('step') == 'done') {
 
-            //todo get country form frontend session
+            $container = new Container('userSettings');
+            $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
+                ->findOneBy(array('guid' => $container->id));
             $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
             $appointment->setCountry($country);
 
             $category = $this->getEntityManager()->getRepository('Administration\Entity\AppointmentCategory')
@@ -172,9 +174,11 @@ class IndexController extends AbstractActionController {
             $form->setData($request->getPost());
             if ($form->isValid()) {
 
-                //todo get country form frontend session
+                $container = new Container('userSettings');
+                $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
+                    ->findOneBy(array('guid' => $container->id));
                 $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                    ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
 
                 $complaint->setContent($request->getPost('feedbackMessage'));
                 $complaint->setCountry($country);
@@ -450,8 +454,11 @@ class IndexController extends AbstractActionController {
             $surveyResults->setAuthId($authId);
             $surveyResults->setBirthDate($birthDate);
 
+            $container = new Container('userSettings');
+            $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
+                ->findOneBy(array('guid' => $container->id));
             $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
             $surveyResults->setCountry($country);
 
             $survey = $this->getEntityManager()->getRepository('Administration\Entity\SurveyODK')

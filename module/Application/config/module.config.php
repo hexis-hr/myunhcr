@@ -168,7 +168,7 @@ return array(
                     'scripts/external/fastclick.js',
                     'scripts/main.js',
                     'scripts/internal/_helpers.js',
-                    'scripts/internal/_historyState.js',
+                    // 'scripts/internal/_historyState.js',
                     'scripts/internal/_ajax.js',
                     'scripts/internal/_sectionTooltip.js',
                     'scripts/internal/_dateAndTime.js',

@@ -11,7 +11,9 @@ use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
 use Application\Form\ReportIncidentForm;
+use Application\Form\SettingsForm;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 use Zend\Paginator\Paginator;
@@ -200,7 +202,115 @@ class IndexController extends AbstractActionController {
     public function settingsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-settings');
-        return new ViewModel();
+
+        $container = new Container('userSettings');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            //save user settings in session
+            $container->notifications = $request->getPost('notifications');
+            $container->language = $request->getPost('language');
+            $container->country = $request->getPost('country');
+            $container->location = $request->getPost('location');
+            $container->category = $request->getPost('category');
+
+            return $this->redirect()->toUrl('/menu-page.html');
+        }
+
+        $settingsForm = new SettingsForm($this->getEntityManager());
+
+        if (isset($container->notifications)) {
+            if (!$container->notifications) {
+                $row = $settingsForm->get('notifications');
+                $row->setAttributes(array(
+                    'checked' => null,
+                ));
+            }
+        }
+
+        $row = $settingsForm->get('language');
+        if (isset($container->language)) {
+            $row->setAttributes(array(
+                'value' => $container->language,
+                'selected' => true,
+            ));
+            $overlayValues ['language'] = $row->getValueOptions()[$container->language];
+        } else {
+            $overlayValues ['language'] = array_values($row->getValueOptions())[0];
+        }
+
+        $row = $settingsForm->get('country');
+        $row->setAttribute('data-ajax-href', $this->url()->fromRoute('showCountryLocation'));
+        if (isset($container->country)) {
+            $row->setAttributes(array(
+                'value' => $container->country,
+                'selected' => true,
+            ));
+            $overlayValues ['country'] = $row->getValueOptions()[$container->country];
+        } else {
+            $overlayValues ['country'] = array_values($row->getValueOptions())[0];
+        }
+
+        $row = $settingsForm->get('location');
+        if (isset($container->location)) {
+            $row->setAttributes(array(
+                'value' => $container->location,
+                'selected' => true,
+            ));
+            $overlayValues ['location'] = $row->getValueOptions()[$container->location];
+        } else {
+            $overlayValues ['location'] = array_values($row->getValueOptions())[0];
+        }
+
+        $row = $settingsForm->get('category');
+        if (isset($container->category)) {
+            $row->setAttributes(array(
+                'value' => $container->category,
+                'selected' => true,
+            ));
+            $overlayValues ['category'] = $row->getValueOptions()[$container->category];
+        } else {
+            $overlayValues ['category'] = array_values($row->getValueOptions())[0];
+        }
+
+
+        return new ViewModel(array('form' => $settingsForm, 'overlayValues' => $overlayValues));
+    }
+    public function showCountryLocationAction ()
+    {
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $countryId = (int)$this->params()->fromPost('countryId');
+            $allLocations = $this->getEntityManager()->getRepository('Administration\Entity\CountryLocation')
+                ->findBy(array('country' => $countryId));
+
+            if ($allLocations) {
+                $locations = array();
+                foreach ($allLocations as $location) {
+                    $locations[$location->getId()] = $location->getName();
+                }
+                asort($locations);
+
+                $result = new JsonModel(array(
+                    'success' => true,
+                    'countryId' => $countryId,
+                    'locations' => $locations,
+                ));
+            } else {
+                $result = new JsonModel(array(
+                    'success' => true,
+                    'countryId' => $countryId,
+                ));
+            }
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
     }
 
     public function listBySectorAction()

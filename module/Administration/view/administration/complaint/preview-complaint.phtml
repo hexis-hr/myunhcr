@@ -1,7 +1,7 @@
 <div class="separator bottom"></div>
 
 <div class="heading-buttons">
-    <h3 class="glyphicons notes"> <?php echo $this->translate('Compliant preview'); ?></h3>
+    <h3 class="glyphicons notes"> <?php echo $this->translate('Complaint preview'); ?></h3>
 
     <div class="clearfix" style="clear: both;"></div>
 </div>
@@ -18,14 +18,14 @@
                 <tbody>
                 <tr>
                     <td style="width: 50%;">
-                        <p class="lead"><?php echo $this->compliant->getContent(); ?></p>
+                        <p class="lead"><?php echo $this->complaint->getContent(); ?></p>
                     </td>
                     <td class="right">
                         <h4 class="lead"><?php echo $this->translate('Date'); ?></h4>
-                        <h4><?php echo date_format($this->compliant->getDate(), 'd.m.Y H:i:s'); ?></h4>
+                        <h4><?php echo date_format($this->complaint->getDate(), 'd.m.Y H:i:s'); ?></h4>
 
                         <h4 class="lead"><?php echo $this->translate('Country'); ?></h4>
-                        <h4><?php echo $this->compliant->getCountry()->getName(); ?></h4>
+                        <h4><?php echo $this->complaint->getCountry()->getName(); ?></h4>
                     </td>
                 </tr>
                 </tbody>

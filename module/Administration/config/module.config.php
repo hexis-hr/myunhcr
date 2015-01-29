@@ -803,13 +803,13 @@ return array(
                     ),
                 ),
             ),
-            'compliant' => array(
+            'complaint' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route' => '/compliant',
+                    'route' => '/complaint',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Administration\Controller',
-                        'controller' => 'Compliant',
+                        'controller' => 'Complaint',
                         'action' => 'index',
                     ),
                 ),
@@ -824,31 +824,31 @@ return array(
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
-                                'controller' => 'Compliant',
+                                'controller' => 'Complaint',
                                 'action' => 'index',
                             ),
                         ),
                     ),
-                    'previewCompliant' => array(
+                    'previewComplaint' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/previewCompliant[/:id]',
+                            'route' => '/previewComplaint[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller' => 'Compliant',
-                                'action' => 'previewCompliant',
+                                'controller' => 'Complaint',
+                                'action' => 'previewComplaint',
                             ),
                         ),
                         'may_terminate' => true,
                     ),
-                    'deleteCompliant' => array(
+                    'deleteComplaint' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/deleteCompliant[/:id]',
+                            'route' => '/deleteComplaint[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
-                                'controller' => 'Compliant',
-                                'action' => 'deleteCompliant',
+                                'controller' => 'Complaint',
+                                'action' => 'deleteComplaint',
                             ),
                         ),
                         'may_terminate' => true,
@@ -996,7 +996,7 @@ return array(
             'Administration\Controller\Incident' => 'Administration\Controller\IncidentController',
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
             'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
-            'Administration\Controller\Compliant' => 'Administration\Controller\CompliantController',
+            'Administration\Controller\Complaint' => 'Administration\Controller\ComplaintController',
             'Administration\Controller\Appointment' => 'Administration\Controller\AppointmentController',
             'Administration\Controller\Console' => 'Administration\Controller\ConsoleController',
         ),
@@ -1130,8 +1130,8 @@ return array(
                 'class' => 'glyphicons settings',
             ),
             array(
-                'label' => 'Compliants',
-                'route' => 'compliant',
+                'label' => 'Complaint',
+                'route' => 'complaint',
                 'resource' => 'Administration',
                 'privilege' => 'Admin',
                 'class' => 'glyphicons warning_sign',

@@ -28,7 +28,7 @@ class AclFactory implements FactoryInterface {
         $acl->addResource(new Resource('Administration'));
         $acl->addResource(new Resource('Appointment'));
         $acl->addResource(new Resource('Auth'));
-        $acl->addResource(new Resource('Compliant'));
+        $acl->addResource(new Resource('Complaint'));
         $acl->addResource(new Resource('Faq'));
         $acl->addResource(new Resource('Incident'));
         $acl->addResource(new Resource('Index'));

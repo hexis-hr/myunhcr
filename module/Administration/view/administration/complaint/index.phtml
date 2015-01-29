@@ -1,6 +1,6 @@
 <div class="separator bottom"></div>
     <div class="heading-buttons">
-        <h3 class="glyphicons notes_2"><?php echo $this->translate('Compliants'); ?></h3>
+        <h3 class="glyphicons notes_2"><?php echo $this->translate('Complaints'); ?></h3>
         <div class="clearfix" style="clear: both;"></div>
     </div>
 <div class="separator bottom"></div>
@@ -23,15 +23,15 @@
                     <tbody>
                     <?php foreach($this->data as $data) { ?>
                         <tr data-row="row_<?php echo $data->getId(); ?>">
-                            <td><a href="<?php echo $this->url('compliant/previewCompliant', array('id' => $data->getId())) ?>">
+                            <td><a href="<?php echo $this->url('complaint/previewComplaint', array('id' => $data->getId())) ?>">
                                     <?php echo $this->limitEcho($data->getContent()); ?></a></td>
                             <td><?php echo date_format($data->getDate(), 'd.m.Y - H:i:s'); ?></td>
                             <td><?php echo $data->getCountry()->getName(); ?></td>
                             <td>
                                 <a class="btn-action glyphicons notes btn-success"
-                                   href="<?php echo $this->url('compliant/previewCompliant', array('id' => $data->getId())) ?>"></a>
+                                   href="<?php echo $this->url('complaint/previewComplaint', array('id' => $data->getId())) ?>"></a>
                                 <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
-                                   data-href="<?php echo $this->url('compliant/deleteCompliant', array('id' => $data->getId())); ?>"></a>
+                                   data-href="<?php echo $this->url('complaint/deleteComplaint', array('id' => $data->getId())); ?>"></a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -40,7 +40,7 @@
             <?php } else { ?>
                 <div class="widget-body center">
                     <span class="gritter-add-regular btn btn-inverse btn-block">
-                        <?php echo $this->translate('No compliants found.'); ?>
+                        <?php echo $this->translate('No complaints found.'); ?>
                     </span>
                 </div>
             <?php } ?>
@@ -56,6 +56,6 @@ echo $this->paginationControl(
     $this->data,
     'sliding',
     array('partial/paginator.phtml', 'Administration'),
-    array('route  ' => 'compliant', 'routeParams' => array())
+    array('route  ' => 'complaint', 'routeParams' => array())
 );
 ?>

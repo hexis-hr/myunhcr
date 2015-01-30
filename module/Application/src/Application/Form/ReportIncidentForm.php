@@ -71,17 +71,20 @@ class ReportIncidentForm extends Form {
 
         $countryAll = $entityManager->getRepository('Administration\Entity\Country')->findAll();
 
-        $countries = array();
+        $countries = array(
+            0 => '(Autodetect)',
+        );
+
         foreach ($countryAll as $country) {
-            $countries[$country->getCountryId()] = $country->getName();
+            $countries[$country->getId()] = $country->getName();
         }
 
         $this->add(array(
-            'name' => 'reportCountry',
+            'name' => 'country',
             'type' => 'Select',
             'attributes' => array(
                 'class' => 'formSelect customSelect_select -custom',
-                'id' => 'reportCountry',
+                'id' => 'country',
             ),
             'options' => array(
                 'value_options' => $countries,
@@ -89,26 +92,34 @@ class ReportIncidentForm extends Form {
         ));
 
         $this->add(array(
-            'name' => 'reportLocation',
+            'name' => 'address',
             'type' => 'Text',
             'attributes' => array(
                 'class' => 'formInput',
-                'id' => 'reportLocation',
+                'id' => 'address',
                 'placeholder' => 'Location Address',
             ),
         ));
 
         $this->add(array(
-            'name' => 'feedbackMessage',
-            'type' => 'Textarea',
+            'name' => 'step',
+            'type' => 'Hidden',
             'attributes' => array(
-                'class' => 'formTextarea',
-                'id' => 'feedbackMessage',
+                'id' => 'step',
             ),
         ));
 
         $this->add(array(
-            'name' => 'incidentImage',
+            'name' => 'description',
+            'type' => 'Textarea',
+            'attributes' => array(
+                'class' => 'formTextarea',
+                'id' => 'description',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'image',
             'type' => 'File',
             'attributes' => array(
                 'id' => 'incidentImage',
@@ -119,7 +130,7 @@ class ReportIncidentForm extends Form {
         ));
 
         $this->add(array(
-            'name' => 'incidentAudio',
+            'name' => 'audio',
             'type' => 'File',
             'attributes' => array(
                 'id' => 'incidentAudio',
@@ -127,6 +138,15 @@ class ReportIncidentForm extends Form {
                 'accept' => 'audio/*;capture=microphone',
                 'capture' => 'microphone',
             ),
+        ));
+
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'submit',
+            'attributes' => array(
+                'id' => 'next',
+                'class' => 'inputSubmit button -primary -fullWidth',
+            )
         ));
     }
 

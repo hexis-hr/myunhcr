@@ -64,6 +64,12 @@ class Incident {
     protected $category;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\IncidentType")
+     * @ORM\JoinColumn(name="type", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $type;
+
+    /**
      * @param mixed $category
      */
     public function setCategory($category)
@@ -133,6 +139,7 @@ class Incident {
      */
     public function setAnonymous($anonymous)
     {
+        $anonymous = (boolean) $anonymous;
         $this->anonymous = $anonymous;
     }
 
@@ -207,6 +214,24 @@ class Incident {
     {
         return $this->longitude;
     }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+
 
 
 }

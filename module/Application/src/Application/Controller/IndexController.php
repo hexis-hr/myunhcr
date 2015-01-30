@@ -4,6 +4,7 @@ namespace Application\Controller;
 
 use Administration\Entity\Appointment;
 use Administration\Entity\Complaint;
+use Administration\Entity\Incident;
 use Administration\Entity\SurveyResult;
 use Administration\Entity\UserSettings;
 use Application\Form\BookAnAppointmentForm;
@@ -412,31 +413,66 @@ class IndexController extends AbstractActionController {
 
     public function reportAnIncidentAction()
     {
-        $step = (int) $this->params()->fromRoute('step', 1);
+        $step = (int) $this->params()->fromQuery('step', 0);
 
         $this->layout()->setVariable('body_class', 'pg-reportIncident -step' . $step);
 
         $request = $this->getRequest();
         $form = new ReportIncidentForm($this->getEntityManager(), $this->getServiceLocator());
+        $form->get('step')->setValue($step);
+        $form->get('submit')->setAttribute('value', 'Next');
 
         //save form values in session
-        $container = new Container('incidentForm');
+        $container = new Container('incidentFormData');
 
-        if ($request->isPost()) {
+        if ($request->isXmlHttpRequest()) {
 
             $step++;
+            $form->get('step')->setValue($step);
+
             $postValues = $request->getPost();
 
             foreach ($postValues as $key => $value) {
                 $container->{$key} = $value;
             }
 
+            $form->populateValues($container->getArrayCopy());
+
             if ($step >= 5) {
                 // get data from session, populate form, validate and create incident
-                $container->getManager()->getStorage()->clear('incidentForm');
+
+                $incident = new Incident();
+                $data = $container->getArrayCopy();
+                foreach ($data as $key => $value) {
+                    if (method_exists($incident, 'set' . ucfirst($key))) {
+                        $incident->{'set' . ucfirst($key)}($value);
+                    }
+                }
+                $category = $this->getEntityManager()->getRepository('Administration\Entity\IncidentCategory')
+                    ->findOneBy(array('id' => $data['category']));
+
+                $incident->setCategory($category);
+
+                $type = $this->getEntityManager()->getRepository('Administration\Entity\IncidentType')
+                    ->findOneBy(array('id' => $data['type']));
+
+                $incident->setType($type);
+
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $data['country']));
+
+                $incident->setCountry($country);
+
+                $this->getEntityManager()->persist($incident);
+                $this->getEntityManager()->flush();
+
+                $container->getManager()->getStorage()->clear('incidentFormData');
             }
 
         }
+
+        if ($step == 0)
+            $step = 1;
 
         return new ViewModel(array(
             'step' => $step,

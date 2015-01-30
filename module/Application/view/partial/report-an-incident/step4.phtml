@@ -1,23 +1,24 @@
 <div class='form_item fileUpload'>
     <label class='form_label fileUpload_label' for='feedbackMessage'>
         <?php echo $this->translate('Would you like to take/upload a picture of the incident? (optional)'); ?>
-        <input class='fileUpload_input' type='file' accept='image/*;capture=camera' capture='camera'>
+        <?php echo $this->formRow($form->get('image')); ?>
     </label>
 </div>
 
 <div class='form_item fileUpload'>
     <label class='form_label fileUpload_label' for='feedbackMessage'>
         <?php echo $this->translate('Would you like to record your testimony of the incident? (optional)'); ?>
-        <input class='fileUpload_input' type='file' accept='audio/*;capture=microphone' capture='microphone'>
+        <?php echo $this->formRow($form->get('audio')); ?>
     </label>
 </div>
 
 <div class='grid -compact -reverse'>
     <div class='grid_column -small7'>
-        <input class='inputSubmit button -primary -fullWidth' type='submit' name='' value='Report'>
+        <?php $form->get('submit')->setAttribute('value', 'Report'); ?>
+        <?php echo $this->formRow($form->get('submit')); ?>
     </div>
     <div class='grid_column -small5'>
-        <a class='button -fullWidth' href='<?php echo $this->url('reportAnIncident',
-            array('step' => $step - 1)); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+        <a class='button -fullWidth' href='<?php echo $this->url('reportAnIncident', array(),
+            array('query' => array('step' => $step - 2))); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
     </div>
 </div>

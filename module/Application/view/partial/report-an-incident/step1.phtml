@@ -4,13 +4,17 @@
     <div class='grid -collapse -clean'>
         <div class='grid_column -small6 form_subitem'>
             <div class='bigRadio'>
-                <input class='bigRadio_input' type='radio' name='anonymous' value='yes' id='anonymous-yes'>
+                <input class='bigRadio_input' type='radio' name='anonymous' value='1' id='anonymous-yes'
+                    <?php if ($form->get('anonymous')->getValue() === '1') echo 'checked'; ?>
+                    >
                 <label class='bigRadio_label' for='anonymous-yes'><?php echo $this->translate('Yes'); ?></label>
             </div>
         </div>
         <div class='grid_column -small6 form_subitem'>
             <div class='bigRadio'>
-                <input class='bigRadio_input' type='radio' name='anonymous' value='no' id='anonymous-no'>
+                <input class='bigRadio_input' type='radio' name='anonymous' value='0' id='anonymous-no'
+                    <?php if ($form->get('anonymous')->getValue() === '0') echo 'checked'; ?>
+                    >
                 <label class='bigRadio_label' for='anonymous-no'><?php echo $this->translate('No'); ?></label>
             </div>
         </div>
@@ -24,8 +28,16 @@
     <div class='form_field customSelect'>
         <?php echo $this->formRow($form->get('category')); ?>
         <a unselectable='on'
-           class='customSelect_overlay'><?php echo $this->translate(array_values($form->get('category')
-                ->getValueOptions())[0]); ?></a>
+           class='customSelect_overlay'>
+            <?php
+            if ($form->get('category')->getValue()) {
+                $displayValue = $form->get('category')->getValueOptions()[$form->get('category')->getValue()];
+            } else {
+                $displayValue = array_values($form->get('category')->getValueOptions())[0];
+            }
+            ?>
+            <?php echo $this->translate($displayValue); ?>
+        </a>
     </div>
 </div>
 
@@ -35,14 +47,22 @@
 
     <div class='form_field customSelect'>
         <?php echo $this->formRow($form->get('type')); ?>
-        <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate(array_values($form->get('type')
-                ->getValueOptions())[0]); ?></a>
+        <a unselectable='on' class='customSelect_overlay'>
+            <?php
+            if ($form->get('type')->getValue()) {
+                $displayValue = $form->get('type')->getValueOptions()[$form->get('type')->getValue()];
+            } else {
+                $displayValue = array_values($form->get('type')->getValueOptions())[0];
+            }
+            ?>
+            <?php echo $this->translate($displayValue); ?>
+        </a>
     </div>
 </div>
 
 <div class='grid -compact -reverse'>
     <div class='grid_column -small7'>
-        <input class='button -primary -fullWidth' type='submit' name='' value='<?php echo $this->translate('Next'); ?>'>
+        <?php echo $this->formRow($form->get('submit')); ?>
     </div>
     <div class='grid_column -small5'>
         <a class='button -fullWidth' href='/menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel');

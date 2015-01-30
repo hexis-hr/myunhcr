@@ -25,10 +25,17 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <?php $this->form->setAttribute('action', $this->url('reportAnIncident', array('step' => $step)))->prepare(); ?>
-      <?php echo $this->form()->openTag($this->form); ?>
+        <?php
+        $this->form->setAttribute('action', $this->url('reportAnIncident', array(), array(
+                'query' => array(
+                    'step' => $step,
+                )
+            )))->prepare();
+        ?>
 
-        <?php echo $this->partial('partial/report-an-incident/step' . $this->step . '.phtml',
+        <form action='<?php echo $this->form->getAttribute('action'); ?>' method="post" class='status form' ajaxForm>
+          <?php echo $this->formRow($form->get('step')); ?>
+          <?php echo $this->partial('partial/report-an-incident/step' . $this->step . '.phtml',
           array(
             'form' => $this->form,
             'step' => $step,

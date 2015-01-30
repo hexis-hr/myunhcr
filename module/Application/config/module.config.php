@@ -182,8 +182,9 @@ return array(
                     'scripts/internal/_historyState.js',
                     'scripts/internal/_ajax.js',
                     'scripts/internal/_sectionTooltip.js',
-                    'scripts/internal/_dateAndTime.js',
                     'scripts/internal/_forms.js',
+                    'scripts/internal/_dateAndTime.js',
+                    'scripts/internal/_fileUpload.js',
                     'scripts/internal/_unsorted.js',
                     'scripts/internal/_exec.js'
                 ),

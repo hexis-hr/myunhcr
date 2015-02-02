@@ -21,11 +21,6 @@
     border-radius: 0 !important;
   }
 
-  &.-fullWidth {
-    display: block;
-    width: 100% !important;
-  }
-
   &.-compact {
     display: inline-block !important;
     width: auto !important;
@@ -35,6 +30,11 @@
     @include medium {
       padding: ($button-size / 2.2) ($button-size / 1.2) ($button-size / 2.05) !important;
     }
+  }
+
+  &.-fullWidth {
+    display: block;
+    width: 100% !important;
   }
 }
 
@@ -68,7 +68,7 @@
 
 
 @include small {
-  .button { display:inline-block; width:auto; margin-bottom:0; padding:($button-size / 1.7) $button-size; }
+  .button { display:inline-block; width:auto; margin-bottom:0; }
   .button.-submit { display:block; width:100% !important; }
 }
 

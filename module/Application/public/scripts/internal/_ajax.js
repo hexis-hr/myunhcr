@@ -1,6 +1,8 @@
 // Main function used for swapping pages
 function getPage(url, title, method, data, timeout) {
   
+  // Documentation: http://zeptojs.com/#ajax
+
   // Log page request
   dlog('GET: ' + url + ' started...');
   var start = new Date().getTime();

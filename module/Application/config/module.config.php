@@ -179,6 +179,7 @@ return array(
                     'scripts/external/fastclick.js',
                     'scripts/main.js',
                     'scripts/internal/_helpers.js',
+                    'scripts/internal/_design.js',
                     'scripts/internal/_historyState.js',
                     'scripts/internal/_ajax.js',
                     'scripts/internal/_sectionTooltip.js',
@@ -186,6 +187,7 @@ return array(
                     'scripts/internal/_dateAndTime.js',
                     'scripts/internal/_fileUpload.js',
                     'scripts/internal/_unsorted.js',
+                    'scripts/internal/_infiniteScroll.js',
                     'scripts/internal/_exec.js'
                 ),
             ),

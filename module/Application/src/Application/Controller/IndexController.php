@@ -387,7 +387,7 @@ class IndexController extends AbstractActionController {
 
         $adapter = new DoctrineAdapter(new ORMPaginator($query = $mNews->createQueryBuilder('News')));
         $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(1);
+        $paginator->setDefaultItemCountPerPage(2);
 
         $page = (int)$this->params()->fromQuery('page');
 

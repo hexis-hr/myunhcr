@@ -203,7 +203,7 @@
   Icon scale
 ————————————————————————————————————————————————————————————————————————————————*/
   @mixin img-scale($src, $icon, $scale:1){
-    $path: "../build/images/#{$src}/#{$icon}.png";
+    $path: $file-path + "/media/#{$src}/#{$icon}.png";
     @if file_exists($path) {
       $width: image_width($path);
       $height: image_height($path);
@@ -218,22 +218,30 @@
   Proportional image scaling
 ————————————————————————————————————————————————————————————————————————————————*/
   @mixin scale($original_width, $original_height, $target_height){
-
     @if ($original_width > $original_height) {
       width: ceil($target_height / ( $original_height / $original_width ))+px;
       height: ($target_height)+px;
     }
-
     @else if ($original_width < $original_height) {
       width: ceil($target_height / ( $original_height / $original_width ))+px;
       height: ($target_height)+px;
     }
-
     @else {
       width: ($target_height)+px;
       height: ($target_height)+px;
     }
+  }
 
+
+
+/*————————————————————————————————————————————————————————————————————————————————
+  Base64 an image
+————————————————————————————————————————————————————————————————————————————————*/
+  @mixin base64($image){
+    $path: $file-path + "/media/" + $image;
+    @if file_exists($path) {
+      background-image: inline_image($path);
+    }
   }
 
 

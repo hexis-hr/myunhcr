@@ -1,13 +1,15 @@
 <div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
 
-  <div class='sectionHeader'>
+  <div class='sectionHeader -clean'>
     <div class='sectionHeader_top'>
       <div class='grid -clean'>
         <div class='grid_column'>
           <div class='sectionHeader_top_inner'>
-            <h1 class='sectionHeader_title'><?php echo $this->translate("News & Events");?></h1>
-            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
+            <div class='sectionCategory'>
+              <a class='sectionCategory_link' href='/news-and-events.html' ajaxNav><?php echo $this->translate("News and Events");?></a>
+            </div>
+            <h1 class='sectionHeader_title'><?php echo $this->news->getTitle(); ?></h1>
           </div>
         </div>
       </div>
@@ -23,31 +25,43 @@
     </div>
   </div>
 
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-
-      <div class='newsArticle'>
-        <h2 class='newsArticle_title'><?php echo $this->news->getTitle(); ?></h2>
-        <p class='newsArticle_release'>
-            <?php if ($this->news->getSource() != '') { ?>
-                Source:&nbsp;<a class='newsArticle_link' href='<?php echo $this->news->getSourceUrl(); ?>'>
-                <?php echo $this->news->getSource(); ?></a>
-            <?php } ?>
-            <span class='news_date floatRight clearfix'><?php echo date_format($this->news->getDate(), 'd.m.Y'); ?></span>
-        </p>
+  <?php // If there is an article photo... ?>
+  <div class='articlePhoto'>
+    <div class='grid -collapse -mediumExpand'>
+      <div class='grid_column -mediumPlus10 -large9'>
+        <img class='articlePhoto_img' src='http://www.unhcr.org/thumb1/54c5441c6.jpg' alt=''>
       </div>
-        <br/>
-        <p class='newsArticle_body'><?php echo $this->news->getContent(); ?></p>
     </div>
   </div>
 
-  <div class='grid'>
-      <div class='grid_column'>
-          <div class='form_item'>
-              <br/><br/>
-            <a class='button -submit' href="/news-and-events.html"><?php echo $this->translate('Back'); ?></a>
+  <div class='grid gapLarge'>
+    <div class='grid_column -mediumPlus10 -large9'>
+      <div class='article'>
+        <?php if ($this->news->getSource() != '') { ?>
+          <div class='article_source'><?php echo $this->translate('Source'); ?>:
+            <a class='article_source_link' href='<?php echo $this->news->getSourceUrl(); ?>'><?php echo $this->news->getSource(); ?></a>
           </div>
+        <?php } ?>
+        <div class='article_date'><?php echo date_format($this->news->getDate(), 'd.m.Y'); ?></div>
+        <div class='article_body preformat'>
+          <?php echo $this->news->getContent(); ?>
+        </div>
       </div>
+    </div>
   </div>
-</section>
 
+  <div class='nextArticle tearSection -bottom'>
+    <div class='grid -clean'>
+      <div class='grid_column -mediumPlus10 -large9'>
+        <div class='nextArticle_inner'>
+          <a class='nextArticle_label' href='/newsArticle/2' ajaxNav>Next article</a>
+          <h4 class='nextArticle_title'>
+            <a class='nextArticle_title_link' href='/newsArticle/2' ajaxNav>Some title here</a>
+          </h4>
+          <a class='nextArticle_body preformat' href='/newsArticle/2' ajaxNav>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad excepturi quidem veniam quis ipsum culpa, expedita placeat fuga nesciunt. Debitis illo minima qui consequatur distinctio blanditiis id sequi voluptatum est corporis asperiores, dolor maiores, harum.</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

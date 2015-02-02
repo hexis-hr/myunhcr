@@ -101,6 +101,18 @@ var loadCSS = function(href) {
 
 
 
+/*------------------------------------------------------------------------------------
+  Check if element is scrolled into view
+------------------------------------------------------------------------------------*/
+function checkIfVisible(elem, offset) {
+  var docViewBottom = $(window).scrollTop() + $(window).height();
+  var elemTop = $(elem).offset().top;
+  var offset = offset | 0;
+  return( (elemTop + offset) <= docViewBottom );
+}
+
+
+
 // jQuery Dependant...
 queue.jQuery(function(){
 

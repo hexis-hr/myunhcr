@@ -19,11 +19,12 @@
 @import "globals/_footer";
 
 
-// Import layout modules
+// Import layout partials
 @import "layout/_base";
+@import "layout/_tearSection";
 
 
-// Import form modules
+// Import form partials
 @import "form/_base";
 @import "form/_input";
 @import "form/_select";
@@ -36,7 +37,7 @@
 @import "form/_time";
 
 
-// Import content modules
+// Import content partials
 @import "content/_base";
 @import "content/_buttons";
 @import "content/_preformat";
@@ -45,7 +46,7 @@
 @import "content/_menu";
 @import "content/_feedback";
 @import "content/_faq";
-@import "content/_news";
+@import "content/_articles";
 @import "content/_pagination";
 
 

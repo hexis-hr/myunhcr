@@ -1,9 +1,30 @@
+/*--------------------------------------------------------------------------------
+  Age navigation
+--------------------------------------------------------------------------------*/
+$margin: $gapSmall * 1.4;
+
+.ageNav {}
+  .ageNav_button { margin:($margin/1.25) 0 ($margin/1.5); }
+  .ageNav_end { margin:($margin/1.25) 0; font-size:0.9em; color:lighten($gray,10%); text-align:center; }
+
+.ageNav.-top { margin-bottom:$margin * 1.5; 
+  
+  .ageNav_button {}
+}
+
+.ageNav.-bottom { margin-top:$margin * 1.5;
+  .ageNav_button { @extend .button.-primary; }
+}
+
+
+
+/*--------------------------------------------------------------------------------
+  Standard pagination
+--------------------------------------------------------------------------------*/
 $paginationHeight: 42px;
 
 .pagination { font-size:0; text-align:center; }
-
   .pagination_item { display:inline-block; }
-    
     .pagination_link {
       display: inherit;
       height: $paginationHeight;
@@ -13,14 +34,9 @@ $paginationHeight: 42px;
       background: $lightGray;
       background: linear-gradient(top, lighten($lightGray, 2), darken($lightGray, 2));
     }
-
     .pagination_link.-page { display:none; }
-
     .pagination_separator {}
 
-
 @include smallPlus {
-
   .pagination_link.-page { display:inherit; }
-
 }

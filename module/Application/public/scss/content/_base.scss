@@ -6,6 +6,8 @@
 
   .sectionHeader_top { overflow:hidden; }
     .sectionHeader_top_inner { position:relative; @include responsive(padding-top ($basicMargin) 1.1, padding-bottom ($basicMargin) 1.1); }
+      .sectionCategory { margin-bottom:5px; @include rem(font-size, .9rem); font-weight:300; }
+        .sectionCategory_link { color:lighten($gray,20%); }
       .sectionHeader_title { display:block; @include responsive(font-size 18px 1.1); color:$black; }
       .sectionHeader_info { display:none; }
   .sectionHeader_bottom { display:none; /* Added display none for now */ margin-top:-5px; }
@@ -15,7 +17,7 @@
 
 // SmallPlus screens
 @include smallPlus {
-  .sectionHeader_title { text-align:center; }
+  .sectionHeader_title, .sectionCategory { text-align:center; }
 }
 
 // Compact it for modern smartphones with javascript

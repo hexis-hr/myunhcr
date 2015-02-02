@@ -1,0 +1,13 @@
+.tearSection { position:relative; background:#f2f2f2; }
+  .tearSection:before { position:absolute; left:0; right:0; height:6px; content:''; }
+  .tearSection_inner { padding:1em 0; }
+
+// Top tear
+.tearSection.-top { background-image:linear-gradient(bottom, #ececec, white);
+  &:before { bottom:-6px; background:url("#{$img-path}layout/jagged-bottom.png"); } // Request this image which is rarely loaded
+}
+
+// Top tear
+.tearSection.-bottom { background-image:linear-gradient(top, #ececec, white);
+  &:before { top:-6px; @include base64("layout/jagged-top.png"); } // Inline this small image which is often loaded
+}

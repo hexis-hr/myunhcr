@@ -1,0 +1,49 @@
+%article_info { margin-bottom:0.5em; color:lighten($gray, 10); font-size:0.9em; }
+
+
+// Article overview / summary
+.articleSummary {}
+  .articleSummary_title { margin-bottom:0.45em; @include responsive(font-size 1.1em 1.1); line-height:1.3; }
+    .articleSummary_title_link { color:$link; }
+  .articleSummary_source { @extend %article_info; }
+    .articleSummary_source_link {}
+  .articleSummary_date { @extend %article_info; }
+  .articleSummary_body { margin-bottom:0.9em; }
+  .articleSummary_button { margin-bottom:0.35em; }
+
+
+// Article photo
+.articlePhoto { max-height:260px; overflow:hidden; }
+  .articlePhoto_img { display:block; position:relative; top:-50%; width:100%; }
+@include smallPlus {
+  .articlePhoto { max-height:320px; }
+}
+@include medium {
+  .articlePhoto { max-height:380px; }
+    .articlePhoto_img { display:inline; width:auto; }
+}
+
+
+// Full article
+.article { @include responsive(padding-top 1.25em 1.2); }
+  .article_source { @extend %article_info; }
+    .article_source_link { color:inherit; text-decoration:underline; }
+  .article_date { @extend %article_info; margin-bottom:0; }
+  .article_body { margin-top:1em; }
+
+
+// Next article peek
+.nextArticle { display:block; text-decoration:none !important; }
+  .nextArticle_inner { padding-top:1.75em; }
+    .nextArticle_label { display:block; margin-bottom:4px; font-size:0.9em; font-weight:300; color:lighten($gray,20%); }
+    .nextArticle_title { display:block; @extend .articleSummary_title; margin-bottom:0; }
+      .nextArticle_title_link { display:block; @extend .articleSummary_title_link; }
+    .nextArticle_body { display:block; position:relative; max-height:72px; font-size:0.95em !important; overflow:hidden;
+      &:after{ position:absolute; bottom:0; left:0; width:100%; height:75%; background-image:linear-gradient(bottom, white, rgba(white,0)); content:''; }}
+
+
+// Article list
+.articleList {}
+  .articleList_item { @include responsive(margin-top 1em, padding-top 1em); border-top:2px solid $lightGray;
+    &:first-child { margin-top:0; padding-top:0; border-top:0; }
+  }

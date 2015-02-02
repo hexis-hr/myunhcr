@@ -8,6 +8,7 @@ use Administration\Entity\Incident;
 use Administration\Entity\SurveyResult;
 use Administration\Entity\UserSettings;
 use Application\Form\BookAnAppointmentForm;
+use Application\Form\CheckStatusForm;
 use Application\Form\ComplaintForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
@@ -101,7 +102,10 @@ class IndexController extends AbstractActionController {
     public function checkYourStatusAction()
     {
         $this->layout()->setVariable('body_class', 'pg-checkStatus');
-        return new ViewModel();
+
+        $form = new CheckStatusForm($this->getEntityManager());
+
+        return new ViewModel(array('form' => $form));
     }
 
     public function checkYourStatus2Action()
@@ -113,7 +117,42 @@ class IndexController extends AbstractActionController {
     public function checkYourStatus3Action()
     {
         $this->layout()->setVariable('body_class', 'pg-checkStatus -step3');
-        return new ViewModel();
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => 'https://www.unhcrmenadagdata.org/myUNHCRWebApi/api/RSDResults?CaseNumber='
+                    . $request->getPost('authentification')  . '&DateOfBirth=' . $request->getPost('date')
+                    . '&format=json&nojsoncallback=1'
+            ));
+
+            if (!($resp = curl_exec($curl)))
+                return new ViewModel(array('status' => false));
+
+            curl_close($curl);
+
+            switch (json_decode($resp)->ResultId) {
+                case 1: $class = '-positive'; $name = 'Accepted'; break;
+                case 2: $class = '-unknown'; $name = 'Pending'; break;
+                case 3: $class = '-negative'; $name = 'Rejected'; break;
+                default: $class = ''; $name = '';
+            }
+
+            return new ViewModel(array(
+                'status' => true,
+                'class' => $class,
+                'name' => $name,
+                'message' => json_decode($resp)->ResultMessage
+            ));
+
+        } else {
+            return $this->redirect()->toRoute('app', array('action' => 'check-your-status'));
+        }
+
+
     }
 
     public function faqAction()

@@ -25,12 +25,15 @@
 
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='check-your-status2.html' class='status form' ajaxForm>
+        <?php $form = $this->form; ?>
+        <?php $this->form->setAttribute('action', 'check-your-status3.html'); ?>
+        <?php $form->setAttribute('class', 'status form'); ?>
+        <?php echo $this->form()->openTag($form); ?>
 
         <div class='form_item'>
           <label class='form_label' for='authentication'><?php echo $this->translate("Please enter your identification number:");?></label>
           <div class='form_field'>
-            <input class='formInput' type='text' name='' value='' placeholder='ID Number' id='authentication'>
+              <?php echo $this->formRow($form->get('authentification')); ?>
           </div>
         </div>
 
@@ -38,20 +41,21 @@
           <label class='form_label' for='date'><?php echo $this->translate("Please enter your date of birth:");?></label>
           <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
           <div class='form_field'>
-            <input class='formInput' type='date' placeholder='Day/Month/Year' inputDate>
+              <?php echo $this->formRow($form->get('date')); ?>
           </div>
         </div>
 
         <div class='grid -compact -reverse'>
           <div class='grid_column -small7'>
-            <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Next'); ?>">
+            <input class='button -primary -fullWidth' type='submit' name='' value="<?php echo $this->translate('Check'); ?>">
           </div>
           <div class='grid_column -small5'>
             <a class='button -fullWidth' href='menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
           </div>
         </div>
 
-      </form>
+        <?php echo $this->form()->closeTag($form); ?>
+
     </div>
   </div>
 </section>

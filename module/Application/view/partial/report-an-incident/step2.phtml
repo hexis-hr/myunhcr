@@ -1,6 +1,6 @@
 <h2 class='form_legend'><?php echo $this->translate('Where did this happen?'); ?></h2>
 
-<div class='form_item'>
+<div class='form_item <?php if (isset($form->getMessages()['country'])) echo '-error'; ?>'>
     <label class='form_label' for='report_country'><?php echo $this->translate('Country'); ?></label>
 
     <div class='form_field customSelect'>
@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class='form_item'>
+<div class='form_item <?php if (isset($form->getMessages()['address'])) echo '-error'; ?>'>
     <label class='form_label' for='report_location'><?php echo $this->translate('Location'); ?></label>
 
     <div class='form_field'>
@@ -32,6 +32,6 @@
     </div>
     <div class='grid_column -small5'>
         <a class='button -fullWidth' href='<?php echo $this->url('reportAnIncident', array(),
-            array('query' => array('step' => $step - 2))); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+            array('query' => array('step' => $step - 1))); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
     </div>
 </div>

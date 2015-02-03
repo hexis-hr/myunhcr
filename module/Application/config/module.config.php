@@ -79,6 +79,17 @@ return array(
                     ),
                 ),
             ),
+            'uploadFile' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/upload-file',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'uploadFile',
+                    ),
+                ),
+            ),
             'fileAComplaint' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

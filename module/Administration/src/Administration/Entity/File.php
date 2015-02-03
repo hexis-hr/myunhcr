@@ -32,6 +32,11 @@ class File {
     /**
      * @ORM\Column(type="string")
      */
+    protected $originalName = "";
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $mimeType = "";
 
     /**
@@ -123,5 +128,23 @@ class File {
     {
         return $this->mimeType;
     }
+
+    /**
+     * @param mixed $originalName
+     */
+    public function setOriginalName($originalName)
+    {
+        $this->originalName = $originalName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginalName()
+    {
+        return $this->originalName;
+    }
+
+
 
 }

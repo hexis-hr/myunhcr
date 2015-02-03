@@ -102,14 +102,6 @@ class ReportIncidentForm extends Form {
         ));
 
         $this->add(array(
-            'name' => 'step',
-            'type' => 'Hidden',
-            'attributes' => array(
-                'id' => 'step',
-            ),
-        ));
-
-        $this->add(array(
             'name' => 'description',
             'type' => 'Textarea',
             'attributes' => array(

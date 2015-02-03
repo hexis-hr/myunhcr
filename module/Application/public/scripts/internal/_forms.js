@@ -5,7 +5,7 @@ queue.jQuery(function(){
     Custom select
   ------------------------------------------------------------------------------------*/
   $(document).on('change','.customSelect_select', function() {
-    $(this).siblings('.customSelect_overlay').html( $(this).find('option:selected').first().text() );
+    $(this).siblings('.customSelect_overlay:first').html( $(this).find('option:selected').first().text() );
   });
 
 

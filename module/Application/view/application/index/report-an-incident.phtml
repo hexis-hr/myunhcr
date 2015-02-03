@@ -28,13 +28,12 @@
         <?php
         $this->form->setAttribute('action', $this->url('reportAnIncident', array(), array(
                 'query' => array(
-                    'step' => $step,
+                    'step' => $step + 1,
                 )
             )))->prepare();
         ?>
 
-        <form action='<?php echo $this->form->getAttribute('action'); ?>' method="post" class='status form' ajaxForm>
-          <?php echo $this->formRow($form->get('step')); ?>
+        <form enctype="multipart/form-data" action='<?php echo $this->form->getAttribute('action'); ?>' method="post" class='status form' ajaxForm>
           <?php echo $this->partial('partial/report-an-incident/step' . $this->step . '.phtml',
           array(
             'form' => $this->form,

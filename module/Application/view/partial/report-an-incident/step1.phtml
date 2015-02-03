@@ -1,4 +1,4 @@
-<div class='form_item'>
+<div class='form_item <?php if (isset($form->getMessages()['anonymous'])) echo '-error'; ?>'>
     <label class='form_label' for=''><?php echo $this->translate('Is this report Anonymous ?'); ?></label>
 
     <div class='grid -collapse -clean'>
@@ -23,11 +23,11 @@
 
 
 
-<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple fileUpload>
+<input id="fileupload" type="file" name="files[]" data-url="<?php echo $this->url('uploadFile'); ?>" multiple fileUpload>
 
 
 
-<div class='form_item'>
+<div class='form_item <?php if (isset($form->getMessages()['category'])) echo '-error'; ?>'>
     <label class='form_label'
            for='incidentCategory'><?php echo $this->translate('Category of the Incident:'); ?></label>
 
@@ -47,7 +47,7 @@
     </div>
 </div>
 
-<div class='form_item'>
+<div class='form_item <?php if (isset($form->getMessages()['type'])) echo '-error'; ?>'>
     <label class='form_label'
            for='protectionType'><?php echo $this->translate('Which type of protection incident?'); ?></label>
 

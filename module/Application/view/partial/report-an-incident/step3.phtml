@@ -1,4 +1,4 @@
-<div class='form_item'>
+<div class='form_item <?php if (isset($form->getMessages()['description'])) echo '-error'; ?>'>
     <label class='form_label'
            for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
 
@@ -13,6 +13,6 @@
     </div>
     <div class='grid_column -small5'>
         <a class='button -fullWidth' href='<?php echo $this->url('reportAnIncident', array(),
-            array('query' => array('step' => $step - 2))); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
+            array('query' => array('step' => $step - 1))); ?>' ajaxNav tabindex='0'><?php echo $this->translate('Back'); ?></a>
     </div>
 </div>

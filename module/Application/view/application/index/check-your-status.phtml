@@ -26,9 +26,7 @@
   <div class='grid'>
     <div class='grid_column -medium9 -mediumPlus8'>
         <?php $form = $this->form; ?>
-        <?php $this->form->setAttribute('action', 'check-your-status3.html'); ?>
-        <?php $form->setAttribute('class', 'status form'); ?>
-        <?php echo $this->form()->openTag($form); ?>
+        <form action="check-your-status3.html" method="POST" class="status form" ajaxForm>
 
         <div class='form_item'>
           <label class='form_label' for='authentication'><?php echo $this->translate("Please enter your identification number:");?></label>

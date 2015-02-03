@@ -251,7 +251,7 @@ class SettingsController extends AbstractActionController {
                 $this->getEntityManager()->persist($settings);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('User category settings successfully edited.');
+                $this->flashMessenger()->addSuccessMessage('User category settings successfully edited.');
                 return $this->redirect()->toRoute('settings');
             }
         }
@@ -350,13 +350,13 @@ class SettingsController extends AbstractActionController {
                 $this->getEntityManager()->persist($countryLocation);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addMessage('Country location successfully edited.');
+                $this->flashMessenger()->addSuccessMessage('Country location successfully edited.');
                 return $this->redirect()->toRoute('settings');
             }
         }
 
         $form->populateValues(array(
-            'countryLocation' => $countryLocation->getName(),
+            'locationName' => $countryLocation->getName(),
         ));
 
         return new ViewModel(array('form' => $form, 'countryLocationId' => $countryLocationId));

@@ -80,7 +80,7 @@ handle('[data-countrySelection]', function () {
 
 handle('[data-activateCountry]', function () {
 
-    $(this).on('click', function (e) {
+    $(this).on('submit', function (e) {
         e.preventDefault();
 
         var select = $('#country option:selected');
@@ -274,15 +274,7 @@ handle('[data-checkActiveCountry]', function () {
 
 handle('[data-addUserCategory]', function () {
 
-    // prevent form submit on enter
-    $('#userCategoryForm').on('keyup keypress', function(e) {
-        var code = e.keyCode || e.which;
-        if (code  == 13) {
-            e.preventDefault();
-        }
-    });
-
-    $(this).on('click', function (e) {
+    $(this).on('submit', function (e) {
         e.preventDefault();
 
         $.ajax({
@@ -336,15 +328,7 @@ handle('[data-deleteUserCategory]', function () {
 
 handle('[data-addCountryLocation]', function () {
 
-    // prevent form submit on enter
-    $('#countryLocationForm').on('keyup keypress', function(e) {
-        var code = e.keyCode || e.which;
-        if (code  == 13) {
-            e.preventDefault();
-        }
-    });
-
-    $(this).on('click', function (e) {
+    $(this).on('submit', function (e) {
         e.preventDefault();
 
         $.ajax({

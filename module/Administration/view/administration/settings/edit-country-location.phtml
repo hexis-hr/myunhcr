@@ -1,0 +1,36 @@
+
+<?php $form = $this->form; ?>
+<?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
+<?php $form->setAttribute('action', $this->url('settings/editCountryLocation', array('id' => $this->countryLocationId)))->prepare(); ?>
+
+<div class="separator bottom"></div>
+<h3 class="glyphicons globe_af"><?php echo $this->translate('Edit country location'); ?></h3>
+<div class="innerLR">
+
+    <?php echo $this->form()->openTag($form); ?>
+
+    <div class="widget-body col-md-12">
+        <div class="tab-content">
+            <!-- Row -->
+            <div class="row">
+                <!-- Column -->
+                <div class="col-md-10">
+
+                    <label><?php echo $this->translate('Country location'); ?></label>
+                    <?php echo $this->formRow($form->get('locationName')); ?>
+                    <div class="separator bottom"></div>
+
+                </div>
+                <div class="col-md-2">
+                    <div class="separator"></div>
+                    <div class="form-group" style="padding-right: 15px;">
+                        <button type="submit" class="btn btn-icon btn-primary glyphicons circle_plus pull-right">
+                            <i></i><?php echo $this->translate('Edit location'); ?></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php echo $this->form()->closeTag($form); ?>
+</div>

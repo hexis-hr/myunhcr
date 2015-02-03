@@ -13,6 +13,7 @@ use Application\Form\ComplaintForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
+use Application\Form\Filter\ComplaintFormFilter;
 use Application\Form\ReportIncidentForm;
 use Application\Form\SettingsForm;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -212,6 +213,8 @@ class IndexController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new ComplaintFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
 

@@ -28,15 +28,24 @@
 
         <?php $form = $this->form; ?>
 
-        <form action="<?php echo $this->url('bookAnAppointment2'); ?>"
+        <form action="<?php echo $this->url('bookAnAppointment'); ?>"
               method="POST" name="appointmentForm" class="booking form" id="appointmentForm" ajaxForm>
 
-            <div class='form_item'>
+            <div class='form_item <?php if (isset($form->getMessages()['appointmentType'])) echo '-error'; ?>'>
                 <label class='form_label' for='appointmentType'><?php echo $this->translate('What would you like to do at UNHCR ?'); ?></label>
                 <div class='form_field customSelect'>
                     <?php echo $this->formRow($this->form->get('appointmentType')); ?>
-                    <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate($form->get('appointmentType')
-                            ->getEmptyOption()); ?></a>
+                    <a unselectable='on' class='customSelect_overlay'>
+                        <?php
+                        if ($form->get('appointmentType')->getValue()) {
+                            $displayValue = $form->get('appointmentType')->getValueOptions()
+                            [$form->get('appointmentType')->getValue()];
+                        } else {
+                            $displayValue = $form->get('appointmentType')->getEmptyOption();
+                        }
+                        ?>
+                        <?php echo $this->translate($displayValue); ?>
+                    </a>
                 </div>
             </div>
 

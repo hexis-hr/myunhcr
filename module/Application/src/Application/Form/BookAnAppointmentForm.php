@@ -59,6 +59,9 @@ class BookAnAppointmentForm extends Form {
                 'id' => 'appointmentTime',
                 'placeholder' => 'Hour:Minutes',
             ),
+            'options' => array(
+                'format' => 'H:i',
+            ),
         ));
     }
 }

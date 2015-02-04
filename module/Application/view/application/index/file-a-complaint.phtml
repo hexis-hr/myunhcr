@@ -32,13 +32,9 @@
       </div>
 
         <?php $form = $this->form; ?>
-        <?php $form->setAttribute('class', 'form'); ?>
-        <?php $form->setAttribute('ajaxForm', ''); ?>
-        <?php $form->setAttribute('action', $this->url('fileAComplaint'))->prepare(); ?>
+        <form action='<?php echo $this->url('fileAComplaint') ?>' method="post" class='form' ajaxForm>
 
-        <?php echo $this->form()->openTag($form); ?>
-
-        <div class='form_item'>
+        <div class='form_item <?php if (isset($form->getMessages()['feedbackMessage'])) echo '-error'; ?>'>
             <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Please describe the incident:'); ?></label>
             <div class='form_field'>
                 <?php echo $this->formRow($form->get('feedbackMessage')); ?>
@@ -54,7 +50,7 @@
             </div>
         </div>
 
-        <?php echo $this->form()->closeTag($form); ?>
+        </form>
 
     </div>
   </div>

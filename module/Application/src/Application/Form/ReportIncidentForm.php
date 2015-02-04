@@ -5,6 +5,7 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Form\FormInterface;
+use Zend\View\Helper\Url;
 
 class ReportIncidentForm extends Form {
 
@@ -13,6 +14,8 @@ class ReportIncidentForm extends Form {
         parent::__construct('reportIncident');
 
         $this->em = $entityManager;
+
+        $this->view = new Url();
 
         $this->add(array(
             'name' => 'anonymous',
@@ -118,6 +121,9 @@ class ReportIncidentForm extends Form {
                 'class' => 'fileUpload_input',
                 'accept' => 'image/*;capture=camera',
                 'capture' => 'camera',
+                // quickfix todo: data-url link should be dynamically called
+                'data-url' => '/upload-file',
+                'fileUpload' => '',
             ),
         ));
 
@@ -129,6 +135,9 @@ class ReportIncidentForm extends Form {
                 'class' => 'fileUpload_input',
                 'accept' => 'audio/*;capture=microphone',
                 'capture' => 'microphone',
+                // quickfix todo: data-url link should be dynamically called
+                'data-url' => '/upload-file',
+                'fileUpload' => '',
             ),
         ));
 

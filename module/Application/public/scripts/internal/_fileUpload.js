@@ -12,14 +12,14 @@ queue.pageLoadEvents.push(function(event){
 
       // In order to not conflict with Zepto, route the alias to $j
       var $j = jQuery.noConflict();
-      
+
 
       $j(function(){
-        $j('#fileupload').fileupload({
+        $j('[fileUpload]').fileupload({
           dataType: 'json',
           done: function (e, data) {
             $j.each(data.result.files, function (index, file) {
-              $('<p/>').text(file.name).appendTo(document.body);
+              $j('<p/>').text(file.name).appendTo(document.body);
             });
           }
         });

@@ -248,14 +248,6 @@ class Incident {
     }
 
     /**
-     * @param mixed $files
-     */
-    public function setFiles($files)
-    {
-        $this->files = $files;
-    }
-
-    /**
      * @return mixed
      */
     public function getFiles()

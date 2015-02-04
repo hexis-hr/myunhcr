@@ -19,6 +19,11 @@
             </div>
         </div>
     </div>
+
+    <?php if (isset($form->getMessages()['anonymous'])) { ?>
+        <div class="form_error"><?php echo reset($form->getMessages()['anonymous']); ?></div>
+    <?php } ?>
+
 </div>
 
 

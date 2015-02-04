@@ -64,7 +64,8 @@ class Module
     {
         return array(
             'invokables' => array(
-                'formelementerrors' => 'Application\Form\View\Helper\FormElementErrors'
+                'formelementerrors' => 'Application\Form\View\Helper\FormElementErrors',
+                'formfile' => 'Application\Form\View\Helper\FormFile',
             ),
         );
     }

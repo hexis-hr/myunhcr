@@ -1,7 +1,7 @@
 queue.jQuery(function(){
 
   queue.pageLoadEvents.push(function(event){
-    if( $('[inputDate]')[0] || $('[inputTime]')[0] ){ // Check if there are date & time fields
+    if( $('[data-inputDate]')[0] || $('[data-inputTime]')[0] ){ // Check if there are date & time fields
       
       // Avoid replacing date & time in favor of native device UI
       if((app.userDevice === 'Android' && app.userDeviceVersion > 4.3) || (app.userDevice === 'iOS' && app.userDeviceVersion > 5)){
@@ -12,17 +12,39 @@ queue.jQuery(function(){
           console.log('GET: Picker.js loaded!');
 
           // Change type to basic inputs
-          $('[inputDate], [inputTime]').attr('type', 'input');
+          $('[data-inputDate], [data-inputTime]').attr('type', 'input');
+
+          // Assign a placeholder to date input
+          $('[data-inputDate]').each(function () {
+            $(this).attr('placeholder', $(this).attr('data-placeholder'));
+          });
+
+          // Assign a placeholder to date input
+          $('[data-inputTime]').each(function () {
+            $(this).attr('placeholder', $(this).attr('data-placeholder'));
+          });
+
+          // After validation assign the required format to date input
+          $('[data-inputDate]').each(function () {
+            if ($(this).val()) {
+              var date = $(this).val().split('-');
+              $(this).val(date[2] + '/' + date[1] + '/' + date[0]);
+            }
+          });
+
+
 
           // Activate custom date picker
-          $('[inputDate]').pickadate({
+          $('[data-inputDate]').pickadate({
             container: 'body',
             // onOpen: function(){
             //   checkIfPickerFits();
             // },
             // onClose: function(){ page.demote(); },
             format: 'dd/mm/yyyy',
-            
+            formatSubmit: 'yyyy-mm-dd',
+            hiddenSuffix: '',
+
             // Disable these dates in the calendar (0 = January)
             disable: [
               [2015,0,14],
@@ -32,7 +54,7 @@ queue.jQuery(function(){
           });
 
           // Activate custom time picker
-          $('[inputTime]').pickatime({
+          $('[data-inputTime]').pickatime({
             container: 'body',
             // onOpen: function(){
             //   checkIfPickerFits();

@@ -13,6 +13,7 @@ use Application\Form\ComplaintForm;
 use Administration\Provider\ProvidesEntityManager;
 use Application\Form\ChooseSurveyForm;
 
+use Application\Form\Filter\BookAnAppointmentFormFilter;
 use Application\Form\Filter\ComplaintFormFilter;
 use Application\Form\ReportIncidentForm;
 use Application\Form\SettingsForm;
@@ -46,7 +47,31 @@ class IndexController extends AbstractActionController {
     {
         $this->layout()->setVariable('body_class', 'pg-bookAppoint');
 
+        $formContainer = new Container('appointmentFormData');
+
+        $request = $this->getRequest();
+        $appointment = new Appointment();
         $form = new BookAnAppointmentForm($this->getEntityManager());
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\Appointment'));
+        $form->bind($appointment);
+        $form->setData($formContainer->getArrayCopy());
+
+        if ($request->isPost()) {
+
+            $postValues = $request->getPost();
+            foreach ($postValues as $key => $value) {
+                $formContainer->{$key} = $value;
+            }
+
+            $formFilter = new BookAnAppointmentFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData($formContainer->getArrayCopy());
+            $form->setValidationGroup('appointmentType');
+            if ($form->isValid()) {
+                return $this->redirect()->toRoute('app', array('action' => 'book-an-appointment2'));
+            }
+
+        }
 
         return new ViewModel(array(
             'form' => $form,
@@ -65,31 +90,42 @@ class IndexController extends AbstractActionController {
 
         if ($request->isPost() && $this->params()->fromQuery('step') == 'done') {
 
-            $container = new Container('userSettings');
-            $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
-                ->findOneBy(array('guid' => $container->id));
-            $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
-                ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
-            $appointment->setCountry($country);
+            $formFilter = new BookAnAppointmentFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData($request->getPost());
+            $form->setValidationGroup('appointmentDate', 'appointmentTime');
+            if ($form->isValid()) {
+                $container = new Container('userSettings');
+                $userSettings = $this->getEntityManager()->getRepository('Administration\Entity\UserSettings')
+                    ->findOneBy(array('guid' => $container->id));
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $userSettings->getCountry()->getId()));
+                $appointment->setCountry($country);
 
-            $category = $this->getEntityManager()->getRepository('Administration\Entity\AppointmentCategory')
-                ->findOneBy(array('id' => $this->params()->fromRoute('appointmentType')));
-            $appointment->setCategory($category);
+                $formContainer = new Container('appointmentFormData');
+                if (isset($formContainer->appointmentType)) {
+                    $category = $this->getEntityManager()->getRepository('Administration\Entity\AppointmentCategory')
+                        ->findOneBy(array('id' => $formContainer->appointmentType));
+                    $appointment->setCategory($category);
+                }
 
-            $appointment->setAuthId($this->params()->fromRoute('authentification'));
-            $appointment->setDate(new \DateTime($this->params()->fromPost('appointmentDate')));
-            $appointment->setTime(new \DateTime($this->params()->fromPost('appointmentTime')));
+                if (isset($formContainer->authentification))
+                    $appointment->setAuthId($formContainer->authentification);
 
-            $this->getEntityManager()->persist($appointment);
-            $this->getEntityManager()->flush();
+                $appointment->setDate(new \DateTime($this->params()->fromPost('appointmentDate')));
+                $appointment->setTime(new \DateTime($this->params()->fromPost('appointmentTime')));
 
-            return $this->redirect()->toRoute('app', array('action' => 'book-an-appointment3'));
+                $this->getEntityManager()->persist($appointment);
+                $this->getEntityManager()->flush();
+
+                $formContainer->getManager()->getStorage()->clear('appointmentFormData');
+
+                return $this->redirect()->toRoute('app', array('action' => 'book-an-appointment3'));
+            }
         }
 
         return new ViewModel(array(
             'form' => $form,
-            'appointmentType' => $this->params()->fromPost('appointmentType'),
-            'authentification' => $this->params()->fromPost('authentification'),
         ));
 
     }

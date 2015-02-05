@@ -28,7 +28,9 @@ class ChooseSurveyForm extends Form {
             'attributes' => array(
                 'class' => 'formInput',
                 'id' => 'date',
-                'placeholder' => 'Day/Month/Year',
+                'data-placeholder' => 'Day/Month/Year',
+                // disabled for now because of inability to choose year
+                // 'data-inputdate' => '',
             ),
         ));
 

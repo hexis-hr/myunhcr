@@ -47,7 +47,8 @@ class BookAnAppointmentForm extends Form {
             'attributes' => array(
                 'class' => 'formInput picker__input',
                 'id' => 'appointmentDate',
-                'placeholder' => 'Day/Month/Year',
+                'data-placeholder' => 'Day/Month/Year',
+                'data-inputdate' => '',
             ),
         ));
 
@@ -57,7 +58,8 @@ class BookAnAppointmentForm extends Form {
             'attributes' => array(
                 'class' => 'formInput picker__input',
                 'id' => 'appointmentTime',
-                'placeholder' => 'Hour:Minutes',
+                'data-placeholder' => 'Hour:Minutes',
+                'data-inputtime' => '',
             ),
             'options' => array(
                 'format' => 'H:i',

@@ -176,8 +176,10 @@ return array(
         'resolver_configs' => array(
             'collections' => array(
                 'scripts/all.js' => array(
-                    'scripts/external/fastclick.js',
+                    'scripts/external/zepto.js',
                     'scripts/main.js',
+                    'scripts/external/load.js',
+                    'scripts/external/fastclick.js',
                     'scripts/internal/_helpers.js',
                     'scripts/internal/_design.js',
                     'scripts/internal/_historyState.js',

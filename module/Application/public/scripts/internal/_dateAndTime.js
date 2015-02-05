@@ -39,8 +39,8 @@ queue.jQuery(function(){
             // },
             // onClose: function(){ page.demote(); },
             format: 'HH:i',
-            min: [8,00],
-            max: [16,0]
+            min: [8, parseInt('00')], // Seems we have to use parseInt here to avoid strict errors
+            max: [16, parseInt('00')]
           });
 
         });

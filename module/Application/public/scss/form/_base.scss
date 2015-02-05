@@ -28,7 +28,7 @@
 .form_item { margin-bottom:$form-item-gap; }
   .form_item_column.-alignRight { @include text-align(right); }
   .form_label { display:block; padding-bottom:.5em; font-size:0.95em; font-weight:500; color:$black; }
-  .form_item_help { display:block; margin-top:-.15em; padding-bottom:.75em; font-size:0.85em; color:lighten($gray, 10); font-style:italic; }
+  .form_item_help { display:block; margin-top:-.15em; padding-bottom:.75em; font-size:0.85em; color:lighten($gray, 10); }
   .form_field { position:relative; }
   .form_error { display:none; padding:0.5em; font-size:0.9em; color:white; background:$negative; }
 

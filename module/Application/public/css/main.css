@@ -1155,6 +1155,8 @@ body {
   display: block;
   margin-bottom: 1em;
   text-decoration: underline;
+  -webkit-transition: opacity 1s ease-in-out;
+          transition: opacity 1s ease-in-out;
 }
 
 .mainHeader_nav {
@@ -1258,8 +1260,8 @@ body {
     display: none;
     padding: 0 !important;
     background: #005e97;
-    background: -webkit-linear-gradient(top, #005e97, rgba(0, 94, 151, 0.95));
-    background: linear-gradient(top, #005e97, rgba(0, 94, 151, 0.95));
+    background-image: -webkit-linear-gradient(top, #005e97, rgba(0, 94, 151, 0.95));
+    background-image: linear-gradient(to bottom, #005e97, rgba(0, 94, 151, 0.95));
   }
   .js .mainHeader_nav {
     margin: 0;
@@ -1383,7 +1385,7 @@ body {
 
 .tearSection.-top {
   background-image: -webkit-linear-gradient(bottom, #ececec, white);
-  background-image: linear-gradient(bottom, #ececec, white);
+  background-image: linear-gradient(to top, #ececec, white);
 }
 .tearSection.-top:before {
   bottom: -6px;
@@ -1392,7 +1394,7 @@ body {
 
 .tearSection.-bottom {
   background-image: -webkit-linear-gradient(top, #ececec, white);
-  background-image: linear-gradient(top, #ececec, white);
+  background-image: linear-gradient(to bottom, #ececec, white);
 }
 .tearSection.-bottom:before {
   top: -6px;
@@ -1485,7 +1487,7 @@ body {
 
 .formSelect {
   height: 42px;
-  -webkit-appearance: menulist-button
+  -webkit-appearance: menulist-button;
   /* Fix for mac height */
 }
 
@@ -1898,7 +1900,7 @@ body {
   color: #242424;
   background: whitesmoke;
   background: -webkit-linear-gradient(top, #fdfdfd, #ebebeb);
-  background: linear-gradient(top, #fdfdfd, #ebebeb);
+  background: linear-gradient(to bottom, #fdfdfd, #ebebeb);
   border: 1px solid gainsboro !important;
   border-radius: 3px;
 }
@@ -1912,7 +1914,7 @@ body {
 .button:hover, .button:focus {
   background: #ebebeb;
   background: -webkit-linear-gradient(top, #f3f3f3, #e1e1e1);
-  background: linear-gradient(top, #f3f3f3, #e1e1e1);
+  background: linear-gradient(to bottom, #f3f3f3, #e1e1e1);
 }
 .button.-sharp {
   border-radius: 0 !important;
@@ -1937,26 +1939,26 @@ body {
   color: white;
   background: #009d54;
   background: -webkit-linear-gradient(top, #00a759, #00934e);
-  background: linear-gradient(top, #00a759, #00934e);
+  background: linear-gradient(to bottom, #00a759, #00934e);
   border: 1px solid #008849 !important;
 }
 .button.-primary:hover, .ageNav.-bottom .ageNav_button:hover, .button.-primary:focus, .ageNav.-bottom .ageNav_button:focus {
   background: #00b15f;
   background: -webkit-linear-gradient(top, #00bb64, #00a759);
-  background: linear-gradient(top, #00bb64, #00a759);
+  background: linear-gradient(to bottom, #00bb64, #00a759);
 }
 
 .button.-secondary {
   color: white;
   background: #0077c0;
   background: -webkit-linear-gradient(top, #007dca, #0071b6);
-  background: linear-gradient(top, #007dca, #0071b6);
+  background: linear-gradient(to bottom, #007dca, #0071b6);
   border: 1px solid #006aac !important;
 }
 .button.-secondary:hover, .button.-secondary:focus {
   background: #0084d4;
   background: -webkit-linear-gradient(top, #008adf, #007dca);
-  background: linear-gradient(top, #008adf, #007dca);
+  background: linear-gradient(to bottom, #008adf, #007dca);
 }
 
 @media only screen and (min-width: 18.75em) {
@@ -2253,7 +2255,7 @@ body {
 
 .callScreen_middle {
   padding-top: .5em;
-  font-size: 1.75em;
+  font-size: 1.5em;
   color: white;
   font-weight: 300;
 }
@@ -2265,22 +2267,23 @@ body {
 }
 
 .callScreen_dial_inner {
-  height: 200px;
-  background: #008adf -webkit-linear-gradient(top, #039fff, #0087da);
-  background: #008adf linear-gradient(top, #039fff, #0087da);
+  padding: 20px 10px;
+  background: #008adf;
+  background-image: -webkit-linear-gradient(top, #039fff, #0087da);
+  background-image: linear-gradient(to bottom, #039fff, #0087da);
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .callScreen_dial_title {
   display: block;
-  padding: .9em 0;
+  margin-bottom: 8px;
   font-size: 1.35em;
   color: white;
   font-weight: bold;
 }
 
 .callScreen_dial_image {
-  display: block;
+  display: none;
   margin-bottom: 26px;
 }
 
@@ -2311,6 +2314,25 @@ body {
   box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.15);
 }
 
+@media only screen and (min-height: 320px) {
+  .callScreen_middle {
+    font-size: 1.75em;
+  }
+
+  .callScreen_dial_title {
+    margin-bottom: 18px;
+  }
+
+  .callScreen_dial_image {
+    display: block;
+  }
+}
+@media only screen and (min-height: 500px) {
+  .callScreen_dial_inner {
+    padding-top: 36px;
+    padding-bottom: 30px;
+  }
+}
 .js.ready .callScreen {
   display: block;
 }
@@ -2322,7 +2344,7 @@ body {
           transform: translateX(-100%);
 }
 
-.callScreen.-show {
+.js .callScreen.-show {
   display: block;
   left: 0 !important;
   -webkit-transform: translateX(0) !important;
@@ -2600,8 +2622,8 @@ body {
   left: 0;
   width: 100%;
   height: 75%;
-  background-image: -webkit-linear-gradient(bottom, white, rgba(255, 255, 255, 0));
-  background-image: linear-gradient(bottom, white, rgba(255, 255, 255, 0));
+  background-image: -webkit-linear-gradient(top, white, rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to bottom, white, rgba(255, 255, 255, 0));
   content: '';
 }
 
@@ -2671,7 +2693,7 @@ body {
   color: #595959;
   background: #e6e6e6;
   background: -webkit-linear-gradient(top, #ebebeb, #e1e1e1);
-  background: linear-gradient(top, #ebebeb, #e1e1e1);
+  background: linear-gradient(to bottom, #ebebeb, #e1e1e1);
 }
 
 .pagination_link.-page {
@@ -2717,7 +2739,7 @@ body {
 
 .rippleWave {
   position: absolute;
-  background: rgba(75, 166, 221, 0.5);
+  background: rgba(75, 166, 221, 0.3);
   border-radius: 100%;
   -webkit-transform: scale(0);
       -ms-transform: scale(0);
@@ -2730,10 +2752,10 @@ body {
 }
 
 .transforms [data-ripple="neutral"] .rippleWave, .transforms .button .rippleWave {
-  background: rgba(128, 128, 128, 0.45);
+  background: rgba(128, 128, 128, 0.3);
 }
 .transforms [data-ripple="white"] .rippleWave, .transforms .button.-primary .rippleWave, .transforms .ageNav.-bottom .ageNav_button .rippleWave, .ageNav.-bottom .transforms .ageNav_button .rippleWave, .transforms .button.-secondary .rippleWave {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .pg-welcome {
@@ -2768,6 +2790,9 @@ body {
   padding-bottom: .9em;
 }
 
+.pg-homepage .mainHeader_menu {
+  opacity: 0.25;
+}
 .pg-homepage .page {
   padding-top: .25em;
 }
@@ -3131,7 +3156,7 @@ body {
   font-size: .75em;
   padding-bottom: .25em;
   color: #999999;
-  font-weight: 500
+  font-weight: 500;
   /* Increase the spacing a tad */
 }
 

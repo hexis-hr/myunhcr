@@ -11,19 +11,18 @@ function checkMediaQuery(query){
 /*------------------------------------------------------------------------------------
   Update user info on resize event
 ------------------------------------------------------------------------------------*/
-function updateOnResize(){
-  dlog('Resize updates executed...');
+function updateViewport(){
   ux.viewport.width = $(window).width();
   ux.viewport.height = $(window).height();
 }
+lightResize(updateViewport, 20);
 
 
 
 /*------------------------------------------------------------------------------------
   Update user info on scroll even
 ------------------------------------------------------------------------------------*/
-function updateOnScroll(){
-  dlog('Scroll updates executed...');
+function updateScroll(){
   var treshold = 5;
   ux.scroll.offsetPrevious = ux.scroll.offset;
   ux.scroll.offset = $(window).scrollTop();
@@ -38,6 +37,7 @@ function updateOnScroll(){
   ux.viewport.visibleTop = ux.scroll.offset
   ux.viewport.visibleBottom = ux.viewport.height + ux.scroll.offset;
 }
+lightScroll(updateScroll, 40);
 
 
 
@@ -138,8 +138,8 @@ queue.jQuery(function(){
     Run on page load
   ------------------------------------------------------------------------------------*/
   // Get basic user info
-  updateOnResize();
-  updateOnScroll();
+  updateViewport();
+  updateScroll();
 
 
 });

@@ -1,14 +1,36 @@
-// Main function used for swapping pages
-function getPage(url, title, method, data, timeout) {
+/*------------------------------------------------------------------------------------
+  Update user info on resize event
+------------------------------------------------------------------------------------*/
+var pageOffset = {
+  save: function(){
+    ux.scrollOffset[$('#relay').attr('bodyClass')] = ux.scroll.offset;
+  },
+  restore: function(){
+    var currentPage = $('#relay').attr('bodyClass');
+    var allowedPages = ['pg-homepage'];
+    if( $.inArray(currentPage, allowedPages) > -1 ){
+      $(window).scrollTop( ux.scrollOffset[currentPage] );
+    }
+  }
+};
+
+
+
+/*------------------------------------------------------------------------------------
+  Get page function
+------------------------------------------------------------------------------------*/
+function getPage(url, method, data, timeout) {
   
   // Documentation: http://zeptojs.com/#ajax
 
   // Log page request
   dlog('GET: ' + url + ' started...');
   var start = new Date().getTime();
+  
+  // Store the scroll offset for current page
+  pageOffset.save();
 
   // Parse config
-  var title = title || app.name;
   var method = method || 'GET';
   var data = data || [];
 
@@ -25,7 +47,8 @@ function getPage(url, title, method, data, timeout) {
     data: data,
     timeout: 10000, // Wait for 10 seconds max
     success: function(data) {
-      
+      var title = $('#relay').attr('data-pageTitle') || app.name;
+
       // Swap data
       $('#page').empty().html(data);
       $('body').removeClass().addClass($('#relay').attr('bodyClass'));
@@ -46,6 +69,9 @@ function getPage(url, title, method, data, timeout) {
 
       // Run all pageLoad events
       page.onLoad();
+
+      // Apply the scroll offset if applicable
+      pageOffset.restore();
 
     },
     error: function(xhr, type) {

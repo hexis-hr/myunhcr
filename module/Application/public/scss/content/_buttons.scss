@@ -6,7 +6,7 @@
   margin-bottom: .5em;
   color: $neutral-dark;
   background: $color;
-  background: linear-gradient(top, lighten($color, 3), darken($color, 4));
+  background: linear-gradient(to bottom, lighten($color, 3), darken($color, 4));
   border: 1px solid darken(#e6e6e6, 4) !important;
   border-radius: 3px;
 
@@ -14,7 +14,7 @@
     @extend %inputBase_focus;
     $color: lighten($lightGray, 2);
     background: $color;
-    background: linear-gradient(top, lighten($color, 3), darken($color, 4));
+    background: linear-gradient(to bottom, lighten($color, 3), darken($color, 4));
   }
 
   &.-sharp {
@@ -42,13 +42,13 @@
 .button.-primary {
   color: white;
   background: $primary;
-  background: linear-gradient(top, lighten($primary, 2), darken($primary, 2));
+  background: linear-gradient(to bottom, lighten($primary, 2), darken($primary, 2));
   border: 1px solid darken($primary, 4) !important;
 
   &:hover, &:focus {
     $color: lighten($primary, 4);
     background: $color;
-    background: linear-gradient(top, lighten($color, 2), darken($color, 2));
+    background: linear-gradient(to bottom, lighten($color, 2), darken($color, 2));
   }
 }
 
@@ -56,13 +56,13 @@
 .button.-secondary {
   color: white;
   background: $secondary;
-  background: linear-gradient(top, lighten($secondary, 2), darken($secondary, 2));
+  background: linear-gradient(to bottom, lighten($secondary, 2), darken($secondary, 2));
   border: 1px solid darken($secondary, 4) !important;
 
   &:hover, &:focus {
     $color: lighten($secondary, 4);
     background: $color;
-    background: linear-gradient(top, lighten($color, 2), darken($color, 2));
+    background: linear-gradient(to bottom, lighten($color, 2), darken($color, 2));
   }
 }
 

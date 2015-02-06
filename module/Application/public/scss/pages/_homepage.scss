@@ -1,5 +1,8 @@
 .pg-homepage {
   
+  // Fade out the menu button
+  .mainHeader_menu { opacity:0.25; }
+
   // Remove padding from page
   .page { padding-top:.25em; }
 

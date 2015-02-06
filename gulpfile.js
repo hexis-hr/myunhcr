@@ -44,7 +44,7 @@ gulp.task('css', function (){
       noCache: true,
       bundleExec: true
     }))
-    .pipe(prefix('last 2 version', 'Explorer >= 8', '> 1%', 'Android >= 2.3.3'))
+    .pipe(prefix('last 3 version', 'Explorer >= 8', '> 1%', 'Android >= 2.3', 'iOS', 'BlackBerry'))
     .pipe(gulp.dest(path.css));
 });
 

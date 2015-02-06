@@ -8,7 +8,7 @@ $active-background: darken($blue, 8);
     .mainHeader_call { display:none; }
     .mainHeader_logo { cursor:default !important; display:inline-block; margin-bottom:1em; }
     .mainHeader_menu {}
-      .mainHeader_menu { display:block; margin-bottom:1em; text-decoration:underline; }
+      .mainHeader_menu { display:block; margin-bottom:1em; text-decoration:underline; transition:opacity 1s ease-in-out; }
     .mainHeader_nav { display:block; margin-bottom:1em; }
       .mainHeader_nav_trigger { display:none; }
       .mainHeader_nav_item { display:block; }
@@ -40,7 +40,7 @@ $active-background: darken($blue, 8);
             .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
             .mainHeader_menu_open { @include img("icons", "menu-white-h24@2x", 2, inline); }
             // .mainHeader_menu_close { @include img("icons", "close-white-h24@2x", 2, inline); display:none; }
-        .mainHeader_bottom { display:none; padding:0 !important; background:$active-background; background:linear-gradient(top, $active-background, rgba($active-background, 0.95)); }
+        .mainHeader_bottom { display:none; padding:0 !important; background:$active-background; background-image:linear-gradient(to bottom, $active-background, rgba($active-background, 0.95)); }
           .mainHeader_nav { margin:0; }
             .mainHeader_nav_item {}
               .mainHeader_nav_link { margin:0; padding:.85em 1em; min-width:200px; font-size:1.1em; font-weight:400; background:none;

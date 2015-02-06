@@ -8,7 +8,7 @@
 %rippleContainer { position:relative; overflow:hidden; }
 
 // Wave styles
-.rippleWave { position:absolute; background:rgba($lightBlue,0.5); border-radius:100%; transform:scale(0); }
+.rippleWave { position:absolute; background:rgba($lightBlue,0.3); border-radius:100%; transform:scale(0); }
 
 // Animate the wave
 .rippleWave.animate { animation:ripple 0.6s linear; }
@@ -21,9 +21,9 @@
   [data-ripple], .button, .sectionHeader_info, .bigRadio { @extend %rippleContainer; }
   
   // Gray wave
-  [data-ripple="neutral"], .button { .rippleWave { background:rgba(gray,0.45); }}
+  [data-ripple="neutral"], .button { .rippleWave { background:rgba(gray,0.3); }}
 
   // White wave
-  [data-ripple="white"], .button.-primary, .button.-secondary, { .rippleWave { background:rgba(white,0.45); }}
+  [data-ripple="white"], .button.-primary, .button.-secondary, { .rippleWave { background:rgba(white,0.3); }}
 
 }

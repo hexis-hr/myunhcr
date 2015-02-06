@@ -9,6 +9,7 @@ window.ux = {
   scroll: {
     direction: false
   },
+  scrollOffset: {},
   config: {},
   url: {
     isLoading: false

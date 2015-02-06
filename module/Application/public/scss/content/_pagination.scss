@@ -32,7 +32,7 @@ $paginationHeight: 42px;
       line-height: $paginationHeight;
       color: $gray;
       background: $lightGray;
-      background: linear-gradient(top, lighten($lightGray, 2), darken($lightGray, 2));
+      background: linear-gradient(to bottom, lighten($lightGray, 2), darken($lightGray, 2));
     }
     .pagination_link.-page { display:none; }
     .pagination_separator {}

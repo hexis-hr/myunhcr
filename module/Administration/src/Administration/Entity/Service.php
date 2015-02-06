@@ -46,12 +46,12 @@ class Service {
     protected $phone = "";
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     protected $latitude = "";
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
     protected $longitude = "";
 

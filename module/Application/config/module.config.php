@@ -134,6 +134,17 @@ return array(
                     ),
                 ),
             ),
+            'getAjaxMarkers' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/getAjaxMarkers',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'getAjaxMarkers',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -200,6 +211,7 @@ return array(
                     'scripts/internal/_forms.js',
                     'scripts/internal/_dateAndTime.js',
                     'scripts/internal/_fileUpload.js',
+                    'scripts/internal/_openMaps.js',
                     'scripts/internal/_unsorted.js',
                     'scripts/internal/_infiniteScroll.js',
                     'scripts/internal/_exec.js'
@@ -217,13 +229,13 @@ return array(
                 ),
             ),
         ),
-//        'caching' => array(
-//            'default' => array(
-//                'cache'     => 'AssetManager\\Cache\\FilePathCache',
-//                'options' => array(
-//                    'dir' => 'public/', // path/to/cache
-//                ),
-//            ),
-//        ),
+        'caching' => array(
+            'default' => array(
+                'cache'     => 'AssetManager\\Cache\\FilePathCache',
+                'options' => array(
+                    'dir' => 'public/', // path/to/cache
+                ),
+            ),
+        ),
     ),
 );

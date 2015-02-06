@@ -728,5 +728,63 @@ class IndexController extends AbstractActionController {
         return new ViewModel();
     }
 
+    public function getAjaxMarkersAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+
+            $nelat = $this->params()->fromPost('nelat');
+            $nelng = $this->params()->fromPost('nelng');
+            $swlat = $this->params()->fromPost('swlat');
+            $swlng = $this->params()->fromPost('swlng');
+
+            if ($nelat < $swlat) {
+                $minLat = $nelat;
+                $maxLat = $swlat;
+            } else {
+                $minLat = $swlat;
+                $maxLat =  $nelat;
+            }
+
+            if ($nelng < $swlng) {
+                $minLng = $nelng;
+                $maxLng = $swlng;
+            } else {
+                $minLng = $swlng;
+                $maxLng =  $nelng;
+            }
+
+            $dql = 'SELECT service FROM Administration\Entity\Service service
+            WHERE service.latitude BETWEEN :minLat AND :maxLat AND service.longitude BETWEEN :minLng AND :maxLng';
+
+            $query = $this->getEntityManager()->createQuery($dql)->setParameters(array(
+                'minLat' => $minLat,
+                'maxLat' => $maxLat,
+                'minLng' => $minLng,
+                'maxLng' => $maxLng,
+            ));
+
+            $services = $query->getResult();
+
+            $arr = array();
+            foreach ($services as $service) {
+                $arr[$service->getId()] = array($service->getServiceName(), $service->getLatitude(), $service->getLongitude());
+            }
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'data' => $arr,
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
 }
 

@@ -955,6 +955,118 @@ return array(
                     ),
                 ),
             ),
+            'service' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/service',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Administration\Controller',
+                        'controller' => 'Service',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:controller[/:action]][/:id][/:confirm]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Service',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                    'addService' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addService',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'addService',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editService' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editService[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'editService',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteService' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteService[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'deleteService',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewPartner' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewPartner',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'viewPartner',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addPartner' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addPartner',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'addPartner',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editPartner' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editPartner[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'editPartner',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deletePartner' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deletePartner[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'deletePartner',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                ),
+            ),
         ),
     ),
 
@@ -1008,6 +1120,7 @@ return array(
             'Administration\Controller\Incident' => 'Administration\Controller\IncidentController',
             'Administration\Controller\News' => 'Administration\Controller\NewsController',
             'Administration\Controller\Settings' => 'Administration\Controller\SettingsController',
+            'Administration\Controller\Service' => 'Administration\Controller\ServiceController',
             'Administration\Controller\Complaint' => 'Administration\Controller\ComplaintController',
             'Administration\Controller\Appointment' => 'Administration\Controller\AppointmentController',
             'Administration\Controller\Console' => 'Administration\Controller\ConsoleController',
@@ -1163,6 +1276,24 @@ return array(
                         'label' => 'Appointment category',
                         'route' => 'appointment/viewAppointmentCategory',
                         'class' => 'glyphicons parents',
+                    ),
+                ),
+            ),
+            array(
+                'label' => 'Service',
+                'route' => 'service',
+                'id' => 'service',
+                'class' => 'glyphicons circle_info',
+                'pages' => array(
+                    array(
+                        'label' => 'Service',
+                        'route' => 'service',
+                        'class' => 'glyphicons circle_info',
+                    ),
+                    array(
+                        'label' => 'Service Partner',
+                        'route' => 'service/viewPartner',
+                        'class' => 'glyphicons group',
                     ),
                 ),
             ),

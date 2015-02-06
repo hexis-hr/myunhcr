@@ -256,6 +256,14 @@ class Incident {
     }
 
     /**
+     * @return mixed
+     */
+    public function getFeaturedFile ()
+    {
+        return $this->files->first();
+    }
+
+    /**
      * @param $file
      */
     public function addFile (File $file) {

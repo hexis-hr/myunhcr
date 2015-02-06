@@ -3,9 +3,13 @@
 namespace Application\Form\Filter;
 
 use Administration\Provider\ProvidesEntityManager;
+use Administration\Provider\ProvidesServiceLocator;
+use Doctrine\ORM\EntityManager;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\ServiceManager\ServiceManager;
+use Zend\Session\Container;
 use Zend\Validator\File\IsImage;
 use Zend\Validator\File\MimeType;
 
@@ -14,7 +18,36 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
     protected $inputFilter;
     const DESCRIPTION_LIMIT = 10;
 
-    use ProvidesEntityManager;
+    private $entityManager;
+    private $serviceLocator;
+    private $sessionContainer;
+
+    const AUDIO_ERROR = 'Audio file is invalid.';
+    const IMAGE_ERROR = 'Image file is invalid.';
+
+    private static $allowedTypes = array('image', 'audio');
+
+    public function __construct (EntityManager $entityManager = null, ServiceManager $serviceLocator = null,
+        Container $sessionContainer = null) {
+
+        $this->entityManager = $entityManager;
+        $this->serviceLocator = $serviceLocator;
+
+        $this->sessionContainer = $sessionContainer;
+
+    }
+
+    public static function getErrorMessage ($type) {
+
+        if ($type == 'image')
+            return self::IMAGE_ERROR;
+
+        if ($type == 'audio')
+            return self::AUDIO_ERROR;
+
+        throw new \Exception('Type *' . $type . '* is not supported');
+
+    }
 
     // Add content to these methods:
     public function setInputFilter (InputFilterInterface $inputFilter) {
@@ -120,7 +153,7 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
                             'callback' => function ($value) {
                                     return $this->validateImage($value);
                                 },
-                            'message' => 'Image file is invalid.',
+                            'message' => self::IMAGE_ERROR,
                         ),
                     ),
                 ),
@@ -136,7 +169,7 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
                             'callback' => function ($value) {
                                     return $this->validateAudio($value);
                                 },
-                            'message' => 'Audio file is invalid.',
+                            'message' => self::AUDIO_ERROR,
                         ),
                     ),
                 ),
@@ -149,11 +182,37 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
     }
 
     /**
+     * @param $type
+     * @return bool
+     */
+    private function entityOfTypeExistsInSession ($type) {
+
+        //save form values in session
+        $data = $this->sessionContainer->getArrayCopy();
+
+        foreach ($data as $key => $value) {
+            if (strpos($key, $type) !== false) {
+                $file = $this->entityManager->getRepository('Administration\Entity\File')
+                    ->findOneBy(array('name' => $value));
+                if (isset($file))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param $image
      * @return bool
      */
     private function validateImage ($image)
     {
+        // if the image was uploaded via ajax uploader then we return true - we check Session and EM to validate
+        // else we validate file since we have a POST request
+        if ($this->entityOfTypeExistsInSession('image'))
+            return true;
+
         return $this->validateFileType($image, 'image');
     }
 
@@ -163,6 +222,11 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
      */
     private function validateAudio ($audio)
     {
+        // if the image was uploaded via ajax uploader then we return true - we check Session and EM to validate
+        // else we validate file since we have a POST request
+        if ($this->entityOfTypeExistsInSession('audio'))
+            return true;
+
         return $this->validateFileType($audio, 'audio');
     }
 
@@ -177,11 +241,9 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
      * @throws \Exception if invalid expected type
      * @return boolean/id - return false on failure and unique_id on success
      */
-    private function validateFileType ($fileDetails, $expectedType)
+    public function validateFileType ($fileDetails, $expectedType)
     {
-        $allowedTypes = array('image', 'audio');
-
-        if (!in_array($expectedType, $allowedTypes)) {
+        if (!in_array($expectedType, self::$allowedTypes)) {
             throw new \Exception('Expected type *' . $expectedType . '* is not supported');
         }
 
@@ -199,9 +261,9 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
         $audioValidator = new MimeType($audioMimeTypes);
 
         if ($expectedType == 'image' && $imageValidator->isValid($fileDetails['tmp_name'])) {
-            $outputName = uniqid('image', true);
-        } else if ($expectedType == 'audio' && $audioValidator->isValid($fileDetails['name'])) {
-            $outputName = uniqid('audio', true);
+            $outputName = uniqid('file:image');
+        } else if ($expectedType == 'audio' && $audioValidator->isValid($fileDetails['tmp_name'])) {
+            $outputName = uniqid('file:audio');
         } else {
             return false;
         }
@@ -224,12 +286,14 @@ class ReportIncidentFormFilter implements InputFilterAwareInterface {
             $file->setMimeType($outputMimeType);
             $file->setSize($fileDetails['size']);
 
-            $this->getEntityManager()->persist($file);
-            $this->getEntityManager()->flush();
+            $this->entityManager->persist($file);
+            $this->entityManager->flush();
 
         } else {
             return false;
         }
+
+        $this->sessionContainer->{$outputName} = $outputName;
 
         return $outputName;
     }

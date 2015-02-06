@@ -18,9 +18,15 @@ queue.pageLoadEvents.push(function(event){
         $j('[fileUpload]').fileupload({
           dataType: 'json',
           done: function (e, data) {
-            $j.each(data.result.files, function (index, file) {
-              $j('<p/>').text(file.name).appendTo(document.body);
-            });
+            var t = $j(this);
+            if (data.result.status == 'success') {
+                $j.each(data.result.files, function (index, file) {
+                    $j('<p/>').text(file.name).insertAfter(t);
+                });
+            } else if (data.result.status == 'error') {
+                t.parents('.form_item:first').addClass('-error');
+                $j('<div/>').text(data.result.message).addClass('form_error').insertAfter(t);
+            }
           }
         });
       });

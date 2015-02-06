@@ -503,13 +503,8 @@ class IndexController extends AbstractActionController {
         $form->get('submit')->setAttribute('value', 'Next');
 
         //save form values in session
-        $containerName = 'incidentFormData';
-        $container = new Container($containerName);
+        $container = new Container(ReportIncidentForm::$formName);
         $form->populateValues($container->getArrayCopy());
-
-        if (!isset($container->files)) {
-            $container->files = array();
-        }
 
         if ($request->isXmlHttpRequest() || $request->isPost()) {
 
@@ -519,7 +514,7 @@ class IndexController extends AbstractActionController {
                 $container->{$key} = $value;
             }
 
-            $formFilter = new ReportIncidentFormFilter();
+            $formFilter = new ReportIncidentFormFilter($this->getEntityManager(), $this->getServiceLocator(), $container);
             $form->setInputFilter($formFilter->getInputFilter());
             $form->setData(array_merge($container->getArrayCopy(), $request->getFiles()->toArray()));
 
@@ -546,8 +541,6 @@ class IndexController extends AbstractActionController {
 
             $form->setValidationGroup($validationGroups);
 
-            $data = $container->getArrayCopy();
-
             // upon first ajax load of the page we need to skip validation
             if ($validate) {
                 if (!$form->isValid()) {
@@ -562,16 +555,16 @@ class IndexController extends AbstractActionController {
                 // get data from session, populate form, validate and create incident
 
                 $incident = new Incident();
+                $data = $container->getArrayCopy();
 
                 foreach ($data as $key => $value) {
                     if (method_exists($incident, 'set' . ucfirst($key))) {
                         $incident->{'set' . ucfirst($key)}($value);
-                    } else if ($key == 'files') {
-                        foreach ($value as $v) if (!empty($v)) {
-                            $file = $this->getEntityManager()->getRepository('Administration\Entity\File')
-                                ->findOneBy(array('name' => $v));
+                    } else if (strpos($key, 'file:') !== false) {
+                        $file = $this->getEntityManager()->getRepository('Administration\Entity\File')
+                            ->findOneBy(array('name' => $value));
+                        if (isset($file))
                             $incident->addFile($file);
-                        }
                     }
                 }
                 $category = $this->getEntityManager()->getRepository('Administration\Entity\IncidentCategory')
@@ -607,11 +600,21 @@ class IndexController extends AbstractActionController {
 
         $request = $this->getRequest();
 
-        var_dump($request->getFiles()->toArray());
-
         $files = array();
+        $translator = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
         foreach ($request->getFiles()->toArray() as $type => $file) {
-
+            $filter = new ReportIncidentFormFilter($this->getEntityManager(), $this->getServiceLocator(),
+                new Container(ReportIncidentForm::$formName));
+            if ($outputName = $filter->validateFileType($file, $type)) {
+                $files[] = array(
+                    'name' => $file['name'],
+                );
+            } else {
+                return new JsonModel(array(
+                    'status' => 'error',
+                    'message' => $translator(ReportIncidentFormFilter::getErrorMessage($type)),
+                ));
+            }
         }
 
         return new JsonModel(array(

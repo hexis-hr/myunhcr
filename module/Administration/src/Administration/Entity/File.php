@@ -145,6 +145,4 @@ class File {
         return $this->originalName;
     }
 
-
-
 }

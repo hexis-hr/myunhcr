@@ -9,6 +9,8 @@ use Zend\View\Helper\Url;
 
 class ReportIncidentForm extends Form {
 
+    public static $formName = 'incidentFormData';
+
     public function __construct ($entityManager, $name = null) {
 
         parent::__construct('reportIncident');

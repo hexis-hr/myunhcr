@@ -56,73 +56,43 @@
 
                     <?php $active = true; ?>
                     <?php foreach ($this->categories as $category) { ?>
-                        <?php if ($active) { ?>
-                            <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane active">
-                                <div class="panel-group" id="accordion">
-                                    <?php foreach ($this->data as $data) { ?>
-                                        <?php if ($data->getCategory() == $category) { ?>
-                                            <div class="panel panel-default"
-                                                 data-row="row_<?php echo $data->getId(); ?>">
-                                                <div class="panel-heading">
-                                                    <a class="accordion-toggle glyphicons circle_question_mark collapsed col-md-11"
-                                                       data-toggle="collapse"
-                                                       data-parent="#accordion"
-                                                       href="#collapse<?php echo $data->getId(); ?>"
-                                                        ><i></i><?php echo $data->getType()->getType(); ?>
-                                                    </a>
-                                                    <a class="btn-action glyphicons pencil btn-success "
-                                                       href="<?php echo $this->url('incident/edit', array('id' => $data->getId())); ?>"></a>
-                                                    <a class="btn-action glyphicons remove_2 btn-danger"
-                                                       href="#"
-                                                       data-delete
-                                                       data-href="<?php echo $this->url('incident/delete', array('id' => $data->getId())); ?>"></a>
-                                                </div>
-                                                <div id="collapse<?php echo $data->getId(); ?>"
-                                                     class="panel-collapse collapse"
-                                                     style="height: 0px;"
-                                                    >
-                                                    <div class="panel-body"><?php echo $data->getDescription(); ?></div>
+                        <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane <?php echo $active ? 'active' : ''; ?>"
+                             data-row="row_<?php echo $category->getId(); ?>">
+                            <div class="panel-group" id="accordion">
+                                <?php foreach ($this->data as $data) { ?>
+                                    <?php if ($data->getCategory() == $category) { ?>
+                                        <div class="panel panel-default"
+                                             data-row="row_<?php echo $data->getId(); ?>">
+                                            <div class="panel-heading">
+                                                <a class="accordion-toggle glyphicons circle_question_mark collapsed col-md-11"
+                                                   data-toggle="collapse"
+                                                   data-parent="#accordion"
+                                                   href="#collapse<?php echo $data->getId(); ?>"
+                                                    ><i></i><?php echo $data->getType()->getType(); ?>
+                                                </a>
+                                                <a class="btn-action glyphicons pencil btn-success"
+                                                   href="<?php echo $this->url('incident/edit', array('id' => $data->getId())); ?>"></a>
+                                                <a class="btn-action glyphicons remove_2 btn-danger"
+                                                   href="#"
+                                                   data-delete
+                                                   data-href="<?php echo $this->url('incident/delete', array('id' => $data->getId())); ?>"></a>
+                                            </div>
+                                            <div id="collapse<?php echo $data->getId(); ?>"
+                                                 class="panel-collapse collapse" style="height: 0px;">
+                                                <div class="panel-body">
+                                                    <img src="<?php echo $this->url('incident/downloadImage', array(
+                                                        'name' => $data->getFeaturedFile()->getName(),
+                                                    )); ?>" height="150px" width="150px"
+                                                         alt="<?php echo $data->getFeaturedFile()->getOriginalName(); ?>">
+                                                    <?php echo $data->getDescription(); ?>
                                                 </div>
                                             </div>
-                                        <?php } ?>
+                                        </div>
                                     <?php } ?>
-                                </div>
+                                <?php } ?>
                             </div>
-                            <?php $active = false; ?>
-                        <?php } else { ?>
-                            <div id="tab_<?php echo $category->getId(); ?>" class="tab-pane"
-                                 data-row="row_<?php echo $category->getId(); ?>">
-                                <div class="panel-group" id="accordion">
-                                    <?php foreach ($this->data as $data) { ?>
-                                        <?php if ($data->getCategory() == $category) { ?>
-                                            <div class="panel panel-default"
-                                                 data-row="row_<?php echo $data->getId(); ?>">
-                                                <div class="panel-heading">
-                                                    <a class="accordion-toggle glyphicons circle_question_mark collapsed col-md-11"
-                                                       data-toggle="collapse"
-                                                       data-parent="#accordion"
-                                                       href="#collapse<?php echo $data->getId(); ?>"
-                                                        ><i></i><?php echo $data->getType()->getType(); ?>
-                                                    </a>
-                                                    <a class="btn-action glyphicons pencil btn-success"
-                                                       href="<?php echo $this->url('incident/edit', array('id' => $data->getId())); ?>"></a>
-                                                    <a class="btn-action glyphicons remove_2 btn-danger"
-                                                       href="#"
-                                                       data-delete
-                                                       data-href="<?php echo $this->url('incident/delete', array('id' => $data->getId())); ?>"></a>
-                                                </div>
-                                                <div id="collapse<?php echo $data->getId(); ?>"
-                                                     class="panel-collapse collapse" style="height: 0px;">
-                                                    <div class="panel-body">
-                                                        <?php echo $data->getDescription(); ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        <?php } ?>
+                        </div>
+                        <?php $active = false; ?>
                     <?php } ?>
 
                 </div>

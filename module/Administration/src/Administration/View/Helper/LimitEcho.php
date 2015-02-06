@@ -6,11 +6,11 @@ use Zend\View\Helper\AbstractHelper;
 
 class LimitEcho extends AbstractHelper {
 
-    public function __invoke ($text) {
+    public function __invoke ($text, $length = 200) {
 
-        if (strlen($text) <= 200)
+        if (strlen($text) <= $length)
             return $text;
         else
-            return substr($text, 0, 200) . '...';
+            return substr($text, 0, $length) . '...';
     }
 }

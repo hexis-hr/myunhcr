@@ -35,6 +35,7 @@ class AclFactory implements FactoryInterface {
         $acl->addResource(new Resource('News'));
         $acl->addResource(new Resource('Settings'));
         $acl->addResource(new Resource('Survey'));
+        $acl->addResource(new Resource('Service'));
         $acl->addResource(new Resource('Translation'));
 
         //enable work from console

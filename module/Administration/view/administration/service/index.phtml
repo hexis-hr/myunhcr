@@ -1,0 +1,63 @@
+
+<div class="separator bottom"></div>
+    <div class="heading-buttons">
+        <h3 class="glyphicons keynote"><?php echo $this->translate('Service'); ?></h3>
+
+        <div class="buttons pull-right">
+            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('service/addService');?>">
+                <?php echo $this->translate('Add new Service'); ?></a>
+        </div>
+
+        <div class="buttons pull-right">
+            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('service/addPartner');?>">
+                <?php echo $this->translate('Add new Service Partner'); ?></a>
+        </div>
+        <div class="clearfix" style="clear: both;"></div>
+    </div>
+<div class="separator bottom"></div>
+
+<div class="innerLR" data-checkActiveCountry>
+    <div class="widget widget-4">
+        <div class="widget-head">
+            <h4 class="heading"><?php echo $this->translate('Service'); ?></h4>
+        </div>
+        <div class="widget-body">
+            <?php if (count($this->data) > 0) { ?>
+                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
+                    <tbody>
+                    <?php foreach($this->data as $data) { ?>
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
+                            <td><?php echo $data->getServiceName(); ?></td>
+                            <td><?php echo $data->getServiceAcronym(); ?></td>
+                            <td><?php echo $data->getServiceUrl(); ?></td>
+                            <td><?php echo $data->getPartner()->getPartnerName(); ?></td>
+                            <td><?php echo $this->limitEcho($data->getDescription(), 300); ?></td>
+                            <td>
+                                <a class="btn-action glyphicons pencil btn-success"
+                                   href="<?php echo $this->url('service/editService', array('id' => $data->getId())); ?>"></a>
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
+                                   data-href="<?php echo $this->url('service/deleteService', array('id' => $data->getId())); ?>"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div class="widget-body center">
+                    <span class="gritter-add-regular btn btn-inverse btn-block">
+                        <?php echo $this->translate('No services found. Please add new one.'); ?>
+                    </span>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+<?php
+echo $this->paginationControl(
+    $this->data,
+    'sliding',
+    array('partial/paginator.phtml', 'Administration'),
+    array('route  ' => 'service', 'routeParams' => array())
+);
+?>

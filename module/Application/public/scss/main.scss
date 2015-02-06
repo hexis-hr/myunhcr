@@ -44,10 +44,16 @@
 @import "content/_icons";
 @import "content/_links";
 @import "content/_menu";
+@import "content/_call";
 @import "content/_feedback";
 @import "content/_faq";
 @import "content/_articles";
 @import "content/_pagination";
+
+
+// Import visual effects
+@import "vfx/_animation";
+@import "vfx/_ripple";
 
 
 // Import pages

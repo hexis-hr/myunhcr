@@ -30,11 +30,12 @@ $active-background: darken($blue, 8);
     .mainHeader { min-height:$headerHeight; padding:0; }
       .mainHeader_wrapper { position:relative; }
         .mainHeader_top { position:relative; z-index:2; height:$headerHeight; background:$blue; }
-          .mainHeader_call { @extend %headerButton; display:block; position:absolute; top:0; left:0; }
+          .mainHeader_call, .mainHeader_menu { position:absolute !important; top:0; }
+          .mainHeader_call { @extend %headerButton; display:block; left:0; }
             .mainHeader_call_icon { @include img("icons", "phone-white-h24@2x", 2, inline); }
           .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$headerHeight; }
             .mainHeader_logo_expanded { @include st-icon; @include img("globals", "logoHorizontal-white-h42@2x", 2); display:none !important; }
-          .mainHeader_menu { display:block; @extend %headerButton; display:block; position:absolute; top:0; right:0; padding-right:48px !important; text-decoration:none; }
+          .mainHeader_menu { display:block; @extend %headerButton; display:block; right:0; padding-right:48px !important; text-decoration:none; }
             .mainHeader_menu_label {}
             .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
             .mainHeader_menu_open { @include img("icons", "menu-white-h24@2x", 2, inline); }

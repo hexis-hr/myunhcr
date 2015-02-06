@@ -3,17 +3,17 @@
     <div class='grid_column'>
       <div class='mainHeader_wrapper'>
         <div class='mainHeader_top'>
-          <a id='callTrigger' class='mainHeader_call' href='tel:01 2345 6789' tabindex='-1'>
+          <a id='callScreen_open' class='mainHeader_call' data-ripple='white' tabindex='-1'>
             <i class='icon mainHeader_call_icon'></i>
             <span class='mainHeader_call_label'><?php echo $this->translate('Call info'); ?></span>
           </a>
-          <a class='mainHeader_logo' href='/menu-page.html' ajaxNav tabindex='-1'>
+          <a class='mainHeader_logo' href='/menu-page.html' data-ripple='white' ajaxNav tabindex='-1'>
             <img class='mainHeader_logo_img h42'
               src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABUCAYAAAAh+XGnAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTMyRUE5NDk2OUY3MTFFNDhEQUFGNzRDMEQ4REMwQUIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTMyRUE5NDg2OUY3MTFFNDhEQUFGNzRDMEQ4REMwQUIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2REU5NzRENTVDRkExMURGQjkzQkRCQ0NGMUYwNzRDOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2REU5NzRENjVDRkExMURGQjkzQkRCQ0NGMUYwNzRDOCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pvc5e4oAABCESURBVHja7JwJvE7V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'
               alt='MyUNHCR'>
             <span class='mainHeader_logo_expanded'></span>
           </a>
-          <a id='mobileMenuTrigger' class='mainHeader_menu' unselectable='on' href='/menu-page.html' ajaxNav
+          <a id='mobileMenuTrigger' class='mainHeader_menu' unselectable='on' href='/menu-page.html' data-ripple='white' ajaxNav
             tabindex='0'>
             <span class='mainHeader_menu_label'><?php echo $this->translate("Menu");?></span>
             <i class='icon mainHeader_menu_icon mainHeader_menu_open'></i>
@@ -28,3 +28,27 @@
     </div>
   </div>
 </header>
+
+<div id='callScreen' class='callScreen'>
+  <div class='callScreen_top'>
+    <a id='callScreen_close' class='callScreen_back'>
+      <i class='callScreen_back_icon icon -arrowLeftWhite14'></i>
+      <strong class='callScreen_back_label'>Back</strong>
+    </a>
+  </div>
+  <div class='callScreen_middle'>Select call type</div>
+  <a class='callScreen_dial -left' href='tel:+385916037830' data-ripple='white'>
+    <div class='callScreen_dial_inner'>
+      <span class='callScreen_dial_title'>Phone</span>
+      <span class='callScreen_dial_image'><i class='icon -phone'></i></span>
+      <span class='callScreen_dial_info'>+385 91 603 7830</span>
+    </div>
+  </a>
+  <a class='callScreen_dial -right' href='skype:echo123?call' data-ripple='white'>
+    <div class='callScreen_dial_inner'>
+      <span class='callScreen_dial_title'>Skype</span>
+      <span class='callScreen_dial_image'><i class='icon -skype'></i></span>
+      <span class='callScreen_dial_info'>@unhcr_infoline</span>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,9 @@
+%animate, [animate], [data-animate] {
+  transition: 300ms ease-out;
+  transform:translateZ(0);
+}
+
+%ease, [ease], [data-ease] {
+  @extend %animate;
+  transition: 400ms ease-in-out;
+}

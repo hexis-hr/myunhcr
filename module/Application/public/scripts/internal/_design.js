@@ -26,4 +26,38 @@ queue.jQuery(function(){
   });
 
 
+  /*------------------------------------------------------------------------------------
+    Ripple click effect
+  ------------------------------------------------------------------------------------*/
+  $(document).on('click', '[data-ripple], a.button, .sectionHeader_info, .bigRadio', function(e) {
+    var container = $(this);
+
+    // Create a wave only if one does not exist
+    if(container.find('.rippleWave').length == 0) {
+      container.prepend("<span class='rippleWave'></span>");
+    }
+
+    // Find the child wave
+    var wave = container.find('.rippleWave');
+
+    // Reset wave to starting position
+    wave.removeClass('animate');
+
+    // Set the size of .rippleWave
+    var cWidth = container.width();
+    var cHeight = container.height();
+    if ( cWidth > (cHeight*5) || cHeight > (cWidth*5) ){ var size = Math.max(cWidth, cHeight) / 1.5; }
+    else { var size = Math.max(cWidth, cHeight); }
+    wave.css({ width:size, height:size });
+
+    // Get click coordinates
+    x = e.pageX - container.offset().left - size/2;
+    y = e.pageY - container.offset().top - size/2;
+
+    // Position the wave and apply animation
+    wave.css({top: y+'px', left: x+'px'}).addClass('animate');
+
+  });
+
+
 });

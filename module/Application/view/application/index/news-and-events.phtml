@@ -54,7 +54,7 @@
             <ul class='articleList' infiniteScroll>
                 <?php foreach ($this->data as $news) { ?>
                 <li class='articleList_item articleSummary'>
-                    <h2 class='articleSummary_title'>
+                    <h2 class='articleSummary_title' data-ripple>
                         <a class='articleSummary_title_link'
                            href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>' ajaxNav tabindex='0'
                             ><?php echo $news->getTitle(); ?></a>

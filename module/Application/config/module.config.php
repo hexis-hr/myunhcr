@@ -182,6 +182,7 @@ return array(
                     'scripts/external/fastclick.js',
                     'scripts/internal/_helpers.js',
                     'scripts/internal/_design.js',
+                    'scripts/internal/_call.js',
                     'scripts/internal/_historyState.js',
                     'scripts/internal/_ajax.js',
                     'scripts/internal/_sectionTooltip.js',

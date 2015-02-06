@@ -5,14 +5,8 @@
 .clearfix{ @include clearfix; }
 
 
-%animate, [animate] {
-  transition: 300ms ease-out;
-  transform:translateZ(0);
-}
-
-
 .ready {
-  %animateOnReady, [animateOnReady] {
+  %animateOnReady, [animateOnReady], [data-animateOnReady] {
     @extend %animate;
   }
 }

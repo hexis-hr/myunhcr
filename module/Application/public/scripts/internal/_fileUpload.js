@@ -8,12 +8,17 @@ queue.pageLoadEvents.push(function(event){
       
 
       console.log('File upload ready...');
+
+
+      // In order to not conflict with Zepto, route the alias to $j
+      var $j = jQuery.noConflict();
       
-      $(function(){
-        $('#fileupload').fileupload({
+
+      $j(function(){
+        $j('#fileupload').fileupload({
           dataType: 'json',
           done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
+            $j.each(data.result.files, function (index, file) {
               $('<p/>').text(file.name).appendTo(document.body);
             });
           }

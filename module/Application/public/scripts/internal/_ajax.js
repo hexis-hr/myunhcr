@@ -27,7 +27,7 @@ function getPage(url, title, method, data, timeout) {
     success: function(data) {
       
       // Swap data
-      $('#page').html(data);
+      $('#page').empty().html(data);
       $('body').removeClass().addClass($('#relay').attr('bodyClass'));
 
       // Log success and waiting time

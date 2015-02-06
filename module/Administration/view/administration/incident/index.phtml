@@ -82,7 +82,7 @@
                                                 <div class="panel-body">
                                                     <?php
                                                     $featuredFile = $data->getFeaturedFile();
-                                                    if ($featuredFile && strpos($featuredFile, 'image') !== false) {
+                                                    if ($featuredFile && strpos($featuredFile->getName(), 'image') !== false) {
                                                         ?>
                                                         <img src="<?php echo $this->url('incident/downloadImage', array(
                                                             'name' => $data->getFeaturedFile()->getName(),

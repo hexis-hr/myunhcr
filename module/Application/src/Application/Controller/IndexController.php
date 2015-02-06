@@ -15,9 +15,12 @@ use Application\Form\ChooseSurveyForm;
 
 use Application\Form\Filter\BookAnAppointmentFormFilter;
 use Application\Form\Filter\ComplaintFormFilter;
+use Application\Form\Filter\ReportIncidentFormFilter;
 use Application\Form\ReportIncidentForm;
 use Application\Form\SettingsForm;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Validator\File\IsImage;
+use Zend\Validator\File\MimeType;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
@@ -491,22 +494,19 @@ class IndexController extends AbstractActionController {
 
     public function reportAnIncidentAction()
     {
-        $step = (int) $this->params()->fromQuery('step', 0);
+        $step = (int) $this->params()->fromQuery('step', 1);
 
         $this->layout()->setVariable('body_class', 'pg-reportIncident -step' . $step);
 
         $request = $this->getRequest();
         $form = new ReportIncidentForm($this->getEntityManager(), $this->getServiceLocator());
-        $form->get('step')->setValue($step);
         $form->get('submit')->setAttribute('value', 'Next');
 
         //save form values in session
-        $container = new Container('incidentFormData');
+        $container = new Container(ReportIncidentForm::$formName);
+        $form->populateValues($container->getArrayCopy());
 
-        if ($request->isXmlHttpRequest()) {
-
-            $step++;
-            $form->get('step')->setValue($step);
+        if ($request->isXmlHttpRequest() || $request->isPost()) {
 
             $postValues = $request->getPost();
 
@@ -514,16 +514,57 @@ class IndexController extends AbstractActionController {
                 $container->{$key} = $value;
             }
 
-            $form->populateValues($container->getArrayCopy());
+            $formFilter = new ReportIncidentFormFilter($this->getEntityManager(), $this->getServiceLocator(), $container);
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData(array_merge($container->getArrayCopy(), $request->getFiles()->toArray()));
+
+            $validate = true;
+            $validationGroups = array();
+            switch ($step) {
+                case 5:
+                    $validationGroups[] = 'image';
+                    $validationGroups[] = 'audio';
+                case 4:
+                    $validationGroups[] = 'description';
+                case 3:
+                    $validationGroups[] = 'country';
+                    $validationGroups[] = 'address';
+                case 2:
+                    $validationGroups[] = 'anonymous';
+                    $validationGroups[] = 'category';
+                    $validationGroups[] = 'type';
+                    break;
+                case 1:
+                    $validate = false;
+                    break;
+            }
+
+            $form->setValidationGroup($validationGroups);
+
+            // upon first ajax load of the page we need to skip validation
+            if ($validate) {
+                if (!$form->isValid()) {
+                    return new ViewModel(array(
+                        'step' => --$step ?: 1,
+                        'form' => $form,
+                    ));
+                }
+            }
 
             if ($step >= 5) {
                 // get data from session, populate form, validate and create incident
 
                 $incident = new Incident();
                 $data = $container->getArrayCopy();
+
                 foreach ($data as $key => $value) {
                     if (method_exists($incident, 'set' . ucfirst($key))) {
                         $incident->{'set' . ucfirst($key)}($value);
+                    } else if (strpos($key, 'file:') !== false) {
+                        $file = $this->getEntityManager()->getRepository('Administration\Entity\File')
+                            ->findOneBy(array('name' => $value));
+                        if (isset($file))
+                            $incident->addFile($file);
                     }
                 }
                 $category = $this->getEntityManager()->getRepository('Administration\Entity\IncidentCategory')
@@ -549,13 +590,38 @@ class IndexController extends AbstractActionController {
 
         }
 
-        if ($step == 0)
-            $step = 1;
-
         return new ViewModel(array(
             'step' => $step,
             'form' => $form,
         ));
+    }
+
+    public function uploadFileAction () {
+
+        $request = $this->getRequest();
+
+        $files = array();
+        $translator = $this->getServiceLocator()->get('viewhelpermanager')->get('translate');
+        foreach ($request->getFiles()->toArray() as $type => $file) {
+            $filter = new ReportIncidentFormFilter($this->getEntityManager(), $this->getServiceLocator(),
+                new Container(ReportIncidentForm::$formName));
+            if ($outputName = $filter->validateFileType($file, $type)) {
+                $files[] = array(
+                    'name' => $file['name'],
+                );
+            } else {
+                return new JsonModel(array(
+                    'status' => 'error',
+                    'message' => $translator(ReportIncidentFormFilter::getErrorMessage($type)),
+                ));
+            }
+        }
+
+        return new JsonModel(array(
+            'status' => 'success',
+            'files' => $files,
+        ));
+
     }
 
     public function takeASurveyAction()

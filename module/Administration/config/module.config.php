@@ -565,6 +565,18 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
+                    'downloadImage' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/downloadImage[/:name]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Incident',
+                                'action' => 'downloadImage',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
                 ),
             ),
             'news' => array(

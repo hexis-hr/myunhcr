@@ -69,6 +69,22 @@ class Incident {
      */
     protected $type;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Administration\Entity\File")
+     * @ORM\JoinTable(name="incident_file",
+     *      joinColumns={@ORM\JoinColumn(name="incident_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="file_id", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    protected $files;
+
+    public function __construct()
+    {
+        $this->files = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
     /**
      * @param mixed $category
      */
@@ -231,7 +247,35 @@ class Incident {
         return $this->type;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getFeaturedFile ()
+    {
+        return $this->files->first();
+    }
+
+    /**
+     * @param $file
+     */
+    public function addFile (File $file) {
+        $this->files->add($file);
+    }
+
+    /**
+     * @param $file
+     */
+    public function removeFile (File $file) {
+        $this->files->removeElement($file);
+    }
 
 
 }

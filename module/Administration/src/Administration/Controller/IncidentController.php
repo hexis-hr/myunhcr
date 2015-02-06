@@ -324,4 +324,29 @@ class IncidentController extends AbstractActionController {
         return $result;
     }
 
+    public function downloadImageAction () {
+
+        $name = $this->params()->fromRoute('name');
+
+        $image = $this->getEntityManager()->getRepository('Administration\Entity\File')
+            ->findOneBy(array('name' => $name));
+
+        $globalConfig = $this->serviceLocator->get('config');
+
+        // get image content
+        $response = $this->getResponse();
+
+        $imageContent = file_get_contents($globalConfig['fileDir'] . $image->getName());
+
+        $response->setContent($imageContent);
+        $response
+            ->getHeaders()
+            ->addHeaderLine('Content-Transfer-Encoding', 'binary')
+            ->addHeaderLine('Content-Type', 'image/png')
+            ->addHeaderLine('Content-Length', mb_strlen($imageContent));
+
+        return $response;
+
+    }
+
 }

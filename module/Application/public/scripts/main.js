@@ -8,7 +8,8 @@ window.ux = {
   func: {},
   state: {
     isLoading: false,
-    isCalling: false
+    isCalling: false,
+    pageNotFound: false
   },
   viewport: {},
   scroll: {

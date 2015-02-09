@@ -113,6 +113,15 @@ function checkIfVisible(elem, offset) {
 
 
 
+/*------------------------------------------------------------------------------------
+  Generate random number within range
+------------------------------------------------------------------------------------*/
+function randomWithinRange(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
+
+
 // jQuery Dependant...
 queue.jQuery(function(){
 
@@ -136,17 +145,9 @@ queue.jQuery(function(){
   /*------------------------------------------------------------------------------------
     Preload image
   ------------------------------------------------------------------------------------*/
-  ux.func.preloadImg = function(source){
-    $('<img/>')[0].src = source;
-  }
-
-
-  /*------------------------------------------------------------------------------------
-    Generate random number within range
-  ------------------------------------------------------------------------------------*/
-  function randomWithinRange(min, max) {
-    return Math.random() * (max - min) + min;
-  }
+  // ux.func.preloadImg = function(source){
+  //   $('<img>').attr('src', source);
+  // }
 
 
   /*------------------------------------------------------------------------------------

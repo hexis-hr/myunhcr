@@ -13,7 +13,8 @@ queue.jQuery(function(){
       // Spinner gif for page transitions
       if(ux.preload.spinner !== true){
         console.log('PRELOAD: Spinner animation...');
-        ux.func.preloadImg('/media/globals/loader-blue-40.gif');
+        $('#pageLoad').addClass('-preload');
+        setTimeout(function(){ $('#pageLoad').removeClass('-preload'); }, 50);
         ux.preload.spinner = true;
       }
 

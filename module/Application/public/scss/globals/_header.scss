@@ -34,7 +34,7 @@ $active-background: darken($blue, 8);
           .mainHeader_call { @extend %headerButton; display:block; left:0; }
             .mainHeader_call_icon { @include img("icons", "phone-white-h24@2x", 2, inline); }
           .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$headerHeight; }
-            .mainHeader_logo_expanded { @include st-icon; @include img("globals", "logoHorizontal-white-h42@2x", 2); display:none !important; }
+            .mainHeader_logo_expanded { display:none; }
           .mainHeader_menu { display:block; @extend %headerButton; display:block; right:0; padding-right:48px !important; text-decoration:none; }
             .mainHeader_menu_label {}
             .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
@@ -83,7 +83,7 @@ $active-background: darken($blue, 8);
   @include medium {
     .mainHeader_logo {}
       .mainHeader_logo_img { display:none; }
-      .mainHeader_logo_expanded { display:inline-block !important; }
+      .mainHeader_logo_expanded { @include st-icon; @include img("globals", "logoHorizontal-white-h42@2x", 2); display:inline-block !important; }
   }
   
   @include large {

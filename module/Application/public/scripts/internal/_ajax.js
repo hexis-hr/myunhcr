@@ -1,3 +1,7 @@
+// Documentation: http://zeptojs.com/#ajax
+
+
+
 /*------------------------------------------------------------------------------------
   Save and restore scroll positions for certain pages
 ------------------------------------------------------------------------------------*/
@@ -18,9 +22,7 @@ var pageOffset = {
 /*------------------------------------------------------------------------------------
   Get page function
 ------------------------------------------------------------------------------------*/
-function getPage(url, method, data, timeout) {
-  
-  // Documentation: http://zeptojs.com/#ajax
+function getPage(url, method, data) {
 
   // Log page request
   dlog('--------------------- PAGE ---------------------');
@@ -35,16 +37,12 @@ function getPage(url, method, data, timeout) {
   var data = data || [];
 
   // Hide the page, show the spinner
-  $('#page, #pageLoad').addClass('-loading');
+  $('#page, #pageLoad').removeClass('-problem').addClass('-loading');
 
   // Page unload events
   page.onUnload();
 
-
-  // Generate random delay number
-  // var randomDelay = randomWithinRange(200, 2000);
-  
-  // Start the request
+  // The ajax call wrapped in an internal function
   $.ajax({
     type: method,
     url: url,
@@ -69,9 +67,7 @@ function getPage(url, method, data, timeout) {
       $("html, body").scrollTop(0);
 
       // Show the page, hide the spinner
-      // setTimeout(function(){
       $('#page, #pageLoad').removeClass('-loading');
-      // }, randomWithinRange(200, 2000));
 
       // Run all pageLoad events
       page.onLoad();
@@ -80,20 +76,41 @@ function getPage(url, method, data, timeout) {
       pageOffset.restore();
 
     },
-    error: function(xhr, type) {
-      
-      // Log error and waiting time
+    error: function(xhr) {
       var execTime = new Date().getTime() - start;
-      dlog('GET: ' + url + ' error! Reason: ' + type + '. (' + execTime + 'ms)');
+      dlog('GET: ' + url + ' ERROR!' + xhr.status + ': ' + xhr.statusText + ' (' + execTime + 'ms)');
+      $('#pageLoad').addClass('-problem');
+      
+      switch(xhr.status) {
+        
+        case 404:
+          $('#pageLoad').html("Page not found!<br><br>Redirecting to homepage...");
+          setTimeout(function(){
+            window.location = '/';
+          }, 1000);
+          break;
+        
+        default:
+          // Assuming network drop, try once more...
+          if ( ux.state.pageNotFound === false ) {
+            dlog('GET: Assuming network drop. Trying one more time...');
+            $('#pageLoad').html("Sorry this is taking long. We will try one more time...");
+            ux.state.pageNotFound = true;
+            setTimeout(function(){
+              ajaxCall(url, method, data);
+            }, 1000);
+          }
+          // If this is the second time, hard redirect to homepage. Some shit ain't right.
+          else {
+            dlog('Something went wrong. Redirecting to homepage...');
+            $('#pageLoad').html("Something went wrong. Redirecting to homepage...");
+            setTimeout(function(){
+              window.location = '/';
+            }, 1000);
+          }
 
-      // Show an error message
-      $('#pageLoad').html("Sorry, this is taking long. We will try one more time...");
-
-      // After a small pause, initiate a redirect to the target url
-      setTimeout(function(){
-        window.location = url;
-      }, 500);
-
+      }
     }
   });
+  
 }

@@ -20,7 +20,10 @@ queue.jQuery(function(){
       // Load these icons only if there are no other page loads in progress
       if( ux.state.isLoading === false ){
 
-        // Call screen icons
+        
+        /*------------------------------------------------------------------------------------
+          Inject call screen
+        ------------------------------------------------------------------------------------*/
         if(ux.preload.callScreen !== true){
           console.log('PRELOAD: Call screen');
           
@@ -50,6 +53,7 @@ queue.jQuery(function(){
           $('#callScreen').html(callScreen);
           ux.preload.callScreen = true;
         }
+        
 
       }
 

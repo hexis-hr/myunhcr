@@ -1555,6 +1555,10 @@ body {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAGCAYAAAD68A/GAAAAAXNSR0IArs4c6QAAAIdJREFUCB1j2LZtmzUDAQBSw8THx+e8fft2dVxqQXIgNUyioqJM7OzsQTt37hRDVwwSA8mB1DCBJCUlJdkZGRkjN2/ezAVTDGKDxEByIDHGmzdvNoAYv379Ynj27Nmjjx8/LgTx+fn546WkpOTY2NhAXAYWMAkkQAJiYmJyQKYvSAzEhikC8QGI8CTojH76xwAAAABJRU5ErkJggg==');
 }
 
+.mapContainer {
+  max-width: 100%;
+}
+
 .formInput, .formSelect, .js .customSelect_overlay, .formTextarea, .inputDate, .inputTime {
   width: 100%;
   padding: 0 .75em;
@@ -2811,6 +2815,10 @@ body {
   margin-bottom: 0;
 }
 
+.pg-mapOfServices .page {
+  padding-bottom: 0;
+}
+
 /* ==========================================================================
    $BASE-PICKER
    ========================================================================== */
@@ -3462,4 +3470,3 @@ body {
     margin-bottom: 5em;
   }
 }
-

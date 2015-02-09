@@ -15,7 +15,7 @@ queue.pageLoadEvents.push(function(event){
 
 
     // This is the callback function which will execute upon script load
-    window.gmap = function(){
+    window.parseMap = function(){
       
       var element = document.getElementById('map');
 
@@ -102,21 +102,16 @@ queue.pageLoadEvents.push(function(event){
 
 
   // Get file upload scripts
-  function getMaps(callback){
-    callback = callback || function(){};
+  function getMaps(){
     if(ux.preload.getMaps !== true){
-      load('http://maps.googleapis.com/maps/api/js?v=3.exp&callback=gmap')
+      load('http://maps.googleapis.com/maps/api/js?v=3.exp&callback=parseMap')
       .thenRun(function(){
         ux.preload.getMaps = true;
         dlog('GET: Google Maps API');
-        setTimeout(function(){
-          callback();
-        }, 50);
-        
       });
     } else {
       dlog('SKIP: Google Maps API. Already loaded!');
-      callback();
+      parseMap();
     }
   }
 

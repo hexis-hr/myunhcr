@@ -1557,6 +1557,7 @@ body {
 
 .mapContainer {
   max-width: 100%;
+  min-height: 250px;
 }
 
 .formInput, .formSelect, .js .customSelect_overlay, .formTextarea, .inputDate, .inputTime {
@@ -2817,6 +2818,9 @@ body {
 
 .pg-mapOfServices .page {
   padding-bottom: 0;
+}
+.pg-mapOfServices .mapContainer {
+  margin-top: 20px;
 }
 
 /* ==========================================================================

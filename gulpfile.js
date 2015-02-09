@@ -44,7 +44,19 @@ gulp.task('css', function (){
       noCache: true,
       bundleExec: true
     }))
-    .pipe(prefix('last 3 version', 'Explorer >= 8', '> 1%', 'Android >= 2.3', 'iOS', 'BlackBerry'))
+    .pipe(prefix(
+      '> 1%',
+      'last 2 versions',
+      'Explorer >= 8',
+      'Android >= 2.3',
+      'Chrome >= 28',
+      'iOS >= 4',
+      'last 3 BlackBerry versions',
+      'last 5 ChromeAndroid',
+      'last 3 FirefoxAndroid versions',
+      'last 3 OperaMobile versions',
+      'last 5 OperaMini versions'
+    ))
     .pipe(gulp.dest(path.css));
 });
 

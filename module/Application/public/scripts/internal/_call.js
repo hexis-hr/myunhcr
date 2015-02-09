@@ -2,7 +2,7 @@ queue.jQuery(function(){
 
 
   // Open the call screen
-  $('#callScreen_open').on('click', function() {
+  $(document).on('click', '#callScreen_open', function(){
     
     // Adjust the design initially
     callScreenDesign();
@@ -14,8 +14,24 @@ queue.jQuery(function(){
 
   
   // Close the call screen
-  $('#callScreen_close').on('click', function() {
+  $(document).on('click', '#callScreen_close', function(){
     $('#callScreen').removeClass('-show');
+  });
+
+
+  // Phone call init...
+  $(document).on('click', '#callPhone', function(){
+    dlog('CALL: Phone');
+    callState();
+    event.stopPropagation();
+  });
+
+
+  // Skype call init...
+  $(document).on('click', '#callSkype', function(){
+    dlog('CALL: Skype');
+    callState();
+    event.stopPropagation();
   });
 
 
@@ -33,6 +49,15 @@ queue.jQuery(function(){
     var dialHeight = $('#callPhone').height();
     var padding = (totalHeight - headerHeight * 2 - dialHeight) / 2;
     $('#callScreen').children('.callScreen_middle').css('paddingTop', padding);
+  }
+
+
+  // Activate call state
+  function callState(){
+    ux.state.isCalling = true;
+    setTimeout(function(){
+      ux.state.isCalling = false;
+    }, 1000);
   }
 
 

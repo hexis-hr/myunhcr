@@ -5,15 +5,18 @@
   Define global ux variable
 ------------------------------------------------------------------------------------*/
 window.ux = {
+  func: {},
+  state: {
+    isLoading: false,
+    isCalling: false
+  },
   viewport: {},
   scroll: {
     direction: false
   },
-  scrollOffset: {},
+  page: {},
   config: {},
-  url: {
-    isLoading: false
-  }
+  preload: {}
 };
 
 
@@ -34,10 +37,7 @@ window.queue = {
   // We use this to store function which will get executed once jQuery loads
   jQuery: function(func){
     // If there is jQuery / Zepto library present, we simply execute the passed function. Nothing different there...
-    if(window.jQuery || window.Zepto || window.$) {
-      dlog('Forwarding function...');
-      func();
-    }
+    if(window.jQuery || window.Zepto || window.$) { func(); }
 
     // However, if there is no library present at the moment (loading asynchronously) we store the function/s in an array for later use
     else { window.queue.jQueryWaitlist.push(func); }
@@ -62,10 +62,9 @@ window.queue = {
  */
 function jQueryExec(){
   if((window.jQuery || window.Zepto || window.$) && window.app.DOMContentLoaded === true) {
-    dlog('Queue ready...');
+    dlog('Zepto loaded...');
     $.each(queue.jQueryWaitlist, function(index, value) {
       value();
-      dlog('Queue exec: ' + index);
     });
     dlog('Queue complete!');
   } else {
@@ -80,8 +79,8 @@ function jQueryExec(){
   Helper: Call global events only once
 ------------------------------------------------------------------------------------*/
 var exec = function(funcQueue, name) {
+  dlog(name + '();');
   $.each(funcQueue, function(index, value) {
-    dlog_verbose(name + ' fired: ' + index);
     value();
   });
 }
@@ -93,11 +92,17 @@ var exec = function(funcQueue, name) {
 ------------------------------------------------------------------------------------*/
 window.page = {
   onUnload: function(){
-    dlog_verbose('page.onUnload()');
     exec(queue.pageUnloadEvents, 'pageUnloadEvents');
   },
   onLoad: function(){
-    dlog_verbose('page.onLoad()');
+    
+    // Populate some basic page data
+    ux.page.current = $('#relay').attr('bodyClass');
+
+    // Open a new object for this page, if one does not exist
+    ux.page[$('#relay').attr('bodyClass')] = ux.page[$('#relay').attr('bodyClass')] || {};
+
     exec(queue.pageLoadEvents, 'pageLoadEvents');
+
   }
 };

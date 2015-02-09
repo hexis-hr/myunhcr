@@ -5,7 +5,7 @@
 .clearfix{ @include clearfix; }
 
 
-.ready {
+.pageReady {
   %animateOnReady, [animateOnReady], [data-animateOnReady] {
     @extend %animate;
   }

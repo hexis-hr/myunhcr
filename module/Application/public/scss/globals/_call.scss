@@ -40,6 +40,10 @@
 
 
 // This only works with js anyways
-.js.ready .callScreen { display:block; }
-.js.transforms.ready .callScreen { left:0; transform:translateX(-100%); }
+.js.pageReady .callScreen { display:block;
+  .icon.-arrowLeftWhite14 { @include img("icons", "arrowLeft-white-h14@2x", 2); }
+  .icon.-phone { @include img("icons", "phone-white-h64@2x", 2); }
+  .icon.-skype { @include img("icons", "skype-white-h64@2x", 2); }
+}
+.js.transforms.pageReady .callScreen { left:0; transform:translateX(-100%); }
 .js .callScreen.-show { display:block; left:0 !important; transform:translateX(0) !important; opacity:1; visibility:visible; }

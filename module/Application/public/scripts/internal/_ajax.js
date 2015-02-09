@@ -1,15 +1,14 @@
 /*------------------------------------------------------------------------------------
-  Update user info on resize event
+  Save and restore scroll positions for certain pages
 ------------------------------------------------------------------------------------*/
 var pageOffset = {
   save: function(){
-    ux.scrollOffset[$('#relay').attr('bodyClass')] = ux.scroll.offset;
+    ux.page[ux.page.current].scroll = ux.scroll.offset;
   },
   restore: function(){
-    var currentPage = $('#relay').attr('bodyClass');
-    var allowedPages = ['pg-homepage'];
-    if( $.inArray(currentPage, allowedPages) > -1 ){
-      $(window).scrollTop( ux.scrollOffset[currentPage] );
+    var whitelist = ['pg-homepage'];
+    if( $.inArray(ux.page.current, whitelist) > -1 ){
+      $(window).scrollTop( ux.page[ux.page.current].scroll );
     }
   }
 };
@@ -24,7 +23,8 @@ function getPage(url, method, data, timeout) {
   // Documentation: http://zeptojs.com/#ajax
 
   // Log page request
-  dlog('GET: ' + url + ' started...');
+  dlog('--------------------- PAGE ---------------------');
+  dlog('GET: ' + url);
   var start = new Date().getTime();
   
   // Store the scroll offset for current page
@@ -34,11 +34,15 @@ function getPage(url, method, data, timeout) {
   var method = method || 'GET';
   var data = data || [];
 
-  // Hide the content of the page and show a loader
-  $('#page').addClass('-loading');
+  // Hide the page, show the spinner
+  $('#page, #pageLoad').addClass('-loading');
 
   // Page unload events
   page.onUnload();
+
+
+  // Generate random delay number
+  // var randomDelay = randomWithinRange(200, 2000);
   
   // Start the request
   $.ajax({
@@ -55,17 +59,19 @@ function getPage(url, method, data, timeout) {
 
       // Log success and waiting time
       var execTime = new Date().getTime() - start;
-      dlog('GET: ' + url + ' success! (' + execTime + 'ms)');
+      dlog('GOT: ' + url + '! (' + execTime + 'ms)');
 
       // Push history state and toggle related switches
       History.pushState(null, title, url);
-      ux.url.isLoading = false;
+      ux.state.isLoading = false;
 
       // Scroll to top
       $("html, body").scrollTop(0);
 
-      
-      $('#page').removeClass('-loading');
+      // Show the page, hide the spinner
+      // setTimeout(function(){
+      $('#page, #pageLoad').removeClass('-loading');
+      // }, randomWithinRange(200, 2000));
 
       // Run all pageLoad events
       page.onLoad();
@@ -81,7 +87,7 @@ function getPage(url, method, data, timeout) {
       dlog('GET: ' + url + ' error! Reason: ' + type + '. (' + execTime + 'ms)');
 
       // Show an error message
-      $('#pageLoad').html("Sorry, this is taking long. We will try one more time...").addClass('-show');
+      $('#pageLoad').html("Sorry, this is taking long. We will try one more time...");
 
       // After a small pause, initiate a redirect to the target url
       setTimeout(function(){

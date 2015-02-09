@@ -2,6 +2,62 @@ queue.jQuery(function(){
 
   
   /*------------------------------------------------------------------------------------
+    Preload some resources after everything else loads
+  ------------------------------------------------------------------------------------*/
+  $(window).on('load', function(){
+    setTimeout(function(){
+
+      // Signal to css that the page is fully loaded
+      $('html').addClass('pageLoaded');
+
+      // Spinner gif for page transitions
+      if(ux.preload.spinner !== true){
+        console.log('PRELOAD: Spinner animation...');
+        ux.func.preloadImg('/media/globals/loader-blue-40.gif');
+        ux.preload.spinner = true;
+      }
+
+      // Load these icons only if there are no other page loads in progress
+      if( ux.state.isLoading === false ){
+
+        // Call screen icons
+        if(ux.preload.callScreen !== true){
+          console.log('PRELOAD: Call screen');
+          
+          var callScreen = ""+
+          "<div class='callScreen_top'>"+
+            "<a id='callScreen_close' class='callScreen_back'>"+
+              "<i class='callScreen_back_icon icon -arrowLeftWhite14'></i>"+
+              "<strong class='callScreen_back_label'>Back</strong>"+
+            "</a>"+
+          "</div>"+
+          "<div class='callScreen_middle'>Select call type</div>"+
+          "<a id='callPhone' class='callScreen_dial -left' href='tel:+385916037830' data-ripple='white'>"+
+            "<div class='callScreen_dial_inner'>"+
+              "<span class='callScreen_dial_title'>Phone</span>"+
+              "<span class='callScreen_dial_image'><i class='icon -phone'></i></span>"+
+              "<span class='callScreen_dial_info'>+385 91 603 7830</span>"+
+            "</div>"+
+          "</a>"+
+          "<a id='callSkype' class='callScreen_dial -right' href='skype:echo123?call' data-ripple='white'>"+
+            "<div class='callScreen_dial_inner'>"+
+              "<span class='callScreen_dial_title'>Skype</span>"+
+              "<span class='callScreen_dial_image'><i class='icon -skype'></i></span>"+
+              "<span class='callScreen_dial_info'>@unhcr_infoline</span>"+
+            "</div>"+
+          "</a>";
+
+          $('#callScreen').html(callScreen);
+          ux.preload.callScreen = true;
+        }
+
+      }
+
+    }, 500);
+  });
+
+
+  /*------------------------------------------------------------------------------------
     Article photo centering
   ------------------------------------------------------------------------------------*/
   function articlePhotoCenter(el){

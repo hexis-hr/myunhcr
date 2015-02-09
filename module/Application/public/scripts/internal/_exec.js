@@ -17,7 +17,12 @@ queue.jQuery(function(){
   }, 300);
 
   $(window).on('beforeunload', function(event) {
-    exec(queue.globalUnloadEvents, 'globalUnloadEvents');
+    
+    // Ignore call triggers since they almost never actually navigate the page
+    if ( ux.state.isCalling !== true ) {
+      exec(queue.globalUnloadEvents, 'globalUnloadEvents');
+    }
+
   });
 
 

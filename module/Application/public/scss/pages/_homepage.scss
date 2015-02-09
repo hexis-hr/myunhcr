@@ -1,6 +1,7 @@
 .pg-homepage {
   
   // Fade out the menu button
+  .no-js & .mainHeader_menu { display:none; }
   .mainHeader_menu { opacity:0.25; }
 
   // Remove padding from page

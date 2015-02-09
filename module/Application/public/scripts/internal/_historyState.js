@@ -10,8 +10,8 @@ queue.jQuery(function(){
     // Watch ajax links
     $(document).on('click','[ajaxNav]', function(event) {
       event.preventDefault();
-      if ( ux.url.isLoading === false ){
-        ux.url.isLoading = true;
+      if ( ux.state.isLoading === false ){
+        ux.state.isLoading = true;
         var link = $(this).attr('href');
         getPage(link);
       }
@@ -22,8 +22,8 @@ queue.jQuery(function(){
       event.preventDefault();
       var data = $(this).serialize();
       dlog('FORM: ' + data);
-      if ( ux.url.isLoading === false ){
-        ux.url.isLoading = true;
+      if ( ux.state.isLoading === false ){
+        ux.state.isLoading = true;
         var link = $(this).attr('action');
         getPage(link, $(this).attr('method'), data);
       }
@@ -31,8 +31,8 @@ queue.jQuery(function(){
 
     // Watch redirect attributes
     $(document).on('click','[data-redirect]', function() {
-      if ( ux.url.isLoading === false ){
-        ux.url.isLoading = true;
+      if ( ux.state.isLoading === false ){
+        ux.state.isLoading = true;
         var link = $(this).attr('data-redirect');
         getPage(link);
       }
@@ -40,12 +40,12 @@ queue.jQuery(function(){
 
     // Watch for all sorts of state changes (e.g. back button)
     if ( History.Adapter ) {
-      History.Adapter.bind(window,'statechange',function(){
+      History.Adapter.bind(window,'statechange',function(event){
         var state = History.getState();
         dlog('History statechange to: ' + state.hash);
 
         // We check if loading is in progress to avoid double ajax calls (ongoing issue: https://github.com/browserstate/history.js/issues/96)
-        if ( ux.url.isLoading === false ) {
+        if ( ux.state.isLoading === false ) {
           getPage(state.hash);
         }
       });

@@ -21,8 +21,9 @@
     window.app = {
       name: 'MyUNHCR', // Define a default app name (for untitled pages, etc.)
       time24h: false,
+      QA: false, // Toggles quality assurance tests (e.g., random delay values with ajax page calls)
       dlog: true, // Toggle dev output logs in the console
-      verbose: true, // Toggle some minor info like scroll ticks (requires dlog to be true)
+      verbose: false, // Toggle some minor info like scroll ticks (requires dlog to be true)
       ua: navigator.userAgent.toLowerCase(),
       userDevice: '',
       userDeviceVersion: '',
@@ -109,7 +110,7 @@
       document.addEventListener("DOMContentLoaded", function(){
         window.app.DOMContentLoaded = true;
         setTimeout(function(){
-          doc.className += " ready";
+          doc.className += " pageReady";
         }, 1000); 
       });
     }

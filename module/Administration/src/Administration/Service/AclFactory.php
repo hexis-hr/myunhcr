@@ -35,6 +35,7 @@ class AclFactory implements FactoryInterface {
         $acl->addResource(new Resource('News'));
         $acl->addResource(new Resource('Settings'));
         $acl->addResource(new Resource('Survey'));
+        $acl->addResource(new Resource('Service'));
         $acl->addResource(new Resource('Translation'));
 
         //enable work from console
@@ -51,6 +52,7 @@ class AclFactory implements FactoryInterface {
         $acl->allow('anonymous', 'Administration', 'Auth');
         $acl->allow('anonymous', 'Survey', 'xmlDeliver');
         $acl->allow('anonymous', 'Survey', 'transformXml');
+        $acl->allow('anonymous', 'Service', 'getAjaxMarkers');
 
         $acl->allow('user', 'Administration', 'Index');
         $acl->allow('user', 'Account', 'profile');

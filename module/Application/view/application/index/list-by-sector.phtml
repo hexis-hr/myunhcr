@@ -44,6 +44,12 @@
 
       </form>
     </div>
-    <div id="map" data-openStreetMap></div>
+
+    <div class='grid -collapse'>
+      <div class='grid_column -medium9 -mediumPlus8'>
+        <div id='map' class='mapContainer -fill' data-openStreetMap data-href='<?php echo $this->url('getAjaxMarkers'); ?>'></div>
+      </div>
+    </div>
+
   </div>
 </section>

@@ -207,6 +207,7 @@ return array(
                     'scripts/primary/_call.js',
                     'scripts/primary/_historyState.js',
                     'scripts/primary/_ajax.js',
+                    'scripts/primary/_forms.js',
                     'scripts/primary/_unsorted.js',
                     'scripts/primary/_exec.js'
                 ),
@@ -217,6 +218,7 @@ return array(
                     'scripts/secondary/_fileUpload.js',
                     'scripts/secondary/_infiniteScroll.js',
                     'scripts/secondary/_openMaps.js',
+                    'scripts/secondary/_exec.js'
                 ),
             ),
         'paths' => array(

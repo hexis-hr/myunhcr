@@ -1,13 +1,5 @@
 queue.jQuery(function(){
 
-  
-  /*------------------------------------------------------------------------------------
-    Custom select
-  ------------------------------------------------------------------------------------*/
-  $(document).on('change','.customSelect_select', function() {
-    $(this).siblings('.customSelect_overlay').html( $(this).find('option:selected').first().text() );
-  });
-
 
   /*------------------------------------------------------------------------------------
     Check for date and time inputs, and load libraries if required

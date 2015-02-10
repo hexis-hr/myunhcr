@@ -2,29 +2,10 @@ queue.jQuery(function(){
 
 
   /*------------------------------------------------------------------------------------
-    Accordion (Used on FAQ pages)
+    Custom select
   ------------------------------------------------------------------------------------*/
-  var accordion = {
-    open: function(target, openItems){
-      dlog_verbose('faq.open()');
-      openItems.removeAttr('accordionOpen').find('[autoHeight]').first().height(0);
-      target.attr('accordionOpen', '').find('[autoHeight]').first().animateAuto();
-    },
-    close: function(target){
-      dlog_verbose('faq.close()');
-      target.removeAttr('accordionOpen').find('[autoHeight]').first().height(0);
-    }
-  };
-
-  // Accordion item click
-  $(document).on('click, focus','[accordionItem]', function() {
-    var openItems = $(this).parent().children('[accordionOpen]');
-    accordion.open($(this), openItems);
-  });
-
-  // CLose on unfocus
-  $(document).on('blur','[accordionItem]', function() {
-    accordion.close($(this));
+  $(document).on('change','.customSelect_select', function() {
+    $(this).siblings('.customSelect_overlay').html( $(this).find('option:selected').first().text() );
   });
 
 

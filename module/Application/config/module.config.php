@@ -197,24 +197,26 @@ return array(
     'asset_manager' => array(
         'resolver_configs' => array(
             'collections' => array(
-                'scripts/all.js' => array(
+                'scripts/primary.js' => array(
                     'scripts/external/zepto.js',
-                    'scripts/main.js',
                     'scripts/external/load.js',
+                    'scripts/primary/_core.js',
                     'scripts/external/fastclick.js',
-                    'scripts/internal/_helpers.js',
-                    'scripts/internal/_design.js',
-                    'scripts/internal/_call.js',
-                    'scripts/internal/_historyState.js',
-                    'scripts/internal/_ajax.js',
-                    'scripts/internal/_sectionTooltip.js',
-                    'scripts/internal/_unsorted.js',
-                    'scripts/internal/_forms.js',
-                    'scripts/internal/_dateAndTime.js',
-                    'scripts/internal/_fileUpload.js',
-                    'scripts/internal/_infiniteScroll.js',
-                    'scripts/internal/_openMaps.js',
-                    'scripts/internal/_exec.js'
+                    'scripts/primary/_helpers.js',
+                    'scripts/primary/_design.js',
+                    'scripts/primary/_call.js',
+                    'scripts/primary/_historyState.js',
+                    'scripts/primary/_ajax.js',
+                    'scripts/primary/_unsorted.js',
+                    'scripts/primary/_exec.js'
+                ),
+                'scripts/secondary.js' => array(
+                    'scripts/secondary/_sectionTooltip.js',
+                    'scripts/secondary/_forms.js',
+                    'scripts/secondary/_dateAndTime.js',
+                    'scripts/secondary/_fileUpload.js',
+                    'scripts/secondary/_infiniteScroll.js',
+                    'scripts/secondary/_openMaps.js',
                 ),
             ),
         'paths' => array(

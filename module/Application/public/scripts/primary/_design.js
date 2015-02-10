@@ -1,14 +1,19 @@
 queue.jQuery(function(){
 
+
+  /*------------------------------------------------------------------------------------
+    Add state classes for css
+  ------------------------------------------------------------------------------------*/
+  $(window).on('load', function(){
+    $('html').addClass('pageLoaded');
+  });
+
   
   /*------------------------------------------------------------------------------------
-    Preload some resources after everything else loads
+    Preload resources after everything else loads
   ------------------------------------------------------------------------------------*/
   $(window).on('load', function(){
     setTimeout(function(){
-
-      // Signal to css that the page is fully loaded
-      $('html').addClass('pageLoaded');
 
       // Spinner gif for page transitions
       if(ux.preload.spinner !== true){

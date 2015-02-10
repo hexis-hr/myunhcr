@@ -39,8 +39,18 @@ queue.pageLoadEvents.push(function(event){
       }));
 
       var markers = [];
+      var oldMarkers = [];
 
-      google.maps.event.addListener(map, 'bounds_changed', function(){
+      google.maps.event.addListener(map, 'tilesloaded', function(){ getMarkers(); });
+      google.maps.event.addListener(map, 'dragend', function(){ getMarkers(); });
+      
+      // Add the on.resize event
+      queue.globalResizeEvents.push(function(event){
+        resizeMap(mapContainer);
+        google.maps.event.trigger(map, 'resize');
+      });
+
+    function getMarkers() {
         var bounds = map.getBounds();
         var northEast = bounds.getNorthEast(); // LatLng of the north-east corner
         var southWest = bounds.getSouthWest();
@@ -50,48 +60,54 @@ queue.pageLoadEvents.push(function(event){
         var swlng = southWest.lng();
 
         $.ajax({
-          type: 'POST',
-          url: $('#map').data('href'),
-          data: {
-            nelat: nelat,
-            nelng: nelng,
-            swlat: swlat,
-            swlng: swlng
-          },
-          timeout: 10000, // Wait for 10 seconds max
-          success: function (response) {
+            type: 'POST',
+            url: $('#map').data('href'),
+            data: {
+                nelat: nelat,
+                nelng: nelng,
+                swlat: swlat,
+                swlng: swlng
+            },
+            timeout: 10000, // Wait for 10 seconds max
+            success: function (response) {
 
-            // Multiple Markers
-            markers = response.data;
+                clearMarkers();
 
-            $.each(markers, function (key, marker) {
-              marker = new google.maps.Marker({
-                position: new google.maps.LatLng(marker[1], marker[2]),
-                map: map,
-                title: marker[0]
-              });
-              marker.setMap(map);
-            });
+                // Multiple Markers
+                markers = response.data;
 
-          },
-          error: function (xhr, type) {
-            console.log('Error on service map handling');
-          }
+                $.each(markers, function (key, marker) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(marker[1], marker[2]),
+                        map: map,
+                        title: marker[0]
+                    });
+                    marker.setMap(map);
+                    oldMarkers.push(marker);
+                });
+
+            },
+            error: function (xhr, type) {
+                console.log('Error on service map handling');
+            }
         });
-      });
+    }
 
+    // Sets the map on all markers in the array.
+    function setAllMap(map) {
+        for (var i = 0; i < oldMarkers.length; i++) {
+            oldMarkers[i].setMap(map);
+        }
+        oldMarkers = [];
+    }
 
-      
-      // Add the on.resize event
-      queue.globalResizeEvents.push(function(event){
-        resizeMap(mapContainer);
-        google.maps.event.trigger(map, 'resize');
-      });
-
+    // Removes the markers from the map, but keeps them in the array.
+    function clearMarkers() {
+        setAllMap(null);
+    }
 
     }
   }
-
 
   // Resize the map to fit the screen nicely
   function resizeMap(mapContainer){

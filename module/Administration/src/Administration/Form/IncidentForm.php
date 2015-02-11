@@ -11,7 +11,6 @@ class IncidentForm extends Form {
     public function __construct ($entityManager, $serviceLocator, $name = null) {
 
         $this->em = $entityManager;
-        $globalConfig = $serviceLocator->get('config');
 
         parent::__construct('incident');
 

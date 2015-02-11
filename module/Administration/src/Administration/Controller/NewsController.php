@@ -3,6 +3,7 @@
 namespace Administration\Controller;
 
 use Administration\Entity\News;
+use Administration\Form\Filter\NewsFormFilter;
 use Administration\Form\NewsForm;
 
 use Administration\Provider\ProvidesEntityManager;
@@ -49,9 +50,8 @@ class NewsController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new NewsFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -82,9 +82,8 @@ class NewsController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new NewsFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

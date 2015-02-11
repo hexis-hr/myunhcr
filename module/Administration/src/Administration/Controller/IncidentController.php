@@ -5,6 +5,9 @@ namespace Administration\Controller;
 use Administration\Entity\Incident;
 use Administration\Entity\IncidentCategory;
 use Administration\Entity\IncidentType;
+use Administration\Form\Filter\IncidentCategoryFormFilter;
+use Administration\Form\Filter\IncidentFormFilter;
+use Administration\Form\Filter\IncidentTypeFormFilter;
 use Administration\Form\IncidentCategoryForm;
 use Administration\Form\IncidentForm;
 use Administration\Form\IncidentTypeForm;
@@ -49,9 +52,8 @@ class IncidentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new IncidentFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -82,9 +84,8 @@ class IncidentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new IncidentFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -175,6 +176,8 @@ class IncidentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new IncidentCategoryFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -203,6 +206,8 @@ class IncidentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new IncidentCategoryFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -255,6 +260,8 @@ class IncidentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new IncidentTypeFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -283,6 +290,8 @@ class IncidentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new IncidentTypeFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

@@ -4,6 +4,7 @@ namespace Administration\Controller;
 
 use Administration\Entity\File;
 use Administration\Entity\Translation;
+use Administration\Form\Filter\TranslationFormFilter;
 use Administration\Form\TranslationForm;
 use Administration\Provider\ProvidesEntityManager;
 
@@ -55,6 +56,8 @@ class TranslationController extends AbstractActionController {
                 $request->getFiles()->toArray()
             );
 
+            $formFilter = new TranslationFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($post);
 
             if ($form->isValid()) {
@@ -65,7 +68,7 @@ class TranslationController extends AbstractActionController {
 
                 if (move_uploaded_file($translateFile['tmp_name'], $target_file)) {
                     exec('msgfmt -cv -o ' . $newMoFile . ' ' . $target_file);
-                    $this->flashMessenger()->addMessage('The file ' . basename($translateFile['name']) . ' has been uploaded.
+                    $this->flashMessenger()->addSuccessMessage('The file ' . basename($translateFile['name']) . ' has been uploaded.
                      Its name is changed to ' . basename($fileName));
                 } else {
                     $this->flashMessenger()->addMessage('Sorry, there was an error uploading your file.');

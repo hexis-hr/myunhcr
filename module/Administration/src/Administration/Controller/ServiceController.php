@@ -5,6 +5,8 @@ namespace Administration\Controller;
 use Administration\Entity\News;
 use Administration\Entity\Service;
 use Administration\Entity\ServicePartner;
+use Administration\Form\Filter\ServiceFormFilter;
+use Administration\Form\Filter\ServicePartnerFormFilter;
 use Administration\Form\NewsForm;
 
 use Administration\Form\ServiceForm;
@@ -53,9 +55,8 @@ class ServiceController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new ServiceFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -86,9 +87,8 @@ class ServiceController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new ServiceFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -161,9 +161,8 @@ class ServiceController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new ServicePartnerFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -194,9 +193,8 @@ class ServiceController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new ServicePartnerFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

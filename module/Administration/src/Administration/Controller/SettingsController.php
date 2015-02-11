@@ -8,6 +8,8 @@ use Administration\Entity\News;
 use Administration\Entity\Settings;
 use Administration\Form\CountryLocationForm;
 use Administration\Form\CountrySettingsForm;
+use Administration\Form\Filter\CountryLocationFormFilter;
+use Administration\Form\Filter\UserCategoryFormFilter;
 use Administration\Form\NewsForm;
 use Administration\Form\UserCategoryForm;
 use Administration\Provider\ProvidesEntityManager;
@@ -240,9 +242,8 @@ class SettingsController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-            //$formFilter = new UserFormFilter();
-            //$form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new UserCategoryFormFilter();
+            $form->setInputFilter($formFilter->getAddInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -339,9 +340,8 @@ class SettingsController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-            //$formFilter = new UserFormFilter();
-            //$form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new CountryLocationFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

@@ -7,6 +7,8 @@ use Administration\Entity\FaqCategory;
 use Administration\Form\FaqCategoryForm;
 use Administration\Form\FaqForm;
 
+use Administration\Form\Filter\FaqCategoryFormFilter;
+use Administration\Form\Filter\FaqFormFilter;
 use Administration\Provider\ProvidesEntityManager;
 use Doctrine\ORM\Query;
 use Zend\View\Model\JsonModel;
@@ -46,9 +48,8 @@ class FaqController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new FaqFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -79,9 +80,8 @@ class FaqController extends AbstractActionController {
 
         if ($request->isPost()) {
 
-            //todo
-//            $formFilter = new UserFormFilter();
-//            $form->setInputFilter($formFilter->getAddInputFilter());
+            $formFilter = new FaqFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -154,6 +154,8 @@ class FaqController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new FaqCategoryFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -184,6 +186,8 @@ class FaqController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new FaqCategoryFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

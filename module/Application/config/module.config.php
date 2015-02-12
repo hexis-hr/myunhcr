@@ -221,6 +221,7 @@ return array(
                     'scripts/secondary/_infiniteScroll.js',
                     'scripts/secondary/_openMaps.js',
                     'scripts/secondary/_geoLocation.js',
+                    'scripts/secondary/_maps.js',
                     'scripts/secondary/_exec.js'
                 ),
             ),

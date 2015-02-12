@@ -65,13 +65,3 @@ var deviceLocation = {
   }
 
 };
-
-
-queue.pageLoadEvents.push(function (event) {
-  
-  // Get the device location if there's an autoLocate attribute on this page
-  if ($('[data-autoLocate]')[0]) {
-    deviceLocation.get();
-  }
-
-});

@@ -26,14 +26,6 @@ queue.pageLoadEvents.push(function (event) {
 
 
     if ($('[data-openStreetMap]')[0]) {
-        var mapContainer = '';
-
-
-        // Resize the map container based on available screen estate
-        if ($('#map')[0]) {
-            var mapContainer = $('#map').first();
-            resizeMap(mapContainer);
-        }
 
         // Load map scripts
         getMaps();
@@ -71,12 +63,6 @@ queue.pageLoadEvents.push(function (event) {
             });
             google.maps.event.addListener(app.currentMap, 'dragend', function () {
                 getMarkers();
-            });
-
-            // Add the on.resize event
-            queue.globalResizeEvents.push(function (event) {
-                resizeMap(mapContainer);
-                google.maps.event.trigger(app.currentMapapp.currentMap, 'resize');
             });
 
             function getMarkers() {
@@ -135,24 +121,7 @@ queue.pageLoadEvents.push(function (event) {
                 setAllMap(null);
             }
 
-            $(document).on('click', '[data-geocode]', function (e) {
-              app.geocode.setAddress( $('#location').val() );
-            });
-
-            $(document).on('submit', '[data-geocodeForm]', function (e) {
-              e.preventDefault();
-              app.geocode.setAddress( $('#location').val() );
-            });
         }
-    }
-
-    // Resize the map to fit the screen nicely
-    function resizeMap(mapContainer) {
-        var height = ux.viewport.height - mapContainer.offset().top;
-        if (height < 250) {
-            height = 250;
-        }
-        mapContainer.height(height);
     }
 
 

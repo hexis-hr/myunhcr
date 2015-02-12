@@ -115,9 +115,9 @@ queue.pageLoadEvents.push(function (event) {
             function geocode() {
                 var address = document.getElementById('location').value;
 
-                geocoder.geocode({ 'address': address}, function (results, status) {
+                geocoder.geocode({'address': address}, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
-                        map.setCenter(results[0].geometry.location);
+                        map.fitBounds(results[0].geometry.viewport);
                     } else {
                         alert("Geocode was not successful for the following reason: " + status);
                     }

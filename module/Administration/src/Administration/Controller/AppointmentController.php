@@ -9,6 +9,7 @@ use Administration\Form\AppointmentCategoryForm;
 use Administration\Form\FaqCategoryForm;
 use Administration\Form\FaqForm;
 
+use Administration\Form\Filter\AppointmentCategoryFormFilter;
 use Administration\Provider\ProvidesEntityManager;
 use Doctrine\ORM\Query;
 use Zend\View\Model\JsonModel;
@@ -94,6 +95,8 @@ class AppointmentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new AppointmentCategoryFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
@@ -126,6 +129,8 @@ class AppointmentController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new AppointmentCategoryFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {

@@ -3,6 +3,7 @@
 namespace Administration\Controller;
 
 use Administration\Entity\SurveyODK;
+use Administration\Form\Filter\SurveyODKFormFilter;
 use Administration\Form\SurveyODKForm;
 use Administration\Provider\ProvidesEntityManager;
 
@@ -48,7 +49,10 @@ class SurveyController extends AbstractActionController {
 
         if ($request->isPost()) {
 
+            $formFilter = new SurveyODKFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
+
             if ($form->isValid()) {
 
                 $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')

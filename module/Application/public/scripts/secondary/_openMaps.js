@@ -2,6 +2,29 @@ queue.pageLoadEvents.push(function (event) {
 
     var geocoder;
 
+
+    // Geocode object for pushing locations to google maps
+    app.geocode = {
+      params: {},
+
+      setAddress: function(address){
+        geocoder.geocode({ 'address':address }, this.callback);
+      },
+
+      setLocation: function(latitude,longitude){
+        app.currentMap.setCenter({ 'lat':latitude, 'lng':longitude });
+      },
+
+      callback: function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          app.currentMap.fitBounds(results[0].geometry.viewport);
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      }
+    };
+
+
     if ($('[data-openStreetMap]')[0]) {
         var mapContainer = '';
 
@@ -28,10 +51,10 @@ queue.pageLoadEvents.push(function (event) {
                 streetViewControl: false
             };
 
-            var map = new google.maps.Map(element, mapOptions);
+            window.app.currentMap = new google.maps.Map(element, mapOptions);
             geocoder = new google.maps.Geocoder();
 
-            map.mapTypes.set('OSM', new google.maps.ImageMapType({
+            app.currentMap.mapTypes.set('OSM', new google.maps.ImageMapType({
                 getTileUrl: function (coord, zoom) {
                     return 'http://tile.openstreetmap.org/' + zoom + '/' + coord.x + '/' + coord.y + '.png';
                 },
@@ -43,21 +66,21 @@ queue.pageLoadEvents.push(function (event) {
             var markers = [];
             var oldMarkers = [];
 
-            google.maps.event.addListener(map, 'tilesloaded', function () {
+            google.maps.event.addListener(app.currentMap, 'tilesloaded', function () {
                 getMarkers();
             });
-            google.maps.event.addListener(map, 'dragend', function () {
+            google.maps.event.addListener(app.currentMap, 'dragend', function () {
                 getMarkers();
             });
 
             // Add the on.resize event
             queue.globalResizeEvents.push(function (event) {
                 resizeMap(mapContainer);
-                google.maps.event.trigger(map, 'resize');
+                google.maps.event.trigger(app.currentMapapp.currentMap, 'resize');
             });
 
             function getMarkers() {
-                var bounds = map.getBounds();
+                var bounds = app.currentMap.getBounds();
                 var northEast = bounds.getNorthEast(); // LatLng of the north-east corner
                 var southWest = bounds.getSouthWest();
                 var nelat = northEast.lat();
@@ -85,10 +108,10 @@ queue.pageLoadEvents.push(function (event) {
                         $.each(markers, function (key, marker) {
                             marker = new google.maps.Marker({
                                 position: new google.maps.LatLng(marker[1], marker[2]),
-                                map: map,
+                                map: app.currentMap,
                                 title: marker[0]
                             });
-                            marker.setMap(map);
+                            marker.setMap(app.currentMap);
                             oldMarkers.push(marker);
                         });
 
@@ -100,9 +123,9 @@ queue.pageLoadEvents.push(function (event) {
             }
 
             // Sets the map on all markers in the array.
-            function setAllMap(map) {
+            function setAllMap() {
                 for (var i = 0; i < oldMarkers.length; i++) {
-                    oldMarkers[i].setMap(map);
+                    oldMarkers[i].setMap(app.currentMap);
                 }
                 oldMarkers = [];
             }
@@ -112,25 +135,13 @@ queue.pageLoadEvents.push(function (event) {
                 setAllMap(null);
             }
 
-            function geocode() {
-                var address = document.getElementById('location').value;
-
-                geocoder.geocode({'address': address}, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        map.fitBounds(results[0].geometry.viewport);
-                    } else {
-                        alert("Geocode was not successful for the following reason: " + status);
-                    }
-                });
-            }
-
             $(document).on('click', '[data-geocode]', function (e) {
-                geocode();
+              app.geocode.setAddress( $('#location').val() );
             });
 
             $(document).on('submit', '[data-geocodeForm]', function (e) {
-                e.preventDefault();
-                geocode();
+              e.preventDefault();
+              app.geocode.setAddress( $('#location').val() );
             });
         }
     }

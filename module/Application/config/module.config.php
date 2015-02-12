@@ -219,8 +219,8 @@ return array(
                     'scripts/secondary/_dateAndTime.js',
                     'scripts/secondary/_fileUpload.js',
                     'scripts/secondary/_infiniteScroll.js',
-                    'scripts/secondary/_geoLocation.js',
                     'scripts/secondary/_openMaps.js',
+                    'scripts/secondary/_geoLocation.js',
                     'scripts/secondary/_exec.js'
                 ),
             ),

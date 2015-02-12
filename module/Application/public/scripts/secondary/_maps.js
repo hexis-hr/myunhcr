@@ -3,31 +3,36 @@
   This is the main controller for all map scripts
 
 */
-queue.pageLoadEvents.push(function (event) {
+queue.pageLoadEvents.push(function(event){
   
-  // If there's a map on this page, resize it to fit
+  // Resize the mobile map to fit vertically
   if ($('#map')[0]) {
     var mapContainer = $('#map').first();
     resizeMap(mapContainer);
 
-    // Also add the on.resize event for map resizing
+    // Resize the map again when the viewport resizes
     queue.globalResizeEvents.push(function (event) {
       resizeMap(mapContainer);
-      google.maps.event.trigger(app.currentMapapp.currentMap, 'resize');
     });
   }
 
-  // Get the device location if there's an autoLocate attribute on this page
+  // Get the device location
   if ($('[data-autoLocate]')[0]) {
-    deviceLocation.get();
+    app.deviceLocation.get();
   }
 
-  // If there is a geocode form, watch the submit
+  // Watch for location submits
   if ($('[data-geocodeForm]')[0]) {
     $(document).on('submit', '[data-geocodeForm]', function (e) {
       e.preventDefault();
       app.geocode.setAddress( $('#location').val() );
     });
+  }
+
+  // Call scripts, configure map, etc...
+  if ($('[data-openStreetMap]')[0]) {
+    dlog('MAPS: Calling map handler...');
+    app.handleMap();
   }
 
   // Not used?
@@ -47,4 +52,8 @@ function resizeMap(mapContainer) {
   var height = ux.viewport.height - mapContainer.offset().top;
   if (height < 250) { height = 250; }
   mapContainer.height(height);
+  if(ux.state.mapsLoaded === true){
+    dlog('MAPS: Triggering resize event...');
+    google.maps.event.trigger(app.currentMap, 'resize');
+  }
 }

@@ -9,6 +9,8 @@ window.ux = {
   state: {
     isLoading: false,
     isCalling: false,
+    mapsLoaded: false,
+    isTracing: false,
     pageNotFound: false
   },
   viewport: {},
@@ -17,7 +19,17 @@ window.ux = {
   },
   page: {},
   config: {},
-  preload: {}
+  preload: {},
+  geo: {
+    attemptedTrace: null,
+    country: null,
+    coarse: {
+      failed: 0
+    },
+    accurate: {
+      failed: 0
+    }
+  }
 };
 
 

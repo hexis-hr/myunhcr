@@ -6,6 +6,7 @@
     &.-error { color:white; background:$negative; background:rgba($negative,0.85); }
   }
   .map { min-height:250px; }
+    .map img { max-width:none; }
 
 // #map { width:100%; margin:0; padding:0; }
 // #map-canvas { height:100%; margin:0px; padding:0px; }

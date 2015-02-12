@@ -1600,6 +1600,10 @@ body {
   min-height: 250px;
 }
 
+.map img {
+  max-width: none;
+}
+
 .formInput, .formSelect, .modern .customSelect_overlay, .formTextarea, .inputDate, .inputTime {
   width: 100%;
   padding: 0 .75em;
@@ -2091,7 +2095,7 @@ body {
   cursor: pointer;
   position: relative;
   display: inline-block;
-  padding: 0.6em 1.2em 0.68571em;
+  padding: 0.6em 0.6em 0.68571em;
   width: auto;
   height: auto;
   vertical-align: middle;
@@ -2119,6 +2123,12 @@ body {
 .button::-moz-focus-inner {
   border: 0;
   padding: 0;
+}
+@media only screen and (min-width: 26.75em) {
+  .button {
+    padding-right: 1.2em;
+    padding-left: 1.2em;
+  }
 }
 .button:hover, .button:focus {
   background: #ebebeb;

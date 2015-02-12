@@ -45,17 +45,13 @@
     </div>
   </div>
 
-  <div class='grid -collapse'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <div id='mapContainer' class='mapContainer'>
-        <div id='geoLocator' class='geoLocator' data-autoLocate
-          data-searchingMsg='Trying to locate your position...'
-          data-successMsg='Positioning...'
-          data-errorMsg='Could not determine your precise location'>
-        </div>
-        <div id='map' class='map -fill' data-openStreetMap data-href='<?php echo $this->url('getAjaxMarkers'); ?>'></div>  
-      </div>
+  <div id='mapContainer' class='mapContainer'>
+    <div id='geoLocator' class='geoLocator' data-autoLocate
+      data-searchingMsg='Trying to locate your position...'
+      data-successMsg='Positioning...'
+      data-errorMsg='Could not determine your precise location'>
     </div>
+    <div id='map' class='map -fill' data-openStreetMap data-href='<?php echo $this->url('getAjaxMarkers'); ?>'></div>  
   </div>
 
 </section>

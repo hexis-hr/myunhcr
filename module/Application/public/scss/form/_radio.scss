@@ -1,9 +1,11 @@
-.bigRadio {}
+.bigRadio { position:relative; }
   .bigRadio_input {}
-  .bigRadio_label { vertical-align:-1px; font-weight:regular; color:$black; }
+  .bigRadio_label { vertical-align:-1px; font-weight:regular; color:$black;
+    &:before { position:absolute; top:0; left:0; right:0; bottom:0; content:''; }
+  }
 
 
-@include small {
+.modern {
   .bigRadio {}
     .bigRadio_input { position:absolute; left:-2000px; width:0; height:0; @include opacity(0); }
     .bigRadio_label {

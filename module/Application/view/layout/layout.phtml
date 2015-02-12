@@ -7,7 +7,7 @@
   <meta charset='utf-8'>
   <link rel="dns-prefetch" href="//maps.googleapis.com">
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><!-- This line is best to remove and just send it as a http header -->
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
   <?php echo $this->headTitle($this->translate('MyUNHCR'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
   <!-- ======= Critical Inline Scripts ======= -->
@@ -43,7 +43,7 @@
         app.userDeviceVersion = parseFloat(app.ua.match(/android\s([0-9\.]*)/)[1]);
         doc.className += " android";
         if( app.userDeviceVersion < 2.3 ) {
-          console.log ('Failed the Android Test: ' + app.userDeviceVersion);
+          console.log ('Failed the modern test: Android ' + app.userDeviceVersion);
           app.userModernFail = true;
         }
       }
@@ -54,7 +54,7 @@
         app.userDeviceVersion = parseFloat((navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/)[1]);
         doc.className += " ios";
         if( app.userDeviceVersion < 6.1 ) {
-          console.log ('Failed the iOS Test: ' + app.userDeviceVersion);
+          console.log ('Failed the modern test: iOS ' + app.userDeviceVersion);
           app.userModernFail = true;
         }
       }

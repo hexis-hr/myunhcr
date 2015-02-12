@@ -114,6 +114,4 @@ window.page = {
   Call secondary.js
 ------------------------------------------------------------------------------------*/
 dlog('GET: Secondary.js...');
-load('scripts/secondary.js').thenRun(function(){
-  dlog('GET: Secondary.js OK!');
-});
+load('scripts/secondary.js');

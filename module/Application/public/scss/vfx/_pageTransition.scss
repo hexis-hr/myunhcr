@@ -1,0 +1,8 @@
+#pageLoad { display:block; position:fixed; z-index:99; top:$headerHeight; left:0; width:100%; height:0; opacity:0;
+  transition:transform 200ms 500ms, opacity 250ms ease-out;
+  color:black; font-weight:bold; text-align:center;
+  &.-preload, &.-loading { background:rgba(white,0.65) url("#{$img-path}globals/loader-blue-28.gif") center center no-repeat; }
+  &.-preload { width:1px; height:1px; }
+  &.-loading { transform:translateY(-10px); opacity:1; height:auto; bottom:0; transition:transform 200ms 500ms, opacity 400ms 500ms; }
+  &.-problem { padding-top:90px; background:rgba(white,0.85); }
+}

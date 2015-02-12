@@ -212,11 +212,14 @@ return array(
                     'scripts/primary/_exec.js'
                 ),
                 'scripts/secondary.js' => array(
+                    'scripts/external/geoPosition.js',
+                    'scripts/secondary/_core.js',
                     'scripts/secondary/_sectionTooltip.js',
                     'scripts/secondary/_forms.js',
                     'scripts/secondary/_dateAndTime.js',
                     'scripts/secondary/_fileUpload.js',
                     'scripts/secondary/_infiniteScroll.js',
+                    'scripts/secondary/_geoLocation.js',
                     'scripts/secondary/_openMaps.js',
                     'scripts/secondary/_exec.js'
                 ),

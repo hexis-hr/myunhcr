@@ -4,18 +4,16 @@
 }
 
 
-// Container styles
-%rippleContainer { position:relative; overflow:hidden; }
+.modern {
 
-// Wave styles
-.rippleWave { position:absolute; background:rgba($lightBlue,0.3); border-radius:100%; transform:scale(0); }
+  // Container styles
+  %rippleContainer { position:relative; overflow:hidden; }
 
-// Animate the wave
-.rippleWave.animate { animation:ripple 0.6s linear; }
+  // Wave styles
+  .rippleWave { position:absolute; background:rgba($lightBlue,0.3); border-radius:100%; transform:scale(0); }
 
-
-// Apply the following on for devices which support css transforms
-.transforms {
+  // Animate the wave
+  .rippleWave.animate { animation:ripple 0.6s linear; }
 
   // Apply base container styles
   [data-ripple], .button, .sectionHeader_info, .bigRadio { @extend %rippleContainer; }

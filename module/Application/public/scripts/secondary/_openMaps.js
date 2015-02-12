@@ -7,8 +7,8 @@ queue.pageLoadEvents.push(function (event) {
 
 
         // Resize the map container based on available screen estate
-        if ($('.mapContainer.-fill')[0]) {
-            var mapContainer = $('.mapContainer.-fill').first();
+        if ($('#map')[0]) {
+            var mapContainer = $('#map').first();
             resizeMap(mapContainer);
         }
 

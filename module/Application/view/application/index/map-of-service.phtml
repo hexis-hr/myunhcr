@@ -1,7 +1,7 @@
 <div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
 
-  <div class='sectionHeader'>
+  <div class='sectionHeader -clean'>
     <div class='sectionHeader_top'>
       <div class='grid -clean'>
         <div class='grid_column'>
@@ -23,26 +23,35 @@
     </div>
   </div>
 
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='' class='form' data-geocodeForm>
-        
-        <div class='form_item'>
-          <label class='form_label' for='location'><?php echo $this->translate('Where:'); ?></label>
-          <div class='form_field'>
-            <!-- Map to pin point with fallback to input ?  - check map-of-service.phtml -->
-            <input class='formInput' type='text' name='' value='' placeholder='Location Address' id='location'>
-            <input type="button" class="button -primary -fullWidth" value="Go" data-geocode>
+  
+  <div class='mapHeader'>
+    <div class='grid -clean'>
+      <div class='grid_column -medium9 -mediumPlus8'>
+        <form action='' class='form' data-geocodeForm>
+          <div class='form_item'>
+            <label class='mapHeader_search_label form_label' for='location'><?php echo $this->translate('Search location:'); ?></label>
+            <div class='grid -clean -collapse'>
+              <div class='grid_column -small9 mapHeader_search_left'>
+                <div class='form_field'>
+                  <input class='mapHeader_search_input formInput' type='text' name='' value='' placeholder='<?php echo $this->translate('Enter a country or city'); ?>...' id='location'>
+                </div>
+              </div>
+              <div class='grid_column -small3 mapHeader_search_right'>
+                <input class='mapHeader_search_submit button -primary -fullWidth' type='button' value='<?php echo $this->translate('Find'); ?>' data-geocode>
+              </div>
+            </div>
           </div>
-        </div>
-
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 
   <div class='grid -collapse'>
     <div class='grid_column -medium9 -mediumPlus8'>
-      <div id='map' class='mapContainer -fill' data-openStreetMap data-href='<?php echo $this->url('getAjaxMarkers'); ?>'></div>
+      <div id='mapContainer' class='mapContainer'>
+        <div id='geoLocator' class='geoLocator'>Trying to locate your position...</div>
+        <div id='map' class='map -fill' data-openStreetMap data-href='<?php echo $this->url('getAjaxMarkers'); ?>'></div>  
+      </div>
     </div>
   </div>
 

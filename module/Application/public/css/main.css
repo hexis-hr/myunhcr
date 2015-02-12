@@ -1073,15 +1073,12 @@ body {
 #page {
   position: relative;
   z-index: 11;
-  min-height: 100%;
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
-  -webkit-transition: opacity 250ms ease-out, -webkit-transform 400ms ease-out;
-          transition: opacity 250ms ease-out, transform 400ms ease-out;
+  -webkit-transition: opacity 400ms ease-in, -webkit-transform 400ms ease-in;
+          transition: opacity 400ms ease-in, transform 400ms ease-in;
 }
 #page.-loading {
-  -webkit-transform: translateX(-12px) translateZ(0);
-          transform: translateX(-12px) translateZ(0);
   opacity: 0;
   -webkit-transition: opacity 300ms ease-in, -webkit-transform 400ms ease-in;
           transition: opacity 300ms ease-in, transform 400ms ease-in;
@@ -1090,51 +1087,17 @@ body {
   z-index: 60;
 }
 
-#pageLoad {
-  display: block;
-  position: absolute;
-  position: fixed;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  opacity: 0;
-  -webkit-transition: opacity 350ms;
-          transition: opacity 350ms;
-  color: black;
-  font-weight: bold;
-  text-align: center;
-}
-#pageLoad.-preload, #pageLoad.-loading {
-  background: rgba(255, 255, 255, 0.4) url("../media/globals/loader-blue-28.gif") center center no-repeat;
-}
-#pageLoad.-preload {
-  width: 1px;
-  height: 1px;
-}
-#pageLoad.-loading {
-  opacity: 1;
-  height: 100%;
-  -webkit-transition: opacity 600ms 400ms;
-          transition: opacity 600ms 400ms;
-}
-#pageLoad.-problem {
-  padding-top: 90px;
-  background: rgba(255, 255, 255, 0.85);
-}
-
 .page {
-  padding-bottom: 18px;
+  padding-bottom: 50px;
 }
 @media only screen and (min-width: 37.5em) {
   .page {
-    padding-bottom: 22px;
+    padding-bottom: 61px;
   }
 }
 @media only screen and (min-width: 64.0625em) {
   .page {
-    padding-bottom: 27px;
+    padding-bottom: 74px;
   }
 }
 .page.-extraMargin {
@@ -1568,12 +1531,48 @@ body {
 }
 
 .mapContainer {
-  max-width: 100%;
-  min-height: 250px;
+  position: relative;
   background: url("../media/globals/loader-blue-28.gif") center center no-repeat;
 }
 
-.formInput, .formSelect, .js .customSelect_overlay, .formTextarea, .inputDate, .inputTime {
+.geoLocator {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 15px;
+  height: 0;
+  font-size: .8em;
+  overflow: hidden;
+  opacity: 0;
+  -webkit-transition: opacity 500ms;
+          transition: opacity 500ms;
+}
+.geoLocator.-active {
+  height: auto;
+  padding: 6px;
+  opacity: 1;
+}
+.geoLocator.-searching {
+  color: black;
+  background: #F8C300;
+  background: rgba(248, 195, 0, 0.85);
+}
+.geoLocator.-success {
+  color: white;
+  background: #5bbd72;
+  background: rgba(91, 189, 114, 0.85);
+}
+.geoLocator.-error {
+  color: white;
+  background: #e24f55;
+  background: rgba(226, 79, 85, 0.85);
+}
+
+.map {
+  min-height: 250px;
+}
+
+.formInput, .formSelect, .modern .customSelect_overlay, .formTextarea, .inputDate, .inputTime {
   width: 100%;
   padding: 0 .75em;
   font-size: 15px;
@@ -1582,11 +1581,11 @@ body {
   -webkit-transition: 200ms;
           transition: 200ms;
 }
-.-error .formInput, .-error .formSelect, .-error .js .customSelect_overlay, .js .-error .customSelect_overlay, .-error .formTextarea, .-error .inputDate, .-error .inputTime {
+.-error .formInput, .-error .formSelect, .-error .modern .customSelect_overlay, .modern .-error .customSelect_overlay, .-error .formTextarea, .-error .inputDate, .-error .inputTime {
   border-color: #e24f55;
 }
 
-.formInput:focus, .formSelect:focus, .js .customSelect_select:focus + .customSelect_overlay, .button:hover, .button:focus, .linkGroup_link:hover, .linkGroup_link:focus, .faq_item:focus {
+.formInput:focus, .formSelect:focus, .modern .customSelect_select:focus + .customSelect_overlay, .button:hover, .button:focus, .linkGroup_link:hover, .linkGroup_link:focus, .faq_item:focus {
   box-shadow: 1px 2px 6px rgba(54, 155, 217, 0.35), 0 0 0px 1px #8bc6e9 !important;
   outline: 4px #8bc6e9;
 }
@@ -1667,16 +1666,16 @@ body {
   display: none;
 }
 
-.js .customSelect {
+.modern .customSelect {
   position: relative;
 }
-.js .customSelect_select {
+.modern .customSelect_select {
   position: relative;
   z-index: 2;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-.js .customSelect_overlay {
+.modern .customSelect_overlay {
   position: absolute;
   z-index: 1;
   display: block;
@@ -1686,7 +1685,7 @@ body {
   height: 42px;
   line-height: 42px;
 }
-.js .customSelect_overlay:after {
+.modern .customSelect_overlay:after {
   width: 0;
   height: 0;
   border: 6px solid transparent;
@@ -1706,58 +1705,64 @@ body {
           transition: none;
 }
 
+.bigRadio {
+  position: relative;
+}
+
 .bigRadio_label {
   vertical-align: -1px;
   font-weight: regular;
   color: #231f20;
 }
-
-@media only screen and (min-width: 18.75em) {
-  .bigRadio_input {
-    position: absolute;
-    left: -2000px;
-    width: 0;
-    height: 0;
-    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    opacity: 0;
-  }
-
-  .bigRadio_label {
-    position: relative;
-    z-index: 1;
-    display: block;
-    margin-right: -1px;
-    padding: 1em .5em;
-    color: #595959;
-    text-align: center;
-    border: 1px dashed #d2d2d2;
-  }
-
-  .form_subitem:last-child .bigRadio_label {
-    margin-right: 0;
-  }
-
-  .bigRadio_input:focus + .bigRadio_label {
-    z-index: 2;
-    margin: 0;
-    color: #0077c0;
-    border-color: #0077c0;
-    box-shadow: inset 0 0 0 1px #0077c0;
-  }
-
-  .bigRadio_input:checked + .bigRadio_label {
-    z-index: 2;
-    margin: 0;
-    color: #0077c0;
-    border-style: solid;
-    border-color: #0077c0;
-    box-shadow: inset 0 0 0 1px #0077c0;
-  }
-
-  .bigRadio .form_subitem:last-child .bigRadio_label {
-    margin-right: 0;
-  }
+.bigRadio_label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
 }
+
+.modern .bigRadio_input {
+  position: absolute;
+  left: -2000px;
+  width: 0;
+  height: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+.modern .bigRadio_label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-right: -1px;
+  padding: 1em .5em;
+  color: #595959;
+  text-align: center;
+  border: 1px dashed #d2d2d2;
+}
+.modern .form_subitem:last-child .bigRadio_label {
+  margin-right: 0;
+}
+.modern .bigRadio_input:focus + .bigRadio_label {
+  z-index: 2;
+  margin: 0;
+  color: #0077c0;
+  border-color: #0077c0;
+  box-shadow: inset 0 0 0 1px #0077c0;
+}
+.modern .bigRadio_input:checked + .bigRadio_label {
+  z-index: 2;
+  margin: 0;
+  color: #0077c0;
+  border-style: solid;
+  border-color: #0077c0;
+  box-shadow: inset 0 0 0 1px #0077c0;
+}
+.modern .bigRadio .form_subitem:last-child .bigRadio_label {
+  margin-right: 0;
+}
+
 .formSwitch {
   margin-bottom: .75em;
   padding: .4em 0;
@@ -1945,6 +1950,10 @@ body {
 .sectionHeader_description {
   margin-top: 1em;
   font-size: 0.85em;
+}
+
+.sectionHeader.-promoted {
+  z-index: 5;
 }
 
 .sectionHeader.-noMargin {
@@ -2667,6 +2676,29 @@ body {
   border-top: 0;
 }
 
+.mapHeader {
+  position: relative;
+  z-index: 2;
+  padding: .75em 0 1em;
+  background: #eeeeee;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.mapHeader_search_input {
+  margin: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.mapHeader_search_submit {
+  margin: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.modern .mapHeader_search_label {
+  display: none;
+}
+
 /*--------------------------------------------------------------------------------
   Age navigation
 --------------------------------------------------------------------------------*/
@@ -2734,6 +2766,43 @@ body {
           transition: 400ms ease-in-out;
 }
 
+#pageLoad {
+  display: block;
+  position: fixed;
+  z-index: 99;
+  top: 58px;
+  left: 0;
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  -webkit-transition: -webkit-transform 200ms 500ms, opacity 250ms ease-out;
+          transition: transform 200ms 500ms, opacity 250ms ease-out;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+#pageLoad.-preload, #pageLoad.-loading {
+  background: rgba(255, 255, 255, 0.65) url("../media/globals/loader-blue-28.gif") center center no-repeat;
+}
+#pageLoad.-preload {
+  width: 1px;
+  height: 1px;
+}
+#pageLoad.-loading {
+  -webkit-transform: translateY(-10px);
+      -ms-transform: translateY(-10px);
+          transform: translateY(-10px);
+  opacity: 1;
+  height: auto;
+  bottom: 0;
+  -webkit-transition: -webkit-transform 200ms 500ms, opacity 400ms 500ms;
+          transition: transform 200ms 500ms, opacity 400ms 500ms;
+}
+#pageLoad.-problem {
+  padding-top: 90px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
 @-webkit-keyframes ripple {
   100% {
     opacity: 0;
@@ -2749,12 +2818,11 @@ body {
             transform: scale(2.5);
   }
 }
-.transforms [data-ripple], .transforms .button, .transforms .sectionHeader_info, .transforms .bigRadio {
+.modern [data-ripple], .modern .button, .modern .sectionHeader_info, .modern .bigRadio {
   position: relative;
   overflow: hidden;
 }
-
-.rippleWave {
+.modern .rippleWave {
   position: absolute;
   background: rgba(75, 166, 221, 0.3);
   border-radius: 100%;
@@ -2762,16 +2830,14 @@ body {
       -ms-transform: scale(0);
           transform: scale(0);
 }
-
-.rippleWave.animate {
+.modern .rippleWave.animate {
   -webkit-animation: ripple 0.6s linear;
           animation: ripple 0.6s linear;
 }
-
-.transforms [data-ripple="neutral"] .rippleWave, .transforms .button .rippleWave {
+.modern [data-ripple="neutral"] .rippleWave, .modern .button .rippleWave {
   background: rgba(128, 128, 128, 0.3);
 }
-.transforms [data-ripple="white"] .rippleWave, .transforms .button.-primary .rippleWave, .transforms .ageNav.-bottom .ageNav_button .rippleWave, .ageNav.-bottom .transforms .ageNav_button .rippleWave, .transforms .button.-secondary .rippleWave {
+.modern [data-ripple="white"] .rippleWave, .modern .button.-primary .rippleWave, .modern .ageNav.-bottom .ageNav_button .rippleWave, .ageNav.-bottom .modern .ageNav_button .rippleWave, .modern .button.-secondary .rippleWave {
   background: rgba(255, 255, 255, 0.3);
 }
 
@@ -2830,10 +2896,15 @@ body {
 }
 
 .pg-mapOfServices .page {
-  padding-bottom: 0;
+  padding-bottom: 0 !important;
 }
-.pg-mapOfServices .mapContainer {
-  margin-top: 20px;
+
+.pg-listByOrganisation .page {
+  padding-bottom: 0 !important;
+}
+
+.pg-listBySector .page {
+  padding-bottom: 0 !important;
 }
 
 /* ==========================================================================

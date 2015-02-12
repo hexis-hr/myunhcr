@@ -49,11 +49,13 @@
 @import "content/_feedback";
 @import "content/_faq";
 @import "content/_articles";
+@import "content/_mapHeader";
 @import "content/_pagination";
 
 
 // Import visual effects
 @import "vfx/_animation";
+@import "vfx/_pageTransition";
 @import "vfx/_ripple";
 
 
@@ -62,6 +64,8 @@
 @import "pages/_homepage";
 @import "pages/_faq";
 @import "pages/_mapOfServices";
+@import "pages/_listByOrganisation";
+@import "pages/_listBySector";
 
 
 // Import plugins

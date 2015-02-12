@@ -78,16 +78,26 @@ queue.jQuery(function(){
   };
 
   // Add the on.load event
-  queue.pageLoadEvents.push(function(event){
-    if( $('.articlePhoto')[0]){
+  queue.pageLoadEvents.push(function(){
+    if( $('.articlePhoto')[0] ){
       $('.articlePhoto').each(function(i, el){ articlePhotoCenter($(el)); });
     }
   });
 
   // Add the on.resize event
-  queue.globalResizeEvents.push(function(event){
-    if( $('.articlePhoto')[0]){
+  queue.globalResizeEvents.push(function(){
+    if( $('.articlePhoto')[0] ){
       $('.articlePhoto').each(function(i, el){ articlePhotoCenter($(el)); });
+    }
+  });
+
+
+  /*------------------------------------------------------------------------------------
+    Autofocus input elements
+  ------------------------------------------------------------------------------------*/
+  queue.pageLoadEvents.push(function (){
+    if( $('[autofocus]')[0] ){
+      $('[autofocus]')[0].focus();
     }
   });
 

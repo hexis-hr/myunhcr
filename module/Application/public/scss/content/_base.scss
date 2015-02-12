@@ -13,6 +13,7 @@
   .sectionHeader_bottom { display:none; /* Added display none for now */ margin-top:-5px; }
     .sectionHeader_description { margin-top:1em; font-size:0.85em; }
 
+.sectionHeader.-promoted { z-index:5; }
 .sectionHeader.-noMargin { margin-bottom: 0 !important; }
 
 // SmallPlus screens

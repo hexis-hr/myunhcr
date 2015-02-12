@@ -1,0 +1,20 @@
+.mapSearch { position:relative; z-index:2; padding:.75em 0 1em; background:#eeeeee; box-shadow:0 4px 6px 0 rgba(black,0.15); overflow:hidden; }
+  .mapSearch_label {}
+  .mapSearch_inner {}
+    .mapSearch_leftColumn {}
+      .mapSearch_input { margin:0; border-radius:3px 0 0 3px; }
+    .mapSearch_rightColumn {}
+      .mapSearch_submit { margin:0; border-radius:0 3px 3px 0; }
+
+// Minimise for modern browsers
+.modern {
+  // .mapSearch { height:41px; transition:height 300ms; }
+    .mapSearch_label { display:none; }
+    // .mapSearch_inner { opacity:0; transition:opacity 500ms; }
+  
+  // .mapSearch.-focus {
+  //   &.-focus { height:96px;
+  //     .mapSearch_inner { opacity:1; }
+  //   }
+  // }
+}

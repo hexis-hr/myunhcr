@@ -1,3 +1,6 @@
+// Plugin documentation: https://github.com/estebanav/javascript-mobile-desktop-geolocation
+
+
 var deviceLocation = {
 
   get: function(){

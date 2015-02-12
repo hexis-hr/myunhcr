@@ -164,44 +164,72 @@
   Absolute fill
 ————————————————————————————————————————————————————————————————————————————————*/
 .gap {
-  margin-bottom: 32px;
+  margin-bottom: 1.85em;
 }
 @media only screen and (min-width: 37.5em) {
   .gap {
-    margin-bottom: 38px;
+    margin-bottom: 2.22em;
   }
 }
 @media only screen and (min-width: 64.0625em) {
   .gap {
-    margin-bottom: 46px;
+    margin-bottom: 2.664em;
   }
 }
 
 .gapSmall {
-  margin-bottom: 16px;
+  margin-bottom: 1.1em;
 }
 @media only screen and (min-width: 37.5em) {
   .gapSmall {
-    margin-bottom: 18px;
+    margin-bottom: 1.21em;
   }
 }
 @media only screen and (min-width: 64.0625em) {
   .gapSmall {
-    margin-bottom: 19px;
+    margin-bottom: 1.331em;
   }
 }
 
 .gapLarge {
-  margin-bottom: 54px;
+  margin-bottom: 2.5em;
 }
 @media only screen and (min-width: 37.5em) {
   .gapLarge {
-    margin-bottom: 70px;
+    margin-bottom: 3.25em;
   }
 }
 @media only screen and (min-width: 64.0625em) {
   .gapLarge {
-    margin-bottom: 91px;
+    margin-bottom: 4.225em;
+  }
+}
+
+.gapTop {
+  margin-top: 1.85em;
+}
+@media only screen and (min-width: 37.5em) {
+  .gapTop {
+    margin-top: 2.22em;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .gapTop {
+    margin-top: 2.664em;
+  }
+}
+
+.gapTopSmall {
+  margin-top: 1.1em;
+}
+@media only screen and (min-width: 37.5em) {
+  .gapTopSmall {
+    margin-top: 1.21em;
+  }
+}
+@media only screen and (min-width: 64.0625em) {
+  .gapTopSmall {
+    margin-top: 1.331em;
   }
 }
 
@@ -1073,12 +1101,12 @@ body {
 #page {
   position: relative;
   z-index: 11;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
   -webkit-transition: opacity 400ms ease-in, -webkit-transform 400ms ease-in;
           transition: opacity 400ms ease-in, transform 400ms ease-in;
 }
 #page.-loading {
+  -webkit-transform: translateX(-10px) translateZ(0);
+          transform: translateX(-10px) translateZ(0);
   opacity: 0;
   -webkit-transition: opacity 300ms ease-in, -webkit-transform 400ms ease-in;
           transition: opacity 300ms ease-in, transform 400ms ease-in;
@@ -2703,22 +2731,22 @@ body {
   Age navigation
 --------------------------------------------------------------------------------*/
 .ageNav_button {
-  margin: 17.92px 0 14.93333px;
+  margin: 1.232em 0 1.02667em;
 }
 
 .ageNav_end {
-  margin: 17.92px 0;
+  margin: 1.232em 0;
   font-size: 0.9em;
   color: #727272;
   text-align: center;
 }
 
 .ageNav.-top {
-  margin-bottom: 33.6px;
+  margin-bottom: 2.31em;
 }
 
 .ageNav.-bottom {
-  margin-top: 33.6px;
+  margin-top: 2.31em;
 }
 
 /*--------------------------------------------------------------------------------
@@ -2775,8 +2803,8 @@ body {
   width: 100%;
   height: 0;
   opacity: 0;
-  -webkit-transition: -webkit-transform 200ms 500ms, opacity 250ms ease-out;
-          transition: transform 200ms 500ms, opacity 250ms ease-out;
+  -webkit-transition: opacity 250ms ease-out;
+          transition: opacity 250ms ease-out;
   color: black;
   font-weight: bold;
   text-align: center;
@@ -2789,14 +2817,11 @@ body {
   height: 1px;
 }
 #pageLoad.-loading {
-  -webkit-transform: translateY(-10px);
-      -ms-transform: translateY(-10px);
-          transform: translateY(-10px);
   opacity: 1;
   height: auto;
   bottom: 0;
-  -webkit-transition: -webkit-transform 200ms 500ms, opacity 400ms 500ms;
-          transition: transform 200ms 500ms, opacity 400ms 500ms;
+  -webkit-transition: opacity 400ms 500ms;
+          transition: opacity 400ms 500ms;
 }
 #pageLoad.-problem {
   padding-top: 90px;

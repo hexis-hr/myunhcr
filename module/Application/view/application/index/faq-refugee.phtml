@@ -40,13 +40,15 @@
             <?php } ?>
         </ul>
     <?php } else { ?>
-        <div class='grid'>
-            <div class='grid_column -medium9 -mediumPlus8'>
-                <div class='preformat gap'>
-                    <p class="sectionHeader_title"><?php echo $this->translate('No FAQ found for chosen category.'); ?></p>
-                </div>
+      <div class='grid'>
+        <div class='grid_column -medium9 -mediumPlus8'>
+          <div class='feedback -unknown gapTopSmall'>
+            <div class='feedback_description preformat'>
+              <p><?php echo $this->translate('There are currently no fequently asked questions for this category.'); ?></p>
             </div>
+          </div>
         </div>
+      </div>
     <?php } ?>
 
 </section>

@@ -4,8 +4,8 @@ body { height:100%; }
 // --------------------------------------------------------------------
 
 // Wrapper for AJAX content
-#page { position:relative; z-index:z(layout, 1); transform:translateZ(0); transition:opacity 400ms ease-in, transform 400ms ease-in;
-  &.-loading { opacity:0; transition:opacity 300ms ease-in, transform 400ms ease-in; }
+#page { position:relative; z-index:z(layout, 1); transition:opacity 400ms ease-in, transform 400ms ease-in;
+  &.-loading { transform:translateX(-10px) translateZ(0); opacity:0; transition:opacity 300ms ease-in, transform 400ms ease-in; }
   &.-promoted { z-index:z(modal, 10); }
 }
 

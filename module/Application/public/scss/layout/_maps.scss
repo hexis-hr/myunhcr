@@ -1,5 +1,5 @@
 .mapContainer { position:relative; background:url("#{$img-path}globals/loader-blue-28.gif") center center no-repeat; }
-  .geoLocator { position:absolute; z-index:2; top:12px; left:15px; height:0; font-size:.8em; overflow:hidden; opacity:0; transition:opacity 500ms;
+  .geoLocator { position:absolute; z-index:2; top:12px; right:15px; height:0; font-size:.8em; overflow:hidden; opacity:0; transition:opacity 500ms;
     &.-active { height:auto; padding:6px; opacity:1; }
     &.-searching { color:black; background:$yellow; background:rgba($yellow,0.85); }
     &.-success { color:white; background:$positive; background:rgba($positive,0.85); }

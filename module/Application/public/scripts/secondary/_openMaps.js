@@ -6,6 +6,7 @@ app.geocode = {
   params: {},
 
   setAddress: function(address){
+    dlog('MAPS: Pushing ' + address + ' location to map...');
     geocoder.geocode({ 'address':address }, this.callback);
   },
 

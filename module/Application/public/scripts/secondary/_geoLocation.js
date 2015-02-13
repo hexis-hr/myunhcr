@@ -19,11 +19,11 @@ app.deviceLocation = {
 
         // Try to get the accurate location this time...
         if(ux.state.isTracing===false && $('#map')[0]){
-          if (ux.geo.accurate.failed < 4) {
+          if (ux.geo.accurate.failed < 3) {
             this.getRealtime('accurate');
             return true;
           } else {
-            dlog('GEOLOCATION: Failed 3 times already. Skipping...');
+            dlog('GEOLOCATION: Accurate trace failed 3 times. Skipping...');
           }
         }
       }
@@ -42,7 +42,12 @@ app.deviceLocation = {
     // Needs code here...
 
     // If no succes, try getting realtime from the device...
-    if(ux.state.isTracing===false){ this.getRealtime('coarse'); }
+    if(ux.state.isTracing===false){
+      if(ux.geo.coarse.failed < 3){ this.getRealtime('coarse'); }
+      else { dlog('GEOLOCATION: Coarse trace failed 3 times. Skipping...'); }
+    }
+    else { dlog('GEOLOCATION: Trace already in progress. Skipping...'); }
+    
   },
 
 
@@ -116,7 +121,7 @@ app.deviceLocation = {
 
   getRealtime_error: function(data){
     ux.state.isTracing = false;
-    ux.geo[type].failed++;
+    ux.geo[ux.geo.attemptedTrace].failed++;
     dlog('GEOLOCATION: Error! ' + data.message + ' for ' + ux.geo.attemptedTrace + ' trace.');
     
     // If there is a geolocator element, update it

@@ -22,7 +22,7 @@ $active-background: darken($blue, 8);
 .js {
   @include small {
     // Header button commons
-    %headerButton { height:$headerHeight; line-height:$headerHeight - 2; padding:0 14px; font-size:0.85em; font-weight:bold;
+    %headerButton { height:$headerHeight; line-height:$headerHeight; padding:0 14px; font-size:0.85em; font-weight:bold;
       &_img { vertical-align:-7px; }
       &:hover, &:focus { background: $active-background; }
     }

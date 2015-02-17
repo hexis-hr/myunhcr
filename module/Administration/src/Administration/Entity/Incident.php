@@ -2,6 +2,7 @@
 
 namespace Administration\Entity;
 
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -260,7 +261,44 @@ class Incident {
      */
     public function getFeaturedFile ()
     {
-        return $this->files->first();
+        return $this->getImageFiles()->first();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFiles ()
+    {
+        return $this->getFilesFiltered('image');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAudioFiles ()
+    {
+        return $this->getFilesFiltered('audio');
+    }
+
+    /**
+     * @param $type
+     * @return mixed
+     */
+    public function getFilesFiltered($type) {
+        /*
+        // Currently available for OneToMany relationship
+
+        $criteria = Criteria::create()->where(Criteria::expr()->eq('type', $type));
+
+        return $this->getFiles()->matching($criteria);
+        /**/
+
+        return $this->files->filter(function ($file) use ($type) {
+            if ($file->getType() == $type)
+                return true;
+            return false;
+        });
+
     }
 
     /**

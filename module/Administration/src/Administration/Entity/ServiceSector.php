@@ -5,12 +5,12 @@ namespace Administration\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ServicePartner
+ * ServiceSector
  *
- * @ORM\Table(name="service_partner")
+ * @ORM\Table(name="service_sector")
  * @ORM\Entity
  */
-class ServicePartner {
+class ServiceSector {
 
     /**
      * @ORM\Column(name="id", type="bigint", nullable=false)
@@ -23,20 +23,15 @@ class ServicePartner {
     /**
      * @ORM\Column(type="string")
      */
-    protected $partnerName = "";
+    protected $sectorName = "";
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $partnerAcronym = "";
+    protected $sectorAcronym = "";
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $partnerUrl = "";
-
-    /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $description = "";
 
@@ -89,45 +84,31 @@ class ServicePartner {
     }
 
     /**
-     * @param mixed $partnerAcronym
+     * @param mixed $sectorAcronym
      */
-    public function setPartnerAcronym ($partnerAcronym) {
-        $this->partnerAcronym = $partnerAcronym;
+    public function setSectorAcronym ($sectorAcronym) {
+        $this->sectorAcronym = $sectorAcronym;
     }
 
     /**
      * @return mixed
      */
-    public function getPartnerAcronym () {
-        return $this->partnerAcronym;
+    public function getSectorAcronym () {
+        return $this->sectorAcronym;
     }
 
     /**
-     * @param mixed $partnerName
+     * @param mixed $sectorName
      */
-    public function setPartnerName ($partnerName) {
-        $this->partnerName = $partnerName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPartnerName () {
-        return $this->partnerName;
-    }
-
-    /**
-     * @param mixed $partnerUrl
-     */
-    public function setPartnerUrl ($partnerUrl) {
-        $this->partnerUrl = $partnerUrl;
+    public function setSectorName ($sectorName) {
+        $this->sectorName = $sectorName;
     }
 
     /**
      * @return mixed
      */
-    public function getPartnerUrl () {
-        return $this->partnerUrl;
+    public function getSectorName () {
+        return $this->sectorName;
     }
 
 }

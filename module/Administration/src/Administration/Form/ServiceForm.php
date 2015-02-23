@@ -29,30 +29,6 @@ class ServiceForm extends Form {
         ));
 
         $this->add(array(
-            'name' => 'address',
-            'type' => 'Text',
-            'attributes' => array(
-                'class' => 'col-md-12 form-control',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'email',
-            'type' => 'Text',
-            'attributes' => array(
-                'class' => 'col-md-12 form-control',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'phone',
-            'type' => 'Text',
-            'attributes' => array(
-                'class' => 'col-md-12 form-control',
-            ),
-        ));
-
-        $this->add(array(
             'name' => 'latitude',
             'type' => 'Text',
             'attributes' => array(
@@ -84,24 +60,59 @@ class ServiceForm extends Form {
             ),
         ));
 
-        $servicePartners = $entityManager->getRepository('Administration\Entity\ServicePartner')->findAll();
+        $serviceOrganizations = $entityManager->getRepository('Administration\Entity\ServiceOrganization')->findAll();
 
-        $partners = array();
-        foreach ($servicePartners as $servicePartner) {
-            $partners[$servicePartner->getId()] = $servicePartner->getPartnerName();
+        $organizations = array();
+        foreach ($serviceOrganizations as $serviceOrganization) {
+            $organizations[$serviceOrganization->getId()] = $serviceOrganization->getOrganizationName();
         }
 
         $this->add(array(
-            'name' => 'partner',
+            'name' => 'organization',
             'type' => 'Select',
             'attributes' => array(
                 'class' => 'col-md-12 form-control',
             ),
             'options' => array(
-                'value_options' => $partners,
+                'value_options' => $organizations,
             ),
         ));
 
+        $serviceSectors = $entityManager->getRepository('Administration\Entity\ServiceSector')->findAll();
+
+        $sectors = array();
+        foreach ($serviceSectors as $serviceSector) {
+            $sectors[$serviceSector->getId()] = $serviceSector->getSectorName();
+        }
+
+        $this->add(array(
+            'name' => 'sector',
+            'type' => 'Select',
+            'attributes' => array(
+                'class' => 'col-md-12 form-control',
+            ),
+            'options' => array(
+                'value_options' => $sectors,
+            ),
+        ));
+
+        $serviceActivities = $entityManager->getRepository('Administration\Entity\ServiceActivity')->findAll();
+
+        $activities = array();
+        foreach ($serviceActivities as $serviceActivity) {
+            $activities[$serviceActivity->getId()] = $serviceActivity->getActivityName();
+        }
+
+        $this->add(array(
+            'name' => 'activity',
+            'type' => 'Select',
+            'attributes' => array(
+                'class' => 'col-md-12 form-control',
+            ),
+            'options' => array(
+                'value_options' => $activities,
+            ),
+        ));
     }
 
     //bind method overridden because of foreign object binding
@@ -124,8 +135,14 @@ class ServiceForm extends Form {
 
         $this->bindAs = $flags;
 
-        if (property_exists($object, 'partner') && !is_null($object->getPartner()))
-            $object->setPartner($object->getPartner()->getId());
+        if (property_exists($object, 'organization') && !is_null($object->getOrganization()))
+            $object->setOrganization($object->getOrganization()->getId());
+
+        if (property_exists($object, 'sector') && !is_null($object->getSector()))
+            $object->setSector($object->getSector()->getId());
+
+        if (property_exists($object, 'activity') && !is_null($object->getActivity()))
+            $object->setActivity($object->getActivity()->getId());
 
         $this->setObject($object);
         $this->extract();

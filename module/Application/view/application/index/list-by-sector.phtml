@@ -26,34 +26,25 @@
   <div class='mapHeader'>
     <div class='grid -clean'>
       <div class='grid_column -medium9 -mediumPlus8'>
-        <form action='' class='form' data-geocodeForm>
+        <form action='' class='form' ajaxForm>
           <div class='form_item'>
             <div class='grid -clean -collapse'>
               <div class='grid_column -small9 mapHeader_search_left'>
                 <div class='form_field customSelect'>
-                  <select class='formSelect customSelect_select -custom' id='selectSector'>
-                    <option>All sectors</option>
-                  </select>
-                  <a class='customSelect_overlay' unselectable='on'>All sectors</a>
+                    <input class='formInput' id='searchInput' type='text' placeholder='Search..'>
                 </div>
-              </div>
-              <div class='grid_column -small3 mapHeader_search_right'>
-                <input class='mapHeader_search_submit button -primary -fullWidth' type='button' value='<?php echo $this->translate('Filter'); ?>' data-geocode>
               </div>
             </div>
           </div>
         </form>
+
+    <div class='grid'>
+      <div class='grid_column -medium9 -mediumPlus8 sectorSearch' data-url="<?php echo $this->url('listBySector'); ?>">
+        <p>Type for search</p>
       </div>
     </div>
   </div>
 
-  <div id='mapContainer' class='mapContainer'>
-    <div id='geoLocator' class='geoLocator' data-autoLocate
-      data-searchingMsg='Trying to locate your position...'
-      data-successMsg='Positioning...'
-      data-errorMsg='Could not determine your precise location'>
-    </div>
-    <div id='map' class='map -fill' data-openStreetMap data-href='<?php echo $this->url('getAjaxMarkers'); ?>'></div>  
   </div>
 
 </section>

@@ -23,21 +23,6 @@
                         <?php echo $this->formRow($form->get('serviceAcronym')); ?>
                         <div class="separator bottom"></div>
 
-                        <label><?php echo $this->translate('Address'); ?></label>
-                        <?php echo $this->formRow($form->get('address')); ?>
-                        <div class="separator bottom"></div>
-
-                        <label><?php echo $this->translate('Email'); ?></label>
-                        <?php echo $this->formRow($form->get('email')); ?>
-                        <div class="separator bottom"></div>
-
-                        <label><?php echo $this->translate('Phone'); ?></label>
-                        <?php echo $this->formRow($form->get('phone')); ?>
-                        <div class="separator bottom"></div>
-
-                    </div>
-                    <div class="col-md-6">
-
                         <label><?php echo $this->translate('Description'); ?></label>
                         <?php echo $this->formRow($form->get('description')); ?>
                         <div class="separator bottom"></div>
@@ -45,6 +30,9 @@
                         <label><?php echo $this->translate('Service URL'); ?></label>
                         <?php echo $this->formRow($form->get('serviceUrl')); ?>
                         <div class="separator bottom"></div>
+
+                    </div>
+                    <div class="col-md-6">
 
                         <label><?php echo $this->translate('Latitude'); ?></label>
                         <?php echo $this->formRow($form->get('latitude')); ?>
@@ -54,8 +42,16 @@
                         <?php echo $this->formRow($form->get('longitude')); ?>
                         <div class="separator bottom"></div>
 
-                        <label><?php echo $this->translate('Service Partner'); ?></label>
-                        <?php echo $this->formRow($form->get('partner')); ?>
+                        <label><?php echo $this->translate('Service Organization'); ?></label>
+                        <?php echo $this->formRow($form->get('organization')); ?>
+                        <div class="separator bottom"></div>
+
+                        <label><?php echo $this->translate('Service Sector'); ?></label>
+                        <?php echo $this->formRow($form->get('sector')); ?>
+                        <div class="separator bottom"></div>
+
+                        <label><?php echo $this->translate('Service Activity'); ?></label>
+                        <?php echo $this->formRow($form->get('activity')); ?>
                         <div class="separator bottom"></div>
 
                     </div>

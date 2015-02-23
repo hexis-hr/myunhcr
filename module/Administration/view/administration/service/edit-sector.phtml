@@ -1,10 +1,10 @@
 
 <?php $form = $this->form; ?>
 <?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
-<?php $form->setAttribute('action', $this->url('service/editPartner', array('id' => $this->servicePartnerId)))->prepare(); ?>
+<?php $form->setAttribute('action', $this->url('service/editSector', array('id' => $this->serviceSectorId)))->prepare(); ?>
 
 <div class="separator bottom"></div>
-<h3 class="glyphicons keynote"><?php echo $this->translate('Edit Service Partner'); ?></h3>
+<h3 class="glyphicons keynote"><?php echo $this->translate('Edit Service Sector'); ?></h3>
 <div class="innerLR" data-checkActiveCountry>
 
     <?php echo $this->form()->openTag($form); ?>
@@ -16,20 +16,16 @@
                 <!-- Column -->
                 <div class="col-md-6">
 
-                    <label><?php echo $this->translate('Partner Name'); ?></label>
-                    <?php echo $this->formRow($form->get('partnerName')); ?>
+                    <label><?php echo $this->translate('Sector Name'); ?></label>
+                    <?php echo $this->formRow($form->get('sectorName')); ?>
                     <div class="separator bottom"></div>
 
-                    <label><?php echo $this->translate('Partner Acronym'); ?></label>
-                    <?php echo $this->formRow($form->get('partnerAcronym')); ?>
+                    <label><?php echo $this->translate('Sector Acronym'); ?></label>
+                    <?php echo $this->formRow($form->get('sectorAcronym')); ?>
                     <div class="separator bottom"></div>
 
                 </div>
                 <div class="col-md-6">
-
-                    <label><?php echo $this->translate('Partner Url'); ?></label>
-                    <?php echo $this->formRow($form->get('partnerUrl')); ?>
-                    <div class="separator bottom"></div>
 
                     <label><?php echo $this->translate('Description'); ?></label>
                     <?php echo $this->formRow($form->get('description')); ?>

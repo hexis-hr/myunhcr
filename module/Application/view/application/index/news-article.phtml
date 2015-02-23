@@ -25,18 +25,19 @@
     </div>
   </div>
 
-  <?php // If there is an article photo... ?>
-  <div class='articlePhoto'>
+  <?php // If there is an article photo... { ?>
+  <div class='articlePhoto' role='complementary'>
     <div class='grid -collapse -mediumExpand'>
       <div class='grid_column -mediumPlus10 -large9'>
         <img class='articlePhoto_img' src='http://www.unhcr.org/thumb1/54c5441c6.jpg' alt=''>
       </div>
     </div>
   </div>
+  <?php // } ?>
 
-  <div class='grid gapLarge'>
-    <div class='grid_column -mediumPlus10 -large9'>
-      <div class='article'>
+  <div class='article' role='main'>
+    <div class='grid'>
+      <div class='grid_column -mediumPlus10 -large9'>
         <?php if ($this->news->getSource() != '') { ?>
           <div class='article_source'><?php echo $this->translate('Source'); ?>:
             <a class='article_source_link' href='<?php echo $this->news->getSourceUrl(); ?>'><?php echo $this->news->getSource(); ?></a>
@@ -50,6 +51,7 @@
     </div>
   </div>
 
+  <?php // If there is next article... { ?>
   <div class='nextArticle tearSection -bottom'>
     <div class='grid -clean' data-ripple data-redirect='/newsArticle/2'>
       <div class='grid_column -mediumPlus10 -large9'>
@@ -63,5 +65,6 @@
       </div>
     </div>
   </div>
+  <?php // } ?>
 
 </section>

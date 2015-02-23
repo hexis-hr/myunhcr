@@ -92,11 +92,26 @@ app.handleMap = function() {
                     markers = response.data;
 
                     $.each(markers, function (key, marker) {
+
+                        var content = '<h5>' + marker[0] + '</h5><p>' + marker[3] + '</p><p><a href="' + marker[4] +
+                            '">' + marker[0] + '</a></p><h6>Activity</h6><p>' + marker[5] + '</p><p>' + marker[6] + '</p>' +
+                            '<p>' + marker[7] + '</p><p>' + marker[8] + '</p><h6>Organization</h6><p>' + marker[9] + '</p>' +
+                            '<h6>Sector</h6><p>' + marker[10] + '</p>';
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: content
+                        });
+
                         marker = new google.maps.Marker({
                             position: new google.maps.LatLng(marker[1], marker[2]),
                             map: app.currentMap,
                             title: marker[0]
                         });
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.open(app.currentMap, marker);
+                        });
+
                         marker.setMap(app.currentMap);
                         oldMarkers.push(marker);
                     });

@@ -6,14 +6,14 @@ use Zend\Form\Form;
 use Zend\Form\Exception\InvalidArgumentException;
 use Zend\Form\FormInterface;
 
-class ServicePartnerForm extends Form {
+class ServiceActivityForm extends Form {
 
     public function __construct ($name = null) {
 
-        parent::__construct('servicePartner');
+        parent::__construct('serviceActivity');
 
         $this->add(array(
-            'name' => 'partnerName',
+            'name' => 'activityName',
             'type' => 'Text',
             'attributes' => array(
                 'class' => 'col-md-12 form-control',
@@ -21,7 +21,7 @@ class ServicePartnerForm extends Form {
         ));
 
         $this->add(array(
-            'name' => 'partnerAcronym',
+            'name' => 'activityCategory',
             'type' => 'Text',
             'attributes' => array(
                 'class' => 'col-md-12 form-control',
@@ -29,16 +29,16 @@ class ServicePartnerForm extends Form {
         ));
 
         $this->add(array(
-            'name' => 'partnerUrl',
-            'type' => 'Url',
+            'name' => 'activityStart',
+            'type' => 'Date',
             'attributes' => array(
                 'class' => 'col-md-12 form-control',
             ),
         ));
 
         $this->add(array(
-            'name' => 'description',
-            'type' => 'Textarea',
+            'name' => 'activityEnd',
+            'type' => 'Date',
             'attributes' => array(
                 'class' => 'col-md-12 form-control',
             ),

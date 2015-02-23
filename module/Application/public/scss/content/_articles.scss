@@ -25,7 +25,7 @@
 
 
 // Full article
-.article { @include responsive(padding-top 1.25em 1.2); }
+.article { @include responsive(padding-top 1.25em 1.2, margin-bottom $gapLarge); }
   .article_source { @extend %article_info; }
     .article_source_link { color:inherit; text-decoration:underline; }
   .article_date { @extend %article_info; margin-bottom:0; }

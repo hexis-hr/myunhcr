@@ -31,21 +31,6 @@ class Service {
     protected $serviceAcronym = "";
 
     /**
-     * @ORM\Column(type="text")
-     */
-    protected $address = "";
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $email = "";
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $phone = "";
-
-    /**
      * @ORM\Column(type="float")
      */
     protected $latitude = "";
@@ -66,10 +51,22 @@ class Service {
     protected $serviceUrl = "";
 
     /**
-     * @ORM\ManyToOne(targetEntity="Administration\Entity\ServicePartner")
-     * @ORM\JoinColumn(name="partner", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\ServiceOrganization")
+     * @ORM\JoinColumn(name="organization", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $partner;
+    protected $organization;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\ServiceSector")
+     * @ORM\JoinColumn(name="sector", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $sector;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Administration\Entity\ServiceActivity")
+     * @ORM\JoinColumn(name="activity", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $activity;
 
     /**
      * @ORM\ManyToOne(targetEntity="Administration\Entity\Country")
@@ -77,19 +74,6 @@ class Service {
      */
     protected $country;
 
-    /**
-     * @param mixed $address
-     */
-    public function setAddress ($address) {
-        $this->address = $address;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAddress () {
-        return $this->address;
-    }
 
     /**
      * @param mixed $country
@@ -117,20 +101,6 @@ class Service {
      */
     public function getDescription () {
         return $this->description;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail ($email) {
-        $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail () {
-        return $this->email;
     }
 
     /**
@@ -176,31 +146,17 @@ class Service {
     }
 
     /**
-     * @param mixed $partner
+     * @param mixed $sector
      */
-    public function setPartner ($partner) {
-        $this->partner = $partner;
+    public function setSector ($sector) {
+        $this->sector = $sector;
     }
 
     /**
      * @return mixed
      */
-    public function getPartner () {
-        return $this->partner;
-    }
-
-    /**
-     * @param mixed $phone
-     */
-    public function setPhone ($phone) {
-        $this->phone = $phone;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPhone () {
-        return $this->phone;
+    public function getSector () {
+        return $this->sector;
     }
 
     /**
@@ -243,6 +199,34 @@ class Service {
      */
     public function getServiceUrl () {
         return $this->serviceUrl;
+    }
+
+    /**
+     * @param mixed $organization
+     */
+    public function setOrganization ($organization) {
+        $this->organization = $organization;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrganization () {
+        return $this->organization;
+    }
+
+    /**
+     * @param mixed $activity
+     */
+    public function setActivity ($activity) {
+        $this->activity = $activity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActivity () {
+        return $this->activity;
     }
 
 }

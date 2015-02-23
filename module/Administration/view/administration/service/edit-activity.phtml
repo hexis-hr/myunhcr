@@ -1,10 +1,10 @@
 
 <?php $form = $this->form; ?>
 <?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
-<?php $form->setAttribute('action', $this->url('service/addPartner'))->prepare(); ?>
+<?php $form->setAttribute('action', $this->url('service/editActivity', array('id' => $this->activityId)))->prepare(); ?>
 
 <div class="separator bottom"></div>
-<h3 class="glyphicons keynote"><?php echo $this->translate('Add Service Partner'); ?></h3>
+<h3 class="glyphicons keynote"><?php echo $this->translate('Edit Service Activity'); ?></h3>
 <div class="innerLR" data-checkActiveCountry>
 
     <?php echo $this->form()->openTag($form); ?>
@@ -14,25 +14,22 @@
                 <!-- Row -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
 
-                        <label><?php echo $this->translate('Partner Name'); ?></label>
-                        <?php echo $this->formRow($form->get('partnerName')); ?>
+                        <label><?php echo $this->translate('Activity Name'); ?></label>
+                        <?php echo $this->formRow($form->get('activityName')); ?>
                         <div class="separator bottom"></div>
 
-                        <label><?php echo $this->translate('Partner Acronym'); ?></label>
-                        <?php echo $this->formRow($form->get('partnerAcronym')); ?>
+                        <label><?php echo $this->translate('Activity Category'); ?></label>
+                        <?php echo $this->formRow($form->get('activityCategory')); ?>
                         <div class="separator bottom"></div>
 
-                    </div>
-                    <div class="col-md-6">
-
-                        <label><?php echo $this->translate('Partner Url'); ?></label>
-                        <?php echo $this->formRow($form->get('partnerUrl')); ?>
+                        <label><?php echo $this->translate('Activity Start'); ?></label>
+                        <?php echo $this->formRow($form->get('activityStart')); ?>
                         <div class="separator bottom"></div>
 
-                        <label><?php echo $this->translate('Description'); ?></label>
-                        <?php echo $this->formRow($form->get('description')); ?>
+                        <label><?php echo $this->translate('Activity End'); ?></label>
+                        <?php echo $this->formRow($form->get('activityEnd')); ?>
                         <div class="separator bottom"></div>
 
                     </div>
@@ -41,7 +38,7 @@
                 <div class="separator"></div>
                 <div class="form-group" style="padding-right: 15px;">
                     <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
-                        <?php echo $this->translate('Add Service Partner'); ?></button>
+                        <?php echo $this->translate('Save changes'); ?></button>
                 </div>
             </div>
         </div>

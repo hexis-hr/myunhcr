@@ -1,0 +1,63 @@
+<div class="separator bottom"></div>
+    <div class="heading-buttons">
+        <h3 class="glyphicons group"><?php echo $this->translate('Service Activities'); ?></h3>
+
+        <div class="buttons pull-right">
+            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('service/addActivity');?>">
+                <?php echo $this->translate('Add new Activity'); ?></a>
+        </div>
+        <div class="clearfix" style="clear: both;"></div>
+    </div>
+<div class="separator bottom"></div>
+
+<div class="innerLR">
+
+    <div class="widget widget-4">
+        <div class="widget-head"></div>
+        <div class="widget-body">
+            <?php if (count($this->data) > 0) { ?>
+                <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
+                    <thead>
+                        <tr>
+                            <th><?php echo $this->translate('Activity name'); ?></th>
+                            <th><?php echo $this->translate('Activity category'); ?></th>
+                            <th><?php echo $this->translate('Actions'); ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->data as $data) { ?>
+                        <tr data-row="row_<?php echo $data->getId(); ?>">
+                            <td><?php echo $data->getActivityName(); ?></td>
+                            <td><?php echo $data->getActivityCategory(); ?></td>
+                            <td>
+                                <a class="btn-action glyphicons pencil btn-success"
+                                   href="<?php echo $this->url('service/editActivity', array('id' => $data->getId())) ?>"></a>
+                                <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
+                                   data-href="<?php echo $this->url('service/deleteActivity', array('id' => $data->getId())); ?>"></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div class="widget-body center">
+                    <span class="gritter-add-regular btn btn-inverse btn-block">
+                        <?php echo $this->translate('No service activities found.'); ?>
+                    </span>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+</div>
+
+<div class="clearfix" style="clear: both;"></div>
+
+<?php
+echo $this->paginationControl(
+    $this->data,
+    'sliding',
+    array('partial/paginator.phtml', 'Administration'),
+    array('route  ' => 'service/viewActivity', 'routeParams' => array())
+);
+?>

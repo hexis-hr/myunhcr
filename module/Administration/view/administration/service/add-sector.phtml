@@ -1,0 +1,47 @@
+
+<?php $form = $this->form; ?>
+<?php $form->setAttribute('class', 'form-horizontal margin-none'); ?>
+<?php $form->setAttribute('action', $this->url('service/addSector'))->prepare(); ?>
+
+<div class="separator bottom"></div>
+<h3 class="glyphicons keynote"><?php echo $this->translate('Add Service Sector'); ?></h3>
+<div class="innerLR" data-checkActiveCountry>
+
+    <?php echo $this->form()->openTag($form); ?>
+
+        <div class="widget-body col-md-12">
+            <div class="tab-content">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-6">
+
+                        <label><?php echo $this->translate('Sector Name'); ?></label>
+                        <?php echo $this->formRow($form->get('sectorName')); ?>
+                        <div class="separator bottom"></div>
+
+                        <label><?php echo $this->translate('Sector Acronym'); ?></label>
+                        <?php echo $this->formRow($form->get('sectorAcronym')); ?>
+                        <div class="separator bottom"></div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <label><?php echo $this->translate('Description'); ?></label>
+                        <?php echo $this->formRow($form->get('description')); ?>
+                        <div class="separator bottom"></div>
+
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+                <div class="form-group" style="padding-right: 15px;">
+                    <button type="submit" class="btn btn-icon btn-primary glyphicons circle_ok pull-right"><i></i>
+                        <?php echo $this->translate('Add Service Sector'); ?></button>
+                </div>
+            </div>
+        </div>
+
+    <?php echo $this->form()->closeTag($form); ?>
+
+</div>

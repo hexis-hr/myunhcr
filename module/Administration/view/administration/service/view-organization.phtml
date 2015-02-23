@@ -1,15 +1,10 @@
 <div class="separator bottom"></div>
     <div class="heading-buttons">
-        <h3 class="glyphicons group"><?php echo $this->translate('Service Partner'); ?></h3>
+        <h3 class="glyphicons group"><?php echo $this->translate('Service Organization'); ?></h3>
 
         <div class="buttons pull-right">
-            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('service/addService');?>">
-                <?php echo $this->translate('Add new Service'); ?></a>
-        </div>
-
-        <div class="buttons pull-right">
-            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('service/addPartner');?>">
-                <?php echo $this->translate('Add new Service Partner'); ?></a>
+            <a class="btn btn-primary btn-icon glyphicons circle_plus" href="<?php echo $this->url('service/addOrganization');?>">
+                <?php echo $this->translate('Add new Organization'); ?></a>
         </div>
         <div class="clearfix" style="clear: both;"></div>
     </div>
@@ -24,8 +19,8 @@
                 <table class="dynamicTable table table-striped table-bordered table-primary table-condensed colVis">
                     <thead>
                         <tr>
-                            <th><?php echo $this->translate('Partner name'); ?></th>
-                            <th><?php echo $this->translate('Partner acronym'); ?></th>
+                            <th><?php echo $this->translate('Organization name'); ?></th>
+                            <th><?php echo $this->translate('Organization acronym'); ?></th>
                             <th><?php echo $this->translate('URL'); ?></th>
                             <th><?php echo $this->translate('Description'); ?></th>
                             <th><?php echo $this->translate('Actions'); ?></th>
@@ -34,15 +29,15 @@
                     <tbody>
                     <?php foreach($this->data as $data) { ?>
                         <tr data-row="row_<?php echo $data->getId(); ?>">
-                            <td><?php echo $data->getPartnerName(); ?></td>
-                            <td><?php echo $data->getPartnerAcronym(); ?></td>
-                            <td><?php echo $data->getPartnerUrl(); ?></td>
+                            <td><?php echo $data->getOrganizationName(); ?></td>
+                            <td><?php echo $data->getOrganizationAcronym(); ?></td>
+                            <td><?php echo $data->getOrganizationUrl(); ?></td>
                             <td><?php echo $this->limitEcho($data->getDescription(), 260); ?></td>
                             <td>
                                 <a class="btn-action glyphicons pencil btn-success"
-                                   href="<?php echo $this->url('service/editPartner', array('id' => $data->getId())) ?>"></a>
+                                   href="<?php echo $this->url('service/editOrganization', array('id' => $data->getId())) ?>"></a>
                                 <a class="btn-action glyphicons remove_2 btn-danger" href="#" data-delete
-                                   data-href="<?php echo $this->url('service/deletePartner', array('id' => $data->getId())); ?>"></a>
+                                   data-href="<?php echo $this->url('service/deleteOrganization', array('id' => $data->getId())); ?>"></a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -51,7 +46,7 @@
             <?php } else { ?>
                 <div class="widget-body center">
                     <span class="gritter-add-regular btn btn-inverse btn-block">
-                        <?php echo $this->translate('No service partners found.'); ?>
+                        <?php echo $this->translate('No service organizations found.'); ?>
                     </span>
                 </div>
             <?php } ?>
@@ -67,6 +62,6 @@ echo $this->paginationControl(
     $this->data,
     'sliding',
     array('partial/paginator.phtml', 'Administration'),
-    array('route  ' => 'service/viewPartner', 'routeParams' => array())
+    array('route  ' => 'service/viewOrganization', 'routeParams' => array())
 );
 ?>

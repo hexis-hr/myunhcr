@@ -16,11 +16,10 @@ use Application\Form\ChooseSurveyForm;
 use Application\Form\Filter\BookAnAppointmentFormFilter;
 use Application\Form\Filter\ComplaintFormFilter;
 use Application\Form\Filter\ReportIncidentFormFilter;
+use Application\Form\ListOfOrganizationsForm;
 use Application\Form\ReportIncidentForm;
 use Application\Form\SettingsForm;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Validator\File\IsImage;
-use Zend\Validator\File\MimeType;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
@@ -438,13 +437,61 @@ class IndexController extends AbstractActionController {
     public function listBySectorAction()
     {
         $this->layout()->setVariable('body_class', 'pg-listBySector');
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest() && $request->isPost()) {
+
+            $sectors = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')
+                ->createQueryBuilder('ss')
+                ->where('ss.sectorName LIKE :sector')
+                ->setParameter('sector', $request->getPost('keyword') . '%')
+                ->getQuery()
+                ->getResult();
+
+            if (count($sectors) > 0) {
+                $responseSectors = array();
+                foreach ($sectors as $sector) {
+                    $responseSectors[$sector->getId()] = $sector->getSectorName();
+                }
+
+                return new JsonModel(array(
+                    'status' => 'success',
+                    'sectors' => $responseSectors,
+                ));
+            } else {
+                return new JsonModel(array(
+                    'status' => 'invalid',
+                ));
+            }
+        }
+
         return new ViewModel();
     }
 
     public function listOfOrganizationsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-listByOrg');
-        return new ViewModel();
+
+        $request = $this->getRequest();
+        $form = new ListOfOrganizationsForm($this->getEntityManager());
+
+        if ($request->isPost()) {
+           $organizationId = $request->getPost('organization');
+
+           $organizationData = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
+           ->findOneBy(array('id' => $organizationId));
+
+            return new ViewModel(array(
+                'form' => $form,
+                'organizationData' => $organizationData,
+            ));
+
+        }
+
+        return new ViewModel(array(
+            'form' => $form,
+        ));
     }
 
     public function mapOfServiceAction()
@@ -769,7 +816,11 @@ class IndexController extends AbstractActionController {
 
             $arr = array();
             foreach ($services as $service) {
-                $arr[$service->getId()] = array($service->getServiceName(), $service->getLatitude(), $service->getLongitude());
+                $arr[$service->getId()] = array($service->getServiceName(), $service->getLatitude(), $service->getLongitude(),
+                                                $service->getDescription(), $service->getServiceUrl(),
+                                                $service->getActivity()->getActivityName(), $service->getActivity()->getActivityCategory(),
+                                                $service->getActivity()->getActivityStart(), $service->getActivity()->getActivityEnd(),
+                                                $service->getOrganization()->getOrganizationName(), $service->getSector()->getSectorName());
             }
 
             $result = new JsonModel(array(

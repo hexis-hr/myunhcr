@@ -27,5 +27,28 @@ queue.jQuery(function(){
     accordion.close($(this));
   });
 
+    //sector search
+    $(document).ready(function() {
+        $('#searchInput').on('keyup', function() {
+            var searchKeyword = $(this).val();
+            if (searchKeyword.length >= 2) {
+                $.ajax({
+                    type: "POST",
+                    url: $(this).data('url'),
+                    data: { keyword: searchKeyword },
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            $('.sectorSearch').html('<ul></ul>');
+                            $.each(response.sectors, function (index, value) {
+                                $('.sectorSearch ul').append('<li>' + value + '</li>');
+                            });
+                        } else  {
+                            $('.sectorSearch').html('No sector data found');
+                        }
+                    }
+                });
+            }
+        });
+    });
 
 });

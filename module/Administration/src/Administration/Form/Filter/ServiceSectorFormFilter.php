@@ -6,21 +6,21 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class ServicePartnerFormFilter implements InputFilterAwareInterface {
+class ServiceSectorFormFilter implements InputFilterAwareInterface {
 
     public $id;
-    public $partnerName;
-    public $partnerAcronym;
-    public $partnerUrl;
+    public $sectorName;
+    public $sectorAcronym;
+    public $sectorUrl;
     public $description;
     protected $inputFilter;
 
     public function exchangeArray ($data) {
 
         $this->id = (isset($data['id'])) ? $data['id'] : null;
-        $this->partnerName = (isset($data['partnerName'])) ? $data['partnerName'] : null;
-        $this->partnerAcronym = (isset($data['partnerAcronym'])) ? $data['partnerAcronym'] : null;
-        $this->partnerUrl = (isset($data['partnerUrl'])) ? $data['partnerUrl'] : null;
+        $this->sectorName = (isset($data['sectorName'])) ? $data['sectorName'] : null;
+        $this->sectorAcronym = (isset($data['sectorAcronym'])) ? $data['sectorAcronym'] : null;
+        $this->sectorUrl = (isset($data['sectorUrl'])) ? $data['sectorUrl'] : null;
         $this->description = (isset($data['description'])) ? $data['description'] : null;
     }
 
@@ -37,7 +37,7 @@ class ServicePartnerFormFilter implements InputFilterAwareInterface {
             $inputFilter = new InputFilter();
 
             $inputFilter->add(array(
-                'name' => 'partnerName',
+                'name' => 'sectorName',
                 'required' => true,
                 'filters' => array(
                     array('name' => 'StripTags'),
@@ -54,7 +54,7 @@ class ServicePartnerFormFilter implements InputFilterAwareInterface {
             ));
 
             $inputFilter->add(array(
-                'name' => 'partnerAcronym',
+                'name' => 'sectorAcronym',
                 'required' => false,
                 'filters' => array(
                     array('name' => 'StripTags'),
@@ -67,14 +67,6 @@ class ServicePartnerFormFilter implements InputFilterAwareInterface {
                             'allowWhiteSpace' => true,
                         ),
                     ),
-                ),
-            ));
-
-            $inputFilter->add(array(
-                'name' => 'partnerUrl',
-                'required' => false,
-                'validators' => array(
-                    array('name' => 'Uri'),
                 ),
             ));
 
@@ -84,14 +76,6 @@ class ServicePartnerFormFilter implements InputFilterAwareInterface {
                 'filters' => array(
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name' => 'Alpha',
-                        'options' => array(
-                            'allowWhiteSpace' => true,
-                        ),
-                    ),
                 ),
             ));
 

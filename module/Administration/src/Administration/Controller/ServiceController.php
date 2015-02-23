@@ -2,16 +2,20 @@
 
 namespace Administration\Controller;
 
-use Administration\Entity\News;
+use Administration\Entity\ServiceActivity;
 use Administration\Entity\Service;
-use Administration\Entity\ServicePartner;
+use Administration\Entity\ServiceOrganization;
+use Administration\Entity\ServiceSector;
+use Administration\Form\Filter\ServiceActivityFormFilter;
 use Administration\Form\Filter\ServiceFormFilter;
-use Administration\Form\Filter\ServicePartnerFormFilter;
-use Administration\Form\NewsForm;
-
+use Administration\Form\Filter\ServiceOrganizationFormFilter;
+use Administration\Form\Filter\ServiceSectorFormFilter;
+use Administration\Form\ServiceActivityForm;
 use Administration\Form\ServiceForm;
-use Administration\Form\ServicePartnerForm;
+use Administration\Form\ServiceOrganizationForm;
+use Administration\Form\ServiceSectorForm;
 use Administration\Provider\ProvidesEntityManager;
+
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -28,9 +32,9 @@ class ServiceController extends AbstractActionController {
 
     public function indexAction () {
 
-        $mNews = $this->getEntityManager()->getRepository('Administration\Entity\Service');
+        $mService = $this->getEntityManager()->getRepository('Administration\Entity\Service');
 
-        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mNews->createQueryBuilder('Service')));
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mService->createQueryBuilder('Service')));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(20);
 
@@ -98,7 +102,7 @@ class ServiceController extends AbstractActionController {
                 $this->getEntityManager()->persist($service);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addSuccessMessage('New service successfully added.');
+                $this->flashMessenger()->addSuccessMessage('Service successfully edited.');
                 return $this->redirect()->toRoute('service');
             }
         }
@@ -132,11 +136,11 @@ class ServiceController extends AbstractActionController {
         return $result;
     }
 
-    public function viewPartnerAction () {
+    public function viewOrganizationAction () {
 
-        $mNews = $this->getEntityManager()->getRepository('Administration\Entity\ServicePartner');
+        $mOrganization = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization');
 
-        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mNews->createQueryBuilder('ServicePartner')));
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mOrganization->createQueryBuilder('ServiceOrganization')));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage(20);
 
@@ -150,78 +154,290 @@ class ServiceController extends AbstractActionController {
         ));
     }
 
-    public function addPartnerAction () {
+    public function addOrganizationAction () {
 
         $request = $this->getRequest();
 
-        $servicePartner = new ServicePartner();
-        $form = new ServicePartnerForm();
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServicePartner'));
-        $form->bind($servicePartner);
+        $serviceOrganization = new ServiceOrganization();
+        $form = new ServiceOrganizationForm($this->getEntityManager());
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServiceOrganization'));
+        $form->bind($serviceOrganization);
 
         if ($request->isPost()) {
 
-            $formFilter = new ServicePartnerFormFilter();
+            $formFilter = new ServiceOrganizationFormFilter();
             $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
                 $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
                     ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
-                $servicePartner->setCountry($country);
-                $this->getEntityManager()->persist($servicePartner);
+                $serviceOrganization->setCountry($country);
+                $this->getEntityManager()->persist($serviceOrganization);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addSuccessMessage('New service partner successfully added.');
-                return $this->redirect()->toRoute('service/viewPartner');
+                $this->flashMessenger()->addSuccessMessage('New service organization successfully added.');
+                return $this->redirect()->toRoute('service/viewOrganization');
             }
         }
 
         return new ViewModel(array('form' => $form));
     }
 
-    public function editPartnerAction () {
+    public function editOrganizationAction () {
 
         $request = $this->getRequest();
-        $servicePartnerId = (int) $this->params()->fromRoute('id');
-        $servicePartner = $this->getEntityManager()->getRepository('Administration\Entity\ServicePartner')
-            ->findOneBy(array('id' => $servicePartnerId));
+        $serviceOrganizationId = (int) $this->params()->fromRoute('id');
+        $serviceOrganization = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
+            ->findOneBy(array('id' => $serviceOrganizationId));
 
-        $form = new ServicePartnerForm();
-        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServicePartner'));
-        $form->bind($servicePartner);
+        $form = new ServiceOrganizationForm($this->getEntityManager());
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServiceOrganization'));
+        $form->bind($serviceOrganization);
 
         if ($request->isPost()) {
 
-            $formFilter = new ServicePartnerFormFilter();
+            $formFilter = new ServiceOrganizationFormFilter();
             $form->setInputFilter($formFilter->getInputFilter());
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
                 $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
                     ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
-                $servicePartner->setCountry($country);
-                $this->getEntityManager()->persist($servicePartner);
+                $serviceOrganization->setCountry($country);
+                $this->getEntityManager()->persist($serviceOrganization);
                 $this->getEntityManager()->flush();
 
-                $this->flashMessenger()->addSuccessMessage('New news successfully added.');
-                return $this->redirect()->toRoute('service/viewPartner');
+                $this->flashMessenger()->addSuccessMessage('Service organization successfully edited.');
+                return $this->redirect()->toRoute('service/viewOrganization');
             }
         }
 
-        return new ViewModel(array('form' => $form, 'servicePartnerId' => $servicePartnerId));
+        return new ViewModel(array('form' => $form, 'serviceOrganizationId' => $serviceOrganizationId));
     }
 
-    public function deletePartnerAction () {
+    public function deleteOrganizationAction () {
 
         $request = $this->getRequest();
 
         if ($request->isXmlHttpRequest()) {
             $id = (int)$this->params()->fromRoute('id');
-            $servicePartner = $this->getEntityManager()->getRepository('Administration\Entity\ServicePartner')
+            $serviceOrganization = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
                 ->findOneBy(array('id' => $id));
 
-            $this->getEntityManager()->remove($servicePartner);
+            $this->getEntityManager()->remove($serviceOrganization);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'id' => $id,
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function viewSectorAction () {
+
+        $mSector = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector');
+
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mSector->createQueryBuilder('ServiceSector')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(20);
+
+        $page = (int)$this->params()->fromQuery('page');
+
+        if ($page)
+            $paginator->setCurrentPageNumber($page);
+
+        return new ViewModel(array(
+            'data' => $paginator,
+        ));
+    }
+
+    public function addSectorAction () {
+
+        $request = $this->getRequest();
+
+        $serviceSector = new ServiceSector();
+        $form = new ServiceSectorForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServiceSector'));
+        $form->bind($serviceSector);
+
+        if ($request->isPost()) {
+
+            $formFilter = new ServiceSectorFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $serviceSector->setCountry($country);
+                $this->getEntityManager()->persist($serviceSector);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addSuccessMessage('New service Sector successfully added.');
+                return $this->redirect()->toRoute('service/viewSector');
+            }
+        }
+
+        return new ViewModel(array('form' => $form));
+    }
+
+    public function editSectorAction () {
+
+        $request = $this->getRequest();
+        $serviceSectorId = (int) $this->params()->fromRoute('id');
+        $serviceSector = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')
+            ->findOneBy(array('id' => $serviceSectorId));
+
+        $form = new ServiceSectorForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServiceSector'));
+        $form->bind($serviceSector);
+
+        if ($request->isPost()) {
+
+            $formFilter = new ServiceSectorFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $serviceSector->setCountry($country);
+                $this->getEntityManager()->persist($serviceSector);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addSuccessMessage('Service Sector successfully edited.');
+                return $this->redirect()->toRoute('service/viewSector');
+            }
+        }
+
+        return new ViewModel(array('form' => $form, 'serviceSectorId' => $serviceSectorId));
+    }
+
+    public function deleteSectorAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+            $id = (int)$this->params()->fromRoute('id');
+            $serviceSector = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')
+                ->findOneBy(array('id' => $id));
+
+            $this->getEntityManager()->remove($serviceSector);
+            $this->getEntityManager()->flush();
+
+            $result = new JsonModel(array(
+                'success' => true,
+                'id' => $id,
+            ));
+
+        } else {
+            $result = new JsonModel(array(
+                'error' => true,
+            ));
+        }
+
+        return $result;
+    }
+
+    public function viewActivityAction () {
+
+        $mActivity = $this->getEntityManager()->getRepository('Administration\Entity\ServiceActivity');
+
+        $adapter = new DoctrineAdapter(new ORMPaginator($query = $mActivity->createQueryBuilder('ServiceActivity')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(20);
+
+        $page = (int)$this->params()->fromQuery('page');
+
+        if ($page)
+            $paginator->setCurrentPageNumber($page);
+
+        return new ViewModel(array(
+            'data' => $paginator,
+        ));
+    }
+
+    public function addActivityAction () {
+
+        $request = $this->getRequest();
+
+        $activity = new ServiceActivity();
+        $form = new ServiceActivityForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServiceActivity'));
+        $form->bind($activity);
+
+        if ($request->isPost()) {
+
+            $formFilter = new ServiceActivityFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $activity->setCountry($country);
+                $this->getEntityManager()->persist($activity);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addSuccessMessage('New activity successfully added.');
+                return $this->redirect()->toRoute('service/viewActivity');
+            }
+        }
+
+        return new ViewModel(array('form' => $form));
+    }
+
+    public function editActivityAction () {
+
+        $request = $this->getRequest();
+        $activityId = (int) $this->params()->fromRoute('id');
+        $activity = $this->getEntityManager()->getRepository('Administration\Entity\ServiceActivity')
+            ->findOneBy(array('id' => $activityId));
+
+        $form = new ServiceActivityForm();
+        $form->setHydrator(new DoctrineHydrator($this->getEntityManager(), 'Administration\Entity\ServiceActivity'));
+        $form->bind($activity);
+
+        if ($request->isPost()) {
+
+            $formFilter = new ServiceActivityFormFilter();
+            $form->setInputFilter($formFilter->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $country = $this->getEntityManager()->getRepository('Administration\Entity\Country')
+                    ->findOneBy(array('id' => $_SESSION['countrySettings']['countryId']));
+                $activity->setCountry($country);
+                $this->getEntityManager()->persist($activity);
+                $this->getEntityManager()->flush();
+
+                $this->flashMessenger()->addSuccessMessage('Activity successfully edited.');
+                return $this->redirect()->toRoute('service/viewActivity');
+            }
+        }
+
+        return new ViewModel(array('form' => $form, 'activityId' => $activityId));
+    }
+
+    public function deleteActivityAction () {
+
+        $request = $this->getRequest();
+
+        if ($request->isXmlHttpRequest()) {
+            $id = (int)$this->params()->fromRoute('id');
+            $activity = $this->getEntityManager()->getRepository('Administration\Entity\ServiceActivity')
+                ->findOneBy(array('id' => $id));
+
+            $this->getEntityManager()->remove($activity);
             $this->getEntityManager()->flush();
 
             $result = new JsonModel(array(

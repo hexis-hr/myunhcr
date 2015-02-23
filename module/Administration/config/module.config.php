@@ -1017,50 +1017,146 @@ return array(
                         ),
                         'may_terminate' => true,
                     ),
-                    'viewPartner' => array(
+                    'viewOrganization' => array(
                         'type' => 'Zend\Mvc\Router\Http\Literal',
                         'options' => array(
-                            'route' => '/viewPartner',
+                            'route' => '/viewOrganization',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Service',
-                                'action' => 'viewPartner',
+                                'action' => 'viewOrganization',
                             ),
                         ),
                         'may_terminate' => true,
                     ),
-                    'addPartner' => array(
+                    'addOrganization' => array(
                         'type' => 'Zend\Mvc\Router\Http\Literal',
                         'options' => array(
-                            'route' => '/addPartner',
+                            'route' => '/addOrganization',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Service',
-                                'action' => 'addPartner',
+                                'action' => 'addOrganization',
                             ),
                         ),
                         'may_terminate' => true,
                     ),
-                    'editPartner' => array(
+                    'editOrganization' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/editPartner[/:id]',
+                            'route' => '/editOrganization[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Service',
-                                'action' => 'editPartner',
+                                'action' => 'editOrganization',
                             ),
                         ),
                         'may_terminate' => true,
                     ),
-                    'deletePartner' => array(
+                    'deleteOrganization' => array(
                         'type' => 'Zend\Mvc\Router\Http\Segment',
                         'options' => array(
-                            'route' => '/deletePartner[/:id]',
+                            'route' => '/deleteOrganization[/:id]',
                             'defaults' => array(
                                 '__NAMESPACE__' => 'Administration\Controller',
                                 'controller' => 'Service',
-                                'action' => 'deletePartner',
+                                'action' => 'deleteOrganization',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewSector' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewSector',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'viewSector',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addSector' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addSector',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'addSector',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editSector' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editSector[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'editSector',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteSector' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteSector[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'deleteSector',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'viewActivity' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/viewActivity',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'viewActivity',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'addActivity' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/addActivity',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'addActivity',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'editActivity' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/editActivity[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'editActivity',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                    ),
+                    'deleteActivity' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/deleteActivity[/:id]',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Administration\Controller',
+                                'controller' => 'Service',
+                                'action' => 'deleteActivity',
                             ),
                         ),
                         'may_terminate' => true,
@@ -1291,9 +1387,19 @@ return array(
                         'class' => 'glyphicons circle_info',
                     ),
                     array(
-                        'label' => 'Service Partner',
-                        'route' => 'service/viewPartner',
+                        'label' => 'Service Activity',
+                        'route' => 'service/viewActivity',
+                        'class' => 'glyphicons kiosk',
+                    ),
+                    array(
+                        'label' => 'Service Organization',
+                        'route' => 'service/viewOrganization',
                         'class' => 'glyphicons group',
+                    ),
+                    array(
+                        'label' => 'Service Sector',
+                        'route' => 'service/viewSector',
+                        'class' => 'glyphicons global',
                     ),
                 ),
             ),

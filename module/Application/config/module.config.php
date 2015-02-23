@@ -145,6 +145,28 @@ return array(
                     ),
                 ),
             ),
+            'listOfOrganizations' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/listOfOrganizations',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'listOfOrganizations',
+                    ),
+                ),
+            ),
+            'listBySector' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/listBySector',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'listBySector',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

@@ -6,34 +6,22 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class ServiceFormFilter implements InputFilterAwareInterface {
+class ServiceOrganizationFormFilter implements InputFilterAwareInterface {
 
     public $id;
-    public $serviceName;
-    public $serviceAcronym;
-    public $address;
-    public $email;
-    public $phone;
-    public $latitude;
-    public $longitude;
+    public $organizationName;
+    public $organizationAcronym;
+    public $organizationUrl;
     public $description;
-    public $serviceUrl;
-    public $partner;
     protected $inputFilter;
 
     public function exchangeArray ($data) {
 
         $this->id = (isset($data['id'])) ? $data['id'] : null;
-        $this->serviceName = (isset($data['serviceName'])) ? $data['serviceName'] : null;
-        $this->serviceAcronym = (isset($data['serviceAcronym'])) ? $data['serviceAcronym'] : null;
-        $this->address = (isset($data['address'])) ? $data['address'] : null;
-        $this->email = (isset($data['email'])) ? $data['email'] : null;
-        $this->phone = (isset($data['phone'])) ? $data['phone'] : null;
-        $this->latitude = (isset($data['latitude'])) ? $data['latitude'] : null;
-        $this->longitude = (isset($data['longitude'])) ? $data['longitude'] : null;
+        $this->organizationName = (isset($data['organizationName'])) ? $data['organizationName'] : null;
+        $this->organizationAcronym = (isset($data['organizationAcronym'])) ? $data['organizationAcronym'] : null;
+        $this->organizationUrl = (isset($data['organizationUrl'])) ? $data['organizationUrl'] : null;
         $this->description = (isset($data['description'])) ? $data['description'] : null;
-        $this->serviceUrl = (isset($data['serviceUrl'])) ? $data['serviceUrl'] : null;
-        $this->partner = (isset($data['partner'])) ? $data['partner'] : null;
     }
 
     // Add content to these methods:
@@ -49,7 +37,7 @@ class ServiceFormFilter implements InputFilterAwareInterface {
             $inputFilter = new InputFilter();
 
             $inputFilter->add(array(
-                'name' => 'serviceName',
+                'name' => 'organizationName',
                 'required' => true,
                 'filters' => array(
                     array('name' => 'StripTags'),
@@ -66,7 +54,7 @@ class ServiceFormFilter implements InputFilterAwareInterface {
             ));
 
             $inputFilter->add(array(
-                'name' => 'serviceAcronym',
+                'name' => 'organizationAcronym',
                 'required' => false,
                 'filters' => array(
                     array('name' => 'StripTags'),
@@ -74,7 +62,7 @@ class ServiceFormFilter implements InputFilterAwareInterface {
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'Alpha',
+                        'name' => 'Alnum',
                         'options' => array(
                             'allowWhiteSpace' => true,
                         ),
@@ -83,28 +71,49 @@ class ServiceFormFilter implements InputFilterAwareInterface {
             ));
 
             $inputFilter->add(array(
-                'name' => 'latitude',
+                'name' => 'organizationAddress',
+                'required' => false,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name' => 'organizationEmail',
                 'required' => true,
+                'validators' => array(
+                    array('name' => 'EmailAddress')
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name' => 'organizationPhone',
+                'required' => false,
                 'validators' => array(
                     array(
                         'name' => 'Regex',
                         'options' => array(
-                            'pattern' => '(\-?\d+(?:\.\d+)?)',
+                            'pattern' => '/^((\+| 00)+[0-4]+[0-9]+)?([ -\/]?[0-9]{2,15}){1,5}$/',
                         ),
                     ),
                 ),
             ));
 
             $inputFilter->add(array(
-                'name' => 'longitude',
-                'required' => true,
+                'name' => 'organizationOpeningHours',
+                'required' => false,
+                'filters' => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name' => 'organizationUrl',
+                'required' => false,
                 'validators' => array(
-                    array(
-                        'name' => 'Regex',
-                        'options' => array(
-                            'pattern' => '(\s*(\-?\d+(?:\.\d+)?)$)',
-                        ),
-                    ),
+                    array('name' => 'Uri'),
                 ),
             ));
 
@@ -115,29 +124,6 @@ class ServiceFormFilter implements InputFilterAwareInterface {
                     array('name' => 'StripTags'),
                     array('name' => 'StringTrim'),
                 ),
-            ));
-
-            $inputFilter->add(array(
-                'name' => 'serviceUrl',
-                'required' => false,
-                'validators' => array(
-                    array('name' => 'Uri'),
-                ),
-            ));
-
-            $inputFilter->add(array(
-                'name' => 'organization',
-                'required' => true,
-            ));
-
-            $inputFilter->add(array(
-                'name' => 'sector',
-                'required' => true,
-            ));
-
-            $inputFilter->add(array(
-                'name' => 'activity',
-                'required' => true,
             ));
 
             $this->inputFilter = $inputFilter;

@@ -9,7 +9,6 @@
   <link rel="dns-prefetch" href="//maps.googleapis.com">
   <link rel="dns-prefetch" href="//maps.gstatic.com">
   <link rel="dns-prefetch" href="//tile.openstreetmap.org">
-  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><!-- This line is best to remove and just send it as a http header -->
   <meta name='viewport' content='width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
   <?php echo $this->headTitle($this->translate('MyUNHCR'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
@@ -26,8 +25,13 @@
       userDevice: '',
       userDeviceVersion: '',
       userModernFail: false,
-      DOMContentLoaded: false
+      DOMContentLoaded: false,
+      primaryLoad: 0
     };
+
+    // Start timer to see how long it takes to load primary.js
+    app.timer = function(){ app.primaryLoad = app.primaryLoad + 50; setTimeout(app.timer, 50); }
+    app.timer();
 
     function supportCheck() {
       // Show javascript support
@@ -109,7 +113,7 @@
         window.app.DOMContentLoaded = true;
         setTimeout(function(){
           doc.className += " pageReady";
-        }, 1000); 
+        }, 1500); 
       });
     }
 
@@ -126,6 +130,9 @@
     
     echo $this->headLink();
   ?>
+
+  <!-- ==== Main script file (asyn!) ==== -->
+  <script src='/scripts/primary.js' async defer></script>
 
   <!-- ==== Secondary Meta Tags ==== -->
   <meta name='description' content=''>
@@ -156,6 +163,5 @@
 <div id='alertPolite'></div>
 <div id='alertAssertive'></div>
 
-<script src='/scripts/primary.js' async defer></script>
 </body>
 </html>

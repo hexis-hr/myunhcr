@@ -1,15 +1,35 @@
 <div class='form_item fileUpload <?php if (isset($form->getMessages()['image'])) echo '-error'; ?>'>
-    <label class='form_label fileUpload_label' for='feedbackMessage'>
-        <?php echo $this->translate('Would you like to take/upload a picture of the incident? (optional)'); ?>
-        <?php echo $this->formRow($form->get('image')); ?>
-    </label>
+  <label class='form_label fileUpload_label' for='feedbackMessage'>
+    <?php echo $this->translate('Would you like to take/upload a picture of the incident? (optional)'); ?>
+  </label>
+  <?php echo $this->formRow($form->get('image')); ?>
+  <div class='fileUI -images'>
+    <div class='fileUI_progress'><div class='fileUI_progress_bar'></div></div>
+    <ul class='fileUI_list'
+      data-ready='Ready...'
+      data-uploading='Uploading...'
+      data-success='Done!'
+      data-error='Error!'>
+    </ul>
+  </div>
+  <div class='form_error'></div>
 </div>
 
 <div class='form_item fileUpload <?php if (isset($form->getMessages()['audio'])) echo '-error'; ?>'>
-    <label class='form_label fileUpload_label' for='feedbackMessage'>
-        <?php echo $this->translate('Would you like to record your testimony of the incident? (optional)'); ?>
-        <?php echo $this->formRow($form->get('audio')); ?>
-    </label>
+  <label class='form_label fileUpload_label' for='feedbackMessage'>
+    <?php echo $this->translate('Would you like to record your testimony of the incident? (optional)'); ?>
+  </label>
+  <?php echo $this->formRow($form->get('audio')); ?>
+  <div class='fileUI -images'>
+    <div class='fileUI_progress'><div class='fileUI_progress_bar'></div></div>
+    <ul class='fileUI_list'
+      data-ready='Ready...'
+      data-uploading='Uploading...'
+      data-success='Done!'
+      data-error='Error!'>
+    </ul>
+  </div>
+  <div class='form_error'></div>
 </div>
 
 <div class='grid -compact -reverse'>

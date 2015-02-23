@@ -29,7 +29,8 @@ window.ux = {
     accurate: {
       failed: 0
     }
-  }
+  },
+  speed: 'normal'
 };
 
 
@@ -119,6 +120,18 @@ window.page = {
 
   }
 };
+
+
+
+/*------------------------------------------------------------------------------------
+  Call secondary.js
+------------------------------------------------------------------------------------*/
+clearTimeout(app.timer);
+dlog('PERFORMANCE: Primary.js loaded in: ' + app.primaryLoad + 'ms...');
+if( app.primaryLoad < 1001 ){ ux.speed = 'fast'; }
+else if( app.primaryLoad < 3001 ){ ux.speed = 'normal'; }
+else{ ux.speed = 'slow'; }
+dlog('PERFORMANCE: Logging speed as ' + ux.speed);
 
 
 

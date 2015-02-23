@@ -2701,15 +2701,18 @@ body {
 }
 .article {
   padding-top: 1.25em;
+  margin-bottom: 2.5em;
 }
 @media only screen and (min-width: 37.5em) {
   .article {
     padding-top: 1.5em;
+    margin-bottom: 3.05em;
   }
 }
 @media only screen and (min-width: 64.0625em) {
   .article {
     padding-top: 1.8em;
+    margin-bottom: 3.721em;
   }
 }
 

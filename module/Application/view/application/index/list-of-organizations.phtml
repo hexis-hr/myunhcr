@@ -51,6 +51,12 @@
 
   <div class='grid'>
       <div class='grid_column -medium9 -mediumPlus8'>
+
+          <p><?php if (isset($organizations))
+              foreach ($organizations as $organization) { ?>
+            <p><?php echo $organization->getOrganizationName(); ?></p>
+          <?php } ?></p>
+
           <?php if (isset($this->organizationData)) {  $organizationData = $this->organizationData; ?>
               <div class='preformat gap'>
                   <h5><?php echo $this->translate('Name'); ?></h5> <?php echo $organizationData->getOrganizationName(); ?><br/>

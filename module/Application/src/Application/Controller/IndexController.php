@@ -737,35 +737,8 @@ class IndexController extends AbstractActionController {
 
     public function surveyQuestionsAction()
     {
-//        $this->layout()->setVariable('body_class', 'pg-surveyQuest');
-//
-//        $request = $this->getRequest();
-//
-//        $surveyId = (int) $this->params()->fromPost('survey');
-//        $authId = $this->params()->fromPost('authentification');
-//        $birthDate = $this->params()->fromPost('date');
-//
-//        $postSurvey = $this->params()->fromRoute('survey') != null ? true : false;
-//
-//        if ($request->isPost() && $postSurvey) {
-//
-//            foreach ($this->params()->fromPost() as $fieldset) {
-//                foreach ($fieldset as $fieldName => $fieldValue) {
-//                    $surveyResult = new SurveyResult();
-//                    $surveyResult->setFieldName($fieldName);
-//                    $surveyResult->setFieldValue($fieldValue);
-//                    $surveyResult->setBirthDate($birthDate);
-//                    $surveyResult->setAuthId($authId);
-//                    $surveyResult->setForm($survey->getForm());
-//                    $this->getEntityManager()->persist($surveyResult);
-//                    $this->getEntityManager()->flush();
-//                }
-//            }
-//
-//            return $this->redirect()->toRoute('app', array('action' => 'menu-page'));
-//        }
-//
-//        return new ViewModel(array('form' => $form, 'surveyId' => $surveyId, 'authId' => $authId, 'birthDate' => $birthDate));
+        $this->layout()->setVariable('body_class', 'pg-surveyQuest');
+        return new ViewModel();
 
     }
 
@@ -803,13 +776,17 @@ class IndexController extends AbstractActionController {
             }
 
             $dql = 'SELECT service FROM Administration\Entity\Service service
-            WHERE service.latitude BETWEEN :minLat AND :maxLat AND service.longitude BETWEEN :minLng AND :maxLng';
+            LEFT JOIN Administration\Entity\ServiceActivity activity WITH service.activity = activity.id
+            WHERE service.latitude BETWEEN :minLat AND :maxLat AND service.longitude BETWEEN :minLng AND :maxLng
+            AND activity.activityStart <= :today AND activity.activityEnd >= :today';
 
+            $today = new \DateTime('now');
             $query = $this->getEntityManager()->createQuery($dql)->setParameters(array(
                 'minLat' => $minLat,
                 'maxLat' => $maxLat,
                 'minLng' => $minLng,
                 'maxLng' => $maxLng,
+                'today' => $today->format('Y-m-d'),
             ));
 
             $services = $query->getResult();

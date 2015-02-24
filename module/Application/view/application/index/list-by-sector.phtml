@@ -41,6 +41,10 @@
     <div class='grid'>
       <div class='grid_column -medium9 -mediumPlus8 sectorSearch' data-url="<?php echo $this->url('listBySector'); ?>">
         <p>Type for search</p>
+          <p><?php if (isset($sectors))
+              foreach ($sectors as $sector) { ?>
+                  <p><?php echo $sector->getSectorName(); ?></p>
+          <?php } ?></p>
       </div>
     </div>
   </div>

@@ -466,7 +466,9 @@ class IndexController extends AbstractActionController {
             }
         }
 
-        return new ViewModel();
+        $sectors = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')->findAll();
+
+        return new ViewModel(array('sectors' => $sectors));
     }
 
     public function listOfOrganizationsAction()
@@ -489,8 +491,12 @@ class IndexController extends AbstractActionController {
 
         }
 
+        $organizations = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
+            ->findAll();
+
         return new ViewModel(array(
             'form' => $form,
+            'organizations' => $organizations,
         ));
     }
 
@@ -794,10 +800,10 @@ class IndexController extends AbstractActionController {
             $arr = array();
             foreach ($services as $service) {
                 $arr[$service->getId()] = array($service->getServiceName(), $service->getLatitude(), $service->getLongitude(),
-                                                $service->getDescription(), $service->getServiceUrl(),
-                                                $service->getActivity()->getActivityName(), $service->getActivity()->getActivityCategory(),
-                                                $service->getActivity()->getActivityStart(), $service->getActivity()->getActivityEnd(),
-                                                $service->getOrganization()->getOrganizationName(), $service->getSector()->getSectorName());
+                    $service->getDescription(), $service->getServiceUrl(), $service->getActivity()->getActivityName(),
+                    $service->getActivity()->getActivityCategory(), $service->getActivity()->getActivityStart(),
+                    $service->getActivity()->getActivityEnd(), $service->getOrganization()->getOrganizationName(),
+                    $service->getSector()->getSectorName());
             }
 
             $result = new JsonModel(array(

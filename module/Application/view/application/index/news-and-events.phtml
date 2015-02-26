@@ -21,22 +21,27 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <!--
-  <div class='grid -clean'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-      <form action='' class='pageSearch form'>
-        <div class='form_item'>
-          <label class='form_label' for='checkWhat'><?php echo $this->translate("Search");?> <?php echo $this->translate("News and Events");?>:</label>
-          <div class='form_field'>
-            <input class='formInput' id='searchField' type='text' placeholder='Type a keyword here...'>
+    <form class='pageSearch form' action=''>
+      <div class='grid -clean'>
+        <div class='grid_column -medium9 -mediumPlus8'>
+          <div class='grid -clean -collapse'>
+            <div class='grid_column -small8 -medium9'>
+              <div class='form_item'>
+                <div class='form_field'>
+                  <input class='pageSearch_input formInput' id='searchField' type='text' placeholder='<?php echo $this->translate('Search...'); ?>' data-clearQuery>
+                </div>
+              </div>
+            </div>
+            <div class='grid_column -small4 -medium3 mapHeader_search_right'>
+              <input class='pageSearch_submit button -fullWidth' type='submit' value='<?php echo $this->translate('Find'); ?>' data-geocode>
+            </div>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-  -->
+
+  
   
   <?php // Output this block only if on "page 2" and further ?>
   <div class='ageNav tearSection -top'>

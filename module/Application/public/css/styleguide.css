@@ -208,8 +208,8 @@
 }
 .preformat figure {
   position: relative;
-  margin-left: -1rem;
-  margin-right: -1rem;
+  margin-left: -1.1rem;
+  margin-right: -1.1rem;
   padding: 0;
   text-align: center;
 }
@@ -222,8 +222,8 @@
 .preformat figure figcaption {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 1.1rem;
+  padding-right: 1.1rem;
   padding-top: 15px;
   padding-top: 0.91rem;
   font-family: Georgia, "Times New Roman", Times, serif;
@@ -317,61 +317,61 @@
 }
 
 .grid, .lt-ie9 .grid {
-  margin-top: -25px;
-  margin-top: -1.53846rem;
+  margin-top: -27px;
+  margin-top: -1.69231rem;
 }
 .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-  margin-top: 25px;
-  margin-top: 1.53846rem;
-  padding-left: 16px;
-  padding-left: 1rem;
-  padding-right: 16px;
-  padding-right: 1rem;
+  margin-top: 27px;
+  margin-top: 1.69231rem;
+  padding-left: 18px;
+  padding-left: 1.1rem;
+  padding-right: 18px;
+  padding-right: 1.1rem;
 }
 .grid .grid, .lt-ie9 .grid .grid {
-  margin-left: -16px;
-  margin-left: -1rem;
-  margin-right: -16px;
-  margin-right: -1rem;
+  margin-left: -18px;
+  margin-left: -1.1rem;
+  margin-right: -18px;
+  margin-right: -1.1rem;
 }
 
 @media only screen and (min-width: 37.5em) {
   .grid, .lt-ie9 .grid {
-    margin-top: -30px;
-    margin-top: -1.87692rem;
+    margin-top: -33px;
+    margin-top: -2.06462rem;
   }
   .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-    margin-top: 30px;
-    margin-top: 1.87692rem;
-    padding-left: 20px;
-    padding-left: 1.22rem;
-    padding-right: 20px;
-    padding-right: 1.22rem;
+    margin-top: 33px;
+    margin-top: 2.06462rem;
+    padding-left: 21px;
+    padding-left: 1.342rem;
+    padding-right: 21px;
+    padding-right: 1.342rem;
   }
   .grid .grid, .lt-ie9 .grid .grid {
-    margin-left: -20px;
-    margin-left: -1.22rem;
-    margin-right: -20px;
-    margin-right: -1.22rem;
+    margin-left: -21px;
+    margin-left: -1.342rem;
+    margin-right: -21px;
+    margin-right: -1.342rem;
   }
 }
 @media only screen and (min-width: 64.0625em) {
   .grid, .lt-ie9 .grid {
-    margin-top: -37px;
-    margin-top: -2.28985rem;
+    margin-top: -40px;
+    margin-top: -2.51883rem;
   }
   .grid > .grid_column, .lt-ie9 .grid > .grid_column {
-    margin-top: 37px;
-    margin-top: 2.28985rem;
-    padding-left: 24px;
-    padding-left: 1.4884rem;
-    padding-right: 24px;
-    padding-right: 1.4884rem;
+    margin-top: 40px;
+    margin-top: 2.51883rem;
+    padding-left: 26px;
+    padding-left: 1.63724rem;
+    padding-right: 26px;
+    padding-right: 1.63724rem;
   }
   .grid .grid, .lt-ie9 .grid .grid {
-    margin-left: -24px;
-    margin-left: -1.4884rem;
-    margin-right: -24px;
-    margin-right: -1.4884rem;
+    margin-left: -26px;
+    margin-left: -1.63724rem;
+    margin-right: -26px;
+    margin-right: -1.63724rem;
   }
 }

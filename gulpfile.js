@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     prefix = require('gulp-autoprefixer'),
     plumber = require('gulp-plumber'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    rename = require("gulp-rename"),
+    cssmin = require('gulp-cssmin');
 
 var path = {
   root: __dirname,
@@ -57,6 +59,9 @@ gulp.task('css', function (){
       'last 3 OperaMobile versions',
       'last 5 OperaMini versions'
     ))
+    .pipe(gulp.dest(path.css))
+    .pipe(cssmin())
+    .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest(path.css));
 });
 

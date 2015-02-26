@@ -156,6 +156,17 @@ return array(
                     ),
                 ),
             ),
+            'organizationDetails' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/organizationDetails',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'organizationDetails',
+                    ),
+                ),
+            ),
             'listBySector' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

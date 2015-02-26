@@ -48,3 +48,14 @@
       @extend %inputBase_focus;
     }
 }
+
+
+// RTL Styles
+.customSelect_overlay {
+  @include rtl {
+    &:after {
+      right:auto;
+      left:13px;
+    }
+  }
+}

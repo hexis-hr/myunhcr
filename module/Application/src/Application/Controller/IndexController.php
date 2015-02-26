@@ -434,9 +434,9 @@ class IndexController extends AbstractActionController {
         return $result;
     }
 
-    public function listBySectorAction()
+    public function listOfSectorsAction()
     {
-        $this->layout()->setVariable('body_class', 'pg-listBySector');
+        $this->layout()->setVariable('body_class', 'pg-listOfSectors');
 
         $request = $this->getRequest();
 
@@ -473,7 +473,7 @@ class IndexController extends AbstractActionController {
 
     public function listOfOrganizationsAction()
     {
-        $this->layout()->setVariable('body_class', 'pg-listByOrg');
+        $this->layout()->setVariable('body_class', 'pg-listOfOrgs');
 
         $request = $this->getRequest();
         $form = new ListOfOrganizationsForm($this->getEntityManager());
@@ -498,6 +498,12 @@ class IndexController extends AbstractActionController {
             'form' => $form,
             'organizations' => $organizations,
         ));
+    }
+
+    public function organizationDetailsAction()
+    {
+        $this->layout()->setVariable('body_class', 'pg-organizationDetailss');
+        return new ViewModel();
     }
 
     public function mapOfServiceAction()

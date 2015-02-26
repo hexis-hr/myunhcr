@@ -4,7 +4,7 @@ queue.jQuery(function(){
   /*------------------------------------------------------------------------------------
     Check for date and time inputs, and load libraries if required
   ------------------------------------------------------------------------------------*/
-  // queue.pageLoadEvents.push(function(event){
+  // queue.pageLoadEventsSecondary.push(function(event){
   //   if( $('[inputDate]')[0] || $('[inputTime]')[0] ){ // Check if there are date & time fields
   //     // Avoid replacing date & time in favor of native device UI
   //     if((app.userDevice === 'Android' && app.userDeviceVersion > 4.3) || (app.userDevice === 'iOS' && app.userDeviceVersion > 5)){

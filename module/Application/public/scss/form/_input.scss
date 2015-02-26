@@ -8,3 +8,24 @@
     @extend %inputBase_focus;
   }
 }
+
+
+.clearQuery {
+  display:none;
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  padding: 0 5px;
+  bottom: 4px;
+
+  .icon { margin-top:7px; opacity:.25; }
+
+  @include rtl {
+    right: auto;
+    left: 6px;
+  }
+  
+  @include small {
+    &.-visible { display:block; }
+  }
+}

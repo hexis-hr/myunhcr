@@ -3,29 +3,38 @@
     .linkGroup_link {
       position: relative;
       display: block;
-      padding: 14px 22px;
+      padding: 14px;
+      @include rem(padding-right, ($grid-spacing/2));
+      @include rem(padding-left, ($grid-spacing/2));
       color: $link;
       border-bottom: 1px solid $lightGray;
-      transition: 150ms;
+      // transition: 150ms;
 
       &:after {
         @extend %icon;
         @include img("icons", "arrowRight-blue-h24@2x", 2, inline);
         display: none;
         position: absolute;
-        top: 12px;
-        right: 22px;
+        top: 11px;
+        @include rem(right, ($grid-spacing/2));
         content: '';
-        transition: 150ms;
+        // transition: 150ms;
+
+        @include rtl {
+          // display: none !important;
+          right:auto;
+          @include rem(left, ($grid-spacing/2));
+          @include img("icons", "arrowLeft-blue-h24@2x", 2);
+        }
       }
 
       &:hover, &:focus {
         @extend %inputBase_focus;
         background: rgba($blue, 0.05);
 
-        &:after {
-          right: 18px;
-        }
+        // &:after {
+        //   right: 18px;
+        // }
       }
     }
 

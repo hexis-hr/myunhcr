@@ -7,7 +7,9 @@
 window.ux = {
   func: {},
   state: {
+    secondaryExec: false,
     isLoading: false,
+    callScreenOpen: false,
     isCalling: false,
     mapsLoaded: false,
     isTracing: false,
@@ -18,6 +20,7 @@ window.ux = {
     direction: false
   },
   page: {},
+  history: {},
   config: {},
   preload: {},
   geo: {
@@ -60,6 +63,7 @@ window.queue = {
   jQueryWaitlist: [],
   pageUnloadEvents: [],
   pageLoadEvents: [],
+  pageLoadEventsSecondary: [],
   globalClickEvents: [],
   globalScrollEvents: [],
   globalResizeEvents: [],
@@ -76,7 +80,7 @@ window.queue = {
  */
 function jQueryExec(){
   if((window.jQuery || window.Zepto || window.$) && window.app.DOMContentLoaded === true) {
-    dlog('Zepto loaded...');
+    dlog('OK: Zepto.js loaded!');
     $.each(queue.jQueryWaitlist, function(index, value) {
       value();
     });
@@ -93,7 +97,7 @@ function jQueryExec(){
   Helper: Call global events only once
 ------------------------------------------------------------------------------------*/
 var exec = function(funcQueue, name) {
-  dlog(name + '();');
+  dlog('EXEC: ' + name + '();');
   $.each(funcQueue, function(index, value) {
     value();
   });
@@ -106,6 +110,7 @@ var exec = function(funcQueue, name) {
 ------------------------------------------------------------------------------------*/
 window.page = {
   onUnload: function(){
+    ux.state.secondaryExec = false;
     exec(queue.pageUnloadEvents, 'pageUnloadEvents');
   },
   onLoad: function(){
@@ -116,8 +121,18 @@ window.page = {
     // Open a new object for this page, if one does not exist
     ux.page[$('#relay').attr('bodyClass')] = ux.page[$('#relay').attr('bodyClass')] || {};
 
+    // Exec primary queue
     exec(queue.pageLoadEvents, 'pageLoadEvents');
 
+    // Exec secondary queue
+    this.onLoadSecondary();
+
+  },
+  onLoadSecondary: function(){
+    if ( typeof queue.pageLoadEventsSecondary[0] !== 'undefined' && ux.state.secondaryExec === false ) {
+      ux.state.secondaryExec = true;
+      exec(queue.pageLoadEventsSecondary, 'pageLoadEventsSecondary');
+    }
   }
 };
 

@@ -69,4 +69,15 @@ $switchHeight: 32px;
       }
   
   } // end .modern
+
+  
+  // RTL Styles
+  .formSwitch_custom {
+    @include rtl {
+      right:auto;
+      left:0;
+    }
+  }
+
+
 } // end small

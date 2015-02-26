@@ -2,7 +2,15 @@
   @extend %inputBase;
   padding-top: .75em;
   padding-bottom: .75em;
-  min-height: 15em;
+  min-height: 6em;
   resize:vertical;
   transition: none;
+
+  @include respond("min-height:500px"){
+    min-height:10em;
+  }
+
+  @include respond("min-height:620px"){
+    min-height:14em;
+  }
 }

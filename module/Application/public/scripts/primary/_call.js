@@ -1,22 +1,36 @@
 queue.jQuery(function(){
 
 
-  // Open the call screen
-  $(document).on('click', '#callScreen_open', function(){
-    
+  // Show function
+  ux.func.callScreenShow = function(){
+
+    // Log the state change
+    ux.state.callScreenOpen = true;
+
     // Adjust the design initially
     callScreenDesign();
 
     // Slide in the call screen
     $('#callScreen').addClass('-show');
 
-  });
+  }
 
-  
-  // Close the call screen
-  $(document).on('click', '#callScreen_close', function(){
+
+  // Hide function
+  ux.func.callScreenHide = function(){
+    
+    // Log the state change
+    ux.state.callScreenOpen = false;
+
+    // Hide the call screen
     $('#callScreen').removeClass('-show');
-  });
+
+  }
+
+
+  // Attach events
+  $(document).on('click', '#callScreen_open', ux.func.callScreenShow);
+  $(document).on('click', '#callScreen_close', ux.func.callScreenHide);
 
 
   // Phone call init...
@@ -38,6 +52,12 @@ queue.jQuery(function(){
   // Adjust the design on resize
   queue.globalResizeEvents.push(function(event){
     callScreenDesign();
+  });
+
+
+  // Adjust the design on resize
+  queue.pageUnloadEvents.push(function(event){
+    ux.func.callScreenHide();
   });
 
 

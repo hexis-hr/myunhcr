@@ -42,10 +42,10 @@ queue.jQuery(function(){
     if ( History.Adapter ) {
       History.Adapter.bind(window,'statechange',function(event){
         var state = History.getState();
-        dlog('History statechange to: ' + state.hash);
 
         // We check if loading is in progress to avoid double ajax calls (ongoing issue: https://github.com/browserstate/history.js/issues/96)
-        if ( ux.state.isLoading === false ) {
+        if ( ux.state.isLoading === false ){
+          dlog('History statechange to: ' + state.hash);
           getPage(state.hash);
         }
       });

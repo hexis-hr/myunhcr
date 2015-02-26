@@ -78,7 +78,7 @@
   LAYOUT: GRID
 ————————————————————————————————————————————————————————————————————————————————*/
   // $grid-columns: 12; // Total number of columns in a grid
-  // $grid-spacing: 2.2rem; // Base spacing for small screens
+  $grid-spacing: 2.2rem; // Base spacing for small screens
 
   $grid-small-breakpoint: em(300px); // Media query condition. This one targets entry-level smartphones (usually)
   // $grid-small-width: null; // Optional max-width for the container
@@ -131,7 +131,7 @@
   LAYOUT :: HELPERS
 ————————————————————————————————————————————————————————————————————————————————*/
   // $global-radius: null; // Global border radius (optional)
-  // $ui-radius: 4px; // Radius for some UI elements (required)
+  $ui-radius: 3px; // Radius for some UI elements (required)
 
 
 /*————————————————————————————————————————————————————————————————————————————————

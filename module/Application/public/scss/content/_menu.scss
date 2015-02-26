@@ -1,3 +1,8 @@
 .menu {}
   .menu_group {}
-    .menu_group_title { padding:14px 22px; @include responsive(font-size 18px 1.1); }
+    .menu_group_title {
+      padding:14px;
+      @include rem(padding-right, ($grid-spacing/2));
+      @include rem(padding-left, ($grid-spacing/2));
+      @include responsive(font-size 18px 1.1);
+    }

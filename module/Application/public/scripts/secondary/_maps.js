@@ -3,7 +3,7 @@
   This is the main controller for all map scripts
 
 */
-queue.pageLoadEvents.push(function(event){
+queue.pageLoadEventsSecondary.push(function(event){
   
 
   // Resize the mobile map to fit vertically

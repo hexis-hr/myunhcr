@@ -7,6 +7,12 @@ body { height:100%; }
 #page { position:relative; z-index:z(layout, 1); transition:opacity 400ms ease-in, transform 400ms ease-in;
   &.-loading { transform:translateX(-10px) translateZ(0); opacity:0; transition:opacity 300ms ease-in, transform 400ms ease-in; }
   &.-promoted { z-index:z(modal, 10); }
+
+  // Disable sliding for rtl languages due to a bug...
+  @include rtl {
+    transform:none;
+    &.-loading { transform:none; }
+  }
 }
 
 // --------------------------------------------------------------------

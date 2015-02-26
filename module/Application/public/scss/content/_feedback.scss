@@ -1,10 +1,14 @@
-.feedback { @include responsive(padding 1.25em 1.3); text-align:center; }
-  .feedback_icon { margin-bottom:16px; }
-  .feedback_title { display:block; margin-bottom:0.75em; @include responsive(font-size 19px 1.1); }
+.feedback { @include responsive(padding 1em 1.4); background:lighten($warning, 39%); }
+  .feedback_icon { margin-bottom:16px; @include img("icons", "unknown-h64@2x", 2); }
+  .feedback_title { display:block; margin-bottom:0.75em; @include responsive(font-size 19px 1.1); color:$warning; }
   .feedback_description { @include rem(font-size, 0.9rem); }
 
   // Remove margin from last child
   .feedback > *:last-child { margin-bottom:0 !important; }
+
+@include smallPlus {
+  .feedback { text-align:center; }
+}
 
 
 // Positive
@@ -22,14 +26,7 @@
 
 
 // Warning
-.feedback.-warning { background:rgba($warning, 0.1);
+.feedback.-warning { background:lighten($warning, 39%);
   .feedback_icon { @include img("icons", "warning-h64@2x", 2); }
-  .feedback_title { color:$warning; }
-}
-
-
-// Unknown
-.feedback.-unknown { background:rgba($warning, 0.1);
-  .feedback_icon { @include img("icons", "unknown-h64@2x", 2); }
   .feedback_title { color:$warning; }
 }

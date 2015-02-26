@@ -32,14 +32,14 @@
         <div class='grid_column -medium9 -mediumPlus8'>
 
             <div class='form_item formSwitch'>
-                <label class='form_label formSwitch_wrapper' for='notifications'><?php echo $this->translate('Notifications:'); ?>
+                <label class='form_label formSwitch_wrapper' for='notifications'><?php echo $this->translate('Notifications'); ?>
                     <?php echo $this->formRow($form->get('notifications')); ?>
                     <span class='formSwitch_custom'></span>
                 </label>
             </div>
 
             <div class='form_item'>
-                <label class='form_label' for='language'><?php echo $this->translate('Language:'); ?></label>
+                <label class='form_label' for='language'><?php echo $this->translate('Language'); ?></label>
                 <div class='form_field customSelect'>
                     <?php echo $this->formRow($form->get('language')); ?>
                     <a unselectable='on' class='customSelect_overlay'>
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class='form_item'>
+            <div class='form_item -last'>
                 <div class='form_field'>
                     <input class='button -primary -submit' type='submit' name='' value='Save'>
                 </div>

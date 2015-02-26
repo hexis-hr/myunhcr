@@ -6,7 +6,7 @@
       <div class='grid -clean'>
         <div class='grid_column'>
           <div class='sectionHeader_top_inner'>
-            <h1 class='sectionHeader_title'><?php echo $this->translate("List by Organization");?></h1>
+            <h1 class='sectionHeader_title'><?php echo $this->translate("List of Organizations");?></h1>
             <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
           </div>
         </div>
@@ -21,41 +21,67 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class='mapHeader'>
-    <div class='grid -clean'>
-      <div class='grid_column -medium9 -mediumPlus8'>
-          <?php $form = $this->form; ?>
-          <form action='<?php echo $this->url('listOfOrganizations') ?>' method="post" class='form' ajaxForm>
-          <div class='form_item <?php if (isset($form->getMessages()['feedbackMessage'])) echo '-error'; ?>'>
-          <label class='form_label' for='feedbackMessage'><?php echo $this->translate('Choose organization:'); ?></label>
-            <div class='grid -clean -collapse'>
-              <div class='grid_column -small9 mapHeader_search_left'>
-                <div class='form_field customSelect'>
-                    <?php echo $this->formRow($form->get('organization')); ?>
-                  <a class='customSelect_overlay' unselectable='on'>
-                      <?php echo isset($this->organizationData) ?
-                          $this->organizationData->getOrganizationName() :
-                          $this->translate($form->get('organization')->getEmptyOption()); ?></a>
+    <?php $form = $this->form; ?>
+    <form class='pageSearch form' action='<?php echo $this->url('listOfOrganizations') ?>' method='post' ajaxForm>
+      <div class='grid -clean'>
+        <div class='grid_column -medium9 -mediumPlus8'>
+          <div class='grid -clean -collapse'>
+            <div class='grid_column -small8 -medium9'>
+              <div class='form_item <?php if (isset($form->getMessages()['feedbackMessage'])) echo '-error'; ?>'>
+                <div class='form_field'>
+                  <input class='pageSearch_input formInput' id='searchField' type='text' value='Health' placeholder='<?php echo $this->translate('Search...'); ?>' data-clearQuery>
                 </div>
               </div>
-              <div class='grid_column -small3 mapHeader_search_right'>
-                <input class='button -primary -fullWidth' type='submit' value='<?php echo $this->translate('Filter'); ?>' data-geocode>
-              </div>
+            </div>
+            <div class='grid_column -small4 -medium3 mapHeader_search_right'>
+              <input class='pageSearch_submit button -fullWidth' type='submit' value='<?php echo $this->translate('Filter'); ?>' data-geocode>
             </div>
           </div>
-        </form>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class='activeSearch'>
+    <div class='grid -clean'>
+      <div class='grid_column -medium9 -mediumPlus8'>
+        <div class='activeSearch_body'>
+          4 results for "Health" <a class='activeSearch_remove link'>Show all organizations</a>
+        </div>
       </div>
     </div>
+  </div>
+
+  <ul class='orgList'>
+    <li class='orgList_item'>
+      <a class='orgList_link' data-ripple
+        href='organization-details.html'
+        ajaxNav tabindex='0'><span class='orgList_item_acronym'>DRC</span> Danish Refugee Council
+      </a>
+    </li>
+    <li class='orgList_item'>
+      <a class='orgList_link' data-ripple
+        href='organization-details.html'
+        ajaxNav tabindex='0'><span class='orgList_item_acronym'>JHAS</span> Jordan Health Aid
+      </a>
+    </li>
+    <li class='orgList_item'>
+      <a class='orgList_link' data-ripple
+        href='organization-details.html'
+        ajaxNav tabindex='0'><span class='orgList_item_acronym'>SCI</span> Save the Children
+      </a>
+    </li>
+    <li class='orgList_item'>
+      <a class='orgList_link' data-ripple
+        href='organization-details.html'
+        ajaxNav tabindex='0'><span class='orgList_item_acronym'>WFP</span> World Food Programme
+      </a>
+    </li>
+  </ul>
+
 
   <div class='grid'>
       <div class='grid_column -medium9 -mediumPlus8'>
-
-          <p><?php if (isset($organizations))
-              foreach ($organizations as $organization) { ?>
-            <p><?php echo $organization->getOrganizationName(); ?></p>
-          <?php } ?></p>
 
           <?php if (isset($this->organizationData)) {  $organizationData = $this->organizationData; ?>
               <div class='preformat gap'>

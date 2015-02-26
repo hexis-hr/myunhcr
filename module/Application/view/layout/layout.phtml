@@ -1,8 +1,9 @@
 <?php
   echo $this->doctype();
   $locale = substr($this->plugin('translate')->getTranslator()->getLocale(), 0, 2);
+  $rtl = array('ar', 'he', 'iw', 'ur', 'zh', 'fa', 'ja', 'yi', 'ji');
 ?>
-<html lang='<?php echo $locale?>' class='no-js'<?php if($locale == "ar_JO") echo "dir='rtl'"?>>
+<html lang='<?php echo $locale?>' class='no-js' <?php if(in_array($locale, $rtl)) echo "dir='rtl'" ?>>
 <head>
   <meta charset='utf-8'>
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -123,7 +124,7 @@
   </script>
 
   <?php
-    $this->headLink()->appendStylesheet('/css/main.css');
+    $this->headLink()->appendStylesheet('/css/main.min.css');
 
     // Custom css for development. Enable when != null
     // $this->headLink()->appendStylesheet('/css/dump.css');

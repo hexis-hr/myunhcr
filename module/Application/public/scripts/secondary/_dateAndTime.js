@@ -1,6 +1,6 @@
 queue.jQuery(function(){
 
-  queue.pageLoadEvents.push(function(event){
+  queue.pageLoadEventsSecondary.push(function(event){
     if( $('[data-inputDate]')[0] || $('[data-inputTime]')[0] ){ // Check if there are date & time fields
       
       // Avoid replacing date & time in favor of native device UI

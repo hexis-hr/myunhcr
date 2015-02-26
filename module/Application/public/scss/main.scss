@@ -43,6 +43,7 @@
 @import "content/_base";
 @import "content/_buttons";
 @import "content/_preformat";
+@import "content/_definitionList";
 @import "content/_icons";
 @import "content/_links";
 @import "content/_menu";
@@ -50,6 +51,7 @@
 @import "content/_faq";
 @import "content/_articles";
 @import "content/_mapHeader";
+@import "content/_activeSearch";
 @import "content/_pagination";
 
 
@@ -64,8 +66,8 @@
 @import "pages/_homepage";
 @import "pages/_faq";
 @import "pages/_mapOfServices";
-@import "pages/_listByOrganisation";
-@import "pages/_listBySector";
+@import "pages/_listOfOrganisations";
+@import "pages/_listOfSectors";
 
 
 // Import plugins

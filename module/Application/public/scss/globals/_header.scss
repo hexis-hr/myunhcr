@@ -9,44 +9,31 @@ $active-background: darken($blue, 8);
     .mainHeader_logo { cursor:default !important; display:inline-block; margin-bottom:1em; }
     .mainHeader_menu {}
       .mainHeader_menu { display:block; margin-bottom:1em; text-decoration:underline; transition:opacity 1s ease-in-out; }
-    .mainHeader_nav { display:block; margin-bottom:1em; }
-      .mainHeader_nav_trigger { display:none; }
-      .mainHeader_nav_item { display:block; }
-        .mainHeader_nav_link { display:block; margin-bottom:2px; padding:.75em; font-weight:500; background:lighten($blue, 6);
-          &:hover, &:focus { background:lighten($blue, 10); }
-        }
   .mainHeader_bottom { text-align:center; }
 
 
 // If javascript is supported, we make a nice compact little header
 .js {
   @include small {
+    
     // Header button commons
     %headerButton { height:$headerHeight; line-height:$headerHeight; padding:0 14px; font-size:0.85em; font-weight:bold;
       &_img { vertical-align:-7px; }
-      &:hover, &:focus { background: $active-background; }
     }
 
     .mainHeader { min-height:$headerHeight; padding:0; }
       .mainHeader_wrapper { position:relative; }
         .mainHeader_top { position:relative; z-index:2; height:$headerHeight; background:$blue; }
           .mainHeader_call, .mainHeader_menu { position:absolute !important; top:0; }
-          .mainHeader_call { @extend %headerButton; display:block; left:0; }
-            .mainHeader_call_icon { @include img("icons", "phone-white-h24@2x", 2, inline); }
+          .mainHeader_call { @extend %headerButton; left:0; display:block; padding-left:40px !important; }
+            .mainHeader_call_icon { position:absolute; top:17px; left:11px; @include img("icons", "phone-white-h24@2x", 2, inline); }
           .mainHeader_logo { margin:0 0 0 8px; padding:8px 10px; height:$headerHeight; }
             .mainHeader_logo_expanded { display:none; }
           .mainHeader_menu { display:block; @extend %headerButton; display:block; right:0; padding-right:48px !important; text-decoration:none; }
             .mainHeader_menu_label {}
             .mainHeader_menu_icon { position:absolute; top:17px; right:14px; }
             .mainHeader_menu_open { @include img("icons", "menu-white-h24@2x", 2, inline); }
-            // .mainHeader_menu_close { @include img("icons", "close-white-h24@2x", 2, inline); display:none; }
         .mainHeader_bottom { display:none; padding:0 !important; background:$active-background; background-image:linear-gradient(to bottom, $active-background, rgba($active-background, 0.95)); }
-          .mainHeader_nav { margin:0; }
-            .mainHeader_nav_item {}
-              .mainHeader_nav_link { margin:0; padding:.85em 1em; min-width:200px; font-size:1.1em; font-weight:400; background:none;
-                border-top:1px solid rgba(white, 0.15); border-bottom:1px solid rgba(black,0.15); }
-            .mainHeader_nav_item:first-child .mainHeader_nav_link { border-top:0; } // Remove border from last child
-            .mainHeader_nav_item:last-child .mainHeader_nav_link { border-bottom:0; } // Remove border from last child
           .mainHeader_infoLine { display:none; }
     
     // Nav open
@@ -54,7 +41,6 @@ $active-background: darken($blue, 8);
       .mainHeader_top {}
         .mainHeader_menu { background:darken($blue, 8); }
           .mainHeader_menu_open { display:none; }
-          // .mainHeader_menu_close { display:block; }
       .mainHeader_bottom { display:block; }
     }
 
@@ -62,21 +48,6 @@ $active-background: darken($blue, 8);
     &.modern {
       body { padding-top:$headerHeight; } // We need to offset the .page selement for the fixed header
       .mainHeader { position:fixed; z-index:z(layout, 2); top:0; left:0; width:100%; transform:translateZ(0); }
-
-      // .mainHeader_top { transition-delay:40ms; }
-      //   .mainHeader_menu_icon { display:block !important; transition:120ms ease-in-out; }
-      //   .mainHeader_menu_open { transition-delay:40ms; }
-      //   .mainHeader_menu_close { opacity:0; transform:rotate(-60deg); transition-delay:0ms; }
-      // .mainHeader_bottom { display:block; position:absolute; z-index:1; top:$headerHeight; right:0; width:100%; transform:translateY(-100%) translateZ(0); transition:250ms ease-in-out; }
-      //   .mainHeader_nav { opacity:0; transition:150ms ease-out; }
-
-      // .mainHeader.-active {
-      //   .mainHeader_top {}
-      //     .mainHeader_menu_open { opacity:0; transform:rotate(120deg); transition-delay:0ms; }
-      //     .mainHeader_menu_close { opacity:1; transform:rotate(0deg); transition-delay:40ms; }
-      //   .mainHeader_bottom { transform:translateY(0) translateZ(0); }
-      //     .mainHeader_nav { opacity:1; transition-delay:220ms; }
-      // }
     }
   }
 
@@ -89,4 +60,4 @@ $active-background: darken($blue, 8);
   @include large {
     .mainHeader_logo { margin-left:-14px; }
   }
-} // End of .js
+}

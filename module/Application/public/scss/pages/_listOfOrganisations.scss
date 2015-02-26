@@ -1,0 +1,12 @@
+.pg-listOfOrgs {
+  .page { padding-bottom:0 !important; }
+}
+
+.orgList {}
+  .orgList_item {}
+    .orgList_link { @extend .linkGroup_link; font-size:0.95em;
+      &::after { display:none; }
+    }
+      .orgList_item_acronym { float:right; margin:0 0 0 5px; padding-top:1px; font-size:0.9em; font-weight:bold;
+        @include rtl { float:left; margin:0 5px 0 0; }
+      }

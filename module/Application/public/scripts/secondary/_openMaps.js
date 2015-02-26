@@ -1,4 +1,4 @@
-var geocoder;
+var geocoder, autocomplete;
 
 
 // Geocode object for pushing locations to google maps
@@ -45,6 +45,18 @@ app.handleMap = function() {
 
         window.app.currentMap = new google.maps.Map(element, mapOptions);
         geocoder = new google.maps.Geocoder();
+
+        // Autocomplete and center using google maps
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('map_address'));
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (place.geometry.viewport) {
+            app.currentMap.fitBounds(place.geometry.viewport);
+          } else {
+            app.currentMap.setCenter(place.geometry.location);
+            app.currentMap.setZoom(17);  // Why 17? Because it looks good.
+          }
+        });
 
         app.currentMap.mapTypes.set('OSM', new google.maps.ImageMapType({
             getTileUrl: function (coord, zoom) {
@@ -151,7 +163,7 @@ app.handleMap = function() {
 // Get file upload scripts
 function getMaps() {
     if (ux.preload.getMaps !== true) {
-        load('http://maps.googleapis.com/maps/api/js?v=3.exp&callback=parseMap')
+        load('http://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&callback=parseMap')
             .thenRun(function () {
                 dlog('MAPS: Loaded main maps.google script...');
                 ux.preload.getMaps = true;

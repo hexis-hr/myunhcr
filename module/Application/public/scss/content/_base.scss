@@ -1,14 +1,15 @@
 /*--------------------------------------------------------------------------------
   Section Header
 --------------------------------------------------------------------------------*/
-.sectionHeader { position:relative; border-bottom:1px solid $lightGray; background:rgba($lightGray, .15); @include responsive(margin-bottom ($basicMargin) 1.1); }
+.sectionHeader { position:relative; border-bottom:1px solid $lightGray; background:rgba($lightGray, .15);
+  margin-bottom: $basicMargin; }
 .sectionHeader.-clean { margin-bottom:0 !important; }
 
   .sectionHeader_top { overflow:hidden; }
-    .sectionHeader_top_inner { position:relative; @include responsive(padding-top ($basicMargin) 1.1, padding-bottom ($basicMargin) 1.1); }
+    .sectionHeader_top_inner { position:relative; padding-top:$basicMargin; padding-bottom:$basicMargin; }
       .sectionCategory { margin-bottom:5px; @include rem(font-size, .9rem); font-weight:300; }
         .sectionCategory_link { color:lighten($gray,20%); }
-      .sectionHeader_title { display:block; @include responsive(font-size 18px 1.1); color:$black; }
+      .sectionHeader_title { display:block; font-size:18px; color:$black; }
       .sectionHeader_info { display:none; }
   .sectionHeader_bottom { display:none; /* Added display none for now */ margin-top:-5px; }
     .sectionHeader_description { margin-top:1em; font-size:0.85em; }
@@ -35,7 +36,11 @@
     overflow:hidden; background:$white; visibility:hidden; opacity:0;
     &.-show { opacity:1; visibility:visible; box-shadow:0 4px 5px rgba($gray, 0.6); border-bottom:1px solid $lightGray; }
   }
-    .sectionHeader_description { margin:0; @include responsive(padding-bottom 1em 1.4); }
+    .sectionHeader_description { margin:0; padding-bottom:1em; }
+
+  &[dir='rtl']{
+    .sectionHeader_info { left:-16px; right:auto; }
+  }
 }
 
 
@@ -53,4 +58,12 @@
 /*--------------------------------------------------------------------------------
   Page Search
 --------------------------------------------------------------------------------*/
-.pageSearch { margin-bottom:1.5em; }
+.pageSearch { margin-bottom:1em; }
+  .pageSearch .form_item { margin-bottom:0; }
+    .pageSearch_input { margin:0; border-radius:$ui-radius $ui-radius 0 0; border-bottom-width:0; }
+    .pageSearch_submit { margin:0; border-radius:0 0 $ui-radius $ui-radius !important; }
+
+@include small {
+  .pageSearch_input { border-radius:$ui-radius 0 0 $ui-radius; border-bottom-width:1px; border-right-width:0; }
+  .pageSearch_submit { border-radius:0 $ui-radius $ui-radius 0 !important; }
+}

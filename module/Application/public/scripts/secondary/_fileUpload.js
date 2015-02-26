@@ -7,7 +7,7 @@
   TODO: Review upload security documentation: https://github.com/blueimp/jQuery-File-Upload/wiki/Security
 
 */
-queue.pageLoadEvents.push(function(event) {
+queue.pageLoadEventsSecondary.push(function(event) {
 
 
   // Triggers...

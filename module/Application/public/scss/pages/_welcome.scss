@@ -3,8 +3,8 @@
   .mainHeader, .mainFooter { display:none !important; }
 }
 
-  .welcomeTitle { font-size:2.25em; color:$blue; text-align:center; }
-  .welcomeLogo { display:block; margin-left:auto; margin-right:auto; max-width:160px; text-align:center; }
-    .welcomeLogo_img{}
+  .welcomeTitle { margin-bottom:25px; font-size:2.25em; color:$blue; text-align:center; }
+  .welcomeLogo { display:block; margin-bottom:35px; margin-left:auto; margin-right:auto; max-width:120px; text-align:center; }
+    .welcomeLogo_img {}
   .welcomeFooter { margin-bottom:1em; }
     .welcomeFooter_button.button { display:block; width:100%; padding-top:.9em; padding-bottom:.9em; }

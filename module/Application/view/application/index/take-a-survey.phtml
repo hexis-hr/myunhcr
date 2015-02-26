@@ -68,48 +68,57 @@
         <?php $form->setAttribute('ajaxForm', ''); ?>
         <?php $form->setAttribute('action', $this->url('takeASurvey'))->prepare(); ?>
 
-        <?php echo $this->form()->openTag($form); ?>
-
-        <div class='form_item'>
-          <label class='form_label' for='authentication'><?php echo $this->translate('Please enter your identification number:'); ?></label>
-          <div class='form_field'>
-              <?php echo $this->formRow($form->get('authentification')); ?>
-          </div>
-        </div>
-
-        <div class='form_item'>
-          <label class='form_label' for='date'><?php echo $this->translate('Please enter your date of birth:'); ?></label>
-          <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
-          <div class='form_field'>
-              <?php echo $this->formRow($form->get('date')); ?>
-          </div>
-        </div>
-
+        
         <?php if (count($form->get('survey')->getValueOptions()) < 1) { ?>
-            <div><?php echo $this->translate('There is no survey available at this moment.'); ?></div>
+          
+          <div class='feedback'>
+            <div class='feedback_description preformat'>
+              <p><?php echo $this->translate('There are no active surveys at the moment. Thank you for your support.'); ?></p>
+            </div>
+          </div>
+
         <?php } else { ?>
 
-            <div class='form_item'>
-                <label class='form_label' for='chooseSurvey'><?php echo $this->translate('Choose your survey:'); ?></label>
-                <div class='form_field customSelect'>
-                    <?php echo $this->formRow($form->get('survey')); ?>
-                    <a unselectable='on' class='customSelect_overlay'><?php echo $this->translate($form->get('survey')
-                            ->getEmptyOption()); ?></a>
-                </div>
+          <?php echo $this->form()->openTag($form); ?>
+
+          <div class='form_item'>
+            <label class='form_label' for='authentication'><?php echo $this->translate('Please enter your identification number:'); ?></label>
+            <div class='form_field'>
+              <?php echo $this->formRow($form->get('authentification')); ?>
             </div>
+          </div>
+
+          <div class='form_item'>
+            <label class='form_label' for='date'><?php echo $this->translate('Please enter your date of birth:'); ?></label>
+            <div class='form_item_help hide-for-js'>Example: 28/12/2014, or 28.12.2014</div>
+            <div class='form_field'>
+              <?php echo $this->formRow($form->get('date')); ?>
+            </div>
+          </div>
+
+          <div class='form_item'>
+            <label class='form_label' for='chooseSurvey'><?php echo $this->translate('Choose your survey:'); ?></label>
+            <div class='form_field customSelect'>
+              <?php echo $this->formRow($form->get('survey')); ?>
+              <a unselectable='on' class='customSelect_overlay'>
+                <?php echo $this->translate($form->get('survey')->getEmptyOption()); ?>
+              </a>
+            </div>
+          </div>
+
+          <div class='grid -compact -reverse'>
+            <div class='grid_column -small7'>
+              <input class='button -primary -fullWidth' type='submit' value="<?php echo $this->translate('Next'); ?>">
+            </div>
+            <div class='grid_column -small5'>
+              <a class='button -fullWidth' href='menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
+            </div>
+          </div>
+
+          <?php echo $this->form()->closeTag($form); ?>
 
         <?php } ?>
 
-        <div class='grid -compact -reverse'>
-            <div class='grid_column -small7'>
-                <input class='button -primary -fullWidth' type='submit' value="<?php echo $this->translate('Next'); ?>">
-            </div>
-            <div class='grid_column -small5'>
-                <a class='button -fullWidth' href='menu-page.html' ajaxNav tabindex='0'><?php echo $this->translate('Cancel'); ?></a>
-            </div>
-        </div>
-
-        <?php echo $this->form()->closeTag($form); ?>
     </div>
   </div>
 </section>

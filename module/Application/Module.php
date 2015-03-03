@@ -11,6 +11,9 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\Container;
+use Zend\Session\SessionManager;
 
 class Module
 {
@@ -19,7 +22,33 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        $sessionContainer = new \Zend\Session\Container('userSettings');
+
+        $sessionConfig = new SessionConfig();
+        $sessionConfig->setOptions(array(
+            'use_cookies' => true,
+            'cookie_httponly' => true,
+            'gc_maxlifetime' => 2678400,
+            'cookie_lifetime' => 2678400,
+        ));
+        $manager = new SessionManager($sessionConfig);
+
+        $sessionContainer = new Container('userSettings');
+        $sessionContainer::setDefaultManager($manager);
+
+        if (!isset($sessionContainer->id)) {
+            $url = $e->getApplication()->getMvcEvent()->getRouter()->assemble(array(
+                "controller" => "Index"
+            ), array(
+                'name' => 'home',
+            ));
+            $response = $e->getApplication()->getMvcEvent()->getResponse();
+            $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
+            $response->setStatusCode(302);
+            $response->sendHeaders();
+            $sessionContainer->id = false;
+            exit ();
+        }
+
 
         // test if session language exists
         if(!$sessionContainer->offsetExists('userlocale')){

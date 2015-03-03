@@ -168,9 +168,9 @@ return array(
                 ),
             ),
             'organizationDetails' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/organizationDetails',
+                    'route' => '/organizationDetails[/:id]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',

@@ -66,7 +66,7 @@ class SettingsForm extends Form {
         $locations = array();
         if ($countries) {
             $container = new Container('userSettings');
-            if (isset($container->id)) {
+            if ($container->id) {
                 $settings = $entityManager->getRepository('Administration\Entity\UserSettings')
                     ->findOneBy(array('guid' => $container->id));
                 $locationCountry = $settings->getCountry()->getId();

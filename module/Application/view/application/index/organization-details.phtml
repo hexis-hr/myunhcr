@@ -7,18 +7,12 @@
         <div class='grid_column'>
           <div class='sectionHeader_top_inner'>
             <div class='sectionCategory'>
-              <a class='sectionCategory_link' href='/list-of-organizations.html' ajaxNav><?php echo $this->translate("Organization");?></a>
+              <a class='sectionCategory_link' href='/list-of-organizations.html' ajaxNav>
+                  <?php echo $this->translate("Organization");?></a>
             </div>
-            <h1 class='sectionHeader_title'>Danish Refugee Council (DRC)</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id='sectionInfo' class='sectionHeader_bottom' animate>
-      <div class='grid -clean'>
-        <div class='grid_column'>
-          <div class='sectionHeader_description preformat'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
+            <h1 class='sectionHeader_title'>
+                <?php echo $this->organization->getOrganizationName() . ' (' . $this->organization->getOrganizationAcronym() . ')'; ?>
+            </h1>
           </div>
         </div>
       </div>
@@ -31,21 +25,34 @@
         <div class='grid -reverse'>
           <div class='grid_column -medium6 -mediumPlus5'>
             <dl class='organisation_info definitionList'>
-              <dt>Address</dt>
-              <dd>Some Address 13<br>City Lorem</dd>
-              <dt>Website</dt>
-              <dd><a class='link' href='http://www.example.com' target='_blank'>www.example.com</a></dd>
-              <dt>Email</dt>
-              <dd><a class='link' href='mailto:organisation@example.com'>organisation@example.com</a></dd>
-              <dt>Phone</dt>
-              <dd><a class='link' href='tel:0123456789'>0123456789</a></dd>
-              <dt>Opening hours</dt>
-              <dd>08:00 GMT</dd>
+              <?php if ($this->organization->getOrganizationAddress() != '') { ?>
+                  <dt><?php echo $this->translate('Address'); ?></dt>
+                  <dd><?php echo $this->organization->getOrganizationAddress(); ?></dd>
+              <?php } ?>
+              <?php if ($this->organization->getOrganizationUrl() != '') { ?>
+                <dt><?php echo $this->translate('Website'); ?></dt>
+                <dd><a class='link' href='<?php echo $this->organization->getOrganizationUrl(); ?>'
+                     target='_blank'><?php echo $this->organization->getOrganizationUrl(); ?></a></dd>
+              <?php } ?>
+              <?php if ($this->organization->getOrganizationEmail() != '') { ?>
+                <dt><?php echo $this->translate('Email'); ?></dt>
+                <dd><a class='link' href='mailto:<?php echo $this->organization->getOrganizationEmail(); ?>'>
+                      <?php echo $this->organization->getOrganizationEmail(); ?></a></dd>
+              <?php } ?>
+              <?php if ($this->organization->getOrganizationPhone() != '') { ?>
+                <dt><?php echo $this->translate('Phone'); ?></dt>
+                <dd><a class='link' href='tel:<?php echo $this->organization->getOrganizationPhone(); ?>'>
+                      <?php echo $this->organization->getOrganizationPhone(); ?></a></dd>
+              <?php } ?>
+              <?php if ($this->organization->getOrganizationOpeningHours() != '') { ?>
+                <dt><?php echo $this->translate('Opening hours'); ?></dt>
+                <dd><?php echo $this->organization->getOrganizationOpeningHours(); ?></dd>
+              <?php } ?>
             </dl>
           </div>
           <div class='grid_column -medium6 -mediumPlus7'>
             <div class='organisation_description preformat'>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis officia enim excepturi voluptatibus animi ad!</p>
+              <p><?php echo $this->organization->getDescription(); ?></p>
             </div>
           </div>
         </div>
@@ -56,33 +63,24 @@
   <div class='relatedServices sectionSeparator'>
     <div class='grid -clean'>
       <div class='grid_column -mediumPlus10'>
-        <h2 class='pageTitle'>Related services</h2>
+        <h2 class='pageTitle'><?php echo $this->translate('Related services'); ?></h2>
+          <?php if (count($this->services) > 0) { ?>
         <ul class='serviceList'>
-          <li class='serviceList_item service'>
-            <h3 class='service_name'>Service name (ACRO)</h3>
-            <a class='service_url link' href='http://www.example.com' target='_blank'>www.example.com</a><br>
-            <dl class='service_info definitionList -compact'>
-              <dt>Sector</dt>
-              <dd><a class='link -neutral' href='sector-details.html' ajaxNav>Sector Name (ACRO)</a></dd>
-            </dl>
-          </li>
-          <li class='serviceList_item service'>
-            <h3 class='service_name'>Service name (ACRO)</h3>
-            <a class='service_url link' href='http://www.example.com' target='_blank'>www.example.com</a><br>
-            <dl class='service_info definitionList -compact'>
-              <dt>Sector</dt>
-              <dd><a class='link -neutral' href='sector-details.html' ajaxNav>Sector Name (ACRO)</a></dd>
-            </dl>
-          </li>
-          <li class='serviceList_item service'>
-            <h3 class='service_name'>Service name (ACRO)</h3>
-            <a class='service_url link' href='http://www.example.com' target='_blank'>www.example.com</a><br>
-            <dl class='service_info definitionList -compact'>
-              <dt>Sector</dt>
-              <dd><a class='link -neutral' href='sector-details.html' ajaxNav>Sector Name (ACRO)</a></dd>
-            </dl>
-          </li>
+          <?php foreach ($this->services as $service) { ?>
+              <li class='serviceList_item service'>
+                  <h3 class='service_name'><?php echo $service->getServiceName() . ' (' . $service->getServiceAcronym() . ')'; ?></h3>
+                  <a class='service_url link' href='<?php echo $service->getServiceUrl(); ?>' target='_blank'>
+                      <?php echo $service->getServiceUrl(); ?></a><br>
+                  <dl class='service_info definitionList -compact'>
+                      <dt><?php echo $this->translate('Sector'); ?></dt>
+                      <dd><?php echo $service->getSector()->getSectorName() . ' (' . $service->getSector()->getSectorAcronym() . ')'; ?></dd>
+                  </dl>
+              </li>
+          <?php } ?>
         </ul>
+          <?php } else { ?>
+              <h3><?php echo $this->translate('No related services available'); ?></h3>
+          <?php } ?>
       </div>
     </div>
   </div>

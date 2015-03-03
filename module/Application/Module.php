@@ -36,11 +36,7 @@ class Module
         $sessionContainer::setDefaultManager($manager);
 
         if (!isset($sessionContainer->id)) {
-            $url = $e->getApplication()->getMvcEvent()->getRouter()->assemble(array(
-                "controller" => "Index"
-            ), array(
-                'name' => '/',
-            ));
+            $url = $e->getApplication()->getMvcEvent()->getRouter()->assemble(array(), array('name' => 'home'));
             $response = $e->getApplication()->getMvcEvent()->getResponse();
             $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
             $response->setStatusCode(302);

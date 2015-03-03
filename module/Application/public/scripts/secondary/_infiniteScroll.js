@@ -6,10 +6,11 @@ queue.jQuery(function(){
       if(checkIfVisible('#infiniteScrollTrigger') === true) { 
         console.log('Send ajax request for more news...');
 
-        // See /scripts/internal/_ajax.js
-        // getPage(url, title, method, data, timeout)
-
-        // Mozda ti zatreba i /scripts/internal/_historyState.js
+          if ( ux.state.isLoading === false ){
+            ux.state.isLoading = true;
+            var link = $('.articleList_item').last().attr('data-link');
+            getPartialPage(link);
+          }
       }
     }
   });

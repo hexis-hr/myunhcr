@@ -545,6 +545,28 @@ class IndexController extends AbstractActionController {
         ));
     }
 
+    public function newsAndEventsPartialAction () {
+
+        $this->layout()->setVariable('body_class', 'pg-newsEvents');
+
+        $offset = (int) $this->params()->fromRoute('offset');
+        $dql = 'SELECT news FROM Administration\Entity\News news
+            WHERE news.id > :offset';
+
+        $query = $this->getEntityManager()->createQuery($dql)->setParameters(array(
+            'offset' => $offset,
+        ));
+
+        $adapter = new DoctrineAdapter(new ORMPaginator($query));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(2);
+
+        return new ViewModel(array(
+            'data' => $paginator,
+            'kurac' => false,
+        ));
+    }
+
     public function newsArticleAction()
     {
         $this->layout()->setVariable('body_class', 'pg-newsArticle');
@@ -554,7 +576,22 @@ class IndexController extends AbstractActionController {
         $news = $this->getEntityManager()->getRepository('Administration\Entity\News')
             ->findOneBy(array('id' => $id));
 
-        return new ViewModel(array('news' => $news));
+        $next = true;
+        $nextArticle = null;
+        $lastId = $this->getEntityManager()
+            ->createQuery("SELECT max(news.id) FROM Administration\\Entity\\News news")
+            ->getResult();
+        if ($lastId[0][1] != $id)
+            while ($next) {
+                $nextArticle = $this->getEntityManager()->getRepository('Administration\Entity\News')
+                    ->findOneBy(array('id' => ++$id));
+                if ($nextArticle != null)
+                    $next = false;
+            }
+        return new ViewModel(array(
+            'news' => $news,
+            'nextArticle' => $nextArticle,
+        ));
     }
 
     public function reportAnIncidentAction()

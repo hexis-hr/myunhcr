@@ -1,0 +1,24 @@
+<?php if (isset($this->data)) { ?>
+    <?php foreach ($this->data as $news) { ?>
+        <li class='articleList_item articleSummary'
+            data-link="<?php echo '/newsAndEventsPartial/' . $news->getId(); ?>">
+            <h2 class='articleSummary_title' data-ripple data-redirect='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>'>
+                <a class='articleSummary_title_link'
+                   href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>' ajaxNav tabindex='0'
+                    ><?php echo $news->getTitle(); ?></a>
+            </h2>
+
+            <?php if ($news->getSource() != '') { ?>
+                <div class='articleSummary_source'><?php echo $this->translate('Source'); ?>: <?php echo $news->getSource(); ?></div>
+            <?php } ?>
+
+            <div class='articleSummary_date'><?php echo date_format($news->getDate(), 'd.m.Y'); ?></div>
+            <div class='articleSummary_body preformat'>
+                <?php echo $this->limitEcho($news->getContent()); ?>
+            </div>
+            <a class='articleSummary_button button -secondary -compact'
+               href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>' ajaxNav
+                ><?php echo $this->translate('Read more'); ?></a>
+        </li>
+    <?php } ?>
+<?php } ?>

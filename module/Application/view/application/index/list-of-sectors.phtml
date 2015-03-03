@@ -21,19 +21,17 @@
         </div>
       </div>
     </div>
-    <form class='pageSearch form' action='' method='post' ajaxForm>
+    <form class='pageSearch form' id="sectorFilter" action='' method='post' ajaxForm>
       <div class='grid -clean'>
         <div class='grid_column -medium9 -mediumPlus8'>
           <div class='grid -clean -collapse'>
             <div class='grid_column -small8 -medium9'>
               <div class='form_item'>
                 <div class='form_field'>
-                  <input class='pageSearch_input formInput' id='searchField' type='text' value='Health' placeholder='<?php echo $this->translate('Search...'); ?>' data-clearQuery>
+                  <input class='input formInput' id='searchField' type='text' value=''
+                         placeholder='<?php echo $this->translate('Search...'); ?>' data-clearQuery>
                 </div>
               </div>
-            </div>
-            <div class='grid_column -small4 -medium3 mapHeader_search_right'>
-              <input class='pageSearch_submit button -fullWidth' type='submit' value='<?php echo $this->translate('Filter'); ?>' data-geocode>
             </div>
           </div>
         </div>
@@ -41,41 +39,33 @@
     </form>
   </div>
 
-  <div class='activeSearch'>
+    <?php if (count($this->sectors) > 0) { ?>
+    <div class='activeSearch'>
     <div class='grid -clean'>
       <div class='grid_column -medium9 -mediumPlus8'>
         <div class='activeSearch_body'>
-          4 results for "Health" <a class='activeSearch_remove link'>Show all organizations</a>
+          <?php echo count($this->sectors) . $this->translate(' sectors totally'); ?>
+            <a class='activeSearch_remove link' href="list-of-sectors.html"><?php echo $this->translate('Show all sectors'); ?></a>
         </div>
       </div>
     </div>
   </div>
 
   <ul class='sectorList'>
-    <li class='sectorList_item'>
-      <a class='sectorList_link' data-ripple
-        href='sector-details.html'
-        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>DRC</span> Danish Refugee Council
-      </a>
-    </li>
-    <li class='sectorList_item'>
-      <a class='sectorList_link' data-ripple
-        href='sector-details.html'
-        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>JHAS</span> Jordan Health Aid
-      </a>
-    </li>
-    <li class='sectorList_item'>
-      <a class='sectorList_link' data-ripple
-        href='sector-details.html'
-        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>SCI</span> Save the Children
-      </a>
-    </li>
-    <li class='sectorList_item'>
-      <a class='sectorList_link' data-ripple
-        href='sector-details.html'
-        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>WFP</span> World Food Programme
-      </a>
-    </li>
+      <?php foreach ($this->sectors as $sector) { ?>
+          <li class='orgList_item'>
+              <div class='orgList_link'>
+                  <span class='orgList_item_acronym'><?php echo $sector->getSectorAcronym(); ?></span>
+                  <?php echo $sector->getSectorName(); ?>
+              </div>
+          </li>
+      <?php } ?>
   </ul>
-
+  <?php } else { ?>
+    <div class="feedback -unknown gapTopSmall">
+       <div class="feedback_description preformat">
+           <h3><?php echo $this->translate('No sector data found.'); ?></h3>
+       </div>
+    </div>
+    <?php } ?>
 </section>

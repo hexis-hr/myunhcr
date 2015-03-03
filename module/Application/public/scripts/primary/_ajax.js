@@ -114,3 +114,50 @@ function getPage(url, method, data) {
   });
   
 }
+
+/*------------------------------------------------------------------------------------
+ Get partial page function
+ ------------------------------------------------------------------------------------*/
+function getPartialPage(url, method, data) {
+
+    // Log page request
+    dlog('--------------------- PARTIAL ---------------------');
+    dlog('GET: ' + url);
+    var start = new Date().getTime();
+
+    // Parse config
+    var method = method || 'GET';
+    var data = data || [];
+
+    // The ajax call wrapped in an internal function
+    $.ajax({
+        type: method,
+        url: url,
+        data: data,
+        timeout: 10000, // Wait for 10 seconds max
+        success: function(data) {
+
+            // fix for hide older and newer articles
+            if(data.length < 5) {
+                $('.olderArticles').hide();
+                $('.newerArticles').hide();
+                $('.noMoreRedirect').show();
+            }
+            // Swap data
+            $('.articleList').append(data);
+
+            // Log success and waiting time
+            var execTime = new Date().getTime() - start;
+            dlog('GOT: ' + url + '! (' + execTime + 'ms)');
+
+            // Push history state and toggle related switches
+            //History.pushState(null, title, url);
+            ux.state.isLoading = false;
+        },
+        error: function(xhr) {
+            var execTime = new Date().getTime() - start;
+            dlog('GET: ' + url + ' ERROR!' + xhr.status + ': ' + xhr.statusText + ' (' + execTime + 'ms)');
+        }
+    });
+
+}

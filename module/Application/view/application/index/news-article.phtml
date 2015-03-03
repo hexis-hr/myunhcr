@@ -51,20 +51,38 @@
     </div>
   </div>
 
-  <?php // If there is next article... { ?>
-  <div class='nextArticle tearSection -bottom'>
-    <div class='grid -clean' data-ripple data-redirect='/newsArticle/2'>
-      <div class='grid_column -mediumPlus10 -large9'>
-        <div class='nextArticle_inner'>
-          <a class='nextArticle_label' href='/newsArticle/2' ajaxNav>Next article</a>
-          <h4 class='nextArticle_title'>
-            <a class='nextArticle_title_link' href='/newsArticle/2' ajaxNav>Some title here</a>
-          </h4>
-          <a class='nextArticle_body preformat' href='/newsArticle/2' ajaxNav>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad excepturi quidem veniam quis ipsum culpa, expedita placeat fuga nesciunt. Debitis illo minima qui consequatur distinctio blanditiis id sequi voluptatum est corporis asperiores, dolor maiores, harum.</a>
+  <?php if ($this->nextArticle) { ?>
+      <div class='nextArticle tearSection -bottom'>
+        <div class='grid -clean' data-ripple
+             data-redirect='<?php echo $this->url('newsArticle', array('id' => $this->nextArticle->getId())); ?>'>
+          <div class='grid_column -mediumPlus10 -large9'>
+            <div class='nextArticle_inner'>
+              <a class='nextArticle_label' href='<?php echo $this->url('newsArticle', array('id' => $this->nextArticle->getId())); ?>'
+                 ajaxNav><?php echo $this->translate('Next article'); ?></a>
+              <h4 class='nextArticle_title'>
+                <a class='nextArticle_title_link'
+                   href='<?php echo $this->url('newsArticle', array('id' => $this->nextArticle->getId())); ?>' ajaxNav>
+                    <?php echo $this->nextArticle->getTitle(); ?></a>
+              </h4>
+              <a class='nextArticle_body preformat'
+                 href='<?php echo $this->url('newsArticle', array('id' => $this->nextArticle->getId())); ?>' ajaxNav>
+                    <?php echo $this->limitEcho($this->nextArticle->getTitle(), 300); ?></a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <?php // } ?>
-
+  <?php } else { ?>
+      <div class='nextArticle tearSection -bottom'>
+          <div class='grid -clean' data-ripple data-redirect='<?php echo $this->url('newsAndEvents'); ?>'>
+              <div class='grid_column -mediumPlus10 -large9'>
+                  <div class='nextArticle_inner'>
+                      <h5 class='nextArticle_title'>
+                          <a class='nextArticle_title_link' href='<?php echo $this->url('newsAndEvents'); ?>' ajaxNav>
+                              <?php echo $this->translate('News and Events'); ?></a>
+                      </h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+  <?php } ?>
 </section>

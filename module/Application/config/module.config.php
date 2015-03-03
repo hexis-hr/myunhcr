@@ -58,13 +58,24 @@ return array(
                 ),
             ),
             'newsAndEvents' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
                     'route'    => '/newsAndEvents',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',
                         'action'     => 'newsAndEvents',
+                    ),
+                ),
+            ),
+            'newsAndEventsPartial' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/newsAndEventsPartial[/:offset]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action'     => 'newsAndEventsPartial',
                     ),
                 ),
             ),
@@ -157,9 +168,9 @@ return array(
                 ),
             ),
             'organizationDetails' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/organizationDetails',
+                    'route' => '/organizationDetails[/:id]',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',

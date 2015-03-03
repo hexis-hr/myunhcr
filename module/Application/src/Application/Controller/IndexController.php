@@ -442,17 +442,25 @@ class IndexController extends AbstractActionController {
 
         if ($request->isXmlHttpRequest() && $request->isPost()) {
 
-            $sectors = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')
-                ->createQueryBuilder('ss')
-                ->where('ss.sectorName LIKE :sector')
-                ->setParameter('sector', $request->getPost('keyword') . '%')
-                ->getQuery()
-                ->getResult();
+            $keyword = $request->getPost('keyword');
+
+            if ($keyword == 'all') {
+                $sectors = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')->findAll();
+            } else {
+                $sectors = $this->getEntityManager()->getRepository('Administration\Entity\ServiceSector')
+                    ->createQueryBuilder('ss')
+                    ->where('ss.sectorName LIKE :sector')
+                    ->setParameter('sector', '%' . $keyword . '%')
+                    ->getQuery()
+                    ->getResult();
+            }
 
             if (count($sectors) > 0) {
                 $responseSectors = array();
                 foreach ($sectors as $sector) {
-                    $responseSectors[$sector->getId()] = $sector->getSectorName();
+                    $responseSectors[$sector->getId()] = array(
+                            'sectorName' => $sector->getSectorName(),
+                            'sectorAcronym' => $sector->getSectorAcronym());
                 }
 
                 return new JsonModel(array(
@@ -482,26 +490,46 @@ class IndexController extends AbstractActionController {
         $this->layout()->setVariable('body_class', 'pg-listOfOrgs');
 
         $request = $this->getRequest();
-        $form = new ListOfOrganizationsForm($this->getEntityManager());
 
-        if ($request->isPost()) {
-           $organizationId = $request->getPost('organization');
+        if ($request->isXmlHttpRequest() && $request->isPost()) {
 
-           $organizationData = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
-           ->findOneBy(array('id' => $organizationId));
+            $keyword = $request->getPost('keyword');
 
-            return new ViewModel(array(
-                'form' => $form,
-                'organizationData' => $organizationData,
-            ));
+            if ($keyword == 'all') {
+                $orgs = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')->findAll();
+            } else {
+                $orgs = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
+                    ->createQueryBuilder('org')
+                    ->where('org.organizationName LIKE :organization')
+                    ->setParameter('organization', '%' . $keyword . '%')
+                    ->getQuery()
+                    ->getResult();
+            }
 
+            if (count($orgs) > 0) {
+                $responseOrgs = array();
+                foreach ($orgs as $org) {
+                    $responseOrgs[$org->getId()] = array(
+                        'orgName' => $org->getOrganizationName(),
+                        'orgAcronym' => $org->getOrganizationAcronym(),
+                        'orgUrl' => $this->url()->fromRoute('organizationDetails', array('id' => $org->getId())));
+                }
+
+                return new JsonModel(array(
+                    'status' => 'success',
+                    'orgs' => $responseOrgs,
+                ));
+            } else {
+                return new JsonModel(array(
+                    'status' => 'invalid',
+                ));
+            }
         }
 
         $organizations = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
             ->findAll();
 
         return new ViewModel(array(
-            'form' => $form,
             'organizations' => $organizations,
         ));
     }
@@ -509,7 +537,18 @@ class IndexController extends AbstractActionController {
     public function organizationDetailsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-organizationDetailss');
-        return new ViewModel();
+
+        $id = $this->params()->fromRoute('id');
+        $organization = $this->getEntityManager()->getRepository('Administration\Entity\ServiceOrganization')
+            ->findOneBy(array('id' => $id));
+
+        $relatedServices = $this->getEntityManager()->getRepository('Administration\Entity\Service')
+            ->findBy(array('organization' => $id));
+
+        return new ViewModel(array(
+            'organization' => $organization,
+            'services' => $relatedServices,
+        ));
     }
 
     public function mapOfServiceAction()
@@ -545,6 +584,28 @@ class IndexController extends AbstractActionController {
         ));
     }
 
+    public function newsAndEventsPartialAction () {
+
+        $this->layout()->setVariable('body_class', 'pg-newsEvents');
+
+        $offset = (int) $this->params()->fromRoute('offset');
+        $dql = 'SELECT news FROM Administration\Entity\News news
+            WHERE news.id > :offset';
+
+        $query = $this->getEntityManager()->createQuery($dql)->setParameters(array(
+            'offset' => $offset,
+        ));
+
+        $adapter = new DoctrineAdapter(new ORMPaginator($query));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(2);
+
+        return new ViewModel(array(
+            'data' => $paginator,
+            'kurac' => false,
+        ));
+    }
+
     public function newsArticleAction()
     {
         $this->layout()->setVariable('body_class', 'pg-newsArticle');
@@ -554,7 +615,22 @@ class IndexController extends AbstractActionController {
         $news = $this->getEntityManager()->getRepository('Administration\Entity\News')
             ->findOneBy(array('id' => $id));
 
-        return new ViewModel(array('news' => $news));
+        $next = true;
+        $nextArticle = null;
+        $lastId = $this->getEntityManager()
+            ->createQuery("SELECT max(news.id) FROM Administration\\Entity\\News news")
+            ->getResult();
+        if ($lastId[0][1] != $id)
+            while ($next) {
+                $nextArticle = $this->getEntityManager()->getRepository('Administration\Entity\News')
+                    ->findOneBy(array('id' => ++$id));
+                if ($nextArticle != null)
+                    $next = false;
+            }
+        return new ViewModel(array(
+            'news' => $news,
+            'nextArticle' => $nextArticle,
+        ));
     }
 
     public function reportAnIncidentAction()

@@ -1,129 +1,133 @@
 <div id='relay' bodyClass="<?php echo $this->layout()->body_class; ?>"></div>
 <section class='page'>
 
-  <div class='sectionHeader -clean'>
-    <div class='sectionHeader_top'>
-      <div class='grid -clean'>
-        <div class='grid_column'>
-          <div class='sectionHeader_top_inner'>
-            <h1 class='sectionHeader_title'><?php echo $this->translate("News and Events");?></h1>
-            <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i class='icon -infoBlack24'></i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id='sectionInfo' class='sectionHeader_bottom' animate>
-      <div class='grid -clean'>
-        <div class='grid_column'>
-          <div class='sectionHeader_description preformat'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae dicta, ipsum expedita?</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <form class='pageSearch form' action=''>
-      <div class='grid -clean'>
-        <div class='grid_column -medium9 -mediumPlus8'>
-          <div class='grid -clean -collapse'>
-            <div class='grid_column -small8 -medium9'>
-              <div class='form_item'>
-                <div class='form_field'>
-                  <input class='pageSearch_input formInput' id='searchField' type='text' placeholder='<?php echo $this->translate('Search...'); ?>' data-clearQuery>
+    <div class='sectionHeader -clean'>
+        <div class='sectionHeader_top'>
+            <div class='grid -clean'>
+                <div class='grid_column'>
+                    <div class='sectionHeader_top_inner'>
+                        <h1 class='sectionHeader_title'><?php echo $this->translate("News and Events"); ?></h1>
+
+                        <div id='sectionInfo_trigger' class='sectionHeader_info' unselectable='on'><i
+                                class='icon -infoBlack24'></i></div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class='grid_column -small4 -medium3 mapHeader_search_right'>
-              <input class='pageSearch_submit button -fullWidth' type='submit' value='<?php echo $this->translate('Find'); ?>' data-geocode>
+        </div>
+        <div id='sectionInfo' class='sectionHeader_bottom' animate>
+            <div class='grid -clean'>
+                <div class='grid_column'>
+                    <div class='sectionHeader_description preformat'>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati molestiae quod modi
+                            consequatur quae aliquid, doloremque id praesentium, quia voluptate ratione repudiandae
+                            dicta, ipsum expedita?</p>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+  <!--
+  <div class='grid -clean'>
+    <div class='grid_column -medium9 -mediumPlus8'>
+      <form action='' class='pageSearch form'>
+        <div class='form_item'>
+          <label class='form_label' for='checkWhat'><?php echo $this->translate("Search"); ?> <?php echo $this->translate("News and Events"); ?>:</label>
+          <div class='form_field'>
+            <input class='formInput' id='searchField' type='text' placeholder='Type a keyword here...'>
           </div>
         </div>
       </div>
     </form>
-  </div>
+  </div> -->
 
-  
-  
-  <?php // Output this block only if on "page 2" and further ?>
-  <div class='ageNav tearSection -top'>
-    <div class='grid -clean'>
-      <div class='grid_column -medium9 -mediumPlus8'>
-        <a class='ageNav_button button -fullWidth' href='' ajaxGet='#urlhere'>Show newer articles</a>
-      </div>
-    </div>
-  </div>
-  
-  <div class='grid -clean'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-
-        <?php if (isset($this->data)) { ?>
-            <ul class='articleList' infiniteScroll>
-                <?php foreach ($this->data as $news) { ?>
-                <li class='articleList_item articleSummary'>
-                    <h2 class='articleSummary_title' data-ripple data-redirect='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>'>
-                        <a class='articleSummary_title_link'
-                           href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>' ajaxNav tabindex='0'
-                            ><?php echo $news->getTitle(); ?></a>
-                    </h2>
-
-                    <?php if ($news->getSource() != '') { ?>
-                      <div class='articleSummary_source'><?php echo $this->translate('Source'); ?>: <?php echo $news->getSource(); ?></div>
-                    <?php } ?>
-
-                    <div class='articleSummary_date'><?php echo date_format($news->getDate(), 'd.m.Y'); ?></div>
-                    <div class='articleSummary_body preformat'>
-                        <?php echo $this->limitEcho($news->getContent()); ?>
-                    </div>
-                    <a class='articleSummary_button button -secondary -compact'
-                       href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>' ajaxNav
-                        ><?php echo $this->translate('Read more'); ?></a>
-                </li>
-                <?php } ?>
-            </ul>
-            <div id='infiniteScrollTrigger'></div>
-        <?php } else { ?>
-            <div class="grid">
-                <div class="grid_column -medium9 -mediumPlus8">
-                    <div class="preformat gap">
-                        <p><?php echo $this->translate('No FAQ found for chosen category.'); ?></p>
+    <br/>
+    <?php if (isset($this->data)) { ?>
+        <?php if ($this->data->getCurrentPageNumber() > $this->data->getPages()->first) { ?>
+            <div class='ageNav tearSection -top olderArticles'>
+                <div class='grid -clean'>
+                    <div class='grid_column -medium9 -mediumPlus8'>
+                        <a class='ageNav_button button -fullWidth'
+                           href="<?php echo $this->url('newsAndEvents', array(),
+                               array('query' => array('page' => $this->data->getPages()->previous))); ?>">
+                            <?php echo $this->translate('Show older articles'); ?></a>
                     </div>
                 </div>
             </div>
         <?php } ?>
 
-        <?php
-            // NOTE:
-            // I've designed a new "ageNav" below. It's to be used for all "newer/older" type pagination.
-            // We still might need this classic pagination somewhere though.
-            // -- Elmas
+        <div class='grid -clean'>
+            <div class='grid_column -medium9 -mediumPlus8'>
 
-            // echo $this->paginationControl(
-            //     $this->data,
-            //     'sliding',
-            //     array('partial/paginatorFrontend.phtml', 'Application'),
-            //     array('route' => 'newsAndEvents', 'routeParams' => array())
-            // );
-        ?>
-    </div>
-  </div>
+                <ul class='articleList' infiniteScroll>
+                    <?php foreach ($this->data as $news) { ?>
+                        <li class='articleList_item articleSummary'
+                            data-link="<?php echo '/newsAndEventsPartial/' . $news->getId(); ?>">
+                            <h2 class='articleSummary_title' data-ripple
+                                data-redirect='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>'>
+                                <a class='articleSummary_title_link'
+                                   href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>'
+                                   ajaxNav tabindex='0'
+                                    ><?php echo $news->getTitle(); ?></a>
+                            </h2>
+                            <?php if ($news->getSource() != '') { ?>
+                                <div class='articleSummary_source'><?php echo $this->translate('Source'); ?>
+                                    : <?php echo $news->getSource(); ?></div>
+                            <?php } ?>
 
-  <div class='ageNav tearSection -bottom'>
-    <div class='grid -clean'>
-      <div class='grid_column -medium9 -mediumPlus8'>
-        <a class='ageNav_button button -fullWidth' href='' ajaxGet='#urlhere'>Show older articles</a>
-      </div>
-    </div>
-  </div>
-
-  <?php // Show this block if there are no more articles to load ?>
-  <div class='ageNav tearSection -bottom'>
-    <div class='grid -clean'>
-      <div class='grid_column -medium9 -mediumPlus8'>
-        <div class='ageNav_end preformat'>
-          There are no further articles<br>
-          <a class='link' href='menu-page.html' ajaxNav>Back to main menu?</a>
+                            <div class='articleSummary_date'><?php echo date_format($news->getDate(), 'd.m.Y'); ?></div>
+                            <div class='articleSummary_body preformat'>
+                                <?php echo $this->limitEcho($news->getContent()); ?>
+                            </div>
+                            <a class='articleSummary_button button -secondary -compact'
+                               href='<?php echo $this->url('newsArticle', array('id' => $news->getId())); ?>' ajaxNav
+                                ><?php echo $this->translate('Read more'); ?></a>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <div id='infiniteScrollTrigger'></div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
+        <?php if ($this->data->getCurrentPageNumber() < $this->data->getPages()->last) { ?>
+            <div class='ageNav tearSection -bottom newerArticles'>
+                <div class='grid -clean'>
+                    <div class='grid_column -medium9 -mediumPlus8'>
+                        <a class='ageNav_button button -fullWidth' ajaxGet=""
+                           href='<?php echo $this->url('newsAndEvents', array(),
+                               array('query' => array('page' => $this->data->getPages()->next))); ?>'>
+                            <?php echo $this->translate('Show newer articles'); ?></a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+    <?php } else { ?>
+        <div class='ageNav tearSection -bottom'>
+            <div class='grid -clean'>
+                <div class='grid_column -medium9 -mediumPlus8'>
+                    <div class='ageNav_end preformat'><?php echo $this->translate('There are no news articles'); ?>
+                        <br/>
+                        <a class='link' href='menu-page.html'
+                           ajaxNav><?php echo $this->translate('Back to main menu?'); ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+
+    <div class='ageNav tearSection -bottom noMoreRedirect' style="display: none">
+        <div class='grid -clean'>
+            <div class='grid_column -medium9 -mediumPlus8'>
+                <div class='ageNav_end preformat'><?php echo $this->translate('There are no more news articles'); ?>
+                    <br/>
+                    <a class='link' href='menu-page.html'
+                       ajaxNav><?php echo $this->translate('Back to main menu'); ?></a>
+                    <br/>
+                    <a class='link' href='news-and-events.html'
+                       ajaxNav><?php echo $this->translate('Refresh news and events'); ?></a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

@@ -35,18 +35,6 @@ class Module
         $sessionContainer = new Container('userSettings');
         $sessionContainer::setDefaultManager($manager);
 
-        if (!isset($sessionContainer->id)) {
-//            $url = $e->getApplication()->getMvcEvent()->getRouter()->assemble(array(), array('name' => 'home'));
-            $url = '/';
-            $response = $e->getApplication()->getMvcEvent()->getResponse();
-            $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
-            $response->setStatusCode(302);
-            $response->sendHeaders();
-            $sessionContainer->id = false;
-            exit ();
-        }
-
-
         // test if session language exists
         if(!$sessionContainer->offsetExists('userlocale')){
             // if not use the browser locale
@@ -61,7 +49,9 @@ class Module
         $translator ->setLocale($sessionContainer->userlocale);
         $translator->setFallbackLocale('en_US');
 
-        $sharedEvents        = $eventManager->getSharedManager();
+        $sharedEvents = $eventManager->getSharedManager();
+        $sharedEvents->attach('Zend\Mvc\Application', 'dispatch', array ($this,'mvcPreDispatch' ), 100);
+
         $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
             $result = $e->getResult();
             if ($result instanceof \Zend\View\Model\ViewModel) {
@@ -94,5 +84,20 @@ class Module
                 'formfile' => 'Application\Form\View\Helper\FormFile',
             ),
         );
+    }
+
+    public function mvcPreDispatch($event) {
+
+        $sessionContainer = new Container('userSettings');
+
+        if (!isset($sessionContainer->id)) {
+            $url = $event->getRouter()->assemble(array(), array('name' => 'home'));
+            $response = $event->getResponse();
+            $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
+            $response->setStatusCode(302);
+            $response->sendHeaders();
+            $sessionContainer->id = false;
+            exit ();
+        }
     }
 }

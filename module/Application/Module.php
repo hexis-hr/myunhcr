@@ -50,13 +50,20 @@ class Module
         $translator->setFallbackLocale('en_US');
 
         $sharedEvents = $eventManager->getSharedManager();
-        $sharedEvents->attach('Zend\Mvc\Application', 'dispatch', array ($this,'mvcPreDispatch' ), 100);
-
-        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) use ($sessionContainer) {
             $result = $e->getResult();
             if ($result instanceof \Zend\View\Model\ViewModel) {
                 $result->setTerminal($e->getRequest()->isXmlHttpRequest());
             }
+            if (!isset($sessionContainer->id) || !$sessionContainer->id) {
+                $routeMatch = $e->getRouteMatch();
+                if ($routeMatch->getParam('action') != 'index' && $routeMatch->getParam('action') != 'settings') {
+                    $controller = $e->getTarget();
+                    $controller->plugin('redirect')->toRoute('app', array('action' => 'settings'));
+                    $sessionContainer->id = false;
+                }
+            }
+
         });
     }
 
@@ -86,18 +93,4 @@ class Module
         );
     }
 
-    public function mvcPreDispatch($event) {
-
-        $sessionContainer = new Container('userSettings');
-
-        if (!isset($sessionContainer->id)) {
-            $url = $event->getRouter()->assemble(array(), array('name' => 'home'));
-            $response = $event->getResponse();
-            $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
-            $response->setStatusCode(302);
-            $response->sendHeaders();
-            $sessionContainer->id = false;
-            exit ();
-        }
-    }
 }

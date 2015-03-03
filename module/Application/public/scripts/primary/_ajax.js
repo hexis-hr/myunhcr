@@ -141,6 +141,7 @@ function getPartialPage(url, method, data) {
             if(data.length < 5) {
                 $('.olderArticles').hide();
                 $('.newerArticles').hide();
+                $('.noMoreRedirect').show();
             }
             // Swap data
             $('.articleList').append(data);

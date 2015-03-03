@@ -39,7 +39,7 @@ class Module
             $url = $e->getApplication()->getMvcEvent()->getRouter()->assemble(array(
                 "controller" => "Index"
             ), array(
-                'name' => 'home',
+                'name' => '/',
             ));
             $response = $e->getApplication()->getMvcEvent()->getResponse();
             $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));

@@ -53,9 +53,12 @@
 @import "content/_mapHeader";
 @import "content/_activeSearch";
 @import "content/_pagination";
+@import "content/_service";
+@import "content/_mapPopup";
 
 
 // Import visual effects
+@import "vfx/_unsorted";
 @import "vfx/_animation";
 @import "vfx/_pageTransition";
 @import "vfx/_ripple";

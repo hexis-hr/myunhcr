@@ -79,23 +79,4 @@
     </li>
   </ul>
 
-
-  <div class='grid'>
-      <div class='grid_column -medium9 -mediumPlus8'>
-
-          <?php if (isset($this->organizationData)) {  $organizationData = $this->organizationData; ?>
-              <div class='preformat gap'>
-                  <h5><?php echo $this->translate('Name'); ?></h5> <?php echo $organizationData->getOrganizationName(); ?><br/>
-                  <h5><?php echo $this->translate('Acronym'); ?></h5> <?php echo $organizationData->getOrganizationAcronym(); ?><br/>
-                  <h5><?php echo $this->translate('Url'); ?></h5> <?php echo $organizationData->getOrganizationUrl(); ?><br/>
-                  <h5><?php echo $this->translate('Description'); ?></h5> <?php echo $organizationData->getDescription(); ?><br/>
-                  <h5><?php echo $this->translate('Address'); ?></h5> <?php echo $organizationData->getOrganizationAddress(); ?><br/>
-                  <h5><?php echo $this->translate('Email'); ?></h5> <?php echo $organizationData->getOrganizationEmail(); ?><br/>
-                  <h5><?php echo $this->translate('Phone'); ?></h5> <?php echo $organizationData->getOrganizationPhone(); ?><br/>
-                  <h5><?php echo $this->translate('Opening hours'); ?></h5> <?php echo $organizationData->getOrganizationOpeningHours(); ?>
-              </div>
-          <?php } ?>
-      </div>
-  </div>
-
 </section>

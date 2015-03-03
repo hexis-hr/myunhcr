@@ -23,27 +23,37 @@
     </div>
   </div>
 
-  <div class='grid'>
-    <div class='grid_column -medium9 -mediumPlus8'>
-
-        <?php if ($status) { ?>
-            <h2 class='pageTitle'>Your Asylum Application status:</h2>
-
-            <div class='feedback <?php echo $class; ?> gapSmall'>
-                <i class='feedback_icon icon'></i>
-                <h1 class='feedback_title'><?php echo $name; ?></h1>
-                <div class='feedback_description preformat'>
-                    <p><?php echo $message; ?></p>
-                </div>
+  <div class='gapSmall'>
+    <?php if ($status) { ?>
+      <div class='grid -clean'>
+        <div class='grid_column -medium9 -mediumPlus8'>
+          <h2 class='pageTitle'>Your Asylum Application status:</h2>
+          <div class='feedback <?php echo $class; ?>'>
+            <i class='feedback_icon icon'></i>
+            <h1 class='feedback_title'><?php echo $name; ?></h1>
+            <div class='feedback_description preformat'>
+              <p><?php echo $message; ?></p>
             </div>
-        <?php } else { ?>
-            <h2 class='pageTitle'>Information provided doesn't match any criteria.</h2>
-        <?php } ?>
-      
+          </div>
+        </div>
+      </div>
+    <?php } else { ?>
+      <div class='grid -clean'>
+        <div class='grid_column -medium9 -mediumPlus8'>
+          <div class='feedback -unknown'>
+            <div class='feedback_description preformat'>
+              <p><?php echo $this->translate("Information provided doesn't match any criteria."); ?></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
 
-
+  <div class='grid -clean'>
+    <div class='grid_column -medium9 -mediumPlus8'>
       <a href='menu-page.html' class='button -fullWidth' ajaxNav tabindex='0'><?php echo $this->translate('Back to Homepage'); ?></a>
     </div>
   </div>
-
+    
 </section>

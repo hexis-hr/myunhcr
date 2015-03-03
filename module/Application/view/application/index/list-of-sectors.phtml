@@ -21,34 +21,61 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class='mapHeader'>
-    <div class='grid -clean'>
-      <div class='grid_column -medium9 -mediumPlus8'>
-        <form action='' class='form' ajaxForm>
-          <div class='form_item'>
-            <div class='grid -clean -collapse'>
-              <div class='grid_column -small9 mapHeader_search_left'>
-                <div class='form_field customSelect'>
-                    <input class='formInput' id='searchInput' type='text' placeholder='Search..'>
+    <form class='pageSearch form' action='' method='post' ajaxForm>
+      <div class='grid -clean'>
+        <div class='grid_column -medium9 -mediumPlus8'>
+          <div class='grid -clean -collapse'>
+            <div class='grid_column -small8 -medium9'>
+              <div class='form_item'>
+                <div class='form_field'>
+                  <input class='pageSearch_input formInput' id='searchField' type='text' value='Health' placeholder='<?php echo $this->translate('Search...'); ?>' data-clearQuery>
                 </div>
               </div>
             </div>
+            <div class='grid_column -small4 -medium3 mapHeader_search_right'>
+              <input class='pageSearch_submit button -fullWidth' type='submit' value='<?php echo $this->translate('Filter'); ?>' data-geocode>
+            </div>
           </div>
-        </form>
+        </div>
+      </div>
+    </form>
+  </div>
 
-    <div class='grid'>
-      <div class='grid_column -medium9 -mediumPlus8 sectorSearch' data-url="<?php echo $this->url('listBySector'); ?>">
-        <p>Type for search</p>
-          <p><?php if (isset($sectors))
-              foreach ($sectors as $sector) { ?>
-                  <p><?php echo $sector->getSectorName(); ?></p>
-          <?php } ?></p>
+  <div class='activeSearch'>
+    <div class='grid -clean'>
+      <div class='grid_column -medium9 -mediumPlus8'>
+        <div class='activeSearch_body'>
+          4 results for "Health" <a class='activeSearch_remove link'>Show all organizations</a>
+        </div>
       </div>
     </div>
   </div>
 
-  </div>
+  <ul class='sectorList'>
+    <li class='sectorList_item'>
+      <a class='sectorList_link' data-ripple
+        href='sector-details.html'
+        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>DRC</span> Danish Refugee Council
+      </a>
+    </li>
+    <li class='sectorList_item'>
+      <a class='sectorList_link' data-ripple
+        href='sector-details.html'
+        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>JHAS</span> Jordan Health Aid
+      </a>
+    </li>
+    <li class='sectorList_item'>
+      <a class='sectorList_link' data-ripple
+        href='sector-details.html'
+        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>SCI</span> Save the Children
+      </a>
+    </li>
+    <li class='sectorList_item'>
+      <a class='sectorList_link' data-ripple
+        href='sector-details.html'
+        ajaxNav tabindex='0'><span class='sectorList_item_acronym'>WFP</span> World Food Programme
+      </a>
+    </li>
+  </ul>
 
 </section>

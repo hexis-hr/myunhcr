@@ -48,7 +48,7 @@
 /*--------------------------------------------------------------------------------
   Page Title
 --------------------------------------------------------------------------------*/
-.pageTitle { display:block; @include responsive(margin-bottom ($basicMargin), font-size 18px 1.1); font-weight:normal; color:$black; }
+.pageTitle { display:block; @include responsive(margin-bottom ($basicMargin), font-size 20px 1.1); font-weight:normal; color:$black; }
 @include smallPlus {
   .pageTitle { text-align:center; }
 }
@@ -67,3 +67,10 @@
   .pageSearch_input { border-radius:$ui-radius 0 0 $ui-radius; border-bottom-width:1px; border-right-width:0; }
   .pageSearch_submit { border-radius:0 $ui-radius $ui-radius 0 !important; }
 }
+
+
+
+/*--------------------------------------------------------------------------------
+  Section separator
+--------------------------------------------------------------------------------*/
+.sectionSeparator { @include responsive(padding-top $gap $gapMultiplier); border-top:2px solid $lightGray; }

@@ -1,4 +1,8 @@
-.definitionList { line-height:1.25;
+.definitionList { @include rem(font-size, 1rem); line-height:1.25;
   dt { display:block; font-weight:bold; color:$black; }
-  dd { display:block; margin-bottom:1em; }
+  dd { display:block; margin-bottom:1em;
+    &:last-child { margin-bottom:0; }
+  }
 }
+
+.definitionList.-compact { @include rem(font-size, 0.9rem); }

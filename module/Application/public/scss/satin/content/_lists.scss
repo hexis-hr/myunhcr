@@ -26,12 +26,12 @@
 ————————————————————————————————————————————————————————————————————————————————*/
 @mixin st-ul {
   @extend %list-nesting;
-  margin-left: 1.05em;
+  margin-left: 1.1em;
   list-style-type: $list-decoration;
 
   li {
     @include rem(margin-bottom, ($preformat-gap / 1.5));
-    padding-left: 0.2em;
+    // padding-left: 0.2em;
     &:last-child { margin-bottom: 0; }
   }
 

@@ -24,6 +24,11 @@ app.geocode = {
 };
 
 
+// UX helpers for marker and infoWindow
+window.app.mapPopups = {};
+window.app.lastOpenPopup = '';
+
+
 // if ($('[data-openStreetMap]')[0]) {
 app.handleMap = function() {
 
@@ -103,25 +108,60 @@ app.handleMap = function() {
                     // Multiple Markers
                     markers = response.data;
 
+                    
+
                     $.each(markers, function (key, marker) {
 
-                        var content = '<h5>' + marker[0] + '</h5><p>' + marker[3] + '</p><p><a href="' + marker[4] +
-                            '">' + marker[0] + '</a></p><h6>Activity</h6><p>' + marker[5] + '</p><p>' + marker[6] + '</p>' +
-                            '<p>' + marker[7] + '</p><p>' + marker[8] + '</p><h6>Organization</h6><p>' + marker[9] + '</p>' +
-                            '<h6>Sector</h6><p>' + marker[10] + '</p>';
+                        // Parse the marker data semantically
+                        var data = {
+                          id: 'popup-' + randomWithinRange(1000, 10000),
+                          service: {
+                            name: marker[0],
+                            lat: marker[1],
+                            lng: marker[2],
+                            description: marker[3],
+                            url: marker[4],
+                          },
+                          activity: {
+                            name: marker[5],
+                            category: marker[6],
+                            dateStart: marker[7],
+                            dateEnd: marker[8]
+                          },
+                          organization: {
+                            name: marker[9]
+                          },
+                          sector: {
+                            name: marker[10]
+                          }
+                        };
 
-                        var infowindow = new google.maps.InfoWindow({
-                            content: content
+                        // Template for marker windows
+                        // var descrLength = data.service.description.split(" ").join("").length;
+                        // if(descrLength > ){  }
+                        var mapPopup = ""+
+                          "<div class='mapPopup'>"+
+                            "<h1 class='mapPopup_title'>"+data.service.name+"</h1>"+
+                            "<a class='mapPopup_website link' href='"+data.service.url+"'>"+url('hostname', data.service.url)+"</a>"+
+                            "<div class='mapPopup_description'>"+
+                              "<p>"+data.service.description+"</p>"+
+                            "</div>"+
+                          "</div>";
+
+                        app.mapPopups[data.id] = new google.maps.InfoWindow({
+                            content: mapPopup
                         });
 
                         marker = new google.maps.Marker({
-                            position: new google.maps.LatLng(marker[1], marker[2]),
+                            position: new google.maps.LatLng(data.service.lat, data.service.lng),
                             map: app.currentMap,
-                            title: marker[0]
+                            title: data.service.name
                         });
 
+                        // Bind a click event to this marker
                         google.maps.event.addListener(marker, 'click', function() {
-                            infowindow.open(app.currentMap, marker);
+                          closeExistingPopup();
+                          showNewPopup(data, marker);
                         });
 
                         marker.setMap(app.currentMap);
@@ -133,6 +173,15 @@ app.handleMap = function() {
                     console.log('Error on service map handling');
                 }
             });
+        }
+
+        function showNewPopup(data, marker) {
+          app.mapPopups[data.id].open(app.currentMap, marker);
+          app.lastOpenPopup = data.id;
+        }
+
+        function closeExistingPopup() {
+          if(app.lastOpenPopup !== ''){ app.mapPopups[app.lastOpenPopup].close(); }
         }
 
         // Sets the map on all markers in the array.

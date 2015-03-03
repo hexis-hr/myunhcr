@@ -19,8 +19,14 @@ queue.pageLoadEventsSecondary.push(function(event){
     $('#page').on('click', '#map', function(){
       $('#map_address').blur();
     });
+
     $('#page').on('click', '#map_address', function(){
       $('#map_address').focus();
+    });
+
+    // Expand long popup descriptions
+    $('#page').on('click', '.mapPopup_description', function(){
+      $(this).toggleClass('-expand');
     });
   }
 

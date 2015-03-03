@@ -178,6 +178,17 @@ return array(
                     ),
                 ),
             ),
+            'sectorDetails' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/sectorDetails',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Index',
+                        'action' => 'sectorDetails',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -235,6 +246,7 @@ return array(
                     'scripts/external/load.js',
                     'scripts/primary/_core.js',
                     'scripts/external/fastclick.js',
+                    'scripts/external/url.js',
                     'scripts/primary/_helpers.js',
                     'scripts/primary/_design.js',
                     'scripts/primary/_call.js',

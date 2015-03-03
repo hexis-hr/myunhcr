@@ -471,6 +471,12 @@ class IndexController extends AbstractActionController {
         return new ViewModel(array('sectors' => $sectors));
     }
 
+    public function sectorDetailsAction()
+    {
+        $this->layout()->setVariable('body_class', 'pg-sectorDetailss');
+        return new ViewModel();
+    }
+
     public function listOfOrganizationsAction()
     {
         $this->layout()->setVariable('body_class', 'pg-listOfOrgs');

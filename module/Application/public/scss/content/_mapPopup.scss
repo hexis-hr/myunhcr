@@ -1,0 +1,15 @@
+.mapPopup { line-height:1.2; }
+  .mapPopup_title { margin-bottom:2px; }
+  .mapPopup_website { display:inline-block; margin-bottom:4px; }
+  .mapPopup_description { position:relative; margin-bottom:4px; max-height:46px; overflow:hidden;
+    &:after { @extend %textFade; content:''; }
+  }
+
+@include respond("min-height:500px"){
+  .mapPopup_description { max-height:61px; }
+}
+
+// Expand description on click toggle
+.mapPopup_description.-expand { max-height:none;
+  &:after { display:none; }
+}

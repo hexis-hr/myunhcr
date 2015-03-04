@@ -10,7 +10,7 @@
 
 <div class="innerLR">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="widget widget-4 margin-none">
                 <div class="widget-head">
                     <h4 class="heading"><?php echo $this->translate('Active country'); ?></h4>
@@ -24,26 +24,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-4">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <a href="" class="widget-stats">
-                        <span class="glyphicons user_add"></span>
-                        <span class="txt"><strong>20</strong>signups</span>
-                        <div class="clearfix"></div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="" class="widget-stats">
-                        <span class="glyphicons user_add"></span>
-                        <span class="txt"><strong>20</strong>signups</span>
-                        <div class="clearfix"></div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="" class="widget-stats">
-                        <span class="glyphicons user_add"></span>
-                        <span class="txt"><strong>20</strong>signups</span>
+                        <span class="glyphicons group"></span>
+                        <span class="txt"><strong><?php echo count($this->users); ?></strong><?php echo $this->translate(' users'); ?></span>
                         <div class="clearfix"></div>
                     </a>
                 </div>
@@ -52,150 +38,162 @@
     </div>
 </div>
 <div class="separator bottom"></div>
-
-<!--<div class="widget widget-2 widget-tabs widget-tabs-2">-->
-<!--    <div class="widget-head">-->
-<!--        <ul>-->
-<!--            <li class="active"><a class="glyphicons cardio" href="#website-traffic-tab" data-toggle="tab">Website Traffic</a></li>-->
-<!--            <li><a class="glyphicons cardio" href="#website-traffic-tab2" data-toggle="tab">Secondary Tab</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <div class="widget-body">-->
-<!--        <div class="tab-pane active" id="website-traffic-tab">-->
-<!--            <div class="btn-group separator bottom pull-right">-->
-<!--                <button id="websiteTraffic24Hours" class="btn btn-small btn-default">24 Hours</button>-->
-<!--                <button id="websiteTraffic7Days" class="btn btn-small btn-default">7 Days</button>-->
-<!--                <button id="websiteTraffic14Days" class="btn btn-small btn-default">14 Days</button>-->
-<!--                <button id="websiteTrafficClear" class="btn btn-small btn-default" disabled="disabled">Clear</button>-->
-<!--            </div>-->
-<!--            <div class="clearfix" style="clear: both;"></div>-->
-<!--            <div id="placeholder" style="height: 200px; padding: 0px; position: relative;"><canvas class="base" width="1176" height="200"></canvas><canvas class="overlay" width="1176" height="200" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#37a6cd"><div class="tickLabel" style="position:absolute;text-align:center;left:56px;top:185px;width:106px">Sep 20</div><div class="tickLabel" style="position:absolute;text-align:center;left:175px;top:185px;width:106px">Sep 23</div><div class="tickLabel" style="position:absolute;text-align:center;left:293px;top:185px;width:106px">Sep 26</div><div class="tickLabel" style="position:absolute;text-align:center;left:411px;top:185px;width:106px">Sep 29</div><div class="tickLabel" style="position:absolute;text-align:center;left:529px;top:185px;width:106px">Oct 2</div><div class="tickLabel" style="position:absolute;text-align:center;left:648px;top:185px;width:106px">Oct 5</div><div class="tickLabel" style="position:absolute;text-align:center;left:766px;top:185px;width:106px">Oct 8</div><div class="tickLabel" style="position:absolute;text-align:center;left:884px;top:185px;width:106px">Oct 11</div><div class="tickLabel" style="position:absolute;text-align:center;left:1002px;top:185px;width:106px">Oct 14</div></div><div class="yAxis y1Axis" style="color:#37a6cd"><div class="tickLabel" style="position:absolute;text-align:right;top:168px;right:1152px;width:24px">0</div><div class="tickLabel" style="position:absolute;text-align:right;top:133px;right:1152px;width:24px">1000</div><div class="tickLabel" style="position:absolute;text-align:right;top:99px;right:1152px;width:24px">2000</div><div class="tickLabel" style="position:absolute;text-align:right;top:65px;right:1152px;width:24px">3000</div><div class="tickLabel" style="position:absolute;text-align:right;top:31px;right:1152px;width:24px">4000</div><div class="tickLabel" style="position:absolute;text-align:right;top:-3px;right:1152px;width:24px">5000</div></div></div><div class="legend"><div style="position: absolute; width: 140px; height: 17px; top: 9px; right: 9px; opacity: 0.85; background-color: rgb(255, 255, 255);"> </div><table style="position:absolute;top:9px;right:9px;;font-size:smaller;color:#37a6cd"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(55,166,205);overflow:hidden"></div></div></td><td class="legendLabel">Visitors</td><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(68,68,68);overflow:hidden"></div></div></td><td class="legendLabel">Conversions</td></tr></tbody></table></div></div>-->
-<!--            <div id="overview" style="height: 40px; padding: 0px; position: relative;"><canvas class="base" width="1176" height="40"></canvas><canvas class="overlay" width="1176" height="40" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#37a6cd"></div><div class="yAxis y1Axis" style="color:#37a6cd"></div></div></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <div class="innerLR">
     <div class="row">
         <div class="col-md-6">
             <div class="widget widget-4">
                 <div class="widget-head">
-                    <h4 class="heading">Overview</h4>
+                    <h4 class="heading"><?php echo $this->translate('Overview'); ?></h4>
                 </div>
-                <div class="widget-body list">
-                    <ul>
-                        <li><span class="count">350,254 <span class="sparkline"></span></span> Visits</li>
-                        <li><span class="count">120,103 <span class="sparkline"></span></span> Visitors</li>
-                        <li><span class="count">5,156,392 <span class="sparkline"></span></span> Pageviews</li>
-                    </ul>
+                <div class="separator bottom"></div>
+                <div class="col-md-12">
+                    <div class="btn-group btn-group-vertical block">
+                        <a class="btn btn-icon btn-default btn-block glyphicons keynote count">
+                            <span><?php echo count($this->news); ?></span><?php echo $this->translate('News'); ?></a>
+                        <a class="btn btn-icon btn-default btn-block glyphicons comments count">
+                            <span><?php echo count($this->faqs); ?></span><?php echo $this->translate('FAQ\'s'); ?></a>
+                        <a class="btn btn-icon btn-default btn-block glyphicons notes_2 count">
+                            <span><?php echo count($this->surveys); ?></span><?php echo $this->translate('Surveys'); ?></a>
+                    </div>
                 </div>
-            </div>
-            <div class="widget widget-4">
-                <div class="widget-head">
-                    <h4 class="heading">Interest</h4>
-                </div>
-                <div class="widget-body list">
-                    <ul>
-                        <li><span class="count">00:01:59 <span class="sparkline"></span></span> avg.time</li>
-                        <li><span class="count">48% <span class="sparkline"></span></span> returning</li>
-                    </ul>
+                <div class="separator bottom"></div>
+                <div class="col-md-12">
+                    <div class="btn-group btn-group-vertical block">
+                        <a class="btn btn-icon btn-default btn-block glyphicons circle_info count">
+                            <span><?php echo count($this->services); ?></span><?php echo $this->translate('Services'); ?></a>
+                        <a class="btn btn-icon btn-default btn-block glyphicons group count">
+                            <span><?php echo count($this->organizations); ?></span><?php echo $this->translate('Organizations'); ?></a>
+                        <a class="btn btn-icon btn-default btn-block glyphicons kiosk count">
+                            <span><?php echo count($this->activities); ?></span><?php echo $this->translate('Activities'); ?></a>
+                        <a class="btn btn-icon btn-default btn-block glyphicons global count">
+                            <span><?php echo count($this->sectors); ?></span><?php echo $this->translate('Sectors'); ?></a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="widget widget-4">
                 <div class="widget-head">
-                    <h4 class="heading">Traffic sources</h4>
+                    <h4 class="heading"><?php echo $this->translate('Users'); ?></h4>
                 </div>
-                <div class="widget-body">
-                    <div id="pie" style="height: 220px;"></div>
+                <div class="separator bottom"></div>
+                <div class="col-md-12">
+                    <div class="btn-group btn-group-vertical block">
+                        <?php foreach ($this->users as $user) { ?>
+                            <a class="btn btn-icon btn-default btn-block glyphicons user count">
+                                <span><small><?php echo $user->getType(); ?></small></span>
+                                <?php echo $user->getEmail(); ?>
+                            </a>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <div class="widget widget-4">
+                <div class="widget-head">
+                    <h4 class="heading"><?php echo $this->translate('From clients'); ?></h4>
+                </div>
+                <div class="separator bottom"></div>
+                <div class="col-md-12">
+                    <div class="btn-group btn-group-vertical block">
+                        <a class="btn btn-icon btn-default btn-block glyphicons user count">
+                            <span><?php echo count($this->incidents); ?></span><?php echo $this->translate('Incidents'); ?>
+                        </a>
+                        <a class="btn btn-icon btn-default btn-block glyphicons user count">
+                            <span><?php echo count($this->complaints); ?></span><?php echo $this->translate('Complaints'); ?>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!--<div class="well">-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-12">-->
-<!--            <div class="widget widget-2 widget-tabs">-->
-<!--                <div class="widget-head">-->
-<!--                    <ul>-->
-<!--                        <li class="active"><a class="glyphicons coffe_cup" href="#dataTableSourcesTab" data-toggle="tab">Traffic sources</a></li>-->
-<!--                        <li><a class="glyphicons share_alt" href="#dataTableRefferingTab" data-toggle="tab">Referrals</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--                <div class="widget-body">-->
-<!--                    <div class="tab-content">-->
-<!--                        <div class="tab-pane active" id="dataTableSourcesTab">-->
-<!--                            <div id="dataTableSources"></div>-->
-<!--                        </div>-->
-<!--                        <div class="tab-pane" id="dataTableRefferingTab">-->
-<!--                            <div id="dataTableReffering"></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- <a href="" class="btn btn-block btn-icon right btn-inverse glyphicon cardio" style="margin-bottom: 20px;"> Full Analytics</a> -->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<h4 class="heading-arrow">Recent Activity</h4>-->
-<!--<div class="innerLR">-->
-<!--    <div class="widget-activity">-->
-<!--        <ul class="filters">-->
-<!--            <li>Filter by</li>-->
-<!--            <li class="glyphicons user_add"></li>-->
-<!--            <li class="glyphicons shopping_cart active"></li>-->
-<!--            <li class="glyphicons envelope"></li>-->
-<!--            <li class="glyphicons link"></li>-->
-<!--            <li class="glyphicons camera"></li>-->
-<!--        </ul>-->
-<!--        <div class="clearfix"></div>-->
-<!--        <ul class="activities">-->
-<!--            <li class="highlight">-->
-<!--                <span class="glyphicons activity-icon shopping_cart"></span>-->
-<!--                <a href="">Client name</a> bought 10 items worth of &euro;50 (<a href="">order #2301</a>)-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <span class="glyphicons activity-icon shopping_cart"></span>-->
-<!--                <a href="">Client name</a> bought 10 items worth of &euro;50 (<a href="">order #2302</a>)-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <span class="glyphicons activity-icon shopping_cart"></span>-->
-<!--                <a href="">Client name</a> bought 10 items worth of &euro;50 (<a href="">order #2303</a>)-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
-<div class="separator bottom"></div>
 
 <div class="innerLR">
     <div class="row">
         <div class="col-md-12">
-            <h4 class="glyphicons clock"> Activity</h4>
-
-            <div class="row">
-                <div class="col-md-6">
-
-                    <div class="btn-group btn-group-vertical block">
-                        <a class="btn btn-icon btn-default btn-block glyphicons group count"> <span>5,986</span>Total users</a>
-                        <a class="btn btn-icon btn-default btn-block glyphicons user_add count"> <span>98</span>New users</a>
-                        <a class="btn btn-icon btn-default btn-block glyphicons shopping_cart count"> <span>305</span>Products</a>
-                    </div>
+            <div class="widget widget-4">
+                <div class="widget-head">
+                    <h4 class="heading"><?php echo $this->translate('Appointments'); ?></h4>
                 </div>
-                <div class="col-md-6">
-                    <div class="btn-group btn-group-vertical block">
-                        <a class="btn btn-icon btn-default btn-block glyphicons cargo count"> <span>687</span>Total orders</a>
-                        <a class="btn btn-icon btn-default btn-block glyphicons download count"> <span>15</span>Pending orders</a>
-                        <a class="btn btn-icon btn-default btn-block glyphicons download count"> <span>3</span>Pending delivery</a>
-                        <a class="btn btn-icon btn-primary btn-block glyphicons fire count"> <span>5</span>Support</a>
+                <div class="separator bottom"></div>
+                <div class="col-md-12">
+                    <div class="widget widget-2 widget-tabs">
+                        <div class="widget-head">
+                            <ul>
+                                <?php $active = true; ?>
+                                <?php foreach ($this->appointmentCategories as $ac) { ?>
+                                    <?php if ($active) { ?>
+                                        <li class="active">
+                                            <a class="glyphicons conversation"
+                                            href="#<?php echo $ac->getId(); ?>" data-toggle="tab">
+                                                <?php echo $ac->getCategory(); ?></a>
+                                        </li>
+                                        <?php $active = false; ?>
+                                    <?php } else { ?>
+                                        <li>
+                                            <a class="glyphicons conversation"
+                                               href="#<?php echo $ac->getId(); ?>" data-toggle="tab">
+                                                <?php echo $ac->getCategory(); ?></a>
+                                        </li>
+                                    <?php } ?>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                        <div class="widget-body">
+                            <div class="tab-content" style="overflow: hidden">
+                                <?php $active = true; ?>
+                                <?php foreach ($this->appointmentCategories as $category) { ?>
+                                    <?php if ($active) { ?>
+                                        <div class="tab-pane active" id="<?php echo $category->getId(); ?>">
+                                            <?php $count = 0; ?>
+                                            <?php foreach ($this->appointments as $ap) { ?>
+                                                <?php if ($ap->getCategory() == $category) { ?>
+                                                    <div class="well margin-none col-md-2" data-row="row_<?php echo $ap->getId(); ?>">
+                                                        <address class="margin-none">
+                                                            <strong><?php echo date_format($ap->getDate(), 'd.m.Y'); ?></strong>
+                                                            <?php echo $this->translate('at'); ?>
+                                                            <strong><?php echo date_format($ap->getTime(), 'H:i'); ?></strong><br>
+                                                            <abbr title="Work email"><?php echo $this->translate('Auth ID'); ?>:</abbr>
+                                                            <?php echo $ap->getAuthId(); ?><br/>
+                                                            <abbr title="Work Phone"><?php echo $this->translate('From'); ?>:</abbr>
+                                                            <?php echo $ap->getCountry()->getName(); ?><br/>
+                                                        </address>
+                                                    </div>
+                                                    <?php $count++; ?>
+                                                <?php } ?>
+                                                <?php if ($count == 12) break;?>
+                                            <?php } ?>
+                                        </div>
+                                        <?php $active = false; ?>
+                                    <?php } else { ?>
+                                        <div class="tab-pane" id="<?php echo $category->getId(); ?>">
+                                            <?php $count = 0; ?>
+                                            <?php foreach ($this->appointments as $ap) { ?>
+                                                <?php if ($ap->getCategory() == $category) { ?>
+                                                    <div class="well margin-none col-md-2" data-row="row_<?php echo $ap->getId(); ?>">
+                                                        <address class="margin-none">
+                                                            <strong><?php echo date_format($ap->getDate(), 'd.m.Y'); ?></strong>
+                                                            <?php echo $this->translate('at'); ?>
+                                                            <strong><?php echo date_format($ap->getTime(), 'H:i'); ?></strong><br>
+                                                            <abbr title="Work email"><?php echo $this->translate('Auth ID'); ?>:</abbr>
+                                                            <?php echo $ap->getAuthId(); ?><br/>
+                                                            <abbr title="Work Phone"><?php echo $this->translate('From'); ?>:</abbr>
+                                                            <?php echo $ap->getCountry()->getName(); ?><br/>
+                                                        </address>
+                                                    </div>
+                                                    <?php $count++; ?>
+                                                <?php } ?>
+                                                <?php if ($count == 12) break;?>
+                                            <?php } ?>
+                                        </div>
+                                    <?php } ?>
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="separator bottom"></div>
-
 </div>

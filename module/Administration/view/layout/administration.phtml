@@ -129,7 +129,7 @@
 
     <div id="wrapper">
 
-        <div id="menu" class="hidden-sm hidden-print">
+        <div id="menu" class="hidden-sm hidden-print" style="position: relative;">
             <div id="menuInner">
                 <!-- Scrollable menu wrapper with Maximum height -->
                 <div class="slim-scroll" data-scroll-height="420px">
@@ -143,9 +143,12 @@
 
                 </div>
             </div>
+            <div id="hexisLogo" style="display: block; text-align: center;">
+                <img src="/media/globals/logo_hexis.png" style="max-width: 60%;"/>
+            </div>
         </div>
 
-        <div id="content" style="min-height: 600px">
+        <div id="content" style="min-height: 800px">
             <?php if ($this->flashMessenger()->hasSuccessMessages()) { ?>
               <div class="alert alert-success">
                 <?php
@@ -218,7 +221,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<div class="separator bottom"></div>
+<!--<div class="separator bottom"></div>-->
 
 
 <div id="requireCountryModal" title="<?php echo $this->translate('Country activation'); ?>" style="display: none;">
@@ -229,7 +232,7 @@
         </strong>
     </p>
 </div>
-<div class="separator bottom"></div>
+<!--<div class="separator bottom"></div>-->
 
 <script>
     Holder.add_theme("dark", {background:"#000", foreground:"#aaa", size:9})

@@ -351,7 +351,7 @@ class IncidentController extends AbstractActionController {
         $response
             ->getHeaders()
             ->addHeaderLine('Content-Transfer-Encoding', 'binary')
-            ->addHeaderLine('Content-Type', 'image/png')
+            ->addHeaderLine('Content-Type', $image->getMimeType())
             ->addHeaderLine('Content-Length', mb_strlen($imageContent));
 
         return $response;
